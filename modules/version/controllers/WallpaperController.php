@@ -230,7 +230,8 @@ class WallpaperController extends VController{
             $sql="select id from yd_ver_wall where gid=$gid and province like '%$pCode%' and city like '%$cCode%' and type=1  and (endTime>={$end} and startTime<={$start}) or (startTime<={$end} and startTime>={$start}) or (endTime>={$start} and endTime<={$end})";
             $data[]=SQLManager::queryAll($sql);
         }
-	var_dump($data);die;
+	//var_dump($data);die;
+	echo $sql;die;
 	if(!empty($data)){//说明存在
 		echo 321;
             	die;
