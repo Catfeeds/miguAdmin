@@ -686,6 +686,7 @@ class ScreenController extends VController
     }
 
     /*
+     * 屏幕引用绑定关系表
     CREATE TABLE `yd_ver_screen_quote` (
       `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
       `copyGuideId` int(10) NOT NULL DEFAULT '0' COMMENT '选中复制的导航id',
