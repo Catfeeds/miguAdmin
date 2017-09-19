@@ -337,8 +337,9 @@
 	function getcity(){
         if($("#gid option:selected").val()!=0){
             var stationId=$("#gid option:selected").val();
+	    var id="<?php echo $_REQUEST['id'];?>";
             $(".city").children().eq(1).html("");
-            $.getJSON("/version/wallpaper/city.html?mid=1",{stationId:stationId},function(data){
+            $.getJSON("/version/wallpaper/city.html?mid=1",{stationId:stationId,id:id},function(data){
                 $.each(data,function(v,k){
                     $(".city").children().eq(1).append("<input type='hidden' name='province' value='"+k.provinceCode+"'><span style='margin-right:100px'>"+k.provinceName+"--"+k.cityName+"</span>"+"<input type='checkbox' class='c_val'  name='code'"+k.checked+"  value='"+k.provinceCode+"-"+k.cityCode+"'>选择省市<br>");
 

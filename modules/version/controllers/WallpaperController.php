@@ -641,9 +641,9 @@ class WallpaperController extends VController{
                 $new[$j]=array("provinceName"=>$data[$j]['provinceName'],"cityName"=>$data_c[$j]['cityName'],"provinceCode"=>$data[$j]['provinceCode'],"cityCode"=>$data_c[$j]['cityCode']);
             }
         }
-	var_dump($new);
+	//var_dump($new);
 	
-	$data="select * from yd_ver_wall where gid=$stationId order by id desc limit 0,1";
+	$data="select * from yd_ver_wall where gid=$stationId and id={$_REQUEST['id']}";
         $result=SQLManager::queryRow($data);
 	$res=array();
 	if(!empty($result)){
@@ -655,7 +655,7 @@ class WallpaperController extends VController{
             }
         }
 
-	var_dump($res);
+	//var_dump($res);
 
 	for($m=0;$m<count($res);$m++){
             for($n=0;$n<count($new);$n++){
