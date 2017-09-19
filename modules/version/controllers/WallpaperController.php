@@ -230,12 +230,13 @@ class WallpaperController extends VController{
             $sql="select id from yd_ver_wall where gid=$gid and province like '%$pCode%' and city like '%$cCode%' and type=1  and ((endTime>={$end} and startTime<={$start}) or (startTime<={$end} and startTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
             $data[]=SQLManager::queryRow($sql);
         }
-	var_dump($data);die;
+	//var_dump($data);die;
 	//echo $sql;die;
-	if($data[0]){//说明存在
-		echo 321;
-            	die;
-	}else{
+	for($i=0;$i<count($data);$i++){
+            if($data[$i]!=false) {
+                echo 321;die;
+            }
+        }
 		$model = new VerWall();
         	$model->title = trim($_POST['title']);
         	$Code=$_REQUEST['Code'];//选择的Code
@@ -274,7 +275,6 @@ class WallpaperController extends VController{
         }else{
             echo '500';
         }
-	}
     }
 
     public function actionDoUpdate()
@@ -641,7 +641,7 @@ class WallpaperController extends VController{
                 $new[$j]=array("provinceName"=>$data[$j]['provinceName'],"cityName"=>$data_c[$j]['cityName'],"provinceCode"=>$data[$j]['provinceCode'],"cityCode"=>$data_c[$j]['cityCode']);
             }
         }
-	//var_dump($new);
+	var_dump($new);
 	
 	$data="select * from yd_ver_wall where gid=$stationId order by id desc limit 0,1";
         $result=SQLManager::queryRow($data);
@@ -655,13 +655,16 @@ class WallpaperController extends VController{
             }
         }
 
+	var_dump($res);
+
 	for($m=0;$m<count($res);$m++){
             for($n=0;$n<count($new);$n++){
                 if($res[$m]==$new[$n]){
                     $new[$n]['checked']="checked";
-                }else{
-                    $new[$n]['checked']="";
                 }
+		//else{
+                  //  $new[$n]['checked']="";
+                //}
             }
         }
 
