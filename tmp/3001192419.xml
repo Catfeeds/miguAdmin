@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adi:ADI2 xmlns="http://www.cablelabs.com/VODSchema/default" xmlns:adi="http://www.cablelabs.com/VODSchema/adi"
+						 xmlns:vod="http://www.cablelabs.com/VODSchema/vod">
+
+
+	<adi:OpenGroupAsset type="VODRelease" product="VOD">
+		<vod:VODRelease providerID="642001" providerType="2" assetID="3001192419" updateNum="" groupAsset="Y" serialNo="20121208">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+		</vod:VODRelease>
+	</adi:OpenGroupAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192419" type="Title" product="VOD">
+		<vod:Title providerID="642001" assetID="3001192419" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:TitleFull><![CDATA[直播全球_20150604]]></vod:TitleFull>
+			<vod:Theme><![CDATA[]]></vod:Theme>
+			<vod:ShowType>Column</vod:ShowType>
+			<vod:TitleBrief><![CDATA[]]></vod:TitleBrief>
+			<vod:EnglishName><![CDATA[]]></vod:EnglishName>
+			<vod:Emcee> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Emcee> 
+			<vod:Guest> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Guest> 
+			<vod:SummaryMedium><![CDATA[]]></vod:SummaryMedium>
+			<vod:RunTime><![CDATA[0]]></vod:RunTime>
+			<vod:Character><![CDATA[]]></vod:Character>
+			<vod:EnglishDesc><![CDATA[]]></vod:EnglishDesc>
+			<vod:SummaryShort><![CDATA[《直播全球》是广东卫视打造的一档没有时差、直达现场，集资讯和深度评论为一体，涵盖重大国际事件的日播国际新闻栏目。每天紧贴全球热点话题，让你第一时间把握全球重大资讯动态，洞悉多面世界真相。]]></vod:SummaryShort>
+			<vod:PlayTime><![CDATA[]]></vod:PlayTime>
+			<vod:CountryOfOrigin><![CDATA[1]]></vod:CountryOfOrigin>
+			<vod:Actor type="Actor"> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Actor> 
+			<vod:Director> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Director> 
+			<vod:Producer> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Producer> 
+			<vod:Items><![CDATA[0]]></vod:Items>
+			<vod:Awards><![CDATA[]]></vod:Awards>
+			<vod:StudioName><![CDATA[]]></vod:StudioName>
+			<vod:Agent><![CDATA[]]></vod:Agent>
+			<vod:Language><![CDATA[国语]]></vod:Language>
+			<vod:Keyword><![CDATA[]]></vod:Keyword>
+			<vod:SourceType></vod:SourceType>
+			<vod:SourceInfo><![CDATA[广东卫视,江苏高清]]></vod:SourceInfo>
+			<vod:Comments><![CDATA[]]></vod:Comments>
+			<vod:MediaFormat><![CDATA[]]></vod:MediaFormat>
+			<vod:MetaLanguage><![CDATA[]]></vod:MetaLanguage>
+			<vod:ExternalNo><![CDATA[]]></vod:ExternalNo>
+			<vod:ExternalURL><![CDATA[]]></vod:ExternalURL>
+			<vod:IsAdvertise>0</vod:IsAdvertise>
+		</vod:Title>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192419" type="CategoryPath" product="VOD">
+		<vod:CategoryPath mso="" providerID="642001" assetID="3001192419" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:Classification><![CDATA[录制类节目]]></vod:Classification>
+			<vod:Category><![CDATA[直播全球]]></vod:Category>
+						<vod:CategoryName><![CDATA[]]></vod:CategoryName>
+		</vod:CategoryPath>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192419" type="Copyright" product="VOD">
+		<vod:Copyright providerID="642001" assetID="3001192419" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:LicenseType><![CDATA[0]]></vod:LicenseType>
+			<vod:PublicationDate><![CDATA[2015-06-05]]></vod:PublicationDate>
+			<vod:CopyName><![CDATA[]]></vod:CopyName>
+			<vod:VideoLicense><![CDATA[]]></vod:VideoLicense>
+			<vod:PublishNo><![CDATA[]]></vod:PublishNo>
+			<vod:AuthorserilNo><![CDATA[]]></vod:AuthorserilNo>
+			<vod:CopyType><![CDATA[1]]></vod:CopyType>
+			<vod:CopyLicenser><![CDATA[]]></vod:CopyLicenser>
+			<vod:CopyLicense><![CDATA[]]></vod:CopyLicense>
+			<vod:CopySerilNo><![CDATA[]]></vod:CopySerilNo>
+			<vod:CopyIdea><![CDATA[]]></vod:CopyIdea>
+		</vod:Copyright>
+	</adi:AddMetadataAsset>
+	<adi:AcceptContentAsset type="Video" metadataOnly="N" fileName="直播全球_20150604" 
+			fileSize="488385460" mD5CheckSum="f2bd63fcc5dd42169a25bff90a89f86c">
+		<vod:Video providerID="642001" assetID="3001192436" updateNum="1" fileName="直播全球_20150604" 
+				fileSize="488385460" mD5CheckSum="f2bd63fcc5dd42169a25bff90a89f86c" transferContentURL="ftp://icds_ope:0wlonewave@125.210.139.135:21/icms_icds_pub02/opnewsps02/Video/2015/06/05/00/11771306_20150603001121_r_1156597994_20150605001325_0_1156650427.ts" 
+				encodingProfile="video/H264">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:Duration><![CDATA[1539]]></vod:Duration>
+			<vod:Bitrate><![CDATA[2200000]]></vod:Bitrate>
+			<vod:Numberofframes><![CDATA[2]]></vod:Numberofframes>
+			<vod:FrameHeight><![CDATA[720]]></vod:FrameHeight>
+			<vod:FrameWidth><![CDATA[1280]]></vod:FrameWidth>
+			<vod:AspectRatio><![CDATA[16:9]]></vod:AspectRatio>
+			<vod:FrameRate><![CDATA[25]]></vod:FrameRate>
+			<vod:Brightness><![CDATA[]]></vod:Brightness>
+			<vod:Contrast><![CDATA[]]></vod:Contrast>
+			<vod:FileType><![CDATA[1]]></vod:FileType>
+			<vod:Usage><![CDATA[1]]></vod:Usage>
+			<vod:ServiceType><![CDATA[0]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[1]]></vod:MimeType>
+			<vod:HDFlag><![CDATA[0]]></vod:HDFlag>
+		</vod:Video>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Video" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192419" providerID="642001" assetID="3001192436"/>
+	<adi:AcceptContentAsset type="Video" metadataOnly="N" fileName="直播全球_20150604" 
+			fileSize="365418044" mD5CheckSum="ba4b125a188125cdd3544dacf67b432c">
+		<vod:Video providerID="642001" assetID="3001192444" updateNum="1" fileName="直播全球_20150604" 
+				fileSize="365418044" mD5CheckSum="ba4b125a188125cdd3544dacf67b432c" transferContentURL="ftp://icds_ope:0wlonewave@125.210.139.135:21/icms_icds_pub02/opnewsps02/Video/2015/06/05/00/11771306_20150603001121_r_1156597980_20150605001324_0_1156650319.ts" 
+				encodingProfile="video/H264">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:Duration><![CDATA[1539]]></vod:Duration>
+			<vod:Bitrate><![CDATA[1600000]]></vod:Bitrate>
+			<vod:Numberofframes><![CDATA[2]]></vod:Numberofframes>
+			<vod:FrameHeight><![CDATA[720]]></vod:FrameHeight>
+			<vod:FrameWidth><![CDATA[1280]]></vod:FrameWidth>
+			<vod:AspectRatio><![CDATA[]]></vod:AspectRatio>
+			<vod:FrameRate><![CDATA[25]]></vod:FrameRate>
+			<vod:Brightness><![CDATA[]]></vod:Brightness>
+			<vod:Contrast><![CDATA[]]></vod:Contrast>
+			<vod:FileType><![CDATA[1]]></vod:FileType>
+			<vod:Usage><![CDATA[1]]></vod:Usage>
+			<vod:ServiceType><![CDATA[0]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[1]]></vod:MimeType>
+			<vod:HDFlag><![CDATA[0]]></vod:HDFlag>
+		</vod:Video>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Video" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192419" providerID="642001" assetID="3001192444"/>
+</adi:ADI2>

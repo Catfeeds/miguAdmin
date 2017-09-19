@@ -1,0 +1,11 @@
+curl -m 36000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Comic/Comic1" &
+curl -m 36000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Comic/Comic2" &
+curl -m 36000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Comic/Comic3" &
+curl -m 36000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Comic/Comic4" &
+curl -m 36000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Comic/Comic5" &
+curl -m 36000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Comic/Comic6" &
+curl -m 36000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Comic/Comic7" &
+curl -m 36000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Comic/Comic8" &
+curl -m 36000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Comic/ComicOther1" &
+curl -m 36000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Comic/ComicOther2" &
+curl -m 36000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Comic/ComicOther3" &

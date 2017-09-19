@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adi:ADI2 xmlns="http://www.cablelabs.com/VODSchema/default" xmlns:adi="http://www.cablelabs.com/VODSchema/adi"
+						 xmlns:vod="http://www.cablelabs.com/VODSchema/vod">
+
+
+	<adi:OpenGroupAsset type="VODRelease" product="VOD">
+		<vod:VODRelease providerID="642001" providerType="2" assetID="3001192634" updateNum="" groupAsset="Y" serialNo="20121208">
+			<adi:AssetLifetime startDateTime="2015-06-02" endDateTime="2115-06-02"/>
+		</vod:VODRelease>
+	</adi:OpenGroupAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192634" type="Title" product="VOD">
+		<vod:Title providerID="642001" assetID="3001192634" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-02" endDateTime="2115-06-02"/>
+			<vod:TitleFull><![CDATA[The Pyramid]]></vod:TitleFull>
+			<vod:ShowType>Movie</vod:ShowType>
+			<vod:SummaryMedium><![CDATA[A team of U.S. archaeologists unearths an ancient pyramid buried deep beneath the Egyptian desert. As they search the pyramid's depths, they become hopelessly lost in its dark and endless catacombs. Searching for a way out, they become desperate to seek daylight again. They come to realize they aren't just trapped, they are being hunted.]]></vod:SummaryMedium>
+			<vod:SummaryShort><![CDATA[The Pyramid]]></vod:SummaryShort>
+			<vod:RunTime><![CDATA[]]></vod:RunTime>
+			<vod:CountryOfOrigin><![CDATA[4]]></vod:CountryOfOrigin>
+			<vod:Actor type="Actor"> 
+				<vod:LastNameFirst><![CDATA[Ashley Hinshaw,Denis O'Hare]]></vod:LastNameFirst> 
+			</vod:Actor> 
+			<vod:Actor type="Actress"> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Actor> 
+			<vod:Actor type="CoActor"> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Actor> 
+			<vod:Actor type="CoActress"> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Actor> 
+			<vod:Director> 
+				<vod:LastNameFirst><![CDATA[Grégory Levasseur]]></vod:LastNameFirst> 
+			</vod:Director> 
+			<vod:StudioName><![CDATA[]]></vod:StudioName>
+			<vod:Rating><![CDATA[]]></vod:Rating>
+			<vod:Agent><![CDATA[]]></vod:Agent>
+			<vod:Language><![CDATA[英语]]></vod:Language>
+			<vod:MediaFormat><![CDATA[]]></vod:MediaFormat>
+			<vod:IptvDesc><![CDATA[]]></vod:IptvDesc>
+			<vod:Format><![CDATA[]]></vod:Format>
+			<vod:Superviser><![CDATA[]]></vod:Superviser>
+			<vod:Background><![CDATA[]]></vod:Background>
+			<vod:EnglishDesc><![CDATA[]]></vod:EnglishDesc>
+			<vod:Keyword><![CDATA[The Pyramid]]></vod:Keyword>
+			<vod:StarLevel><![CDATA[0]]></vod:StarLevel>
+			<vod:Awards><![CDATA[]]></vod:Awards>
+			<vod:Year><![CDATA[2014]]></vod:Year>
+			<vod:Comments><![CDATA[]]></vod:Comments>
+			<vod:IsAdvertise>0</vod:IsAdvertise>
+		</vod:Title>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192634" type="CategoryPath" product="VOD">
+		<vod:CategoryPath providerID="642001" assetID="3001192634" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-02" endDateTime="2115-06-02"/>
+		    <vod:Classification><![CDATA[电影类节目]]></vod:Classification>
+			<vod:Category><![CDATA[恐怖悬疑]]></vod:Category>
+					</vod:CategoryPath>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192634" type="Copyright" product="VOD">
+		<vod:Copyright providerID="642001" assetID="3001192634" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-02" endDateTime="2115-06-02"/>
+			<vod:LicenseType><![CDATA[0]]></vod:LicenseType>
+			<vod:OriginalLicenseCompany><![CDATA[]]></vod:OriginalLicenseCompany>
+			<vod:TransferLicenseCompany><![CDATA[]]></vod:TransferLicenseCompany>
+			<vod:Transfer3rd><![CDATA[0]]></vod:Transfer3rd>
+			<vod:TransferAgain><![CDATA[0]]></vod:TransferAgain>
+			<vod:CountryNo><![CDATA[]]></vod:CountryNo>
+			<vod:PublicationDate><![CDATA[2015-06-05]]></vod:PublicationDate>
+			<vod:CopyName><![CDATA[]]></vod:CopyName>
+			<vod:VideoLicense><![CDATA[]]></vod:VideoLicense>
+			<vod:PublishNo><![CDATA[]]></vod:PublishNo>
+			<vod:AuthorserilNo><![CDATA[]]></vod:AuthorserilNo>
+			<vod:CopyIdea><![CDATA[]]></vod:CopyIdea>
+			<vod:CopyType><![CDATA[1]]></vod:CopyType>
+			<vod:CopyLicenser><![CDATA[]]></vod:CopyLicenser>
+			<vod:CopyLicense><![CDATA[]]></vod:CopyLicense>
+			<vod:CopySerilNo><![CDATA[]]></vod:CopySerilNo>
+		</vod:Copyright>
+	</adi:AddMetadataAsset>
+	<adi:AcceptContentAsset type="Image" metadataOnly="N" fileName="The Pyramid 夺命金字塔_新家庭版小图片" 
+			fileSize="64144" mD5CheckSum="9f4164305aa174b5b74bdacabd58b1f4">
+		<vod:Image providerID="642001" assetID="3001192636" updateNum="1" fileName="The Pyramid 夺命金字塔_新家庭版小图片" 
+				fileSize="64144" mD5CheckSum="9f4164305aa174b5b74bdacabd58b1f4" transferContentURL="ftp://store12:3edc$RFV@172.17.90.140:21/ckucc11/Pic/20150605/20150602225754_xduomingjinzita_1155131297_317420834.jpg" 
+				imageEncodingProfile="JPG/JPEG">
+			<adi:AssetLifetime startDateTime="2015-06-02" endDateTime="2115-06-02"/>
+			<vod:Caption><![CDATA[The Pyramid 夺命金字塔_新家庭版小图片]]></vod:Caption>
+			<vod:ColorType><![CDATA[RGB]]></vod:ColorType>
+			<vod:ImagePixels horizontalPixels="305" verticalPixels="257"></vod:ImagePixels>
+			<vod:FileType><![CDATA[3]]></vod:FileType>
+			<vod:Usage><![CDATA[18]]></vod:Usage>
+			<vod:ServiceType><![CDATA[1]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[25]]></vod:MimeType>
+		</vod:Image>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Image" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192634" providerID="642001" assetID="3001192636"/>
+	<adi:AcceptContentAsset type="Image" metadataOnly="N" fileName="The Pyramid 夺命金字塔_新家庭版海报" 
+			fileSize="77012" mD5CheckSum="c4b9b0522b72467dcc63212443872763">
+		<vod:Image providerID="642001" assetID="3001192637" updateNum="1" fileName="The Pyramid 夺命金字塔_新家庭版海报" 
+				fileSize="77012" mD5CheckSum="c4b9b0522b72467dcc63212443872763" transferContentURL="ftp://store12:3edc$RFV@172.17.90.140:21/ckucc11/Pic/20150605/20150602225754_hbduomingjinzita_1155131287_317420844.jpg" 
+				imageEncodingProfile="JPG/JPEG">
+			<adi:AssetLifetime startDateTime="2015-06-02" endDateTime="2115-06-02"/>
+			<vod:Caption><![CDATA[The Pyramid 夺命金字塔_新家庭版海报]]></vod:Caption>
+			<vod:ColorType><![CDATA[RGB]]></vod:ColorType>
+			<vod:ImagePixels horizontalPixels="543" verticalPixels="410"></vod:ImagePixels>
+			<vod:FileType><![CDATA[3]]></vod:FileType>
+			<vod:Usage><![CDATA[6]]></vod:Usage>
+			<vod:ServiceType><![CDATA[1]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[25]]></vod:MimeType>
+		</vod:Image>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Image" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192634" providerID="642001" assetID="3001192637"/>
+	<adi:AcceptContentAsset type="Image" metadataOnly="N" fileName="The Pyramid 夺命金字塔_新家庭版大海报" 
+			fileSize="10526" mD5CheckSum="66e76e90272772e3931cec9dab58e56c">
+		<vod:Image providerID="642001" assetID="3001192638" updateNum="1" fileName="The Pyramid 夺命金字塔_新家庭版大海报" 
+				fileSize="10526" mD5CheckSum="66e76e90272772e3931cec9dab58e56c" transferContentURL="ftp://store12:3edc$RFV@172.17.90.140:21/ckucc11/Pic/20150605/20150602225754_dhbduomingjinzita_1155131277_317420852.jpg" 
+				imageEncodingProfile="JPG/JPEG">
+			<adi:AssetLifetime startDateTime="2015-06-02" endDateTime="2115-06-02"/>
+			<vod:Caption><![CDATA[The Pyramid 夺命金字塔_新家庭版大海报]]></vod:Caption>
+			<vod:ColorType><![CDATA[RGB]]></vod:ColorType>
+			<vod:ImagePixels horizontalPixels="181" verticalPixels="138"></vod:ImagePixels>
+			<vod:FileType><![CDATA[3]]></vod:FileType>
+			<vod:Usage><![CDATA[15]]></vod:Usage>
+			<vod:ServiceType><![CDATA[1]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[25]]></vod:MimeType>
+		</vod:Image>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Image" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192634" providerID="642001" assetID="3001192638"/>
+	<adi:AcceptContentAsset type="Image" metadataOnly="N" fileName="The Pyramid 夺命金字塔_新家庭版大图片" 
+			fileSize="23760" mD5CheckSum="8b1cd3f4e307c459157354d69e7da97b">
+		<vod:Image providerID="642001" assetID="3001192639" updateNum="1" fileName="The Pyramid 夺命金字塔_新家庭版大图片" 
+				fileSize="23760" mD5CheckSum="8b1cd3f4e307c459157354d69e7da97b" transferContentURL="ftp://store12:3edc$RFV@172.17.90.140:21/ckucc11/Pic/20150605/20150602225754_dtpduomingjinzita_1155131282_317420858.jpg" 
+				imageEncodingProfile="JPG/JPEG">
+			<adi:AssetLifetime startDateTime="2015-06-02" endDateTime="2115-06-02"/>
+			<vod:Caption><![CDATA[The Pyramid 夺命金字塔_新家庭版大图片]]></vod:Caption>
+			<vod:ColorType><![CDATA[RGB]]></vod:ColorType>
+			<vod:ImagePixels horizontalPixels="342" verticalPixels="176"></vod:ImagePixels>
+			<vod:FileType><![CDATA[3]]></vod:FileType>
+			<vod:Usage><![CDATA[17]]></vod:Usage>
+			<vod:ServiceType><![CDATA[1]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[25]]></vod:MimeType>
+		</vod:Image>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Image" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192634" providerID="642001" assetID="3001192639"/>
+	<adi:AcceptContentAsset type="Video" metadataOnly="N" fileName="The Pyramid_94_ts(h264+mp2)-1900(1600+128)-1280720" 
+			fileSize="1192410304" mD5CheckSum="5ae2295e9018604326217be9e2339751">
+		<vod:Video providerID="642001" assetID="3001192640" updateNum="1" fileName="The Pyramid_94_ts(h264+mp2)-1900(1600+128)-1280720" 
+				fileSize="1192410304" mD5CheckSum="5ae2295e9018604326217be9e2339751" transferContentURL="ftp://icds_ope:0wlonewave@125.210.139.8:21/icms_icds_pub03/opnewsps03/Video/2015/06/05/10/20150604181505_ThePyramid_1156352701_1156426669.ts" 
+				encodingProfile="video/H264">
+			<adi:AssetLifetime startDateTime="2015-06-02" endDateTime="2115-06-02"/>
+			<vod:Duration><![CDATA[4980]]></vod:Duration>
+			<vod:Bitrate><![CDATA[1600000]]></vod:Bitrate>
+			<vod:Numberofframes><![CDATA[2]]></vod:Numberofframes>
+			<vod:FrameHeight><![CDATA[720]]></vod:FrameHeight>
+			<vod:FrameWidth><![CDATA[1280]]></vod:FrameWidth>
+			<vod:AspectRatio><![CDATA[16:9]]></vod:AspectRatio>
+			<vod:FrameRate><![CDATA[25]]></vod:FrameRate>
+			<vod:Brightness><![CDATA[]]></vod:Brightness>
+			<vod:Contrast><![CDATA[]]></vod:Contrast>
+			<vod:FileType><![CDATA[1]]></vod:FileType>
+			<vod:Usage><![CDATA[1]]></vod:Usage>
+			<vod:ServiceType><![CDATA[1]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[1]]></vod:MimeType>
+			<vod:HDFlag><![CDATA[0]]></vod:HDFlag>
+		</vod:Video>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Video" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192634" providerID="642001" assetID="3001192640"/>
+</adi:ADI2>

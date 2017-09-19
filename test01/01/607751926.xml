@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<content>
+	<version><![CDATA[1.0.0.0]]></version>
+	<contid><![CDATA[607751926]]></contid>	
+	<name><![CDATA[初中数学重要知识点名师讲解]]></name>	
+	<name1><![CDATA[]]></name1>
+	<name2><![CDATA[]]></name2>
+	<levelval><![CDATA[]]></levelval>
+	<rankval><![CDATA[]]></rankval>
+	<createtime><![CDATA[2015-09-10 07:59:35]]></createtime>
+	<updatetime><![CDATA[2015-09-15 18:42:22]]></updatetime>
+	<publishtime><![CDATA[2015-09-15 18:42:22]]></publishtime>	
+	<ispublished><![CDATA[]]></ispublished>
+	<issupwap><![CDATA[1]]></issupwap>
+	<issuprms><![CDATA[1]]></issuprms>
+	<issuph264><![CDATA[1]]></issuph264>
+	<issupwww><![CDATA[1]]></issupwww>
+	<issuprchd><![CDATA[1]]></issuprchd>
+	<isupdating><![CDATA[1]]></isupdating>
+	<PRDPACK_ID><![CDATA[1002261]]></PRDPACK_ID>
+	<BC_ID><![CDATA[699010]]></BC_ID>
+	<SP_ID><![CDATA[699008]]></SP_ID>
+	<PRODUCT_ID><![CDATA[]]></PRODUCT_ID>
+	<!-- 促销 -->
+	<salesPromotions>
+	</salesPromotions>
+	<!-- 渠道计费 -->
+	<channelPkgsProduct>
+	</channelPkgsProduct>
+	<!-- 电影票 -->
+	<tickets>
+	</tickets>
+	
+	<!--流量限免 -->
+    <freeFlow>
+    </freeFlow>
+	
+	<fields>
+		<SubSerial_IDS><![CDATA[607751935,607751940,607751939,607751928,607751937,607759163,607751929,607751934,607751927,607751936,607751938,607782819,607759164,607742783,607751930,607748852,607739689,607751931,607751933,607751932,607759167,607751944,607759168,607751948,607751943,607751947,607759170,607759171,607752263,607751946,607759169,607751942,607739826,607751941,607751945,607759166,607751949,607751950,607759165,607782509,607752254,607759192,607792059,607752255,607752253,607752252,607752256,607759203,607755137,607751951,607755138,607752260,607759202,607787584,607759191,607785202,607759201,607755139,607759182,607752250,607759190,607786065,607759189,607759188,607755146,607759178,607755145,607751956,607759196,607755147,607752244,607751958,607751957,607755140,607752241,607759195,607795662,607759181,607752248,607759174,607751953,607755141,607755148,607759175,607752245,607752261,607752247,607785203,607790939,607751954,607752258,607751952,607790940,607755143,607797086,607759180,607787154,607752246,607791002,607788008,607752243,607791647,607759194,607752259,607751955,607755144,607791358,607759176,607752242,607759197,607759193,607759183,607759198,607752257,607759200,607759173,607759185,607797085,607759199,607755149,607752249,607759184,607752251,607759177,607755142,607759172,607759187,607752262,607787958,607797087,607741080,607759186,607788570,607755150,607759179]]></SubSerial_IDS>
+		<SubAlbum_IDS><![CDATA[]]></SubAlbum_IDS>
+		<IsSubAlbum><![CDATA[0]]></IsSubAlbum>
+		<Album_IDS><![CDATA[]]></Album_IDS>
+		<DISPLAYFILELISTS><![CDATA[/image/3003/751/256]]></DISPLAYFILELISTS>
+		<MMS_ID><![CDATA[3003751256]]></MMS_ID>
+		<CDuration><![CDATA[]]></CDuration>
+		<CPID><![CDATA[699013]]></CPID>
+		<ECID><![CDATA[1000000000]]></ECID>
+		<UDID><![CDATA[]]></UDID>
+		<AssetID><![CDATA[3003634143]]></AssetID>
+		<Assist><![CDATA[教育]]></Assist>
+		<Author><![CDATA[]]></Author>
+		<CATEGORY><![CDATA[1]]></CATEGORY>
+		<COPYRIGHTID><![CDATA[0000000000000015]]></COPYRIGHTID>
+		<CopyRightType><![CDATA[1]]></CopyRightType>
+		<CreateTime><![CDATA[2014-12-30 14:41:20]]></CreateTime>
+		<ModifyTime><![CDATA[2014-12-31 09:21:30]]></ModifyTime>
+		<CreatorID><![CDATA[000000]]></CreatorID>
+		<Detail><![CDATA[涵盖初中数学考试重要知识点，以专题式授课方式依据知识块进行横向复习，完成整体能力提升，加强知识之间的联系与对比，挖掘基础知识内在联系，加强知识的融合与应用，深化基础知识网络，整合基础知识网络与解题技巧，形成完整的数学知识体系，同时，提高学生综合辨析和实际应用的能力。]]></Detail>
+		<DirectRecFlag><![CDATA[]]></DirectRecFlag>
+		<DISPLAYTYPE><![CDATA[1011]]></DISPLAYTYPE>
+		<DisplayName><![CDATA[教育]]></DisplayName>
+		<FORMTYPE><![CDATA[6]]></FORMTYPE>
+		<MediaLevel><![CDATA[2]]></MediaLevel>
+		<N_CPID><![CDATA[600249]]></N_CPID>
+		<Name><![CDATA[初中数学重要知识点名师讲解]]></Name>
+		<Sequence><![CDATA[0001161518]]></Sequence>
+		<SerialContentID><![CDATA[]]></SerialContentID>
+		<SerialCount><![CDATA[136]]></SerialCount>
+		<SerialSequence><![CDATA[]]></SerialSequence>
+		<SHORTNAME><![CDATA[初中数学知识点]]></SHORTNAME>
+		<TYPE><![CDATA[7]]></TYPE>
+		<LiveType><![CDATA[]]></LiveType>
+		<MTV_ID><![CDATA[]]></MTV_ID>
+		<ContentLists>
+			<SubContentID><![CDATA[1]]></SubContentID>
+		</ContentLists>
+		
+		<SCENEFILES>
+		</SCENEFILES>
+		<!-- 版权 -->
+		<CopyRight>
+			<CopyRightObjectID><![CDATA[300000000000000000000003750081]]></CopyRightObjectID>  
+			<N_CPID><![CDATA[600249]]></N_CPID> 
+		  	<Name><![CDATA[初中数学重要知识点名师讲解]]></Name>  
+		  	<BeginDate><![CDATA[2014-12-01 00:00:00]]></BeginDate>  
+		  	<EndDate><![CDATA[2017-11-30 23:59:59]]></EndDate>  
+		  	<Area><![CDATA[1]]></Area>  
+		  	<Terminal><![CDATA[1]]></Terminal>  
+		  	<Integrity><![CDATA[1]]></Integrity>  
+		  	<Scarcity><![CDATA[1]]></Scarcity>  
+		  	<Way><![CDATA[3]]></Way>  
+		  	<Publish><![CDATA[]]></Publish>  
+		  	<Clarity><![CDATA[2]]></Clarity>  
+		  	<Support><![CDATA[]]></Support>  
+		  	<Scope><![CDATA[2]]></Scope>  
+		  	<Output><![CDATA[0]]></Output>  
+		  	<Chain><![CDATA[德智天成教育科技（北京）有限公司-赛尔互联（北京）教育科技有限公司-北京搜狐互联网信息服务有限公司-中国移动通信集团上海有限公司]]></Chain>
+		  	<FeeType><![CDATA[2]]></FeeType>  
+		  	<CopyRightUDID><![CDATA[]]></CopyRightUDID>
+		  	<Optimal><![CDATA[0]]></Optimal>
+		  	<Score><![CDATA[73.0]]></Score>
+		  	<File><![CDATA[Copyright/300000000000000000000003750081/DZ_cs.jpg]]></File>
+		  	<NeedDRM><![CDATA[1]]></NeedDRM>
+		  	<authorizationWay><![CDATA[]]></authorizationWay>
+		  	<miguPublish><![CDATA[]]></miguPublish>
+		  	<bcLicense><![CDATA[]]></bcLicense>
+		  	<influence><![CDATA[]]></influence>
+		  	<oriPublish><![CDATA[]]></oriPublish>
+		</CopyRight>
+		<!-- 关键字 -->
+		<KEYWORDS>
+        	<keyword>
+        		<primaryKey><![CDATA[1]]></primaryKey>
+				<keywordName><![CDATA[赛尔互联]]></keywordName>  
+			</keyword>
+        	<keyword>
+        		<primaryKey><![CDATA[1]]></primaryKey>
+				<keywordName><![CDATA[初中数学]]></keywordName>  
+			</keyword>
+        	<keyword>
+        		<primaryKey><![CDATA[0]]></primaryKey>
+				<keywordName><![CDATA[考试辅导]]></keywordName>  
+			</keyword>
+        	<keyword>
+        		<primaryKey><![CDATA[0]]></primaryKey>
+				<keywordName><![CDATA[解题思路]]></keywordName>  
+			</keyword>
+        	<keyword>
+        		<primaryKey><![CDATA[0]]></primaryKey>
+				<keywordName><![CDATA[高分策略]]></keywordName>  
+			</keyword>
+        	<keyword>
+        		<primaryKey><![CDATA[0]]></primaryKey>
+				<keywordName><![CDATA[应试技巧]]></keywordName>  
+			</keyword>
+        	<keyword>
+        		<primaryKey><![CDATA[0]]></primaryKey>
+				<keywordName><![CDATA[知识点讲解]]></keywordName>  
+			</keyword>
+        	<keyword>
+        		<primaryKey><![CDATA[0]]></primaryKey>
+				<keywordName><![CDATA[中考
+]]></keywordName>  
+			</keyword>
+		</KEYWORDS>
+		
+		<LABELS>
+		</LABELS>
+		
+		<!-- 媒体文件 -->
+		<mediafiles>
+		</mediafiles>
+
+		<!-- 图片文件 -->
+		<displayFileLists>
+        	<displayFile>
+        		<dpFileID><![CDATA[3003751257]]></dpFileID>
+        		<dpFileName><![CDATA[czsx_HSJ720H.jpg]]></dpFileName>
+        		<dpFileDetail><![CDATA[00]]></dpFileDetail>
+        		<dpFileType><![CDATA[03]]></dpFileType>
+        		<dpUsageCode><![CDATA[24]]></dpUsageCode>
+        		<dpUseType><![CDATA[00]]></dpUseType>
+        		<dpAdapType><![CDATA[00]]></dpAdapType>
+        		<pixel><![CDATA[00]]></pixel>
+        	</displayFile>
+        	<displayFile>
+        		<dpFileID><![CDATA[3003751258]]></dpFileID>
+        		<dpFileName><![CDATA[czsx_HSJ720V.jpg]]></dpFileName>
+        		<dpFileDetail><![CDATA[00]]></dpFileDetail>
+        		<dpFileType><![CDATA[03]]></dpFileType>
+        		<dpUsageCode><![CDATA[25]]></dpUsageCode>
+        		<dpUseType><![CDATA[00]]></dpUseType>
+        		<dpAdapType><![CDATA[00]]></dpAdapType>
+        		<pixel><![CDATA[00]]></pixel>
+        	</displayFile>
+        	<displayFile>
+        		<dpFileID><![CDATA[3003751259]]></dpFileID>
+        		<dpFileName><![CDATA[czsx_HSJ1080H_sc.jpg]]></dpFileName>
+        		<dpFileDetail><![CDATA[00]]></dpFileDetail>
+        		<dpFileType><![CDATA[03]]></dpFileType>
+        		<dpUsageCode><![CDATA[00]]></dpUsageCode>
+        		<dpUseType><![CDATA[00]]></dpUseType>
+        		<dpAdapType><![CDATA[00]]></dpAdapType>
+        		<pixel><![CDATA[00]]></pixel>
+        	</displayFile>
+        	<displayFile>
+        		<dpFileID><![CDATA[3003751260]]></dpFileID>
+        		<dpFileName><![CDATA[czsx_HSJ1080V.jpg]]></dpFileName>
+        		<dpFileDetail><![CDATA[00]]></dpFileDetail>
+        		<dpFileType><![CDATA[03]]></dpFileType>
+        		<dpUsageCode><![CDATA[23]]></dpUsageCode>
+        		<dpUseType><![CDATA[00]]></dpUseType>
+        		<dpAdapType><![CDATA[00]]></dpAdapType>
+        		<pixel><![CDATA[00]]></pixel>
+        	</displayFile>
+        	<displayFile>
+        		<dpFileID><![CDATA[3003751261]]></dpFileID>
+        		<dpFileName><![CDATA[czsx_TV_CONTENT.jpg]]></dpFileName>
+        		<dpFileDetail><![CDATA[00]]></dpFileDetail>
+        		<dpFileType><![CDATA[03]]></dpFileType>
+        		<dpUsageCode><![CDATA[22]]></dpUsageCode>
+        		<dpUseType><![CDATA[00]]></dpUseType>
+        		<dpAdapType><![CDATA[00]]></dpAdapType>
+        		<pixel><![CDATA[00]]></pixel>
+        	</displayFile>
+        	<displayFile>
+        		<dpFileID><![CDATA[3003751262]]></dpFileID>
+        		<dpFileName><![CDATA[czsx_V_CONTENT.jpg]]></dpFileName>
+        		<dpFileDetail><![CDATA[00]]></dpFileDetail>
+        		<dpFileType><![CDATA[03]]></dpFileType>
+        		<dpUsageCode><![CDATA[21]]></dpUsageCode>
+        		<dpUseType><![CDATA[00]]></dpUseType>
+        		<dpAdapType><![CDATA[00]]></dpAdapType>
+        		<pixel><![CDATA[00]]></pixel>
+        	</displayFile>
+    	</displayFileLists>
+
+		<!-- 内容展示类型属性 -->
+		<propertyFileLists>
+        	<propertyFile>
+        		<propertyKey><![CDATA[内容类型]]></propertyKey>
+        		<propertyValue><![CDATA[初中教育]]></propertyValue>
+        	</propertyFile>
+        	<propertyFile>
+        		<propertyKey><![CDATA[内容类型]]></propertyKey>
+        		<propertyValue><![CDATA[考试辅导]]></propertyValue>
+        	</propertyFile>
+        	<propertyFile>
+        		<propertyKey><![CDATA[国家及地区]]></propertyKey>
+        		<propertyValue><![CDATA[内地]]></propertyValue>
+        	</propertyFile>
+        	<propertyFile>
+        		<propertyKey><![CDATA[内容形态]]></propertyKey>
+        		<propertyValue><![CDATA[连载]]></propertyValue>
+        	</propertyFile>
+        	<propertyFile>
+        		<propertyKey><![CDATA[播出年代]]></propertyKey>
+        		<propertyValue><![CDATA[2015]]></propertyValue>
+        	</propertyFile>
+        	<propertyFile>
+        		<propertyKey><![CDATA[学科]]></propertyKey>
+        		<propertyValue><![CDATA[数学]]></propertyValue>
+        	</propertyFile>
+    	</propertyFileLists>
+	</fields>
+
+</content>

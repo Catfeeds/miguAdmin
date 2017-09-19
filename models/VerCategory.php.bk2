@@ -1,0 +1,143 @@
+<?php
+
+/**
+ * This is the model class for table "{{ver_category}}".
+ *
+ * The followings are the available columns in table '{{ver_category}}':
+ * @property integer $id
+ * @property string $CountryOfOrigin
+ * @property string $actor
+ * @property string $boxoffice
+ * @property string $cp
+ * @property string $director
+ * @property integer $end
+ * @property string $keyword
+ * @property string $language
+ * @property string $orders
+ * @property string $score
+ * @property string $type
+ * @property string $year
+ * @property string $prize
+ * @property integer $gid
+ * @property integer $hdflag
+ * @property string $short
+ */
+class VerCategory extends CActiveRecord
+{
+	/**
+	 * @return string the associated database table name
+	 */
+	public function tableName()
+	{
+		return '{{ver_category}}';
+	}
+
+	/**
+	 * @return array validation rules for model attributes.
+	 */
+	public function rules()
+	{
+		// NOTE: you should only define rules for those attributes that
+		// will receive user inputs.
+		return array(
+			array('end, gid, hdflag', 'numerical', 'integerOnly'=>true),
+			array('CountryOfOrigin, type, short', 'length', 'max'=>150),
+			array('actor, prize', 'length', 'max'=>250),
+			array('boxoffice, cp, director, keyword, language', 'length', 'max'=>200),
+			array('orders, score, year', 'length', 'max'=>50),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('id, CountryOfOrigin, actor, boxoffice, cp, director, end, keyword, language, orders, score, type, year, prize, gid, hdflag, short', 'safe', 'on'=>'search'),
+		);
+	}
+
+	/**
+	 * @return array relational rules.
+	 */
+	public function relations()
+	{
+		// NOTE: you may need to adjust the relation name and the related
+		// class name for the relations automatically generated below.
+		return array(
+		);
+	}
+
+	/**
+	 * @return array customized attribute labels (name=>label)
+	 */
+	public function attributeLabels()
+	{
+		return array(
+			'id' => 'ID',
+			'CountryOfOrigin' => 'Country Of Origin',
+			'actor' => 'æ¼”å‘˜',
+			'boxoffice' => 'ç¥¨æˆ¿',
+			'cp' => 'ç‰Œç…§æ–¹',
+			'director' => 'å¯¼æ¼”',
+			'end' => 'æ˜¯å¦å®Œç»“',
+			'keyword' => 'å…³é”®å­—',
+			'language' => 'è¯­è¨€',
+			'orders' => 'æŽ’åº',
+			'score' => 'è¯„åˆ†',
+			'type' => 'ç§ç±»',
+			'year' => 'å¹´ä»½',
+			'prize' => 'å¥–é¡¹',
+			'gid' => 'gid',
+			'hdflag' => 'Hdflag',
+			'short' => 'Short',
+		);
+	}
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
+	 */
+	public function search()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('CountryOfOrigin',$this->CountryOfOrigin,true);
+		$criteria->compare('actor',$this->actor,true);
+		$criteria->compare('boxoffice',$this->boxoffice,true);
+		$criteria->compare('cp',$this->cp,true);
+		$criteria->compare('director',$this->director,true);
+		$criteria->compare('end',$this->end);
+		$criteria->compare('keyword',$this->keyword,true);
+		$criteria->compare('language',$this->language,true);
+		$criteria->compare('orders',$this->orders,true);
+		$criteria->compare('score',$this->score,true);
+		$criteria->compare('type',$this->type,true);
+		$criteria->compare('year',$this->year,true);
+		$criteria->compare('prize',$this->prize,true);
+		$criteria->compare('gid',$this->gid);
+		$criteria->compare('hdflag',$this->hdflag);
+		$criteria->compare('short',$this->short,true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return VerCategory the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
+}
+

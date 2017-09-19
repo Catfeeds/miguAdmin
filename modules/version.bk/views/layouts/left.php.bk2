@@ -1,0 +1,95 @@
+<?php
+$auth['list']='';
+if($_SESSION['auth']=='1'){
+   $nav = $this->verguide;
+}else{
+   $uid = $_SESSION['userid'];
+   $auth = $this->getAuth($uid);
+   $nav=$auth['data'];
+}
+$admin = $this->getMvAdmin();
+//var_dump($nav);die;
+?>
+<div class="admin_left">
+    <div id="menubox">
+        <ul id="J_navlist">
+            <?php
+            //print_r($nav);
+            if(!empty($nav)){
+                foreach($nav as $v){
+                    if($v->pid == 0 && $v->status==0){
+                        ?>
+                        <li class="<?php echo !empty($_GET['nid']) && $_GET['nid'] == $v['id']?'thismenu':''?>">
+                            <span>
+                                <?php
+                                    $data = VerGuideManager::getGuideCopy($v['id'],$auth['list']);
+                                    if(!empty($data)){?>
+                                        <li class="menu">
+                                            <span><b><?php echo $v['name']?></b></span>
+                                            <ul>
+                                                <?php
+                                                    foreach($data as $val){?>
+                                                           <li>
+                                                               <span>
+                                <?php
+                                    $tmp = VerGuideManager::getGuideCopy($val['id'],$auth['list']);
+                                    if(!empty($tmp)){?>
+                                        <li class="menu">
+                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val['name']?></span>
+                                            <ul>
+                                                <?php
+                                                    foreach($tmp as $l){?>
+                                                           <li><a href="<?php echo $l['url'] == '#'?'#':Yii::app()->createUrl($l['url'],array('mid'=>$_GET['mid'],'nid'=>$l['id'],'epg'=>$l['name'],'pro'=>$admin['nickname']))?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $l['name']?></a></li>
+                                                    <?php }
+                                                ?>
+                                            </ul>
+                                        </li>
+                                    <?php
+                                        }else{?>
+                                        <li><a href="<?php echo $val['url'] == '#'?'#':Yii::app()->createUrl($val['url'],array('mid'=>$_GET['mid'],'nid'=>$val['id'],'epg'=>$val['name'],'pro'=>$admin['nickname']))?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val['name']?></a></li>
+                                   <?php }
+                                ?>
+                            </span>
+
+                                                           </li>
+                                                    <?php }
+                                                ?>
+                                            </ul>
+                                        </li>
+                                    <?php
+                                        }else{?>
+                                        <li><a href="<?php echo $v['url'] == '#'?'#':Yii::app()->createUrl($v['url'],array('mid'=>$_GET['mid'],'nid'=>$v['id'],'epg'=>$v['name'],'pro'=>$admin['nickname']))?>"><b><?php echo $v['name']?></b></a></li>
+                                   <?php }
+                                ?>
+                            </span>
+                        </li>
+                    <?php
+                    }
+                }
+            }else{
+                ?>
+                <li class="">
+                </li>
+            <?php
+            }?>
+        </ul>
+        <script type="text/javascript" language="javascript">
+            navList(12);
+        </script>
+    </div>
+    <div class="left_ico left_active"><a href="#"></a></div>
+</div>
+<script type="text/javascript">
+    window.onload = function(){
+        $('li.thismenu div.submenu').show();
+    };
+    $('.left_ico').click(function(){
+        $(this).toggleClass('left_active');
+        $("#menubox").toggle();
+    });
+    function reurl(obj){
+        var url = obj.value;
+        window.location.href=url;
+    }
+
+</script>

@@ -1,0 +1,88 @@
+<script charset="utf-8" type="text/javascript" src="/js/jdate/jquery.datetimepicker.js"></script>
+<link rel="stylesheet" href="/js/jdate/jquery.datetimepicker.css" />
+<div class="btn-parent">
+    <a href="<?php echo $this->get_url('content','message')?>" class="btn">新建消息</a>
+</div>
+<div class="mt10">
+    <form action="">
+        <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
+            <tr>
+                <th>序号</th>
+                <th>名称</th>
+                <th>内容</th>
+                <th>站点</th>
+                <th>状态</th>
+                <th>有效期</th>
+                <th>操作</th>
+            </tr>
+            <?php
+            if(!empty($list)){
+                foreach($list as $l){?>
+                    <tr>
+                        <input type="hidden" name="id" value="<?php echo $l['id']?>">
+                        <td><?php echo $l['id']?></td>
+                        <td><?php echo $l['title']?></td>
+                        <td><?php echo $l['info']?></td>
+                        <td><?php echo $l['name']?></td>
+                        <td><?php
+                            switch($l['flag']){
+                                case '0':echo '未审核';break;
+                                case '1':
+                                case '2':
+                                case '3':
+                                case '4':
+                                case '5':
+                                    echo '审核中';break;
+                                case '6':echo '通过';break;
+                            }
+                            ?></td>
+                        <td><?php 
+                             if(!empty($l['firstTime'])){
+                                echo date("Y-m-d",$l['firstTime']);
+                             }?>---<?php if(!empty($l['endTime'])){
+                                   echo date("Y-m-d",$l['endTime']);
+                                     }?></td>
+                        <td>
+                           <?php
+                                if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
+                                    if($l['flag']=='0'){
+                                    ?>
+                                    <a href="<?php echo $this->get_url('content','message',array('id'=>$l['id']))?>">编辑</a>&nbsp;<a class="review">提交审核</a>&nbsp;<a class="del">删除</a></td>
+                                <?php
+                                    }else if($l['flag']=='6'){
+                                        ?>
+                                    <a href="<?php echo $this->get_url('content','message',array('id'=>$l['id']))?>">编辑</a>&nbsp;<a class="del">删除</a></td>
+                                    <?php
+                                    }
+                                }
+                            ?>
+                    </tr>
+                    <?php
+                }
+            }
+            ?>
+        </table>
+    </form>
+</div>
+<div><?php echo $page;?></div>
+<script>
+    $('.del').click(function(){
+        var id = $(this).parent().parent().children('input').val();
+        $.post("<?php echo $this->get_url('content','msgdel')?>",{id:id},function(d){
+            if(d.code==200){
+                alert(d.msg);
+                location.reload();
+            }else{
+                alert(d.msg)
+            }
+        },'json')
+    })
+    $('.review').click(function(){
+        var id = $(this).parent().parent().children('input').val();
+        $.post("<?php echo $this->get_url('message','review')?>",{id:id},function(d){
+            if(d.code==200){
+                location.reload();
+            }
+        },'json')
+    })
+</script>

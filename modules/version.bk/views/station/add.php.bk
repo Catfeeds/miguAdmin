@@ -1,0 +1,142 @@
+<style>
+    .center{
+        margin-left:50px;
+    }
+    aa{
+        width:200px;
+        height:50px;
+    }
+</style>
+<div class="center">
+<div>
+    <span>选择省份</span>
+    <select name="province" onchange="getregin()" id="province" class="form-input w200">
+                          <option value="0" >请选择省份</option>
+        <?php
+        if(!empty($province)){
+            foreach($province as $v){?>
+                <option <?php if($provinceCode==$v['provinceCode']){echo "selected=selected"; } ?> value ="<?php echo $v['provinceCode']?>_<?php echo $v['provinceName']?>"><?php echo $v['provinceName']?></option>
+                <?php
+            }
+        }
+        ?>
+    </select>
+    <span>选择地区</span>
+    <select name="city" id="city"  class="form-input w200">
+        <option value="0">请选择市</option>
+        <?php
+        if(!empty($city)){
+            foreach($city as $vv){?>
+                <option <?php if($cityCode==$vv['cityCode']){echo "selected=selected"; } ?> value ="<?php echo $vv['cityCode']?>_<?php echo $vv['cityName']?>"><?php echo $vv['cityName']?></option>
+
+                <?php
+            }
+        }
+        ?>
+    </select>
+</div>
+<br>
+<div>
+    <span>选择牌照方：</span>
+    <input type="checkbox" name="cp" id="cp" value="1">华数
+    <input type="checkbox" name="cp" id="cp" value="2">百视通
+    <input type="checkbox" name="cp" id="cp" value="3">未来电视
+    <input type="checkbox" name="cp" id="cp" value="4">南传
+    <input type="checkbox" name="cp" id="cp" value="5">芒果
+    <input type="checkbox" name="cp" id="cp" value="6">国广
+    <input type="checkbox" name="cp" id="cp" value="7">银河
+</div>
+<br>
+<div>
+    <span>站点名称：</span>
+    <input type="text" name="title" id="title" class="aa" placeholder="输入站点名称">
+</div>
+<br>
+<div>
+    <span>备注：</span>
+    <input type="text" name="mark" id="mark" class="aa" placeholder="输入备注信息">
+</div>
+<br>
+<div>
+    <span>userGroup:</span>
+    <input type="text" name="usergroup" id="usergroup" class="aa" placeholder="输入userGroup">
+</div>
+<br>
+<div>
+    <span>epgCode:</span>
+    <input type="text" name="epgcode" id="epgcode" class="aa" placeholder="输入epgCode">
+</div>
+<br>
+<div>
+    <input type="button" value="保存信息" class="btn save">
+    <input type="button" value="返回列表" class="gray">
+</div>
+</div>
+<script>
+    $('.gray').click(function()
+    {
+        //window.history.go(-1);
+    });
+    function getregin()
+    {
+        var shengid=$("#province").val();
+
+        var i = shengid.split('_');//分割
+        $("#city option").remove();
+
+        $.getJSON("/version/wallpaper/getcity?mid=<?php echo $_GET['mid']?>",{id:i[0]},function(data){
+
+            $.each(data,function(i){
+                $("#city").append('<option value="'+data[i]['cityCode']+'_'+data[i]['cityName']+'">'+data[i]['cityName']+'</option>');
+//                +'_'+data[i]['cityName']
+            });
+        });
+    }
+
+
+    $('.save').click(function()
+    {
+        var k = $(this);
+        var G = {};
+        G.name  = $('#title').val();
+        G.mark  = $('#mark').val();
+        var pro = $('#province  option:selected').val();
+        var city = $('#city  option:selected').val();
+        pro  = pro.split('_');
+        city = city.split('_');
+        G.cp="";
+        $("input[name='cp']:checked").each(function() {
+            G.cp += $(this).val()+'/';
+        });
+        G.pro = pro[0];
+        G.city = city[0];
+        G.usergroup = $('#usergroup').val();
+        G.epgcode = $('#epgcode').val();
+        G.gid    = <?php echo $_GET['nid'] ;?>;
+//        console.log(G);return false;
+        if(empty(G.name)){
+            layer.alert('标题不能为空',{icon:0});
+            return false;
+        }
+        if(empty(G.cp)){
+            layer.alert('牌照方不能为空',{icon:0});
+            return false;
+        }
+        if(empty(G.pro)){
+            layer.alert('省市不能为空',{icon:0});
+            return false;
+        }
+//                console.log(G);return false;
+        var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
+        $.post('/version/station/doAdd?mid=<?php echo $this->mid?>',G,function(d){
+//            console.log(d);return false;
+            if(d== 200){
+                alert('添加成功');
+                location.reload();
+            }else{
+                layer.close(load);
+                layer.alert(d.msg);
+            }
+        },'json')
+    });
+</script>

@@ -1,0 +1,120 @@
+<?php
+
+/**
+ * This is the model class for table "{{ver_message}}".
+ *
+ * The followings are the available columns in table '{{ver_message}}':
+ * @property string $id
+ * @property string $vid
+ * @property string $tType
+ * @property string $param
+ * @property string $action
+ * @property string $url
+ * @property string $info
+ * @property string $cTime
+ * @property string $pic
+ */
+class VerMessage extends CActiveRecord
+{
+	/**
+	 * @return string the associated database table name
+	 */
+	public function tableName()
+	{
+		return '{{ver_message}}';
+	}
+
+	/**
+	 * @return array validation rules for model attributes.
+	 */
+	public function rules()
+	{
+		// NOTE: you should only define rules for those attributes that
+		// will receive user inputs.
+		return array(
+			array('tType, info', 'required'),
+			array('vid', 'length', 'max'=>30),
+			array('tType', 'length', 'max'=>20),
+			array('param, action, url', 'length', 'max'=>300),
+			array('cTime', 'length', 'max'=>11),
+			array('pic', 'length', 'max'=>255),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('id, vid, tType, param, action, url, info, cTime, pic', 'safe', 'on'=>'search'),
+		);
+	}
+
+	/**
+	 * @return array relational rules.
+	 */
+	public function relations()
+	{
+		// NOTE: you may need to adjust the relation name and the related
+		// class name for the relations automatically generated below.
+		return array(
+		);
+	}
+
+	/**
+	 * @return array customized attribute labels (name=>label)
+	 */
+	public function attributeLabels()
+	{
+		return array(
+			'id' => 'ID',
+			'vid' => 'Vid',
+			'tType' => 'T Type',
+			'param' => 'Param',
+			'action' => 'Action',
+			'url' => 'Url',
+			'info' => 'Info',
+			'cTime' => 'C Time',
+			'pic' => 'Pic',
+		);
+	}
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
+	 */
+	public function search()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id,true);
+		$criteria->compare('vid',$this->vid,true);
+		$criteria->compare('tType',$this->tType,true);
+		$criteria->compare('param',$this->param,true);
+		$criteria->compare('action',$this->action,true);
+		$criteria->compare('url',$this->url,true);
+		$criteria->compare('info',$this->info,true);
+		$criteria->compare('cTime',$this->cTime,true);
+		$criteria->compare('pic',$this->pic,true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return VerMessage the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
+}
+

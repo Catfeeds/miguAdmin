@@ -1,0 +1,98 @@
+<?php
+$nav = $this->verguide;
+$admin = $this->getMvAdmin();
+//var_dump($nav);die;
+?>
+<div class="admin_left">
+    <div id="menubox">
+        <ul id="J_navlist">
+            <li >
+                <select name="" onchange="reurl(this)" style="height: 50px">
+                    <?php
+                    if(!empty($nav)){
+                    foreach($nav as $n){
+                    if($n->pid == 0){
+                    ?>
+                    <option value="<?php echo $n['url'].'?mid='.$n['id'].'&nid='.$n['id']?>" <?php if($n['id']==$_REQUEST['mid']) echo "selected=selected"?>><?php echo $n['name']?></option>
+            <?php   }
+            }
+            }?>
+                </select>
+            </li>
+            <?php
+            //print_r($nav);
+            if(!empty($nav)){
+                foreach($nav as $v){
+                    $mid = 0;
+                    if(!empty($_GET['mid'])) $mid = $_GET['mid'];
+                    if(!empty($mid) && $mid == $v->pid){
+                        ?>
+                        <li class="<?php echo !empty($_GET['nid']) && $_GET['nid'] == $v['id']?'thismenu':''?>">
+                            <span>
+                                <?php
+                                    $data = VerGuideManager::getGuide($v['id']);
+                                    if(!empty($data)){?>
+                                        <li class="menu">
+                                            <span><?php echo $v['name']?></span>
+                                            <ul style="display:none">
+                                                <?php
+                                                    foreach($data as $val){?>
+                                                           <li><a href="<?php echo $val['url'] == '#'?'#':Yii::app()->createUrl($val['url'],array('mid'=>$_GET['mid'],'nid'=>$val['id'],'epg'=>$val['name'],'pro'=>$admin['nickname']))?>"><?php echo $val['name']?></a></li>
+                                                    <?php }
+                                                ?>
+                                            </ul>
+                                        </li>
+                                    <?php
+                                        }else{?>
+                                        <li><a <a href="<?php echo $v['url'] == '#'?'#':Yii::app()->createUrl($v['url'],array('mid'=>$_GET['mid'],'nid'=>$v['id'],'epg'=>$v['name'],'pro'=>$admin['nickname']))?>"><?php echo $v['name']?></a></li>
+                                   <?php }
+                                ?>
+                            </span>
+                        </li>
+                    <?php
+                    }
+                }
+            }else{
+                ?>
+                <li class="">
+                    <span><a href="#" style="color:;">待添加<em></em></a></span>
+                    <div class="submenu none" style="">
+                        <a href="#">待添加</a>
+                        <a href="#">待添加</a>
+                        <a href="#">待添加</a>
+                        <a href="#">待添加</a>
+                        <a href="#">待添加</a>
+                        <a href="#">待添加</a>
+                        <a href="#">待添加</a>
+                        <a href="#">待添加</a>
+                        <a href="#">待添加</a>
+                        <a href="#">待添加</a>
+                    </div>
+                </li>
+            <?php
+            }?>
+        </ul>
+        <script type="text/javascript" language="javascript">
+            navList(12);
+        </script>
+    </div>
+    <div class="left_ico left_active"><a href="#"></a></div>
+</div>
+<script type="text/javascript">
+    window.onload = function(){
+        $('li.thismenu div.submenu').show();
+    };
+    $('.left_ico').click(function(){
+        $(this).toggleClass('left_active');
+        $("#menubox").toggle();
+    });
+    function reurl(obj){
+        var url = obj.value;
+        window.location.href=url;
+    }
+
+    $('.menu').click(function(){
+        $(this).siblings().children('ul').hide("slow");
+        $(this).children('ul').show("slow");
+    })
+</script>

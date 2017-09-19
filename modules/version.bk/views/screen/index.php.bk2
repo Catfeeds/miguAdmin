@@ -1,0 +1,416 @@
+<style>
+    .left{
+        width:100px;
+        height:100%;
+        border:1px solid #ccc;
+        float:left;
+        margin-right:20px;
+    }
+    .left-ul li{
+        width:100px;
+        height:50px;
+        border:1px solid #ccc;
+        float:left;
+        text-align: center;
+	line-height:50px;
+    }
+    .center{
+        float:left;
+    }
+    .center-ul{
+        margin-left:20px;
+        margin-bottom:20px;
+        width:100%;
+        height:50px;
+        float:left;
+    }
+    .center-ul li{
+        width:100px;
+        height:50px;
+        float:left;
+        /*border:1px solid #ccc;*/
+        text-align: center;
+        margin-left:20px;
+    }
+    .addBtn{
+        background: #0aaaf1;
+    }
+    .main{
+        width:4500px;
+        height:200%;
+    }
+    .guideFlag{
+        display:block;
+    }
+    .templateParent{
+        background: #4976B7;
+    }	
+   .bg{
+	background:#4976B7;
+   }
+</style>
+<?php
+$verstation = $this->getVerstation();
+?>
+<script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
+<div class="main">
+<div class="left">
+    <ul class="left-ul">
+        <!--<li>全国</li>-->
+        <?php
+           if(!empty($verstation)){
+		    $a = -1;
+		foreach($verstation as $k=>$v){
+		    $a++;	
+                      ?>
+    		<li class='leftLi'>
+			<a href="<?php echo Yii::app()->createUrl('/version/screen/index',array('mid'=>$_GET['mid'],'nid'=>$v['id'],'epg'=>$_GET['epg'],'leftLiId'=>$a))?>"><?php echo $v['name']?></a>
+		</li>
+ 	     <?php	
+ 		}
+           }
+	?>
+    </ul>
+</div>
+<?php
+if(!empty($templateList)){
+    $flag =1;
+}else{
+    $flag =0;
+    $templateList = '0';//
+}
+?>
+
+<div class="center">
+    <ul class="center-ul">
+        <?php
+	    if(!empty($list)){	 
+            foreach($list as $k=>$v) {
+                if ($k == 0) { ?>
+                    <li onclick="guideShow(this)" class='bg active'>
+                        <img src="<?php echo $v['pic_true']; ?>" alt="" width="100px" height="50px"
+                             guideId="<?php echo $v['id']; ?>" class='guideFlag'>
+                        <img src="<?php echo $v['pic_false']; ?>" alt="" width="100px" height="50px"
+                             guideId="<?php echo $v['id']; ?>" style="display:none">
+                    </li>
+                    <?php
+                } else {
+                    ?>
+                    <li onclick="guideShow(this)" class='bg'>
+                        <img src="<?php echo $v['pic_true']; ?>" alt="" width="100px" height="50px"
+                             guideId="<?php echo $v['id']; ?>" style="display:none;">
+                        <img src="<?php echo $v['pic_false']; ?>" alt="" width="100px" height="50px"
+                             guideId="<?php echo $v['id']; ?>">
+                    </li>
+                <?php
+                }
+            }
+	}
+                ?>
+
+        <!--不用遍历出来-->
+        <li class="test">
+           <input type="button" value="添加" class="btn addBtn">
+        </li>
+	<li>
+            <input type="button" value="编辑导航栏" class="btn updateGuide">
+        </li>
+    </ul>
+    <?php
+    if(!empty($html)){
+        echo $html;
+    }
+
+    ?>
+    <input type="button" value="切换审核内容" class="btn content_btn" style="margin-top: 460px;margin-left:-100%">
+        <input type="button" value="提交审核" class="btn submit_btn">
+</div>
+</div>
+<script>
+    function leftLi()
+    {
+	var heightLi = "<?php echo !empty($_GET['leftLiId'])?$_GET['leftLiId']:'' ;?>";
+	$('.leftLi').eq(heightLi).css('background','#7DCFFE');
+    }
+
+    $('a').css('text-decoration','none');	
+
+    leftLi();
+	
+    $('.bx-pager-item').css('display','none');
+
+    $('.addBtn').click(function()
+    {
+        //window.location.href = "/version/screen/addScreen/mid/<?php echo $this->mid;?>/nid/<?php echo $_GET['nid']?>";
+        window.open("/version/screen/addScreen/mid/<?php echo $this->mid;?>/nid/<?php echo $_GET['nid']?>");
+    });
+    $('.updateGuide').click(function()
+    {
+       window.open("/version/screen/updateGuideView/mid/<?php echo $this->mid;?>/nid/<?php echo $_GET['nid']?>");
+    });
+	
+    function guideShow(obj)
+    {
+        $('.bg').removeClass('active');
+        $(obj).addClass('active');
+        var screenId = $(obj).children('img').attr('guideId');
+//	alert(screenId);return false;
+        $.ajax
+        ({
+            type:'post',
+            url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+screenId,
+            success:function(data)
+            {
+                $('.templateParent').remove();
+		for(var i = 0 ; i<$(obj).parent().children('li').length ; i++){
+                    if($(obj).parent().children('li').eq(i).children('img').hasClass('guideFlag')){
+                        $(obj).parent().children('li').eq(i).children('img').removeClass('guideFlag');
+                        $(obj).parent().children('li').eq(i).children('img').eq(0).hide();
+                        $(obj).parent().children('li').eq(i).children('img').eq(1).show();
+                    }
+                }
+                $(obj).children('img').eq(0).addClass('guideFlag');
+                $(obj).children('img').eq(0).show();
+                $(obj).children('img').eq(1).hide();
+                $('.center-ul').after(data);
+		getScreenContent(screenId);
+            }
+        })
+    }
+
+
+    var flag = <?php echo $flag;?>;
+    if(flag == 1){
+        showData();
+    }
+    function showData()
+    {
+        var data=<?php echo $templateList;?>;
+        var l= data.length;
+        l= data.length;
+//        console.log(data);
+        for(var i = 0 ; i<data.length ; i++){
+            var order = '.order-'+data[i]['order'];
+            var width = $(order).css('width');
+            var height = $(order).css('height');
+            var w = $(order).attr('size-w');
+            var h = $(order).attr('size-h');
+            $(order).find('.clickImg-'+w+'-'+h).remove();
+            $(order).append("<li><img style='display:block;float:left;' src='"+data[i]['pic']+"' width='"+width+"' height='"+height+"' onclick='add(this)' id='"+data[i]['id']+"'></li>");
+        }
+        banner(l);
+    }
+	
+    function getScreenContent(screenId)
+    {
+        $.ajax
+        ({
+            type:'post',
+            dataType:'json',
+            url:"/version/screen/getScreenContent/mid/<?php echo $this->mid;?>/screenGuideId/"+screenId,
+            success:function(data)
+            {
+               var flag= data.flag;
+                data = data.list;
+               if(data.length>0){
+                   var data = eval(data);
+                   showDataAgain(data);
+               }
+               if(flag=='1'){
+                    $('.submit_btn').val('审核中');
+                }else if(flag=='2'){
+                    $('.submit_btn').val('发布');
+                }else{
+                    $('.submit_btn').val('提交审核');
+                }
+                $('.content_btn').val('切换审核内容');
+            }
+        })
+    }
+    
+    function showDataAgain(data)
+    {
+//        var data=<?php //echo $templateList;?>//;
+        var l= data.length;
+        l= data.length;
+//        console.log(data);
+        for(var i = 0 ; i<data.length ; i++){
+            var order = '.order-'+data[i]['order'];
+            var width = $(order).css('width');
+            var height = $(order).css('height');
+            var w = $(order).attr('size-w');
+            var h = $(order).attr('size-h');
+            $(order).find('.clickImg-'+w+'-'+h).remove();
+            $(order).append("<li><img style='display:block;float:left;' src='"+data[i]['pic']+"' width='"+width+"' height='"+height+"' onclick='add(this)' id='"+data[i]['id']+"'></li>");
+        }
+        banner(l);
+    }
+	
+    function banner(l)
+    {
+        for(var i = 0 ; i<200 ; i++){
+            if($('.order-'+i).find('li').length>1){
+                var aa = $('.order-'+i).html();
+                var bb = $('.order-'+i);
+                bb.children().remove();
+                bb.append("<ul class='"+i+"-bxslider'></ul>");
+                var str = "."+i+'-bxslider';
+                bb.find(str).append(aa);
+                slider = $(str).bxSlider();
+                slider.startAuto();
+            }
+        }
+	$('.bx-controls').hide();
+    }
+
+    function add(obj)
+    {
+        var mid = "<?php echo $_GET['mid']?>";
+        var screenGuideId = $('.guideFlag').attr('guideId');
+        var epg = "<?php echo $_GET['epg']?>";
+        if($(obj).parent().is('div')){
+            var width = $(obj).parent('div').attr('size-w');
+            var height = $(obj).parent('div').attr('size-h');
+            var x = $(obj).parent('div').attr('x');
+            var y = $(obj).parent('div').attr('y');
+            var order = $(obj).parent('div').attr('order');
+	    window.open('/version/screen/addScreenContent/mid/'+mid+'/screenGuideId/'+screenGuideId+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/epg/'+epg+'/order/'+order);
+        }else if($(obj).parent().parent().is('ul')){
+            var width = $(obj).parent().parent().parent().parent().parent().attr('size-w');
+            var height = $(obj).parent().parent().parent().parent().parent().attr('size-h');
+            var x = $(obj).parent().parent().parent().parent().parent().attr('x');
+            var y = $(obj).parent().parent().parent().parent().parent().attr('y');
+            var order = $(obj).parent().parent().parent().parent().parent().attr('order');
+            var id = $(obj).attr('id');
+            window.open('/version/screen/updateScreenContent/mid/'+mid+'/screenGuideId/'+screenGuideId+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/epg/'+epg+'/order/'+order+"/id/"+id);
+        }else if($(obj).parent().is('li')){
+            var width = $(obj).parent().parent('div').attr('size-w');
+            var height = $(obj).parent().parent('div').attr('size-h');
+            var x = $(obj).parent().parent('div').attr('x');
+            var y = $(obj).parent().parent('div').attr('y');
+            var order = $(obj).parent().parent('div').attr('order');
+	    var id = $(obj).attr('id');
+	    //alert(id);return false;		
+            window.open('/version/screen/updateScreenContent/mid/'+mid+'/screenGuideId/'+screenGuideId+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/epg/'+epg+'/order/'+order+'/id/'+id);
+        }
+
+    }
+
+    $('.content_btn').click(function(){
+        var restr = $(this).attr('des');
+        var screenId = $('.active').children('img').attr('guideId');
+        var str = 'cur-' + screenId;
+        $(this).attr('des',str);
+        if(restr!=str){
+            bbb(screenId);
+            $(this).val('切换现网内容');
+        }else{
+            aaa(screenId);
+            $(this).attr('des','2');
+            $(this).val('切换审核内容')
+        }
+    })
+
+    $('.submit_btn').click(function(){
+        var text = $(this).val();
+        var screenId = $('.active').children('img').attr('guideId');
+        if(text=='提交审核'){
+            $.post("<?php echo $this->get_url('screen','subreview')?>",{guideid:screenId},function(){
+
+            })
+            $(this).val('审核中');
+        }else if(text=='发布'){
+            $.post("<?php echo $this->get_url('screen','submit')?>",{guideid:screenId},function(){
+
+            })
+            $(this).val('提交审核');
+        }
+
+        //$.post("<?php echo $this->get_url('screen','subreview')?>",{guideid:screenId},function(){
+
+        //})
+    })
+
+    function getScreenContentCopy(screenId)
+    {
+        $.ajax
+        ({
+            type:'post',
+            url:"/version/screen/getScreenContentCopy/mid/<?php echo $this->mid;?>/screenGuideId/"+screenId,
+            dataType:'json',
+            success:function(data)
+            {
+
+                var flag= data.flag;
+                data = data.list;
+                console.log(data);
+                //return false;
+                if(data.length>0){
+                    var data = eval(data);
+                    showDataAgain(data);
+                }
+                if(flag=='1'){
+                    $('.submit_btn').val('审核中');
+                }else if(flag=='2'){
+                    $('.submit_btn').val('发布');
+                }else{
+                    $('.submit_btn').val('提交审核');
+                }
+            }
+        })
+    }
+
+    function aaa(screenId){
+        //var screenId = $(obj).children('img').attr('guideId');
+//	alert(screenId);return false;
+        $.ajax
+        ({
+            type:'post',
+            url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+screenId,
+            success:function(data)
+            {
+                $('.templateParent').remove();
+                for(var i = 0 ; i<$('.active').parent().children('li').length ; i++){
+                    if($('.active').parent().children('li').eq(i).children('img').hasClass('guideFlag')){
+                        $('.active').parent().children('li').eq(i).children('img').removeClass('guideFlag');
+                        $('.active').parent().children('li').eq(i).children('img').eq(0).hide();
+                        $('.active').parent().children('li').eq(i).children('img').eq(1).show();
+                    }
+                }
+                $('.active').children('img').eq(0).addClass('guideFlag');
+                $('.active').children('img').eq(0).show();
+                $('.active').children('img').eq(1).hide();
+                $('.center-ul').after(data);
+                getScreenContent(screenId);
+            }
+        })
+    }
+
+    function bbb(screenId){
+        //var screenId = $(obj).children('img').attr('guideId');
+//	alert(screenId);return false;
+        $.ajax
+        ({
+            type:'post',
+            url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+screenId,
+            success:function(data)
+            {
+                $('.templateParent').remove();
+                for(var i = 0 ; i<$('.active').parent().children('li').length ; i++){
+                    if($('.active').parent().children('li').eq(i).children('img').hasClass('guideFlag')){
+                        $('.active').parent().children('li').eq(i).children('img').removeClass('guideFlag');
+                        $('.active').parent().children('li').eq(i).children('img').eq(0).hide();
+                        $('.active').parent().children('li').eq(i).children('img').eq(1).show();
+                    }
+                }
+                $('.active').children('img').eq(0).addClass('guideFlag');
+                $('.active').children('img').eq(0).show();
+                $('.active').children('img').eq(1).hide();
+                $('.center-ul').after(data);
+                getScreenContentCopy(screenId);
+            }
+        })
+    }
+</script>
+
+
