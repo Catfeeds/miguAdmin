@@ -1,8 +1,5 @@
 <?php
-$stationId = $_GET['nid'];
-$uid = $_SESSION['userid'];
-$sql =  "select a.type,a.uid ,b.stationId from yd_ver_worker as a left join yd_ver_work as b on a.workid=b.id and b.flag = 3 where a.uid=$uid and b.stationId=$stationId";
-$workerType =  SQLManager::queryAll($sql);
+$workerType = Common::getUserInfo();
 if(!empty($workerType)){
     foreach ($workerType as $k=>$v){
         $wType[] = $v['type'];
@@ -17,12 +14,12 @@ if(!empty($workerType)){
 
 ?>
 <style>
-	.navi_none{
-		display:none;
-	}
-	.white{
-		color:white;
-	}
+        .navi_none{
+                display:none;
+        }
+        .white{
+                color:white;
+        }
     .station_left{
         width:200px;
         height:100%;
@@ -31,14 +28,14 @@ if(!empty($workerType)){
         float:left;
         padding-top:20px;
         padding-left:10px;
-    
+
     }
     .left-ul li{
         width:160px;
         height:30px;
         word-wrap: break-word;
         overflow:hidden;
-		
+
         float:left;
         text-align: left;
         padding-left:40px;
@@ -126,21 +123,43 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     <ul class="left-ul">
         <!--<li>全国</li>-->
          <input type="hidden" id="screenid" value="" />
-	<img onclick="chang_left_navi(this)" src="/file/u1855.png"> <div style="display:inline;font-family: 黑体;font-size: 20px;letter-spacing:4px;">XX地区</div>
+        <img onclick="chang_left_navi(this)" src="/file/u1855.png"> <div style="display:inline;font-family: 黑体;font-size: 20px;letter-spacing:4px;">商用地区</div>
         <?php
            if(!empty($verstation)){
                     $a = -1;
+                
+		foreach($verstation as $k=>$v){
+                    
+               if(!strpos("1".$v['name'],"测试")){
+		    $a++;   ?>
+                <li class='leftLi'>
+                        <a href="<?php echo Yii::app()->createUrl('/version/screen/index',array('mid'=>$_GET['mid'],'nid'=>$v['id'],'epg'=>$_GET['epg'],'leftLiId'=>$a,'adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>" title="<?php echo $v['name'];?>"><?php echo $v['name']; ?></a>
+                </li>
+             <?php
+                }}
+           }
+        ?>
+    </ul>
+    <ul class="left-ul">
+        <!--<li>全国</li>-->
+         <input type="hidden" id="screenid" value="" />
+        <img onclick="chang_left_navi1(this)" src="/file/u1855.png"> <div style="display:inline;font-family: 黑体;font-size: 20px;letter-spacing:4px;">测试专区</div>
+        <?php
+           if(!empty($verstation)){
+                   
                 foreach($verstation as $k=>$v){
-                    $a++;
-                      ?>
+                    
+		if(strpos("1".$v['name'],"测试")){
+                    $a++;  ?>
                 <li class='leftLi'>
                         <a href="<?php echo Yii::app()->createUrl('/version/screen/index',array('mid'=>$_GET['mid'],'nid'=>$v['id'],'epg'=>$_GET['epg'],'leftLiId'=>$a,'adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>" title="<?php echo $v['name'];?>"><?php echo $v['name']?></a>
                 </li>
              <?php
-                }
+                }}
            }
         ?>
     </ul>
+
 </div>
 <?php
 if(!empty($templateList)){
@@ -161,11 +180,17 @@ if(!empty($templateList)){
             <li>
                 <input type="button" value="编辑导航栏" class="btn updateGuide">
             </li>
+                 <?php if($_SESSION['auth'] == 1  &&empty($list) && 1 == 0){ ?>
+                <li  style="margin-left: 40px">
+                <input type="button" value="引用其他屏幕" class="btn aaa" style="width:120px;">
+                 </li>
+
+                <?php  } ?>
         </ul>
     </div>
     <div class="centerTopNav statusFlag" statusFlag="1">
         <ul>
-            <li class="screenEdit" activeFlag="1">编辑</li>
+           <li class="screenEdit" activeFlag="1">编辑</li>
             <li class="screenRelease" activeFlag="2">待发布</li>
             <li class="screenOnline" activeFlag="3">现网</li>
         </ul>
@@ -180,7 +205,7 @@ if(!empty($templateList)){
                         <img src="/file/u4122.png" alt="" width="80px" height="27px"
                              guideId="<?php echo $v['id']; ?>" class='guideFlag'>
 <div class="nv_button white" style="overflow:hidden;line-height:27px;width:80px;height:27px;position:absolute;top:0px;left: 0px;text-align: center"><?php echo $v['title']; ?></div>
-                       
+
                         <img src="/file/u4124.png" alt="" width="80px" height="27px"
                              guideId="<?php echo $v['id']; ?>" style="display:none">
                     </li>
@@ -223,22 +248,24 @@ if(!empty($templateList)){
            if(!in_array('1',$wType)){
                echo "var wTypeFlag=1;";  //没有编辑权限
            }else if(in_array($stationId,$stationIdArr) ){
-       
-	  	foreach($workerType as $a=>$b){
-		
-                        if($b['stationId'] == $stationId && $b['type'] == 1){
-			
+                foreach($res as $a=>$b){
+                        if(in_array('1',$b)){
                             echo "var wTypeFlag=2;";  //有编辑权限
                         }
                 }
-	   }else{
+           }else{
                echo "var wTypeFlag=1;";  //没有编辑权限
            }
 
            if(!in_array('2',$wType)){
                echo "var fTypeFlag=1;"; //没有发布权限
-           }else if(in_array($stationId,$stationIdArr) && in_array('2',$res[0])){
-               echo "var fTypeFlag=2;"; //有发布权限
+           }else if(in_array($stationId,$stationIdArr)){
+		foreach($res as $a=>$b){
+                        if(in_array('2',$b)){
+                            echo "var fTypeFlag=2;";  //有编辑权限
+                        }
+                }
+               //echo "var fTypeFlag=2;"; //有发布权限
            }else{
                echo "var fTypeFlag=1;"; //没有发布权限
            }
@@ -358,17 +385,17 @@ if(!empty($templateList)){
 
     function guideShow(obj)
     {
-    	
+
         $('.bg').removeClass('active');
         $('.nv_button').removeClass('white');
         $(obj).addClass('active');
         $(obj.children).each(function(){
-			if(this.tagName == 'DIV'){
-				$(this).addClass('white');
-			}
-			})
-        
-         
+                        if(this.tagName == 'DIV'){
+                                $(this).addClass('white');
+                        }
+                        })
+
+
         var screenId = $(obj).children('img').attr('guideId');
 
         var statusFlag = $('.centerTopNav').attr('statusFlag'); //编辑|待发布|现网
@@ -390,8 +417,8 @@ if(!empty($templateList)){
         }else if(statusFlag == '3'){
             getOnlineContent(screenId);
         }
-        
-      
+
+
     }
 
     function getOnlineContent(screenId)
@@ -422,16 +449,16 @@ if(!empty($templateList)){
         for(var i = 0 ; i<data.length ; i++){
             var order = '.order-'+data[i]['order'];
               if(i>=1){
-            	if(data[i]['order'] == data[i-1]['order']){
-            		$(order).find(".plus_button").remove()
-            	}
+                //if(data[i]['order'] == data[i-1]['order']){
+                        $(order).find(".plus_button").remove()
+                //}
             }
             var width = $(order).css('width');
             var height = $(order).css('height');
             var w = $(order).attr('size-w');
-            var h = $(order).attr('size-h');
+            var h = $(order).attr('size-h');console.log(w);
             $(order).find('.clickImg-'+w+'-'+h).remove();
-            $(order).append("<li><img style='display:block;float:left;position:relative;z-index:1' src='"+data[i]['pic']+"' width='"+width+"' height='"+height+"'  id='"+data[i]['id']+"'></li>");
+            $(order).append("<li><img style='display:block;float:left;position:relative;z-index:1' src='"+data[i]['pic']+"' width='"+w+"' height='"+h+"'  id='"+data[i]['id']+"'></li>");
         }
         banner(l);
     }
@@ -455,8 +482,8 @@ if(!empty($templateList)){
                if(statusFlag == '3' || statusFlag == '2'){
                   // $('.plus_button').remove();
                 }
-               
-		if(flag=='1'){
+
+                if(flag=='1'){
                     $('.submit_btn').val('审核中');
                }else if(flag=='2'){
                     <?php if(!isset($faFlag)){echo "$('.submit_btn').val('发布');";}?>
@@ -480,9 +507,9 @@ if(!empty($templateList)){
         for(var i = 0 ; i<data.length ; i++){
             var order = '.order-'+data[i]['order'];
               if(i>=1){
-            	if(data[i]['order'] == data[i-1]['order']){
-            		$(order).find(".plus_button").remove()
-            	}
+                if(data[i]['order'] == data[i-1]['order']){
+                        $(order).find(".plus_button").remove()
+                }
             }
             var width = $(order).css('width');
             var height = $(order).css('height');
@@ -501,29 +528,29 @@ if(!empty($templateList)){
         var l= data.length;
         l= data.length;
 //        console.log(data);
-		
+
         for(var i = 0 ; i<data.length ; i++){
             var order = '.order-'+data[i]['order'];
-           
+
             if(i>=1){
-            	if(data[i]['order'] == data[i-1]['order']){
-            		$(order).find(".plus_button").remove()
-            	}
+                if(data[i]['order'] == data[i-1]['order']){
+                        $(order).find(".plus_button").remove()
+                }
             }
-            
+
             var width = $(order).css('width');
             var height = $(order).css('height');
             var w = $(order).attr('size-w');
             var h = $(order).attr('size-h');
             $(order).find('.clickImg-'+w+'-'+h).remove();
-          
+
             $(order).append("" +
                 "<li>" +
                 "<img style='display:block;float:left;position:relative;z-index:1' src='"+data[i]['pic']+"' width='"+width+"' height='"+height+"' onclick='add(this)' id='"+data[i]['id']+"'>" +
                 "</li>");
         }
-        
-      
+
+
         banner(l);
     }
 
@@ -537,7 +564,7 @@ if(!empty($templateList)){
                 bb.append("<ul class='"+i+"-bxslider'></ul>");
                 var str = "."+i+'-bxslider';
                 bb.find(str).append(aa);
-		$(str).children('img').eq(0).remove();
+                $(str).children('img').eq(0).remove();
                 slider = $(str).bxSlider();
                 slider.startAuto();
             }
@@ -547,7 +574,7 @@ if(!empty($templateList)){
 
 //alert(wTypeFlag);alert(fTypeFlag)
     function add(obj)
-    {  
+    {
        if(wTypeFlag == 1){
             alert('你目前没有编辑屏幕的权限！');
             return false;
@@ -665,8 +692,8 @@ if(!empty($templateList)){
             var reviewFlag = checkReviewDatacopy();
             if(reviewFlag=='2'){
                 var releaseFlag = checkReviewsTimes();
-                
-		var auth = "<?php echo $_SESSION['auth'];?>";
+
+                var auth = "<?php echo $_SESSION['auth'];?>";
                 if(releaseFlag == '1'){
                         //return true;
                 }else{
@@ -687,39 +714,39 @@ if(!empty($templateList)){
 
     function getScreenContentCopy(screenId)
     {
-	document.getElementById("screenid").value = screenId
-    	
-	$.ajax
+        document.getElementById("screenid").value = screenId
+
+        $.ajax
         ({
             type:'post',
             url:"/version/screen/getScreenContentCopy/mid/<?php echo $this->mid;?>/stationId/<?php echo $_GET['nid'];?>/screenGuideId/"+screenId,
             dataType:'json',
             success:function(data)
             {
-            	  
+
                 flag= data.flag;
                 data = data.list;
-               
-	
+
+
                 if(data.length>0){
                     var data = eval(data);
-               
+
                     if(flag=='1'){
                         $('.submit_btn').val('审核中');
                         showDataAgain(data);
-                        
+
                     }else if(flag=='2'){
                         $('.submit_btn').val('发布');
                         //showDataAgain(data);
                         showDataAgainCopy(data);
                     }else{
-                    	
+
                         $('.submit_btn').val('提交审核');
                         showDataAgainCopy(data);
-                        
+
                     }
                 }
-                
+
             }
         })
     }
@@ -751,14 +778,14 @@ if(!empty($templateList)){
     }
 
     function bbb(screenId){
-    	
+
         $.ajax
         ({
             type:'post',
             url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+screenId,
             success:function(data)
             {
-            
+
                 $('.templateParent').remove();
                 for(var i = 0 ; i<$('.active').parent().children('li').length ; i++){
                     if($('.active').parent().children('li').eq(i).children('img').hasClass('guideFlag')){
@@ -767,14 +794,14 @@ if(!empty($templateList)){
                         $('.active').parent().children('li').eq(i).children('img').eq(1).show();
                     }
                 }
-              
+
                 $('.active').children('img').eq(0).addClass('guideFlag');
                 $('.active').children('img').eq(0).show();
                 $('.active').children('img').eq(1).hide();
                 $('.center-ul').after(data);
 
                 getScreenContentCopy(screenId);
-               
+
                 var statusFlag = $('.centerTopNav').attr('statusFlag'); //编辑|待发布|现网
                 if(statusFlag == '3' || statusFlag == '2'){
                   // $('.plus_button').remove();
@@ -836,12 +863,12 @@ if(!empty($templateList)){
              }
          }
      })
- }	
+ }
 
-	    function checkReviewsTimes()
+            function checkReviewsTimes()
     {
         var screenId = document.getElementById("screenid").value
-	var stationId = "<?php echo $_GET['nid'];?>";
+        var stationId = "<?php echo $_GET['nid'];?>";
         var mid = "<?php echo $this->mid;?>";
         var d = null;
         $.ajax
@@ -894,24 +921,61 @@ if(!empty($templateList)){
         })
         return d;
     }
-	
-	function chang_left_navi(e){
-		if($(e).attr('src') == '/file/u1855.png'){
-			$(e).attr('src','/file/u1857.png');
-		$(e.parentNode.children).each(function(){
-			if(this.tagName == 'LI'){
-				$(this).addClass("navi_none");
-			}
-			})
-		}else{
-			$(e).attr('src','/file/u1855.png');
-			$(e.parentNode.children).each(function(){
-			if(this.tagName == 'LI'){
-				$(this).removeClass("navi_none");
-			}
-			})
-		}
+
+        function chang_left_navi(e){
+                if($(e).attr('src') == '/file/u1855.png'){
+                        $(e).attr('src','/file/u1857.png');
 		
-	}
+                $(e.parentNode.children).each(function(){
+                        if(this.tagName == 'LI'){
+                                $(this).addClass("navi_none");
+                        }
+                        })
+                }else{
+                        $(e).attr('src','/file/u1855.png');
+                        $(e.parentNode.children).each(function(){
+                        if(this.tagName == 'LI'){
+                                $(this).removeClass("navi_none");
+                        }
+                        })
+                }
+
+        }
+	 function chang_left_navi1(e){
+                if($(e).attr('src') == '/file/u1855.png'){
+                        $(e).attr('src','/file/u1857.png');
+                $(e.parentNode.children).each(function(){
+                        if(this.tagName == 'LI'){
+                                $(this).addClass("navi_none");
+                        }
+                        })
+                }else{
+                        $(e).attr('src','/file/u1855.png');
+                        $(e.parentNode.children).each(function(){
+                        if(this.tagName == 'LI'){
+                                $(this).removeClass("navi_none");
+                        }
+                        })
+                }
+
+        }
+
+        $('.aaa').click(function(){
+
+
+
+        $.getJSON('<?php echo $this->get_url('screen','copyscreen')?>',{nid:<?php echo $_GET['nid']; ?>},function(d){
+            if(d.code == 200){
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['330px', '136px'], //宽高
+                    content: d.msg
+                })
+            }else{
+                layer.alert(d.msg,{icon:0});
+            }
+        })
+    })
 </script>
 

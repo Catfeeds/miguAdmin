@@ -41,8 +41,6 @@
                     <td align="center">
                         <a  class="update">编辑屏幕</a>
                         <a  class="del">删除</a>
-                        <!--<a  class="up">上移</a>
-                        <a  class="down">下移</a>-->
                     </td>
                 </tr>
             <?php }
@@ -78,10 +76,12 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         var mid = "<?php echo $_GET['mid']?>";
         window.location.href = "/version/screen/updateGuide/mid/"+mid+'/id/'+id+fixedUrl;
     });
+
     $('.goBack').click(function()
     {
-	window.close();
+	    window.close();
     })
+
     $('.addBtn').click(function()
     {
         /*if(wTypeFlag != 2){
@@ -119,7 +119,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 })
             }
         }
-//        if(flag == 1){
+//         if(flag == 1){
             alert('修改排序成功');
             window.location.reload();
 //        }
@@ -138,7 +138,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 success:function(data)
                 {
                     if(data == 200){
-                        alert('删除导航成功！');
+                        layer.alert('删除导航成功！');
                         window.location.reload();
                     }
                 }
@@ -146,6 +146,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         }
     })	
 </script>
+
 
 
 

@@ -25,10 +25,9 @@
 <span class="hidden"><?php echo $list[0]['id'];?></span>
 
 <table style="width:900px;" class="mtable mt10" cellpadding="10" cellspacing="0">
-    <tr>
-        <th style="background: #A3BAD5;height:30px;" colspan="7">修改导航</th>
-    </tr>
-    <tr>
+         <tr>
+        <th style="background: #A3BAD5;height:30px;" colspan="7">添加导航</th>
+    </tr>   <tr>
         <td height="40">标题：</td>
        
         <td colspan="2">
@@ -84,6 +83,8 @@
                 <input type="file" name="pic_three" id="upload_file_three" placeholder="选择图片" value="">
               <?php
                 if($list[0]['pic_three']=='0') {
+                    
+					
                     echo "<img src='/file/6.png' alt='' class='old_pic_three'>";
                 }else{
                     echo "<img src='".$list[0]['pic_three']."' alt='' class='old_pic_three'>";
@@ -105,55 +106,15 @@
         <td colspan="2" class="oldTemplate"><?php echo $list[0]['templateId']?></td>
     </tr>
 
-    <tr>
-        <td>站点引用：</td>
-        <td>
-            <select style="width:200px;margin:7px;"  name="station" onchange="stationGuide(this)"  id="station" class="form-input w200 field">
-                <option value="0">--------------请选择站点-------------</option>
-                <?php
-                if(!empty($quote_res)){
-                    $selected_stationId = $quote_res['stationId'];
-                }else{
-                    $selected_stationId = 0;
-                }
-                $station_res = $this->getAllStation();
-                foreach ($station_res as $k=>$v){ ?>
-                    <option value="<?php echo $v['id'];?>" onclick='changeGudei(this)' <?php if( $v['id'] ==  $selected_stationId ){ echo "selected=selected";}?>><?php echo $v['name']?></option>
-                <?php
-                    }
-                ?>
-            </select>
-        </td>
-
-        <td>
-            <select style="width:200px;margin:7px;"  name="guide"  id="guide" class="form-input w200 field">
-                <option value="0">--------------请选择屏幕-------------</option>
-                <?php
-                    if(!empty($station_guide) && !empty($quote_res)){
-                        $selected_guide = $quote_res['copyGuideId'];
-                        foreach ($station_guide as $key=>$val){
-                            ?>
-                            <option  templateId="<?php echo $val->attributes['templateId']?>" value="<?php echo $val->attributes['id'];?>" <?php if($val->attributes['id']==$selected_guide){echo "selected=selected";};?>><?php echo $val->attributes['title'] ;?></option>
-                 <?php
-                        }
-                    }
-                ?>
-            </select>
-            <input type="radio" name="copyFlag" id="copyFlag" onclick="return checkCopy()" flag="<?php if(!empty($station_guide) && !empty($quote_res)){ echo "1";}else{echo "0";};?>" <?php if(!empty($station_guide) && !empty($quote_res)){ echo "checked=checked";};?>>站点引用
-        </td>
-
-    </tr>
-
 <div>
 <!--    <div class="name">
         重新选择屏幕模板：(注意重新选择屏幕模板之前模板的数据会清空)
         <input type="button" value="确认修改并保存" class="btn save-template">
     </div>
--->
-    <tr>
+--><tr>
         <td>模板选择：</td>
         <td colspan="2">
-        <select <?php if(!empty($station_guide) && !empty($quote_res)){ echo "disabled=disabled";};?> name="template" onchange="showTemplate()"  id="template" class="form-input w200 field">
+    <select name="template" onchange="showTemplate()"  id="template" class="form-input w200 field">
         <option value="0">--------------请选择-------------</option>
         <option onclick="showTemplate(this)" value="1" >1</option>
         <option value="2" onclick='showTemplate(this)'>2</option>
@@ -168,18 +129,16 @@
         <option value="11" onclick="showTemplate(this)">11河南模板</option>
 	<?php foreach($template as $v):?>
             <option value="<?php echo $v['id']+11?>" onclick="showTemplate(this)"><?php echo $v['name']?></option>
-    <?php endforeach;?>
+        <?php endforeach;?>	
     </select>
-            <input style="margin-top: 16px;margin-left: 230px;" type="radio" name="editSelf" id="editSelf" onclick="return checkeditSelf()" flag="0">自行编辑
-        </td>
-    </tr>
+
+    </td></tr>
 </div>
 <tr>
-        <td height="100">模板预览：</td>
+        <td height="100">模板预览：(点击查看大图)</td>
         <td colspan="2">
 <div class="templatePic">
-    <img src="/file/template/t01.png" alt="" width='600px' height='300px'>
-	<input type="button" value="查看大图" class="btn checkImg">
+    <img src="/file/template/t01.png" alt="" width='600px' height='300px' class="checkImg">
 </div>
  </td></tr>
 
@@ -194,12 +153,10 @@
 </table>
 <script type="text/javascript" src="/js/uploadify/jquery.uploadify.min.js"></script>
 <script>
-
     $('.goBack').click(function()
     {
         window.close();
-    });
-
+    })
     $('#upload_file_true').uploadify
     ({
         'auto': true,//关闭自动上传
@@ -377,9 +334,9 @@
             success:function(data)
             {
                 if(data == 200){
-                    layer.alert('修改成功');
+                    alert('修改成功');
                 }else{
-                    layer.alert('修改失败');
+                    alert('修改失败');
                 }
             }
         })
@@ -513,7 +470,32 @@
 
     $('.save-template').click(function()
     {
-        var bindFlag = <?php if(!empty($station_guide) && !empty($quote_res)){ echo "1";}else{echo "0";}?>;
+        /*var templateId = $('#template  option:selected').val();
+        var id = $('.hidden').text();
+        var oldTemplateId = $('.oldTemplate').text();
+        if(templateId == '0'){
+            alert('您没有选择要修改的屏幕模板');
+            return false;
+        }else if(templateId == oldTemplateId){
+            alert('您选择要修改的屏幕模板和之前一样');
+            return false;
+        }else{
+            $.ajax
+            ({
+                type:'get',
+                data:{'templateId':templateId,'id':id},
+                url:"/version/screen/doUpdateGuide/mid/"+mid,
+                success:function(data)
+                {
+                    if(data == 200){
+                        alert('修改成功');
+                        window.location.reload();
+                    }else{
+                        alert('修改失败');
+                    }
+                }
+            })
+        }*/
         var templateId = $('#template  option:selected').val();
         var id = $('.hidden').text();
         var mid = <?php echo $this->mid;?>;
@@ -528,13 +510,13 @@
         }else{
             var pic_false = $('.old_pic_false').attr('src');
         }
-        if($('#main-three').children('img').length>0){
-            var pic_three = $('#main-three').children('img').attr('src');
-        }else if($('.old_pic_three').length>0){
-            var pic_three = $('.old_pic_three').attr('src');
-        }else{
-             var pic_three = '0';
-        }
+    if($('#main-three').children('img').length>0){
+        var pic_three = $('#main-three').children('img').attr('src');
+    }else if($('.old_pic_three').length>0){
+        var pic_three = $('.old_pic_three').attr('src');
+    }else{
+         var pic_three = '0';
+    }
         //alert(pic_three);return fasle;
         var title = $('#title').val();
         if(title.length<1){
@@ -545,19 +527,6 @@
         }else if(templateId == oldTemplateId){
             templateId = oldTemplateId;
         }
-
-        //复制屏幕
-        var copyFlag = $('#copyFlag').attr('flag');
-        var editSelfFlag = $('#editSelf').attr('flag');
-        if(copyFlag == 1){
-            templateId = $('#guide option:selected').attr('templateId');
-        }
-
-        if(copyFlag==0 && editSelfFlag==0){
-            layer.alert('站点引用或自行编辑没有选中');
-            return false;
-        }
-
         var focus = $("input[name=focus]:checked").val();
         if(focus==undefined){
             focus=$('.old_focus').html();
@@ -567,186 +536,31 @@
                 focus='1';
             }
         }
-        var G = {'focus':focus,'templateId':templateId,'id':id,'title':title,'pic_true':pic_true,'pic_false':pic_false,'oldTemplateId':oldTemplateId,'pic_three':pic_three};
-        if(copyFlag == 1){
-            G = {'focus':focus,'templateId':templateId,'id':id,'title':title,'pic_true':pic_true,'pic_false':pic_false,'oldTemplateId':oldTemplateId,'pic_three':pic_three,'copyFlag':1};
-        }else if(bindFlag == 1 && copyFlag==0){
-            G = {'focus':focus,'templateId':templateId,'id':id,'title':title,'pic_true':pic_true,'pic_false':pic_false,'oldTemplateId':oldTemplateId,'pic_three':pic_three,'copyFlag':2};
-        }
-
-        var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
         $.ajax
         ({
             type:'get',
-            data:G,
+            data:{'focus':focus,'templateId':templateId,'id':id,'title':title,'pic_true':pic_true,'pic_false':pic_false,'oldTemplateId':oldTemplateId,'pic_three':pic_three},
             url:"/version/screen/doUpdateGuide/mid/"+mid,
             success:function(data)
             {
-//                console.log(data);
+                console.log(data);
                 if(data == 200){
-                    if(copyFlag == 1){
-                        var copyGuideId = $('#guide').val();
-                        var pasteGuideId = <?php echo $_GET['id'];?>;
-                        var res = copyAction(copyGuideId,pasteGuideId);
-                        if(res == 200){
-                            layer.alert("复制成功");
-                            layer.close(load);
-                            window.location.href=opener.location.href;
-                        }
-                    }else if(bindFlag == 1 && copyFlag == 0){   //解除绑定
-                        var copyGuideId = <?php echo !empty($quote_res['copyGuideId'])?$quote_res['copyGuideId']:'0'; ?>;
-                        var pasteGuideId = <?php echo $_GET['id'];?>;
-                        var unbind_res = unbindCopy(copyGuideId,pasteGuideId);
-                        if(res == 200){
-                            layer.alert("解除绑定成功");
-                            layer.close(load);
-                            window.location.href=opener.location.href;
-                        }
-                    }else{
-                        layer.alert('修改成功');
-                        layer.close(load);
-                        window.location.href=opener.location.href;
-                    }
-
+                    alert('修改成功');
+                   window.history.go(-1); 
+		   window.location.reload();
                 }else{
-                    layer.alert('修改失败');
+                    alert('修改失败');
                 }
             }
-        });
-
-    });
+        })
 
 
-    function changeGudei(obj)
-    {
-        var station_id = $(obj).val();
-        var mid = <?php echo $this->mid;?>;
-        $.ajax
-        ({
-            type:'get',
-            url:'/version/screen/getStationGuide/mid/'+mid+'/stationId/'+station_id,
-            success:function(data)
-            {
-                data = eval(data);
-                $("#guide").children().remove();
-                $.each(data,function(i)
-                {
-                    $("#guide").append
-                    (
-                        '<option value="'+data[i]['id']+'">'+data[i]['title']+'</option>'
-                    );
-                });
-            }
-        });
-    }
 
-    function stationGuide(obj)
-    {
-        var station_id = $(obj).val();
-        var mid = <?php echo $this->mid;?>;
-        $.ajax
-        ({
-            type:'get',
-            url:'/version/screen/getStationGuide/mid/'+mid+'/stationId/'+station_id,
-            success:function(data)
-            {
-                data = eval(data);
-                $("#guide").children().remove();
-                $.each(data,function(i)
-                {
-                    $("#guide").append
-                    (
-                        '<option templateId="'+data[i]['templateId']+'" value="'+data[i]['id']+'">'+data[i]['title']+'</option>'
-                    );
-                });
-            }
-        });
-    }
-
-    function checkCopy()
-    {
-        var station_id = $('#station').val();
-        var guide_id = $('#guide').val();
-        var editSelf_flag = $('#editSelf').attr('flag');
-        if(editSelf_flag == 1){
-            $('#editSelf').attr('flag','0');
-            $('#editSelf').attr("checked",false);
-            $('#station').removeAttr('disabled');
-            $('#guide').removeAttr('disabled');
-        }
-        if(station_id == 0){
-            layer.alert("请选择站点");
-            return false;
-        }
-
-        if(guide_id == 0){
-            layer.alert("请选择对应站点下屏幕");
-            return false;
-        }
-
-        $('#copyFlag').attr('flag','1');
-        $('#template').attr('disabled','disabled');
-    }
-
-    function checkeditSelf()
-    {
-        var copyFlag = $('#copyFlag').attr('flag');
-        if(copyFlag == 1){
-            $('#copyFlag').attr('flag','0');
-            $('#copyFlag').attr("checked",false);
-            $('#template').removeAttr('disabled');
-        }
-        $('#station').attr('disabled','disabled');
-        $('#guide').attr('disabled','disabled');
-        $('#editSelf').attr('flag','1');
-    }
-
-    function copyAction(copyGuideId,pasteGuideId)
-    {
-        var mid = <?php echo $this->mid;?>;
-        var status = 0;
-        $.ajax
-        ({
-            type:'get',
-            url:'/version/screen/CopyScreenContent/mid/'+mid+'/copyGuideId/'+copyGuideId+'/pasteGuideId/'+pasteGuideId,
-            success:function(data)
-            {
-                if(data == 200){
-                    status = 200;
-                }else{
-                    status = 500;
-                }
-            },
-            async:false
-        });
-        return status;
-    }
-
-    function unbindCopy(copyGuideId,pasteGuideId)
-    {
-        var mid = <?php echo $this->mid;?>;
-        var status = 0;
-        $.ajax
-        ({
-            type:'get',
-            url:'/version/screen/unbindCopy/mid/'+mid+'/copyGuideId/'+copyGuideId+'/pasteGuideId/'+pasteGuideId,
-            success:function(data)
-            {
-                if(data == 200){
-                    status = 200;
-                }else{
-                    status = 500;
-                }
-            },
-            async:false
-        });
-        return status;
-    }
+    })
 
 	$(".checkImg").click(function(){
-        var src=$(".templatePic").children().eq(0).attr("src");
+        var src=$(this).attr("src");
         window.open(src);
     })
 </script>
-
 

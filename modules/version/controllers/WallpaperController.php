@@ -227,12 +227,12 @@ class WallpaperController extends VController{
             $arr=explode("-",$tmp);
             $cCode=$arr[1];//市code
             $pCode=$arr[0];//省份code
-            $sql="select id from yd_ver_wall where gid=$gid and province like '%$pCode%' and city like '%$cCode%' and type=1  and (endTime>={$end} and startTime<={$start}) or (startTime<={$end} and startTime>={$start}) or (endTime>={$start} and endTime<={$end})";
-            $data[]=SQLManager::queryAll($sql);
+            $sql="select id from yd_ver_wall where gid=$gid and province like '%$pCode%' and city like '%$cCode%' and type=1  and ((endTime>={$end} and startTime<={$start}) or (startTime<={$end} and startTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
+            $data[]=SQLManager::queryRow($sql);
         }
-	//var_dump($data);die;
-	echo $sql;die;
-	if(!empty($data)){//说明存在
+	var_dump($data);die;
+	//echo $sql;die;
+	if($data[0]){//说明存在
 		echo 321;
             	die;
 	}else{

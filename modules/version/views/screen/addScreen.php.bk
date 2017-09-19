@@ -114,30 +114,7 @@
     </div>
 </div>
 </td></tr>
-    <tr>
-        <td>站点引用：</td>
-        <td>
-            <select style="width:200px;margin:7px;"  name="station" onchange="stationGuide(this)"  id="station" class="form-input w200 field">
-                <option value="0">--------------请选择站点-------------</option>
-                <?php
-                    $station_res = $this->getAllStation();
-                    foreach ($station_res as $k=>$v){ ?>
-                        <option value="<?php echo $v['id'];?>" onclick='changeGudei(this)'><?php echo $v['name']?></option>
-                   <?php }
-                ?>
-            </select>
-        </td>
-
-        <td>
-            <select style="width:200px;margin:7px;"  name="guide"  id="guide" class="form-input w200 field">
-                <option value="0">--------------请选择屏幕-------------</option>
-            </select>
-            <input type="radio" name="copyFlag" id="copyFlag" onclick="return checkCopy()" flag="0">站点引用
-        </td>
-
-    </tr>
 <tr><td width="100" align="center">
-
 <div>
     <div class="name">屏幕模板：</div>
 </td><td colspan="2">
@@ -158,9 +135,7 @@
             <option value="<?php echo $v['id']+11?>" onclick="showTemplate(this)"><?php echo $v['name']?></option>
         <?php endforeach;?>
     </select>
-        <input style="margin-top: 16px;margin-left: 230px;" type="radio" name="editSelf" id="editSelf" onclick="return checkeditSelf()" flag="0">自行编辑
-
-        <div class="templatePic">
+    <div class="templatePic">
     <img src="/file/template/t01.png" alt="" width='600px' height='300px'>
 <input type="button" value="查看大图" class="btn checkImg">
 </div>
@@ -178,7 +153,6 @@
 </form>
 <script type="text/javascript" src="/js/uploadify/jquery.uploadify.min.js"></script>
 <script>
-
     $('#upload_file_true').uploadify
     ({
         'auto': true,//关闭自动上传
@@ -410,12 +384,8 @@
         if(G.focus==undefined){
             G.focus=0;
         }
-        //复制屏幕
-        var copyFlag = $('#copyFlag').attr('flag');
-        if(copyFlag == 1){
-            G.templateId = $('#guide option:selected').attr('templateId');
-        }
 
+        //console.log(G);return false;
         if(empty(G.title)){
             layer.alert('标题不能为空',{icon:0});
             return false;
@@ -433,38 +403,19 @@
             return false;
         }
         var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
-        $.ajax
-        ({
-            type:'post',
-            async:false,
-            data:G,
-            url:'/version/Screen/AddData?mid=<?php echo $this->mid?>',
-            dataType:'json',
-            success:function(d)
-            {
-                if(d.code == 200){
-                    var copyFlag = $('#copyFlag').attr('flag');
-                    if(copyFlag == 1){
-                        var pasteGuideId = d.guideId;
-                        var copyGuideId = $('#guide').val();
-                        var res = copyAction(copyGuideId,pasteGuideId);
-//                        console.log(res);
-                        if(res ==200){
-                            layer.alert("复制成功");
-                            layer.close(load);
-                            window.location.href=opener.location.href;
-                        }
-                    }else{
-                        layer.close(load);
-                        window.location.href=opener.location.href;
-                    }
-                    var nid = "<?php echo trim($_GET['nid']);?>";
-                }else{
-                    layer.close(load);
-                    layer.alert(d.msg);
-                }
+        $.post('/version/Screen/AddData?mid=<?php echo $this->mid?>',G,function(d){
+//            console.log(d);return false;
+            if(d.code == 200){
+                layer.close(load);
+               // window.close();
+               // location.reload();
+                window.location.href=opener.location.href
+		 var nid = "<?php echo trim($_GET['nid']);?>";
+            }else{
+                layer.close(load);
+                layer.alert(d.msg);
             }
-        });
+        },'json')
     });
 
     $('.gray').click(function(){
@@ -477,109 +428,5 @@
         var src=$(".templatePic").children().eq(0).attr("src");
         window.open(src);
     })
-
-    function changeGudei(obj)
-    {
-        var station_id = $(obj).val();
-        var mid = <?php echo $this->mid;?>;
-        $.ajax
-        ({
-            type:'get',
-            url:'/version/screen/getStationGuide/mid/'+mid+'/stationId/'+station_id,
-            success:function(data)
-            {
-                data = eval(data);
-                $.each(data,function(i){
-                    $("#guide").append
-                    (
-                        '<option value="'+data[i]['id']+'">'+data[i]['title']+'</option>'
-                    );
-                });
-            }
-        });
-    }
-    
-    function stationGuide(obj)
-    {
-        var station_id = $(obj).val();
-        var mid = <?php echo $this->mid;?>;
-        $.ajax
-        ({
-            type:'get',
-            url:'/version/screen/getStationGuide/mid/'+mid+'/stationId/'+station_id,
-            success:function(data)
-            {
-                data = eval(data);
-                $.each(data,function(i)
-                {
-                    $("#guide").append
-                    (
-                        '<option templateId="'+data[i]['templateId']+'" value="'+data[i]['id']+'">'+data[i]['title']+'</option>'
-                    );
-                });
-            }
-        });
-    }
-
-    function checkCopy()
-    {
-        var station_id = $('#station').val();
-        var guide_id = $('#guide').val();
-        var editSelf_flag = $('#editSelf').attr('flag');
-        if(editSelf_flag == 1){
-            $('#editSelf').attr('flag','0');
-            $('#editSelf').attr("checked",false);
-            $('#station').removeAttr('disabled');
-            $('#guide').removeAttr('disabled');
-        }
-        if(station_id == 0){
-            layer.alert("请选择站点");
-            return false;
-        }
-
-        if(guide_id == 0){
-            layer.alert("请选择对应站点下屏幕");
-            return false;
-        }
-
-        $('#copyFlag').attr('flag','1');
-        $('#template').attr('disabled','disabled');
-    }
-
-    function checkeditSelf()
-    {
-        var copyFlag = $('#copyFlag').attr('flag');
-        if(copyFlag == 1){
-            $('#copyFlag').attr('flag','0');
-            $('#copyFlag').attr("checked",false);
-            $('#template').removeAttr('disabled');
-        }
-        $('#station').attr('disabled','disabled');
-        $('#guide').attr('disabled','disabled');
-        $('#editSelf').attr('flag','1');
-    }
-
-    function copyAction(copyGuideId,pasteGuideId)
-    {
-        var mid = <?php echo $this->mid;?>;
-        var status = 0;
-        $.ajax
-        ({
-            type:'get',
-            url:'/version/screen/CopyScreenContent/mid/'+mid+'/copyGuideId/'+copyGuideId+'/pasteGuideId/'+pasteGuideId,
-            success:function(data)
-            {
-                if(data == 200){
-                    status = 200;
-                }else{
-                    status = 500;
-                }
-            },
-            async:false
-        });
-        return status;
-    }
-
 </script>
-
 

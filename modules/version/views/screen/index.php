@@ -190,7 +190,7 @@ if(!empty($templateList)){
     </div>
     <div class="centerTopNav statusFlag" statusFlag="1">
         <ul>
-           <li class="screenEdit" activeFlag="1">编辑</li>
+            <li class="screenEdit" activeFlag="1">编辑</li>
             <li class="screenRelease" activeFlag="2">待发布</li>
             <li class="screenOnline" activeFlag="3">现网</li>
         </ul>
@@ -260,7 +260,7 @@ if(!empty($templateList)){
            if(!in_array('2',$wType)){
                echo "var fTypeFlag=1;"; //没有发布权限
            }else if(in_array($stationId,$stationIdArr)){
-		foreach($res as $a=>$b){
+		        foreach($res as $a=>$b){
                         if(in_array('2',$b)){
                             echo "var fTypeFlag=2;";  //有编辑权限
                         }
@@ -367,7 +367,7 @@ if(!empty($templateList)){
     $('.addBtn').click(function()
     {
         if(wTypeFlag != 2){
-            alert('你现在还没有编辑屏幕的权限');
+            layer.alert('你现在还没有编辑屏幕的权限');
             return false;
         }
         //window.location.href = "/version/screen/addScreen/mid/<?php //echo $this->mid;?>/nid/<?php //echo $_GET['nid']?>";
@@ -377,7 +377,7 @@ if(!empty($templateList)){
     $('.updateGuide').click(function()
     {
        if(wTypeFlag != 2){
-            alert('你现在还没有编辑屏幕的权限');
+           layer.alert('你现在还没有编辑屏幕的权限');
             return false;
         }
        window.open("/version/screen/updateGuideView/mid/<?php echo $this->mid;?>/nid/<?php echo $_GET['nid']?>"+fixedUrl);
@@ -572,15 +572,41 @@ if(!empty($templateList)){
             $('.bx-controls').hide();
     }
 
-//alert(wTypeFlag);alert(fTypeFlag)
+    function checkQuote(guideId)
+    {
+        var mid = <?php echo $this->mid;?>;
+        var status = 0;
+        $.ajax
+        ({
+            type:'get',
+            url:'/version/screen/GetQuoteInfo/mid/'+mid+'/guideId/'+guideId,
+            async:false,
+            success:function(data)
+            {
+                if(data == 1){
+                    status = 1;
+                }
+            }
+        });
+        return status;
+    }
+
+
     function add(obj)
     {
-       if(wTypeFlag == 1){
-            alert('你目前没有编辑屏幕的权限！');
+        var screenGuideId = $('.guideFlag').attr('guideId');
+        var quote_flag = checkQuote(screenGuideId);
+        if(quote_flag == 1){
+            layer.alert('此屏幕内容是引用屏幕不能被编辑');
+            return false;
+        }
+
+        if(wTypeFlag == 1){
+           layer.alert('你目前没有编辑屏幕的权限！');
             return false;
         }
          var reviewFlag = checkReviewDatacopy();
-//             console.log(reviewFlag);
+    //             console.log(reviewFlag);
          //alert(reviewFlag);
          if(reviewFlag=='2'){
                var releaseFlag = checkReviewsTimes();
@@ -588,14 +614,14 @@ if(!empty($templateList)){
                  if(releaseFlag == '1'){
                         //return true;
                  }else{
-                        alert('现在有数据还在工作流审核环节中暂且不能编辑！');
+                     layer.alert('现在有数据还在工作流审核环节中暂且不能编辑！');
                         return false;
                 //console.log('现在有数据还在工作流审核环节中暂且不能编辑');
                  }
          }
-            if($('.submit_btn').val() == '发布'){
-            alert('发布新数据之后才可以继续编辑');
-            return false;
+        if($('.submit_btn').val() == '发布'){
+            layer.alert('发布新数据之后才可以继续编辑');
+        return false;
         }
         //console.log(flag);
         /*if( flag==1){
@@ -672,7 +698,7 @@ if(!empty($templateList)){
         var screenId = $('.active').children('img').attr('guideId');
         if(text=='提交审核'){
             if(wTypeFlag == 1){
-                alert('你目前没有提交屏幕审核的权限！');
+                layer.alert('你目前没有提交屏幕审核的权限！');
                 return false;
             }
             $.post("<?php echo $this->get_url('screen','subreview')?>",{guideid:screenId},function(d){
@@ -686,7 +712,7 @@ if(!empty($templateList)){
             //$(this).val('审核中');
         }else if(text=='发布'){
             if(fTypeFlag == 1){
-                alert('你目前没有发布的权限！');
+                layer.alert('你目前没有发布的权限！');
                 return false;
             }
             var reviewFlag = checkReviewDatacopy();
@@ -697,7 +723,7 @@ if(!empty($templateList)){
                 if(releaseFlag == '1'){
                         //return true;
                 }else{
-                        alert('数据还在工作流审核环节中暂且不能发布！');
+                        layer.alert('数据还在工作流审核环节中暂且不能发布！');
                         return false;
                 }
             }
@@ -865,7 +891,7 @@ if(!empty($templateList)){
      })
  }
 
-            function checkReviewsTimes()
+    function checkReviewsTimes()
     {
         var screenId = document.getElementById("screenid").value
         var stationId = "<?php echo $_GET['nid'];?>";
@@ -922,39 +948,39 @@ if(!empty($templateList)){
         return d;
     }
 
-        function chang_left_navi(e){
-                if($(e).attr('src') == '/file/u1855.png'){
-                        $(e).attr('src','/file/u1857.png');
-		
-                $(e.parentNode.children).each(function(){
-                        if(this.tagName == 'LI'){
-                                $(this).addClass("navi_none");
-                        }
-                        })
-                }else{
-                        $(e).attr('src','/file/u1855.png');
-                        $(e.parentNode.children).each(function(){
-                        if(this.tagName == 'LI'){
-                                $(this).removeClass("navi_none");
-                        }
-                        })
-                }
+    function chang_left_navi(e){
+            if($(e).attr('src') == '/file/u1855.png'){
+                    $(e).attr('src','/file/u1857.png');
 
-        }
+            $(e.parentNode.children).each(function(){
+                    if(this.tagName == 'LI'){
+                            $(this).addClass("navi_none");
+                    }
+                    })
+            }else{
+                    $(e).attr('src','/file/u1855.png');
+                    $(e.parentNode.children).each(function(){
+                    if(this.tagName == 'LI'){
+                            $(this).removeClass("navi_none");
+                    }
+                    })
+            }
+
+    }
 	 function chang_left_navi1(e){
                 if($(e).attr('src') == '/file/u1855.png'){
                         $(e).attr('src','/file/u1857.png');
-                $(e.parentNode.children).each(function(){
-                        if(this.tagName == 'LI'){
-                                $(this).addClass("navi_none");
-                        }
+                        $(e.parentNode.children).each(function(){
+                            if(this.tagName == 'LI'){
+                                    $(this).addClass("navi_none");
+                            }
                         })
                 }else{
                         $(e).attr('src','/file/u1855.png');
                         $(e.parentNode.children).each(function(){
-                        if(this.tagName == 'LI'){
-                                $(this).removeClass("navi_none");
-                        }
+                            if(this.tagName == 'LI'){
+                                    $(this).removeClass("navi_none");
+                            }
                         })
                 }
 

@@ -223,6 +223,16 @@ class VController extends Controller{
     }
 
 
+    public function getAllStation()
+    {
+        $res = VerStation::model()->findAll(
+            array(
+                'select' =>array('name','id'),
+                'order' => 'id ASC',
+            ));
+        return $res;
+    }
+
 }
 
 
