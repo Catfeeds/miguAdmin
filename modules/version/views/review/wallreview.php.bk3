@@ -1,0 +1,294 @@
+<?php
+$admin = $this->getMvAdmin();
+?>
+<?php
+$adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
+$adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
+$adminLeftOne = !empty($_GET['adminLeftOne'])?$_GET['adminLeftOne']:'';
+$adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
+?>
+<style>
+
+    .inputDiv{
+        width:100%;
+        float:left;
+        height:38px;
+        background: #A3BAD5;
+        padding: 5px 0px 0px 12px;
+    }
+    .inputDiv input{
+        float: left;
+    }
+    .inputDiv span{
+        float: left;
+        margin-top:5px;
+    }
+    .inputDiv select{
+        float: left;
+        margin-left:5px;
+    }
+    .inputDivTwo{
+        width:100%;
+        float:left;
+        height:30px;
+        background: #f0fdff;
+        padding: 5px 0px 5px 12px;
+    }
+</style>
+<div style='padding: 5px 0px 5px 14px;'>
+    <span><?php echo $adminLeftOneName;echo '>';?></span>
+    <span><?php echo $adminLeftTwoName;?></span>
+</div>
+<div class="mt10" style="margin-top:0;">
+    <div class="inputDiv">
+
+    <?php
+    if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
+        echo '<input class="btn allbtn chose" type="button" value="全部审核" style="padding: 0px;">
+    <input class="btn access_btn btn_acc gray" type="button" value="已通过" style="padding: 0px;">
+    <input class="btn access_btn no_acc gray" type="button" value="驳回" style="padding: 0px;">';
+    }else if(in_array('3',$res['status'])){
+        echo '<input class="btn allbtn chose" type="button" value="全部审核" style="padding: 0px;">
+    <input class="btn access_btn btn_acc gray" type="button" value="已通过" style="padding: 0px;">
+    <input class="btn access_btn no_acc gray" type="button" value="驳回" style="padding: 0px;">';
+    }else{
+        echo '<input class="btn" type="button" value="全部审核" style="padding: 0px;">
+    <input class="btn" type="button" value="已通过" style="padding: 0px;">
+    <input class="btn" type="button" value="驳回" style="padding: 0px;">';
+    }
+    ?>
+    <?php echo $page;?>
+    </div>
+    <div class="inputDivTwo">
+        <input class="btnall btn" type="button" value="全选">
+        <input class="btnno btn" type="button" value="全不选">
+        <input class="btn sub_btn" type="button" value="批量通过">
+        <input class="btn allreject" type="button" value="批量驳回">
+    </div>
+
+    <form action="">
+        <div class="fenlei">
+            <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
+                <tr>
+                    <th>编号</th>
+                    <th>标题</th>
+                    <th>缩略图</th>
+                    <th>壁纸</th>
+                    <th>审核</th>
+                    <th>提交审核时间时间</th>
+                    <th>操作</th>
+                </tr>
+                <?php
+                if(!empty($list)){
+                    foreach($list as $l){?>
+                        <tr>
+                            <input type="hidden" name='id' value="<?php echo $l['id']?>">
+                            <td><input type="checkbox" class="checkbox" name="id" value="<?php echo $l['id']?>"></td>
+                            <td><?php echo $l['title']?></td>
+                            <td><img src="<?php echo $l['thum']?>" width="150px" height="86px"></td>
+                            <td><img src="<?php echo $l['pic']?>" width="214px" height="123px"></td>
+                            <td><?php echo $l['flag']?></td>
+                            <td><?php if(!empty($l['addTime'])){echo date('Y-m-d H:i',$l['addTime']);}?></td>
+                            <td>
+                                <?php
+                                if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
+                                    echo "<a href='javascript:void(0)' gid='{$l['id']}' class='review'>通过</a>&nbsp;";
+                                    echo "<a href='javascript:void(0)' gid='{$l['id']}' class='reject'>驳回</a>";
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                }else{?>
+                    <tr>
+                        <td colspan="8" align="center">暂无数据</td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </table>
+        </div>
+    </form>
+</div>
+<script>
+    $('.chose').click(function(){
+        $('.allbtn').removeClass('gray').addClass('chose');
+        $('.btn_acc').removeClass('chose').addClass('gray');
+        $('.no_acc').removeClass('chose').addClass('gray');
+    })
+
+    $('.btn_acc').click(function(){
+        $('.allbtn').removeClass('chose').addClass('gray');
+        $('.btn_acc').removeClass('gray').addClass('chose');
+        $('.no_acc').removeClass('chose').addClass('gray');
+    })
+
+    $('.no_acc').click(function(){
+        $('.allbtn').removeClass('chose').addClass('gray');
+        $('.btn_acc').removeClass('chose').addClass('gray');
+        $('.no_acc').removeClass('gray').addClass('chose');
+    })
+    $(document).on('click','.review',function(){
+        var flag = "<?php if(in_array('3',$res['status'])){echo 1;}?>";
+        var auth="<?php echo $_SESSION['auth']?>";
+        if(auth!='1'){
+            if(flag==1){
+                return false;
+            }
+        }
+        var gid = $(this).attr('gid');
+        $.post("<?php echo $this->get_url('wallpaper','access')?>",{gid:gid},function(d){
+            if(d.code==200){
+                location.reload();
+            }
+        },'json')
+    })
+
+    $('.reject').click(function(){
+        var type = "<?php if(in_array('3',$res['status'])){echo 1;}?>";
+        var auth="<?php echo $_SESSION['auth']?>";
+        if(auth!='1'){
+            if(type==1){
+                return false;
+            }
+        }
+        var gid = $(this).attr('gid');
+        var flag=1;
+        $.getJSON('<?php echo $this->get_url('wallpaper','rejectview')?>',{gid:gid,flag:flag},function(d){
+            if(d.code == 200){
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['530px', '306px'], //宽高
+                    content: d.msg
+                })
+            }else{
+                layer.alert(d.msg,{icon:0});
+            }
+        })
+    })
+
+    $('.allreject').click(function(){
+        var flag = "<?php if(in_array('3',$res['status'])){echo 1;}?>";
+        var auth="<?php echo $_SESSION['auth']?>";
+        if(auth!='1'){
+            if(flag==1){
+                return false;
+            }
+        }
+        var ids="";
+        $("input[name='id']:checked").each(function() {
+
+            ids += $(this).val()+' ';
+
+        });
+        var flag=2;
+        $.getJSON('<?php echo $this->get_url('wallpaper','rejectview')?>',{gid:ids,flag:flag},function(d){
+            if(d.code == 200){
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['530px', '306px'], //宽高
+                    content: d.msg
+                })
+            }else{
+                layer.alert(d.msg,{icon:0});
+            }
+        })
+    })
+
+    $('.btnall').click(function(){
+        $(".center :checkbox").prop("checked", true);
+    })
+    $('.btnno').click(function(){
+        $(".center :checkbox").prop("checked", false);
+    })
+
+    $('.sub_btn').click(function(){
+        var flag = "<?php if(in_array('3',$res['status'])){echo 1;}?>";
+        var auth="<?php echo $_SESSION['auth']?>";
+        if(auth!='1'){
+            if(flag==1){
+                return false;
+            }
+        }
+        var ids="";
+        $("input[name='id']:checked").each(function() {
+
+            ids += $(this).val()+' ';
+
+        });
+        $.post("<?php echo $this->get_url('wallpaper','allaccess')?>",{ids:ids},function(){
+
+            location.reload();
+
+        })
+    })
+    $('.access_btn').click(function(){
+        var text = $(this).val();
+        if(text=='已通过'){
+            var flag=1;
+        }else{
+            var flag=2;
+        }
+        url = '/version/wallpaper/log?mid='+"<?php echo $_GET['mid']?>"+"&flag="+flag;
+        ajax(url,1)
+    })
+
+    $('.allbtn').click(function(){
+        var username = "<?php echo $admin['nickname']?>";
+        var url = '/version/wallpaper/Accesslog?mid='+"<?php echo $_GET['mid']?>"+"&username="+username;
+        ajax(url,type=2);
+    })
+
+    function ajax(url,type){
+        $.ajax({
+            type: 'GET',
+            url: url,
+            /*data: {'page': 1 },*/
+            dataType: 'json',
+            success: function(json) {
+                //console.log(json);
+                $('.fenlei').empty();
+                var li = '';
+                var btn = $('.chose').val();
+                if(btn=='驳回'){
+                    flag='1';
+                }else{
+                    flag='2';
+                }
+                li += '<table width="100%" cellspacing="0" cellpadding="10" class="mtable center"><tr><th>编号</th><th>标题</th><th>缩略图</th><th>壁纸</th><th>状态</th><th>添加时间</th><th>操作</th></tr>';
+                if(type==1){
+                    $.each(json, function(index, array) {
+                        if(flag=='1'){
+                            li += "<tr><input type='hidden' name='id' value='"+array['id']+"'><td><input type='checkbox' class='checkbox' name='id' value='"+array['vid']+"'></td><td>"+array['title']+"</td><td><img src="+array['thum']+" width='150px' height='86px'></td><td><img src="+array['pic']+" width='214px' height='123px'></td><td>不通过</td><td>"+getLocalTime(array['addTime'])+"</td><td><a class='see'>查看</a></td></tr>";
+
+                        }else{
+                            li += "<tr><input type='hidden' name='id' value='"+array['id']+"'><td><input type='checkbox' class='checkbox' name='id' value='"+array['vid']+"'></td><td>"+array['title']+"</td><td><img src="+array['thum']+" width='150px' height='86px'></td><td><img src="+array['pic']+" width='214px' height='123px'></td><td>通过</td><td>"+getLocalTime(array['addTime'])+"</td><td><a class='see'>查看</a></td></tr>";
+
+                        }
+                    })
+                }else{
+                    $.each(json, function(index, array) {
+                        li += "<tr><input type='hidden' name='id' value='"+array['id']+"'><td><input type='checkbox' class='checkbox' name='id' value='"+array['vid']+"'></td><td>"+array['title']+"</td><td><img src="+array['thum']+" width='150px' height='86px'></td><td><img src="+array['pic']+" width='214px' height='123px'></td><td>"+array['flag']+"</td><td>"+getLocalTime(array['addTime'])+"</td><td><a gid='"+array['id']+"' class='review'>通过</a><a gid='"+array['id']+"' class='reject'>驳回</a></td></tr>";
+                    })
+                }
+
+                li +='</table>';
+                $('.fenlei').append(li);
+            },
+            complete: function() {
+                //getPageBar();//js生成分页，可用程序代替
+            },
+            error: function() {
+                alert("数据异常,请检查是否json格式");
+            }
+        });
+    }
+
+    function getLocalTime(nS) {
+        return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+    }
+</script>
+

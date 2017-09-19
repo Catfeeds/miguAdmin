@@ -1,0 +1,90 @@
+2017/07/13 21:56:55 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "images/admin_logo.png". in /opt/modules/nginx/html/web/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /opt/modules/nginx/html/web/framework/web/CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 /opt/modules/nginx/html/web/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /opt/modules/nginx/html/web/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://117.144.248.58:8082/css/admin.css
+---
+2017/07/13 21:57:29 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "images/admin_logo.png". in /opt/modules/nginx/html/web/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /opt/modules/nginx/html/web/framework/web/CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 /opt/modules/nginx/html/web/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /opt/modules/nginx/html/web/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://117.144.248.58:8082/css/admin.css
+---
+2017/07/13 22:06:42 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "images/admin_logo.png". in /opt/modules/nginx/html/web/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /opt/modules/nginx/html/web/framework/web/CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 /opt/modules/nginx/html/web/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /opt/modules/nginx/html/web/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://117.144.248.58:8082/css/admin.css
+---
+2017/07/13 22:09:34 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "images/admin_logo.png". in /opt/modules/nginx/html/web/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /opt/modules/nginx/html/web/framework/web/CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 /opt/modules/nginx/html/web/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /opt/modules/nginx/html/web/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://117.144.248.58:8082/css/admin.css
+---
+2017/07/13 22:09:36 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "images/admin_logo.png". in /opt/modules/nginx/html/web/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /opt/modules/nginx/html/web/framework/web/CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 /opt/modules/nginx/html/web/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /opt/modules/nginx/html/web/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://117.144.248.58:8082/css/admin.css
+---
+2017/07/13 22:09:36 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "images/admin_logo.png". in /opt/modules/nginx/html/web/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /opt/modules/nginx/html/web/framework/web/CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 /opt/modules/nginx/html/web/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /opt/modules/nginx/html/web/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://117.144.248.58:8082/css/admin.css
+---
+2017/07/13 22:09:39 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "images/admin_logo.png". in /opt/modules/nginx/html/web/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /opt/modules/nginx/html/web/framework/web/CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 /opt/modules/nginx/html/web/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /opt/modules/nginx/html/web/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://117.144.248.58:8082/css/admin.css
+---
+2017/07/13 22:09:41 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "images/admin_logo.png". in /opt/modules/nginx/html/web/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /opt/modules/nginx/html/web/framework/web/CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 /opt/modules/nginx/html/web/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /opt/modules/nginx/html/web/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://117.144.248.58:8082/css/admin.css
+---
+2017/07/13 22:09:45 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "images/admin_logo.png". in /opt/modules/nginx/html/web/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /opt/modules/nginx/html/web/framework/web/CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 /opt/modules/nginx/html/web/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /opt/modules/nginx/html/web/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://117.144.248.58:8082/css/admin.css
+---
+2017/07/13 22:10:23 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "images/admin_logo.png". in /opt/modules/nginx/html/web/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /opt/modules/nginx/html/web/framework/web/CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 /opt/modules/nginx/html/web/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /opt/modules/nginx/html/web/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://117.144.248.58:8082/css/admin.css
+---

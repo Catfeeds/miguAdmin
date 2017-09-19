@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>		
+		ul{list-style:none;}
+		ul,li{margin:0;padding:0;}
+		#options{border-left:1px solid #999;border-bottom:1px solid #999;height:40px;}
+		#options li{background-color:#ccc;height:39px;line-height:38px;padding:0 25px;float:left;border-top:1px solid #999;border-right:1px solid #999;cursor:pointer;}
+		#options li.current_options{background-color:#fff;height:40px;}
+		#card{clear:both;}
+		#card li{padding:0 20px;border:1px solid #999;border-top:none;display:none;}
+		#card li.current_card{display:block;}
+		.search{float:left;padding:10px}
+		td ,th {text-align:center}
+		.page a {border:1px solid #999;text-decoration:none;padding:4px 5px;}
+		.page{padding:10px;}
+		.current_card a{text-decoration:none}
+	</style>
+</head>
+<body>
+	
+	
+	<div>
+		<ul id="options">
+			<li class="current_options">元数据</li>
+			<li>站点</li>
+			<li>屏幕</li>
+		</ul>
+		<form action="" method="" style="border-left:1px solid #999;border-right:1px solid #999;">
+			<div style="height:39px;padding:2px">
+				<div class="search"><label>查用户</label><input type="text" name="user" class="form-input w100"></div>
+				
+				<div class="search"><label>查任务名称</label><input type="text" name="user" class="form-input w100"></div>
+				
+				<div class="search"><label>牌照方</label>
+					<select class="form-input w100">
+						<option value="0">请选择</option>
+						<option value="1">华数</option>
+						<option value="2">百视通</option>
+						<option value="3">芒果</option>
+						<option value="4">银河</option>
+						<option value="5">未来电视</option>
+						<option value="6">南传</option>
+						<option value="7">国广</option>
+					</select>
+				</div>
+				
+				<div class="search"><label>流模式</label>
+					<select class="form-input w100">
+						<option value="0">请选择</option>
+						<option value="1">一审</option>
+						<option value="2">二审</option>
+						<option value="3">三审</option>
+						<option value="4">四审</option>
+						<option value="5">五审</option>
+					</select>
+				</div>
+				<input type="button" value="查询" class="btn">
+				<a class="btn search_btn">新建工作流</a>
+			</div>
+		<ul id="card">
+			<li class="current_card">
+				<table class="mtable" cellpadding="10" cellspacing="0" width="100%">
+					<tr>
+						<th>时间</th>
+						<th>任务名称</th>
+						<th>牌照方</th>
+						<th>流模式</th>
+						<th>相关用户</th>
+						<th>操作</th>
+					</tr>
+					<?php
+						if(!empty($list)){
+							foreach($list as $k=>$v){
+								?>
+								<tr>
+									<input type="hidden" name="id" value="<?php echo $v['id']?>">
+									<td><?php echo date('Y-m-d h:i:s',$v['addTime'])?></td>
+									<td><?php echo $v['name']?></td>
+									<td><?php
+										switch($v['cp']){
+											case '642001':echo '华数';break;
+											case 'BESTVOTT':echo '百视通';break;
+											case 'ICNTV':echo '未来电视';break;
+											case 'youpeng':echo '南传';break;
+											case 'HNBB':echo '芒果';break;
+											case 'CIBN':echo '国广';break;
+											case 'YGYH':echo '银河';break;
+										}
+										?></td>
+									<td><?php echo $v['type']?>审</td>
+									<td><?php echo VerGuideManager::String($v['user'])?></td>
+									<td><a href="#">编辑</a>&nbsp;<a class="del">删除</a></td>
+								</tr>
+							<?php
+							}
+						}
+					?>
+				</table>
+			</li>
+			<!--2-->
+			<li class="second"></li>
+			<!--3-->
+			<li class="third"></li>
+			
+		</ul>
+		</form>
+		<script>
+			
+			var opList = document.getElementById('options').getElementsByTagName('li');
+			var cardList = document.getElementById('card').getElementsByTagName('li');
+			for(var i=0; i<opList.length; i++){
+				(function(i){
+					opList[i].onclick = function(){
+						for(var j=0; j<opList.length; j++){
+							opList[j].className = "";
+						}
+						
+						this.className = "current_options";
+						
+						for(var j=0; j<cardList.length; j++){
+							cardList[j].style.display = "none";
+						}
+						
+						cardList[i].style.display = 'block';
+						getData();
+					}
+				
+				})(i)
+				
+			}
+		</script>
+	</div>
+</body>
+</html>
+<script>
+	$('.search_btn').click(function(){
+		var current_options = $('.current_options').html();
+		if(current_options=='元数据'){
+			var flag=1;
+		}else if(current_options=='站点'){
+			var flag=2;
+		}else if(current_options=='屏幕'){
+			var flag=3;
+		}
+		var mid=<?php echo $_REQUEST['mid']?>;
+		window.location.href="/version/station/workadd?mid="+mid+"&flag="+flag;
+	})
+	//$('.del').click(function(){
+	$(document).on('click','.del',function(){
+		var id = $(this).parent().parent().children('input').val();
+		$.post("<?php echo $this->get_url('station','workdel')?>",{id:id},function(d){
+			location.reload();
+		})
+	})
+
+	function getData(){
+		var current_options = $('.current_options').html();
+		if(current_options=='元数据'){
+			var flag=1;
+		}else if(current_options=='站点'){
+			var flag=2;
+		}else if(current_options=='屏幕'){
+			var flag=3;
+		}
+		ajax(flag);
+
+	}
+
+	function ajax(flag){
+		$.ajax
+		({
+			type:'post',
+			url:"/version/station/getStationList/mid/<?php echo $this->mid;?>/flag/"+flag,
+			dataType:'json',
+			success:function(data)
+			{
+				console.log(data);
+				$('.current_card').empty();
+				list = data.list;
+				var li = '<table class="mtable" cellpadding="10" cellspacing="0" width="100%"><tr><th>时间</th><th>任务名称</th><th>牌照方</th><th>流模式</th><th>相关用户</th><th>操作</th></tr>';
+				$.each(list, function(index, array) { //遍历返回json
+					switch(array['cp']){
+						case '642001':array['cp']='华数';break;
+						case 'BESTVOTT':array['cp']='百视通';break;
+						case 'ICNTV':array['cp']='未来电视';break;
+						case 'youpeng':array['cp']='南传';break;
+						case 'HNBB':array['cp']='芒果';break;
+						case 'CIBN':array['cp']='国广';break;
+						case 'YGYH':array['cp']='银河';break;
+					}
+					li +="<tr><td>"+getLocalTime(array['addTime'])+"</td><td>"+array['name']+"</td><td>"+array['cp']+"</td><td>"+array['type']+"</td><td>"+array['user']+"</td><td><a href='#'>编辑</a>&nbsp;<a class='del'>删除</a></td></tr>";
+				});
+				li +='</table>';
+				$('.current_card').append(li);
+			}
+		})
+	}
+
+	function getLocalTime(nS) {
+		return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+	}
+</script>

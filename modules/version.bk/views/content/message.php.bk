@@ -1,0 +1,132 @@
+<script charset="utf-8" type="text/javascript" src="/js/jdate/jquery.datetimepicker.js"></script>
+<link rel="stylesheet" href="/js/jdate/jquery.datetimepicker.css" />
+<form action="" method="post" enctype="multipart/form-data">
+<table class="mtable" width="50%" cellspacing="0" cellpadding="10">
+    <tr>
+        <td width="100" align="right">标题：</td>
+        <td><input type="text" name="title" id="title" value="" class="form-input w300">
+        </td>
+    </tr>
+    <tr>
+        <td width="100" align="right">推荐内容：</td>
+        <td>
+            <select name="type" class="form-input w300" id="type" onchange="aa()">
+                <option value="0">请选择</option>
+                <option  value="1" >咪咕</option>
+                <option  value="2" >应用</option>
+                <option  value="3" >牌照方</option>
+                <option  value="4" >第三方</option>
+            </select>
+        </td>
+    </tr>
+    <tr id="show" style="display:none">
+        <td width="100" align="right">牌照方：</td>
+        <td>
+            <select name="cp" class="form-input w300" id="cp">
+                <option value="0">请选择</option>
+                <option  value="1">华数客户端</option>
+                <option  value="2">百视通客户端</option>
+                <option   value="3">未来电视</option>
+                <option  value="4">南传</option>
+                <option  value="7">银河</option>
+            </select>
+        </td>
+    </tr>
+    <tr class="utp" style="display:none">
+        <td width="100" align="right">页面类型</td>
+        <td><select name="uType" class="form-input w300" id="uType">
+                <option value="0">请选择</option>
+                <option   value="1">搜索</option>
+                <option   value="2">栏目</option>
+                <option   value="3">详情</option>
+                <option   value="4">专题</option>
+                <option   value="5">收藏</option>
+                <option   value="6">历史</option>
+            </select></td>
+    </tr>
+    <tr class="act" style="display:none">
+        <td width="100" align="right">action：</td>
+        <td><input type="text" name="action" id="action" value="" class="form-input"></td>
+    </tr>
+    <tr  class="act" style="display:none">
+        <td width="100" align="right">param：</td>
+        <td><input type="text" name="param" id="param" value="" class="form-input"></td>
+    </tr>
+    <tr  class="upvid" style="display:none">
+        <td width="100" align="right">vid：</td>
+        <td><input type="text" id="upvid" name="upvid" value="" class="form-input"></td>
+    </tr>
+    <tr style="display:none" class="pic">
+        <td width="100" align="right">pic：</td>
+        <td><input type="text" name="pic" id="pic" value="" class="form-input w400"></td>
+    </tr>
+    <tr>
+        <td width="100" align="right">内容：</td>
+        <td><textarea name="info" class="form-input w400" style="height:200px;resize: none;"></textarea></td>
+    </tr>
+    <tr>
+        <td>有效期</td>
+        <td><input type="text" name="firstTime" id="firstTime" value="" class="form-input w100">--<input type="text" name="endTime" id="endTime" value="" class="form-input w100"></td>
+    </tr>
+    <tr>
+        <td align="center" colspan="2">
+            <input type="submit" value="保存信息" class="btn save">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" value="取消" class="gray" onclick="window.location.href='<?php echo $this->get_url('content','msgindex')?>'">
+        </td>
+    </tr>
+</table>
+</form>
+<script>
+
+    $('#firstTime,#endTime').datetimepicker({
+        lang:'ch',
+        validateOnBlur:false,
+        timepicker:false,
+        format:'Y-m-d',
+        formatDate: 'Y-m-d',
+    });
+
+    $('.save').click(function(){
+        var first = $('input[name=firstTime]').val();
+        if(empty(first)){
+            layer.alert("请填写有效期！")
+            return false;
+        }
+        var timeend = $('input[name=endTime]').val();
+        if(empty(timeend)){
+            layer.alert("请填写有效期！")
+            return false;
+        }
+    })
+    function aa(){
+        var zhi = $('#type').val();
+        switch(zhi){
+            case '1':
+                $('#show').hide();
+                $('.act').hide();
+                $('.utp').show();
+                $('.upvid').show();
+                break;
+            case '2':
+                $('#show').hide();
+                $('.utp').hide();
+                $('.upvid').hide();
+                $('.act').show();
+                break;
+            case '3':
+                $('#show').show();
+                $('.utp').hide();
+                $('.upvid').hide();
+                $('.act').show();
+                break;
+            case '4':
+                $('#show').hide();
+                $('.utp').hide();
+                $('.upvid').hide();
+                $('.act').show();
+                break;
+        }
+
+    }
+</script>

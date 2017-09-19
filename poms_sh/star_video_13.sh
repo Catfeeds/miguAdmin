@@ -1,0 +1,10 @@
+curl "127.0.0.1:8080/mobile/poms/SelectStarInfo?page=12000" &
+curl "127.0.0.1:8080/mobile/poms/SelectStarInfo?page=12100" &
+curl "127.0.0.1:8080/mobile/poms/SelectStarInfo?page=12200" &
+curl "127.0.0.1:8080/mobile/poms/SelectStarInfo?page=12300" &
+curl "127.0.0.1:8080/mobile/poms/SelectStarInfo?page=12400" &
+curl "127.0.0.1:8080/mobile/poms/SelectStarInfo?page=12500" & 
+curl "127.0.0.1:8080/mobile/poms/SelectStarInfo?page=12600" &
+curl "127.0.0.1:8080/mobile/poms/SelectStarInfo?page=12700" &
+curl "127.0.0.1:8080/mobile/poms/SelectStarInfo?page=12800" &
+curl "127.0.0.1:8080/mobile/poms/SelectStarInfo?page=12900" &

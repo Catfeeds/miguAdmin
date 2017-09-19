@@ -1,0 +1,164 @@
+<?php
+
+/**
+ * This is the model class for table "{{video}}".
+ *
+ * The followings are the available columns in table '{{video}}':
+ * @property string $id
+ * @property string $vid
+ * @property string $cp
+ * @property string $title
+ * @property string $info
+ * @property string $short
+ * @property string $keyword
+ * @property string $actor
+ * @property string $director
+ * @property string $language
+ * @property string $year
+ * @property string $type
+ * @property string $cate
+ * @property string $status
+ * @property string $cTime
+ * @property integer $IsAdvertise
+ * @property string $endDateTime
+ * @property string $startDateTime
+ * @property string $ShowType
+ * @property string $initial
+ * @property string $flag
+ * @property string $CountryOfOrigin
+ */
+class Video extends CActiveRecord
+{
+	/**
+	 * @return string the associated database table name
+	 */
+	public function tableName()
+	{
+		return '{{video}}';
+	}
+
+	/**
+	 * @return array validation rules for model attributes.
+	 */
+	public function rules()
+	{
+		// NOTE: you should only define rules for those attributes that
+		// will receive user inputs.
+		return array(
+			array('vid, cp, title, info, short, type, cTime, IsAdvertise, endDateTime, startDateTime, ShowType, CountryOfOrigin', 'required'),
+			array('IsAdvertise', 'numerical', 'integerOnly'=>true),
+			array('vid, language, type, cate, ShowType', 'length', 'max'=>20),
+			array('cp, CountryOfOrigin', 'length', 'max'=>15),
+			array('title, keyword, actor', 'length', 'max'=>150),
+			array('director, initial', 'length', 'max'=>50),
+			array('year', 'length', 'max'=>4),
+			array('status', 'length', 'max'=>1),
+			array('cTime', 'length', 'max'=>11),
+			array('endDateTime, startDateTime', 'length', 'max'=>30),
+			array('flag', 'length', 'max'=>10),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('id, vid, cp, title, info, short, keyword, actor, director, language, year, type, cate, status, cTime, IsAdvertise, endDateTime, startDateTime, ShowType, initial, flag, CountryOfOrigin', 'safe', 'on'=>'search'),
+		);
+	}
+
+	/**
+	 * @return array relational rules.
+	 */
+	public function relations()
+	{
+		// NOTE: you may need to adjust the relation name and the related
+		// class name for the relations automatically generated below.
+		return array(
+		);
+	}
+
+	/**
+	 * @return array customized attribute labels (name=>label)
+	 */
+	public function attributeLabels()
+	{
+		return array(
+			'id' => 'ID',
+			'vid' => 'Vid',
+			'cp' => 'Cp',
+			'title' => 'Title',
+			'info' => 'Info',
+			'short' => 'Short',
+			'keyword' => 'Keyword',
+			'actor' => 'Actor',
+			'director' => 'Director',
+			'language' => 'Language',
+			'year' => 'Year',
+			'type' => 'Type',
+			'cate' => 'Cate',
+			'status' => 'Status',
+			'cTime' => 'C Time',
+			'IsAdvertise' => 'Is Advertise',
+			'endDateTime' => 'End Date Time',
+			'startDateTime' => 'Start Date Time',
+			'ShowType' => 'Show Type',
+			'initial' => 'Initial',
+			'flag' => 'Flag',
+			'CountryOfOrigin' => 'Country Of Origin',
+		);
+	}
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
+	 */
+	public function search()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id,true);
+		$criteria->compare('vid',$this->vid,true);
+		$criteria->compare('cp',$this->cp,true);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('info',$this->info,true);
+		$criteria->compare('short',$this->short,true);
+		$criteria->compare('keyword',$this->keyword,true);
+		$criteria->compare('actor',$this->actor,true);
+		$criteria->compare('director',$this->director,true);
+		$criteria->compare('language',$this->language,true);
+		$criteria->compare('year',$this->year,true);
+		$criteria->compare('type',$this->type,true);
+		$criteria->compare('cate',$this->cate,true);
+		$criteria->compare('status',$this->status,true);
+		$criteria->compare('cTime',$this->cTime,true);
+		$criteria->compare('IsAdvertise',$this->IsAdvertise);
+		$criteria->compare('endDateTime',$this->endDateTime,true);
+		$criteria->compare('startDateTime',$this->startDateTime,true);
+		$criteria->compare('ShowType',$this->ShowType,true);
+		$criteria->compare('initial',$this->initial,true);
+		$criteria->compare('flag',$this->flag,true);
+		$criteria->compare('CountryOfOrigin',$this->CountryOfOrigin,true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return Video the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
+}
+

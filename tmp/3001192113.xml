@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adi:ADI2 xmlns="http://www.cablelabs.com/VODSchema/default" xmlns:adi="http://www.cablelabs.com/VODSchema/adi"
+						 xmlns:vod="http://www.cablelabs.com/VODSchema/vod">
+
+
+	<adi:OpenGroupAsset type="VODRelease" product="VOD">
+		<vod:VODRelease providerID="642001" providerType="2" assetID="3001192113" updateNum="" groupAsset="Y" serialNo="20121208">
+			<adi:AssetLifetime startDateTime="2015-06-04" endDateTime="2065-06-04"/>
+		</vod:VODRelease>
+	</adi:OpenGroupAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192113" type="Title" product="VOD">
+		<vod:Title providerID="642001" assetID="3001192113" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-04" endDateTime="2065-06-04"/>
+			<vod:TitleFull><![CDATA[东方时空_20150604]]></vod:TitleFull>
+			<vod:Theme><![CDATA[]]></vod:Theme>
+			<vod:ShowType>Column</vod:ShowType>
+			<vod:TitleBrief><![CDATA[]]></vod:TitleBrief>
+			<vod:EnglishName><![CDATA[]]></vod:EnglishName>
+			<vod:Emcee> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Emcee> 
+			<vod:Guest> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Guest> 
+			<vod:SummaryMedium><![CDATA[]]></vod:SummaryMedium>
+			<vod:RunTime><![CDATA[0]]></vod:RunTime>
+			<vod:Character><![CDATA[]]></vod:Character>
+			<vod:EnglishDesc><![CDATA[]]></vod:EnglishDesc>
+			<vod:SummaryShort><![CDATA[一档梳理解读当天或近期的热点资讯的新闻纪录类栏目。新闻性强，贴近民生，形式互动，风格统一，求实、公正、平等、前卫的播报态度，全景式、多维度、现代化的报道形式，开创了“中国电视改革的先河”。]]></vod:SummaryShort>
+			<vod:PlayTime><![CDATA[]]></vod:PlayTime>
+			<vod:CountryOfOrigin><![CDATA[1]]></vod:CountryOfOrigin>
+			<vod:Actor type="Actor"> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Actor> 
+			<vod:Director> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Director> 
+			<vod:Producer> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Producer> 
+			<vod:Items><![CDATA[0]]></vod:Items>
+			<vod:Awards><![CDATA[]]></vod:Awards>
+			<vod:StudioName><![CDATA[]]></vod:StudioName>
+			<vod:Agent><![CDATA[]]></vod:Agent>
+			<vod:Language><![CDATA[国语]]></vod:Language>
+			<vod:Keyword><![CDATA[]]></vod:Keyword>
+			<vod:SourceType></vod:SourceType>
+			<vod:SourceInfo><![CDATA[中央新闻]]></vod:SourceInfo>
+			<vod:Comments><![CDATA[]]></vod:Comments>
+			<vod:MediaFormat><![CDATA[]]></vod:MediaFormat>
+			<vod:MetaLanguage><![CDATA[]]></vod:MetaLanguage>
+			<vod:ExternalNo><![CDATA[]]></vod:ExternalNo>
+			<vod:ExternalURL><![CDATA[]]></vod:ExternalURL>
+			<vod:IsAdvertise>0</vod:IsAdvertise>
+		</vod:Title>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192113" type="CategoryPath" product="VOD">
+		<vod:CategoryPath mso="" providerID="642001" assetID="3001192113" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-04" endDateTime="2065-06-04"/>
+			<vod:Classification><![CDATA[录制类节目]]></vod:Classification>
+			<vod:Category><![CDATA[东方时空]]></vod:Category>
+						<vod:CategoryName><![CDATA[]]></vod:CategoryName>
+		</vod:CategoryPath>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192113" type="Copyright" product="VOD">
+		<vod:Copyright providerID="642001" assetID="3001192113" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-04" endDateTime="2065-06-04"/>
+			<vod:LicenseType><![CDATA[0]]></vod:LicenseType>
+			<vod:PublicationDate><![CDATA[2015-06-04]]></vod:PublicationDate>
+			<vod:CopyName><![CDATA[]]></vod:CopyName>
+			<vod:VideoLicense><![CDATA[]]></vod:VideoLicense>
+			<vod:PublishNo><![CDATA[]]></vod:PublishNo>
+			<vod:AuthorserilNo><![CDATA[]]></vod:AuthorserilNo>
+			<vod:CopyType><![CDATA[1]]></vod:CopyType>
+			<vod:CopyLicenser><![CDATA[]]></vod:CopyLicenser>
+			<vod:CopyLicense><![CDATA[]]></vod:CopyLicense>
+			<vod:CopySerilNo><![CDATA[]]></vod:CopySerilNo>
+			<vod:CopyIdea><![CDATA[]]></vod:CopyIdea>
+		</vod:Copyright>
+	</adi:AddMetadataAsset>
+	<adi:AcceptContentAsset type="Video" metadataOnly="N" fileName="东方时空_20150604" 
+			fileSize="766956716" mD5CheckSum="9830a7e42617991db665a665dbaf1503">
+		<vod:Video providerID="642001" assetID="3001192115" updateNum="1" fileName="东方时空_20150604" 
+				fileSize="766956716" mD5CheckSum="9830a7e42617991db665a665dbaf1503" transferContentURL="ftp://icds_ope:0wlonewave@125.210.139.135:21/icms_icds_pub02/opnewsps02/Video/2015/06/04/21/11773250_20150603001953_r_1156483643_20150604213332_0_1156525029.ts" 
+				encodingProfile="video/H264">
+			<adi:AssetLifetime startDateTime="2015-06-04" endDateTime="2065-06-04"/>
+			<vod:Duration><![CDATA[3230]]></vod:Duration>
+			<vod:Bitrate><![CDATA[1600000]]></vod:Bitrate>
+			<vod:Numberofframes><![CDATA[2]]></vod:Numberofframes>
+			<vod:FrameHeight><![CDATA[576]]></vod:FrameHeight>
+			<vod:FrameWidth><![CDATA[720]]></vod:FrameWidth>
+			<vod:AspectRatio><![CDATA[]]></vod:AspectRatio>
+			<vod:FrameRate><![CDATA[25]]></vod:FrameRate>
+			<vod:Brightness><![CDATA[]]></vod:Brightness>
+			<vod:Contrast><![CDATA[]]></vod:Contrast>
+			<vod:FileType><![CDATA[1]]></vod:FileType>
+			<vod:Usage><![CDATA[1]]></vod:Usage>
+			<vod:ServiceType><![CDATA[0]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[1]]></vod:MimeType>
+			<vod:HDFlag><![CDATA[1]]></vod:HDFlag>
+		</vod:Video>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Video" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192113" providerID="642001" assetID="3001192115"/>
+</adi:ADI2>

@@ -1,0 +1,159 @@
+<script charset="utf-8" type="text/javascript" src="/js/jdate/jquery.datetimepicker.js"></script>
+<link rel="stylesheet" href="/js/jdate/jquery.datetimepicker.css" />
+<?php
+    $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
+    $adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
+    $adminLeftOne = !empty($_GET['adminLeftOne'])?$_GET['adminLeftOne']:'';
+    $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
+?>
+<style>
+.inputDiv{
+        width:100%;
+        float:left;
+        height:38px;
+        background: #A3BAD5;
+        padding: 5px 0px 0px 12px;
+    }
+    .inputDiv input{
+        float: left;
+    }
+    .inputDiv span{
+        float: left;
+	margin-top:5px;
+    }
+    .inputDiv select{
+        float: left;
+        margin-left:5px;
+    }
+    .inputDivTwo{
+        width:100%;
+        float:left;
+        height:30px;
+        background: #f0fdff;
+        padding: 5px 0px 7px 12px;
+    }
+    .inputDivTwo input{float:left;}		
+</style>
+<div style='padding: 5px 0px 5px 12px;'>
+    <span><?php echo $adminLeftOneName;echo '>';?></span>
+    <span><?php echo $adminLeftTwoName;?></span>
+</div>
+<div >
+    <form action="">
+	<div class='inputDiv'>
+        <span>节目类型:</span>
+        <select name="type" class="form-input w100" id="type">
+            <option value="0">请选择</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='电影'){echo "selected=selected"; }  ?> value="电影" >电影</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='综艺'){echo "selected=selected"; }  ?> value="综艺">综艺</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='新闻'){echo "selected=selected"; }  ?>value="新闻">新闻</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='电视剧'){echo "selected=selected"; }  ?>value="电视剧">电视剧</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='动漫'){echo "selected=selected"; }  ?>value="动漫">动漫</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='教育'){echo "selected=selected"; }  ?>value="教育">教育</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='体育'){echo "selected=selected"; }  ?>value="体育">体育</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='音乐'){echo "selected=selected"; }  ?>value="音乐">音乐</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='娱乐'){echo "selected=selected"; }  ?>value="娱乐">娱乐</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='健康'){echo "selected=selected"; }  ?>value="健康">健康</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='纪实'){echo "selected=selected"; }  ?>value="纪实">纪实</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='旅游'){echo "selected=selected"; }  ?>value="旅游">旅游</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='法制'){echo "selected=selected"; }  ?>value="法制">法制</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='搞笑'){echo "selected=selected"; }  ?>value="搞笑">搞笑</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='时尚'){echo "selected=selected"; }  ?>value="时尚">时尚</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='军事'){echo "selected=selected"; }  ?>value="军事">军事</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='财经'){echo "selected=selected"; }  ?>value="财经">财经</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='曲艺'){echo "selected=selected"; }  ?>value="曲艺">曲艺</option>
+            <option <?php $test=!empty($_REQUEST['type'])?$_REQUEST['type']:'';if($test=='奥运'){echo "selected=selected"; }  ?>value="奥运">奥运</option>
+        </select>
+        <input class="btn btn_search" value="查询" type="button">
+	</div>
+	<div class='inputDivTwo'>
+           <input class="btn keyadd" value="新建标签" type="button" style="float: left;">
+	</div>
+        <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
+            <tr>
+                <th>编号</th>
+                <th>节目类型</th>
+                <th>关键字</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            <?php
+                if(!empty($list)){
+                    foreach( $list as $k=>$v){
+                        ?>
+                        <tr>
+                            <input type="hidden" value="<?php echo $v['id']?>" name="id">
+                            <td><?php echo $v['id']?></td>
+                            <td><?php echo $v['type']?></td>
+                            <td><?php echo $v['keyword']?></td>
+                            <td><?php echo date('Y-m-d',$v['cTime'])?></td>
+                            <td><a class="edit">编辑</a>&nbsp;<a class="del">删除</a></td>
+                        </tr>
+                    <?php
+                    }
+                }
+            ?>
+        </table>
+        <div><?php /*echo $page*/?></div>
+    </form>
+</div>
+<?php
+$adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
+$adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
+$adminLeftOne = !empty($_GET['adminLeftOne'])?$_GET['adminLeftOne']:'';
+$adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
+?>
+<script>
+    var adminLeftOne = "<?php echo $adminLeftOne;?>";
+    var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
+    var adminLeftOneName = "<?php echo $adminLeftOneName;?>";
+    var adminLeftTwoName = "<?php echo $adminLeftTwoName;?>";
+    $('.keyadd').click(function(){
+        $.getJSON('<?php echo $this->get_url('content','keyadd')?>',function(d){
+            if(d.code == 200){
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['530px', '350px'], //宽高
+                    content: d.msg
+                })
+            }else{
+                layer.alert(d.msg,{icon:0});
+            }
+        })
+    })
+
+    $('.edit').click(function(){
+        var id = $(this).parent().parent().children('input').val();
+        $.getJSON('<?php echo $this->get_url('content','keyadd')?>',{id:id},function(d){
+            if(d.code == 200){
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['530px', '350px'], //宽高
+                    content: d.msg
+                })
+            }else{
+                layer.alert(d.msg,{icon:0});
+            }
+        })
+    })
+
+    $('.btn_search').click(function(){
+        var type = $('#type').val();
+        var mid = "<?php echo $this->mid?>";
+        window.location.href="/version/content/keyword?mid="+mid+"&type="+type+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
+    })
+    $('.del').click(function(){
+        var id = $(this).parent().siblings('input').val();
+        $.post('<?php echo $this->get_url('content','keydel')?>',{id:id},function(d){
+            if(d.code==200){
+                alert(d.msg);
+                location.reload();
+            }else{
+                alert(d.msg);
+            }
+        },'json')
+    })
+</script>
+

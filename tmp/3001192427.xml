@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adi:ADI2 xmlns="http://www.cablelabs.com/VODSchema/default" xmlns:adi="http://www.cablelabs.com/VODSchema/adi"
+						 xmlns:vod="http://www.cablelabs.com/VODSchema/vod">
+
+
+	<adi:OpenGroupAsset type="VODRelease" product="VOD">
+		<vod:VODRelease providerID="642001" providerType="2" assetID="3001192427" updateNum="" groupAsset="Y" serialNo="20121208">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+		</vod:VODRelease>
+	</adi:OpenGroupAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192427" type="Title" product="VOD">
+		<vod:Title providerID="642001" assetID="3001192427" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:TitleFull><![CDATA[普法栏目剧_20150604]]></vod:TitleFull>
+			<vod:Theme><![CDATA[]]></vod:Theme>
+			<vod:ShowType>Column</vod:ShowType>
+			<vod:TitleBrief><![CDATA[]]></vod:TitleBrief>
+			<vod:EnglishName><![CDATA[]]></vod:EnglishName>
+			<vod:Emcee> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Emcee> 
+			<vod:Guest> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Guest> 
+			<vod:SummaryMedium><![CDATA[]]></vod:SummaryMedium>
+			<vod:RunTime><![CDATA[0]]></vod:RunTime>
+			<vod:Character><![CDATA[]]></vod:Character>
+			<vod:EnglishDesc><![CDATA[]]></vod:EnglishDesc>
+			<vod:SummaryShort><![CDATA[节目采用观众喜闻乐见的栏目剧形态，运用真实再现、情景剧、系列剧等手法，在和全国普法办等部门充分合作的前提下广泛搜集素材，进行二度创作，生动普法，弘扬正气，震慑犯罪。]]></vod:SummaryShort>
+			<vod:PlayTime><![CDATA[]]></vod:PlayTime>
+			<vod:CountryOfOrigin><![CDATA[1]]></vod:CountryOfOrigin>
+			<vod:Actor type="Actor"> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Actor> 
+			<vod:Director> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Director> 
+			<vod:Producer> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Producer> 
+			<vod:Items><![CDATA[0]]></vod:Items>
+			<vod:Awards><![CDATA[]]></vod:Awards>
+			<vod:StudioName><![CDATA[]]></vod:StudioName>
+			<vod:Agent><![CDATA[]]></vod:Agent>
+			<vod:Language><![CDATA[国语]]></vod:Language>
+			<vod:Keyword><![CDATA[]]></vod:Keyword>
+			<vod:SourceType></vod:SourceType>
+			<vod:SourceInfo><![CDATA[中央十二套,ZYSHIETHD]]></vod:SourceInfo>
+			<vod:Comments><![CDATA[]]></vod:Comments>
+			<vod:MediaFormat><![CDATA[]]></vod:MediaFormat>
+			<vod:MetaLanguage><![CDATA[]]></vod:MetaLanguage>
+			<vod:ExternalNo><![CDATA[]]></vod:ExternalNo>
+			<vod:ExternalURL><![CDATA[]]></vod:ExternalURL>
+			<vod:IsAdvertise>0</vod:IsAdvertise>
+		</vod:Title>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192427" type="CategoryPath" product="VOD">
+		<vod:CategoryPath mso="" providerID="642001" assetID="3001192427" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:Classification><![CDATA[录制类节目]]></vod:Classification>
+			<vod:Category><![CDATA[普法栏目剧]]></vod:Category>
+						<vod:CategoryName><![CDATA[]]></vod:CategoryName>
+		</vod:CategoryPath>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192427" type="Copyright" product="VOD">
+		<vod:Copyright providerID="642001" assetID="3001192427" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:LicenseType><![CDATA[0]]></vod:LicenseType>
+			<vod:PublicationDate><![CDATA[2015-06-05]]></vod:PublicationDate>
+			<vod:CopyName><![CDATA[]]></vod:CopyName>
+			<vod:VideoLicense><![CDATA[]]></vod:VideoLicense>
+			<vod:PublishNo><![CDATA[]]></vod:PublishNo>
+			<vod:AuthorserilNo><![CDATA[]]></vod:AuthorserilNo>
+			<vod:CopyType><![CDATA[1]]></vod:CopyType>
+			<vod:CopyLicenser><![CDATA[]]></vod:CopyLicenser>
+			<vod:CopyLicense><![CDATA[]]></vod:CopyLicense>
+			<vod:CopySerilNo><![CDATA[]]></vod:CopySerilNo>
+			<vod:CopyIdea><![CDATA[]]></vod:CopyIdea>
+		</vod:Copyright>
+	</adi:AddMetadataAsset>
+	<adi:AcceptContentAsset type="Video" metadataOnly="N" fileName="普法栏目剧_20150604" 
+			fileSize="656420236" mD5CheckSum="6e37d1cd2e813864ff8aae1ab6cf5b90">
+		<vod:Video providerID="642001" assetID="3001192431" updateNum="1" fileName="普法栏目剧_20150604" 
+				fileSize="656420236" mD5CheckSum="6e37d1cd2e813864ff8aae1ab6cf5b90" transferContentURL="ftp://icds_ope:0wlonewave@125.210.139.135:21/icms_icds_pub02/opnewsps02/Video/2015/06/05/00/11771445_20150603001158_r_1156555915_20150605000419_0_1156639760.ts" 
+				encodingProfile="video/H264">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:Duration><![CDATA[2764]]></vod:Duration>
+			<vod:Bitrate><![CDATA[1600000]]></vod:Bitrate>
+			<vod:Numberofframes><![CDATA[2]]></vod:Numberofframes>
+			<vod:FrameHeight><![CDATA[576]]></vod:FrameHeight>
+			<vod:FrameWidth><![CDATA[720]]></vod:FrameWidth>
+			<vod:AspectRatio><![CDATA[]]></vod:AspectRatio>
+			<vod:FrameRate><![CDATA[25]]></vod:FrameRate>
+			<vod:Brightness><![CDATA[]]></vod:Brightness>
+			<vod:Contrast><![CDATA[]]></vod:Contrast>
+			<vod:FileType><![CDATA[1]]></vod:FileType>
+			<vod:Usage><![CDATA[1]]></vod:Usage>
+			<vod:ServiceType><![CDATA[0]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[1]]></vod:MimeType>
+			<vod:HDFlag><![CDATA[1]]></vod:HDFlag>
+		</vod:Video>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Video" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192427" providerID="642001" assetID="3001192431"/>
+</adi:ADI2>

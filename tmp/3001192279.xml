@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adi:ADI2 xmlns="http://www.cablelabs.com/VODSchema/default" xmlns:adi="http://www.cablelabs.com/VODSchema/adi"
+						 xmlns:vod="http://www.cablelabs.com/VODSchema/vod">
+
+
+	<adi:OpenGroupAsset type="VODRelease" product="VOD">
+		<vod:VODRelease providerID="642001" providerType="2" assetID="3001192279" updateNum="" groupAsset="Y" serialNo="20121208">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+		</vod:VODRelease>
+	</adi:OpenGroupAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192279" type="Title" product="VOD">
+		<vod:Title providerID="642001" assetID="3001192279" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:TitleFull><![CDATA[(6.4)NBA最前线]]></vod:TitleFull>
+			<vod:Theme><![CDATA[]]></vod:Theme>
+			<vod:ShowType>Column</vod:ShowType>
+			<vod:TitleBrief><![CDATA[]]></vod:TitleBrief>
+			<vod:EnglishName><![CDATA[]]></vod:EnglishName>
+			<vod:Emcee> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Emcee> 
+			<vod:Guest> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Guest> 
+			<vod:SummaryMedium><![CDATA[]]></vod:SummaryMedium>
+			<vod:RunTime><![CDATA[0]]></vod:RunTime>
+			<vod:Character><![CDATA[]]></vod:Character>
+			<vod:EnglishDesc><![CDATA[]]></vod:EnglishDesc>
+			<vod:SummaryShort><![CDATA[(6.4)NBA最前线]]></vod:SummaryShort>
+			<vod:PlayTime><![CDATA[]]></vod:PlayTime>
+			<vod:CountryOfOrigin><![CDATA[1]]></vod:CountryOfOrigin>
+			<vod:Actor type="Actor"> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Actor> 
+			<vod:Director> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Director> 
+			<vod:Producer> 
+				<vod:LastNameFirst><![CDATA[]]></vod:LastNameFirst> 
+			</vod:Producer> 
+			<vod:Items><![CDATA[1]]></vod:Items>
+			<vod:Awards><![CDATA[]]></vod:Awards>
+			<vod:StudioName><![CDATA[]]></vod:StudioName>
+			<vod:Agent><![CDATA[]]></vod:Agent>
+			<vod:Language><![CDATA[国语]]></vod:Language>
+			<vod:Keyword><![CDATA[(6.4)NBA最前线]]></vod:Keyword>
+			<vod:SourceType></vod:SourceType>
+			<vod:SourceInfo><![CDATA[中央五套]]></vod:SourceInfo>
+			<vod:Comments><![CDATA[]]></vod:Comments>
+			<vod:MediaFormat><![CDATA[]]></vod:MediaFormat>
+			<vod:MetaLanguage><![CDATA[]]></vod:MetaLanguage>
+			<vod:ExternalNo><![CDATA[]]></vod:ExternalNo>
+			<vod:ExternalURL><![CDATA[]]></vod:ExternalURL>
+			<vod:IsAdvertise>0</vod:IsAdvertise>
+		</vod:Title>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192279" type="CategoryPath" product="VOD">
+		<vod:CategoryPath mso="" providerID="642001" assetID="3001192279" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:Classification><![CDATA[录制类节目]]></vod:Classification>
+			<vod:Category><![CDATA[NBA最前线]]></vod:Category>
+						<vod:CategoryName><![CDATA[]]></vod:CategoryName>
+		</vod:CategoryPath>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192279" type="Copyright" product="VOD">
+		<vod:Copyright providerID="642001" assetID="3001192279" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:LicenseType><![CDATA[0]]></vod:LicenseType>
+			<vod:PublicationDate><![CDATA[2015-06-05]]></vod:PublicationDate>
+			<vod:CopyName><![CDATA[]]></vod:CopyName>
+			<vod:VideoLicense><![CDATA[]]></vod:VideoLicense>
+			<vod:PublishNo><![CDATA[]]></vod:PublishNo>
+			<vod:AuthorserilNo><![CDATA[]]></vod:AuthorserilNo>
+			<vod:CopyType><![CDATA[1]]></vod:CopyType>
+			<vod:CopyLicenser><![CDATA[]]></vod:CopyLicenser>
+			<vod:CopyLicense><![CDATA[]]></vod:CopyLicense>
+			<vod:CopySerilNo><![CDATA[]]></vod:CopySerilNo>
+			<vod:CopyIdea><![CDATA[]]></vod:CopyIdea>
+		</vod:Copyright>
+	</adi:AddMetadataAsset>
+	<adi:AcceptContentAsset type="Video" metadataOnly="N" fileName="(6.4)NBA最前线" 
+			fileSize="2049025912" mD5CheckSum="1fafbcca4c7c230ebbb2eb1e88c72aee">
+		<vod:Video providerID="642001" assetID="3001192280" updateNum="1" fileName="(6.4)NBA最前线" 
+				fileSize="2049025912" mD5CheckSum="1fafbcca4c7c230ebbb2eb1e88c72aee" transferContentURL="ftp://icds_ope:0wlonewave@125.210.139.135:21/icms_icds_pub02/opnewsps02/Video/2015/06/04/23/20150604130241_(6.4)NBAzuiqianxian_1156143141_1156234261_20150604233603_0_1156610333.ts" 
+				encodingProfile="video/H264">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:Duration><![CDATA[6490]]></vod:Duration>
+			<vod:Bitrate><![CDATA[2200000]]></vod:Bitrate>
+			<vod:Numberofframes><![CDATA[2]]></vod:Numberofframes>
+			<vod:FrameHeight><![CDATA[720]]></vod:FrameHeight>
+			<vod:FrameWidth><![CDATA[1280]]></vod:FrameWidth>
+			<vod:AspectRatio><![CDATA[4:3]]></vod:AspectRatio>
+			<vod:FrameRate><![CDATA[25]]></vod:FrameRate>
+			<vod:Brightness><![CDATA[]]></vod:Brightness>
+			<vod:Contrast><![CDATA[]]></vod:Contrast>
+			<vod:FileType><![CDATA[1]]></vod:FileType>
+			<vod:Usage><![CDATA[1]]></vod:Usage>
+			<vod:ServiceType><![CDATA[0]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[1]]></vod:MimeType>
+			<vod:HDFlag><![CDATA[0]]></vod:HDFlag>
+		</vod:Video>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Video" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192279" providerID="642001" assetID="3001192280"/>
+	<adi:AcceptContentAsset type="Video" metadataOnly="N" fileName="(6.4)NBA最前线" 
+			fileSize="1537262088" mD5CheckSum="1308413944c22ea3651f5f9202103404">
+		<vod:Video providerID="642001" assetID="3001192281" updateNum="1" fileName="(6.4)NBA最前线" 
+				fileSize="1537262088" mD5CheckSum="1308413944c22ea3651f5f9202103404" transferContentURL="ftp://icds_ope:0wlonewave@125.210.139.8:21/icms_icds_pub03/opnewsps03/Video/2015/06/04/23/20150604130241_(6.4)NBAzuiqianxian_1156143141_1156234343_20150604233607_0_1156610676.ts" 
+				encodingProfile="video/H264">
+			<adi:AssetLifetime startDateTime="2015-06-05" endDateTime="2065-06-05"/>
+			<vod:Duration><![CDATA[6490]]></vod:Duration>
+			<vod:Bitrate><![CDATA[1600000]]></vod:Bitrate>
+			<vod:Numberofframes><![CDATA[2]]></vod:Numberofframes>
+			<vod:FrameHeight><![CDATA[720]]></vod:FrameHeight>
+			<vod:FrameWidth><![CDATA[1280]]></vod:FrameWidth>
+			<vod:AspectRatio><![CDATA[]]></vod:AspectRatio>
+			<vod:FrameRate><![CDATA[25]]></vod:FrameRate>
+			<vod:Brightness><![CDATA[]]></vod:Brightness>
+			<vod:Contrast><![CDATA[]]></vod:Contrast>
+			<vod:FileType><![CDATA[1]]></vod:FileType>
+			<vod:Usage><![CDATA[1]]></vod:Usage>
+			<vod:ServiceType><![CDATA[0]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[1]]></vod:MimeType>
+			<vod:HDFlag><![CDATA[0]]></vod:HDFlag>
+		</vod:Video>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Video" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192279" providerID="642001" assetID="3001192281"/>
+</adi:ADI2>

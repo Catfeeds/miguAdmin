@@ -1,0 +1,114 @@
+<script charset="utf-8" type="text/javascript" src="/js/jdate/jquery.datetimepicker.js"></script>
+<link rel="stylesheet" href="/js/jdate/jquery.datetimepicker.css" />
+<style>
+    .inputDiv{
+        width:100%;
+        float:left;
+        height:38px;
+        background: #A3BAD5;
+        padding: 5px 0px 0px 12px;
+    }
+    .inputDivTwo{
+        width:100%;
+        float:left;
+        height:30px;
+        background: #f0fdff;
+        padding: 5px 0px 7px 12px;
+    }
+</style>
+<?php
+$adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
+$adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
+$adminLeftOne = !empty($_GET['adminLeftOne'])?$_GET['adminLeftOne']:'';
+$adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
+?>
+<div style='padding: 5px 0px 5px 12px;'>
+    <span><?php echo $adminLeftOneName;echo '>';?></span>
+    <span><?php echo $adminLeftTwoName;?></span>
+</div>
+<div class="inputDiv">
+    <form >
+    用户名称:
+    <input type="text" placeholder='输入用户名查询' value="<?php echo !empty($_GET['user'])?$_GET['user']:''?>" name='user' class="form-input w100">
+    省份:
+     <select name="pro" id="pro" class="form-input w200">
+        <?php
+        $sql = "select provinceCode,provinceName from yd_province where id not between 40 and 46 order by provinceCode asc";
+        $test = SQLManager::queryAll($sql);
+        if(!empty($test)){
+            foreach($test as $k=>$v){
+                ?>
+                <option <?php $prolist=!empty($_REQUEST['company'])?$_REQUEST['company']:'';if($prolist==$v['provinceCode']){echo "selected=selected"; }  ?> value="<?php echo $v['provinceCode']; ?>"><?php echo $v['provinceName']; ?></option>
+                <?php
+            }
+        }
+        ?>
+    </select>
+    <input type='button' value='查询' class='btn search'>
+
+        </form>
+</div>
+<div class="inputDivTwo">
+    <a href="<?php echo $this->get_url('admin','add',array('adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>" class="btn" style="line-height: 30px;text-align: center;">新建用户</a>
+</div>
+<div class="mt10">
+    <form action="">
+        <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
+            <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>省市</th>
+                <th>公司</th>
+                <th>联系方式</th>
+                <th>操作</th>
+            </tr>
+            <?php
+                if(!empty($list)){
+                    foreach($list as $k=>$v){
+                        ?>
+                        <tr>
+                            <input type='hidden' value="<?php echo $v['id'] ?>" name='id'>
+                            <td><?php echo $v['id'] ?></td>
+                            <td><?php echo $v['nickname'] ?></td>
+                             <td>
+                                <?php if(!empty($province)){foreach($province as $val){if($v['pro']==$val['provinceCode']) echo $val['provinceName'];}} ?>/<?php if(!empty($city)){foreach($city as $vv){if($v['city']==$vv['cityCode']&&$v['city']!=0 ) echo $vv['cityName']; }} ?>
+                            </td>
+                           <!-- <td><?php echo $v['pro']?>/<?php echo $v['city'] ?></td>-->
+                            <td><?php echo $v['company'] ?></td>
+                            <td><?php echo $v['tel'] ?></td>
+                            <td><a href="<?php echo $this->get_url('admin','add',array('id'=>$v['id'],'nid'=>$_REQUEST['nid'],'adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">编辑</a><a class='del'>删除</a></td>
+                        </tr>
+                    <?php
+                    }
+                }
+            ?>
+        </table>
+    </form>
+</div>
+<script>
+    $('.del').click(function(){
+        var id = $(this).parent().parent().children('input').val();
+        $.post("<?php echo $this->get_url('admin','del')?>",{id:id},function(d){
+            if(d.code==200){
+                alert('删除成功');
+                location.reload();
+            }else{
+                alert('删除失败')
+            }
+        },'json')
+    })
+    var adminLeftOne = "<?php echo $adminLeftOne;?>";
+    var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
+    var adminLeftOneName = "<?php echo $adminLeftOneName;?>";
+    var adminLeftTwoName = "<?php echo $adminLeftTwoName;?>";
+	
+    $('.search').click(function(){
+	var user = $('input[name=user]').val();
+        var company = $('#pro').val();
+        var pro = "<?php echo $_SESSION['nickname']?>";
+        var nid = "<?php echo $_REQUEST['nid']?>";
+        var mid = <?php echo $_REQUEST['mid']?>;
+        window.location.href="/version/admin/index?mid="+mid+"&user="+user+"&company="+company+"&pro="+pro+"&nid="+nid+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
+    })
+</script>
+

@@ -1,0 +1,109 @@
+<div>从左到右规则为排序数值从大到小</div>
+<table class="mtable mt10" cellpadding="10" cellspacing="0" width="100%">
+        <tr>
+            <th>勾选</th>
+            <th>编号</th>
+            <th>焦点</th>
+            <th>标题</th>
+            <th>排序</th>
+            <th>重新排序</th>
+            <th>操作</th>
+        </tr>
+
+        <?php
+        if(!empty($list)){
+            $num=1;
+            foreach($list as $key=>$val){
+                ?>
+                <tr class="trdata" id="<?php echo $num++?>">
+                    <td align="center"><label><input type="checkbox" class='chosetr' name="id" onclick='chose(this)' value="<?php echo $val['id'] ;?>"/></label></td>
+                    <td align="center"><?php echo $val['id']?></td>
+                    <td align="center"><?php switch($val['focus']){
+                           case '0':echo '焦点默认未选中';break;
+                           case '1':echo '焦点默认选中';break;
+                       }?></td>
+                    <td align="center"><?php echo $val['title']?></td>
+                    <td align="center"><?php echo $val['order']?></td>
+                    <td> <input type="text" name="order" id="order" value="" placeholder="输入新的排序数值"> </td>
+                    <td align="center">
+                        <a  class="update">编辑屏幕</a>
+                        <a  class="del">删除</a>
+                        <!--<a  class="up">上移</a>
+                        <a  class="down">下移</a>-->
+                    </td>
+                </tr>
+            <?php }
+        }
+
+        ?>
+</table>
+<input type="button" value="保存排序" class="btn save-order">
+<input type="button" value="取消" class="btn goBack">
+<script>
+    $('.update').click(function()
+    {
+        var id = $(this).parent().parent().children().eq(1).text();
+        var mid = "<?php echo $_GET['mid']?>";
+        window.location.href = "/version/screen/updateGuide/mid/"+mid+'/id/'+id;
+    });
+    $('.goBack').click(function()
+    {
+	window.close();
+    })
+
+    $('.save-order').click(function()
+    {
+        var max = $('.trdata').length;
+        mid = <?php echo $this->mid;?>;
+        var flag =0;
+        for(var i = 0 ; i<max ;i++){
+            var id = $('.mtable').find('.trdata').eq(i).children('td').eq(1).text();
+            var order = $('.mtable').find('.trdata').eq(i).children('td').eq(5).children('input').val();
+            if(order == ''){
+                order = $('.mtable').find('.trdata').eq(i).children('td').eq(4).text();
+//                return true;
+            }else{
+                $.ajax
+                ({
+                    type:'get',
+                    url:'/version/screen/updateScreeGuideOrder/mid/'+mid+'/id/'+id+'/order/'+order,
+                    success:function (data)
+                    {
+                        if(data == '500'){
+//                            alert('修改排序失败');
+                        }else if(data == 200){
+                            flag = 1;
+                        }
+                    }
+                })
+            }
+        }
+//        if(flag == 1){
+            alert('修改排序成功');
+            window.location.reload();
+//        }
+
+    })
+
+     $('.del').click(function()
+    {
+         if(confirm('删除导航后所有的数据会清空，点确认删除，取消放弃')){
+            var id = $(this).parent().parent().children().eq(1).text();
+            var mid = "<?php echo $_GET['mid']?>";
+            $.ajax
+            ({
+                type:'get',
+                url:'/version/screen/deleteScreeGuide/mid/'+mid+'/id/'+id,
+                success:function(data)
+                {
+                    if(data == 200){
+                        alert('删除导航成功！');
+                        window.location.reload();
+                    }
+                }
+            })
+        }
+    })	
+</script>
+
+

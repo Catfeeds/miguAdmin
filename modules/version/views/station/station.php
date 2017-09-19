@@ -1,0 +1,744 @@
+<style>
+    .page{
+        width:800px;
+    }
+    a{text-decoration:none}
+    .status_back{
+        display:none;
+    }
+    .yiji{
+        width: 90px;
+        height: 25px;
+        background: inherit;
+        background-color: rgba(201, 201, 201, 1);
+        box-sizing: border-box;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgba(161, 161, 161, 1);
+        border-radius: 2px;
+        -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
+        -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
+        color: #333333;
+    }
+    .erji{
+        width: 90px;
+        height: 25px;
+        background: inherit;
+        background-color: rgba(242, 242, 242, 1);
+        box-sizing: border-box;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgba(228, 228, 228, 1);
+        border-radius: 2px;
+        -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
+        -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
+        color: #333333;
+    }
+    .edit{
+        border-width: 0px;
+        /*position: absolute;
+        left: 0px;
+        top: 0px;*/
+        width: 20px;
+        height: 20px;
+        background: inherit;
+        background-color: rgba(174, 174, 174, 1);
+        box-sizing: border-box;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgba(121, 121, 121, 1);
+        border-radius: 5px;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        color: #000000;
+    }
+    .dele{
+        border-width: 0px;
+        /*position: absolute;
+        left: 0px;
+        top: 0px;*/
+        width: 20px;
+        height: 20px;
+        background: inherit;
+        background-color: rgba(255, 255, 255, 1);
+        box-sizing: border-box;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgba(121, 121, 121, 1);
+        border-radius: 5px;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .menubox {
+        margin-right: 15px;
+        width:190px;
+        min-height: 845px;
+        float: left;
+        overflow: hidden;
+        background: #f7fbfc;
+        border-bottom: 1px solid #c2d1d8;
+        border-right: 1px solid #c2d1d8;
+        -webkit-box-shadow: 1px 1px 0 0 #fff;
+        box-shadow: 1px 1px 0 0 #fff;
+    }
+    .menubox ul li {
+        border-bottom: 0px solid #d9e4ea;
+    }
+
+    .menubox ul li span {
+        display: block;
+    }
+
+    .active{
+        display:block;
+    }
+    .edit{
+        display:block;
+        float:right;
+    }
+    .dele{
+        display:block;
+        float:right;
+    }
+    .jiaoFlag{
+        font-size:14px;
+    }
+    /*.down{
+        background:#red;
+    }*/
+    .selected{
+        /*background:#ccc;*/
+    }
+</style>
+<div class="left">
+    <?php
+    $nav = $this->getVersitelist();
+    $admin = $this->getMvAdmin();
+    ?>
+    <div class="admin_left">
+        <div class="menubox">
+            <ul id="J_navlist">
+                <?php
+                //print_r($nav);
+                if(!empty($nav)){
+                    foreach($nav as $v){
+                        if($v->pid == 0 && $v->type==1 && $v->protype==0 && $v->name=='栏目'){
+                            ?>
+                            <li class="<?php echo !empty($_GET['nid']) && $_GET['nid'] == $v['id']?'thismenu':''?>">
+                            <span>
+                                <?php
+                                    $data = VerSiteListManager::getList($v['id']);
+                                    if(!empty($data)){?>
+                                        <li class="menu">
+                                            <span><?php echo $v['name']?></span>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<a gid="<?php echo $v['id']?>" class="guide yiji">添加一级</a>
+                                            <ul>
+                                                <?php
+						    $leftGuideId = -1;
+                                                    foreach($data as $val){
+						        $leftGuideId++;
+						?>
+                                                           <li>
+                                                               <span>
+                                <?php
+                                    $tmp = VerSiteListManager::getList($val['id']);
+                                    if(!empty($tmp)){?>
+                                        <li class="menus">
+                                           <span class='test active' onclick='test(this)'>
+						<strong class='jiaoFlag'>▲</strong>
+
+						<?php echo $val['id']?>
+						<a href="<?php echo $val['url'] == '#'?'#':Yii::app()->createUrl($val['url'],array('mid'=>$_GET['mid'],'nid'=>$val['id'],'type'=>$val['type']))?>"><?php echo $val['name']?></a>
+						&nbsp;&nbsp;
+						<input type="button" des="<?php echo $val['id']?>" class="dele" value="删">
+						&nbsp;&nbsp;
+						<input type="button" des="<?php echo $val['id']?>" class="edit" value="编">
+						</span>
+                                            <ul>
+                                                <?php
+                                                    foreach($tmp as $l){
+					?>
+                                                           <li><a <?php if($_GET['nid'] == $l['id']){ echo "class='selected'";}?> onclick='getData(this)' href="<?php echo $l['url'] == '#'?'#':Yii::app()->createUrl($l['url'],array('mid'=>$_GET['mid'],'nid'=>$l['id'],'son'=>$l['name'],'pro'=>$admin['nickname'],'top'=>$val['name'],'leftGuideId'=>$leftGuideId))?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $l['id']?><?php echo $l['name']?></a>&nbsp;&nbsp;<input type="button" des="<?php echo $l['id']?>" class="dele" value="删">&nbsp;&nbsp;<input type="button" des="<?php echo $l['id']?>" class="edit" value="编"></li>
+                                                    <?php }
+                                                ?>
+                                            </ul>
+                                        </li>
+                                    <?php
+                                        }else{?>
+                                        <li><a  href="<?php echo $val['url'] == '#'?'#':Yii::app()->createUrl($val['url'],array('mid'=>$_GET['mid'],'nid'=>$val['id'],'epg'=>$val['name'],'pro'=>$admin['nickname']))?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val['id']?><?php echo $val['name']?></a>&nbsp;&nbsp;<input type="button" des="<?php echo $val['id']?>" class="dele" value="删">&nbsp;&nbsp;<input type="button" des="<?php echo $val['id']?>" class="edit" value="编"></li>
+                                   <?php }
+                                ?>
+                                 <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a gid="<?php echo $val['id']?>" class="guide erji">添加二级</a></li>
+                            </span>
+
+                                                           </li>
+                                                    <?php }
+                                                ?>
+                                            </ul>
+                                        </li>
+                                    <?php
+                                        }else{?>
+                                        <li><a href="<?php echo $v['url'] == '#'?'#':Yii::app()->createUrl($v['url'],array('mid'=>$_GET['mid'],'nid'=>$v['id'],'epg'=>$v['name'],'pro'=>$admin['nickname']))?>"><?php echo $v['id']?><?php echo $v['name']?></a></li>
+                                   <?php }
+                                ?>
+                            </span>
+                        </li>
+                        <?php
+                        }
+                    }
+                }else{
+                    ?>
+                    <li class="">
+                        <span><a href="#" style="color:;">待添加<em></em></a></span>
+                        <div class="submenu none" style="">
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                        </div>
+                    </li>
+                <?php
+                }?>
+            </ul>
+            <script type="text/javascript" language="javascript">
+                navList(12);
+            </script>
+        </div>
+    </div>
+</div>
+<div class="mt10" style="float:left">
+    <div>
+        <?php
+        if(!empty($_REQUEST['type'])){
+            if($_REQUEST['type']=='2'){
+                ?>
+                <input type="button" style='width:140px;height:40px;'class="btn shai_btn" value="筛选条件">
+                <?php
+            }else{
+                ?>
+                <input type="button" style='width:140px;height:40px;' class="btn add" value="添加">
+                <input type="button" style='width:140px;height:40px;'class="btn classify_btn" value="分类条件">
+                <?php
+                if($type=='0'){
+                    ?>
+                    <input type="button" class="btn xybtn" style='width:140px;height:40px;' value="切换横版">
+                    <?php
+                }else{
+                    ?>
+                    <input type="button" class="btn xybtn" style='width:140px;height:40px;' value="切换竖版">
+                    <?php
+                }
+                ?>
+                <?php
+            }
+        }else{
+            ?>
+            <input type="button" style='width:140px;height:40px;' class="btn add" value="添加">
+            <input type="button" style='width:140px;height:40px;'class="btn classify_btn" value="分类条件">
+            <?php
+            if($type=='0'){
+                ?>
+                <input type="button" class="btn xybtn" style='width:140px;height:40px;' value="切换横版">
+                <?php
+            }else{
+                ?>
+                <input type="button" class="btn xybtn" style='width:140px;height:40px;' value="切换竖版">
+                <?php
+            }
+            ?>
+            <?php
+        }
+        ?>
+
+
+        &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>总条数:</span><span style='color:red'><?php echo $cou;?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style='color:red'>已上线:</span><span style='color:red'><?php echo $onlie;?></span>
+
+    </div>
+    <div style='margin-top:15px;margin-bottom:15px;'>&nbsp;&nbsp;&nbsp;&nbsp;<span><?php if(!empty($_GET['top'])){echo $_GET['top'];echo '>';}?></span><span><?php if(!empty($_GET['son'])){echo $_GET['son'];}?></span></div>
+    <form action="">
+        <table width="800px" cellspacing="0" cellpadding="10" class="mtable center">
+            <input type="hidden" name="gid" value="<?php echo $gid?>">
+            <tr>
+                <th></th>
+                <th>编号</th>
+                <th>牌照方</th>
+                <th>资产ID</th>
+                <th>标题</th>
+                <th>语言</th>
+                <th>计费说明</th>
+                <th>编入时间</th>
+                <th>发布时间</th>
+                <!--<th>状态码</th>-->
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            <?php
+            //var_dump($list);
+            if(!empty($list)){
+                foreach($list as $l){?>
+                    <tr class='trData <?php switch($l['vstatus']){
+                        case 0:echo 'down';break;
+                        case 1:echo 'up';break;
+                    }?>'
+                    >
+                        <input type="hidden" value="<?php echo $l['cid']?>">
+                        <td><input type="checkbox" class="checkbox" name="id" value="<?php echo $l['cid']?>"></td>
+                        <td><input type="text" class="order" name="order" value="<?php echo $l['orders']?>" style="width:20px"></td>
+                        <td>
+                            <?php
+                            switch($l['cp']){
+                                case '642001':echo '华数';break;
+                                case 'BESTVOTT':echo '百视通';break;
+                                case 'ICNTV':echo '未来电视';break;
+                                case 'youpeng':echo '南传';break;
+                                case 'HNBB':echo '芒果';break;
+                                case 'CIBN':echo '国广';break;
+                                case 'YGYH':echo '银河';break;
+                            }
+                            ?>
+                        </td>
+                        <td><?php echo $l['vid']?></td>
+                        <td><?php echo $l['title']?></td>
+                        <td><?php echo $l['language']?></td>
+                        <td><?php echo '免费'?></td>
+                        <td><?php echo date('Y-m-d H:i',$l['vTime'])?></td>
+                        <td><?php if(!empty($l['updateTime'])){
+                                echo date('Y-m-d H:i',$l['updateTime']);
+                            }?></td>
+                        <!--<td><?php //echo $l['vstatus'];?></td>-->
+                        <td ><?php
+                            if($l['vstatus']==0){
+                                echo '已下线';
+                            }else if($l['vstatus']==1){
+                                echo '已上线';
+                            }
+                            ?>
+                            <span style='display:none;'><?php echo $l['vstatus'];?></span>
+                        </td>
+                        <td><a class='status_true'>上线&nbsp;</a><a class='status_false'>下线&nbsp;</a><a class='status_back'>&nbsp;撤回</a>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            }
+            ?>
+        </table>
+    </form>
+</div>
+<div style='width:70%;height:100px;float:left;'>
+    <input style='width:140px;height:40px;' value='保存排序' type='button' class='btn btn_order'>
+    <input style='width:140px;height:40px;' value='全选' type='button' class='btn allTrue'>
+    <input style='width:140px;height:40px;' value='反选' type='button' class='btn allNotTrue'>
+    <input style='width:140px;height:40px;' value='批量上线' type='button' class='btn allOnline'>
+    <input style='width:140px;height:40px;' value='批量下线' type='button' class='btn allNotOnline'>
+    <div><?php echo $page;?></div>
+</div>
+<script>
+    $('.selected').parent('li').css('background','#007af5');
+    function getData(obj)
+    {
+        var url = $(obj).attr('href');
+        /*$.ajax
+         ({
+         type:'get',
+         url:url,
+         success:function(data)
+         {
+         console.log(data);
+         }
+         })*/
+    }
+
+    $('a').css('text-decoration','none');
+    <?php
+     if(!empty($_GET['leftGuideId'])){
+         echo "index(".$_GET['leftGuideId'].");";
+         }else{
+         echo "index(0)";
+     }
+    ?>
+
+    function index(id)
+    {
+        var maxTest = $('.test').length;
+        for (var i = 0; i < maxTest; i++) {
+            if (id == 0) {
+                if (i > id) {
+                    if ($('.test').eq(i).hasClass('active')) {
+                        $('.test').eq(i).removeClass('active');
+                        $('.test').eq(i).parent().find('ul').hide();
+                        var aa = $('.test').eq(i).find('.jiaoFlag').text();
+                        if (aa == '▼') {
+                            $('.test').eq(i).find('.jiaoFlag').text('▲');
+                        } else {
+                            $('.test').eq(i).find('.jiaoFlag').text('▼');
+                        }
+                    } else {
+                        $('.test').eq(i).addClass('active');
+                        $('.test').eq(i).parent().find('ul').show();
+                        var aa = $('.test').eq(i).find('.jiaoFlag').text();
+                        if (aa == '▼') {
+                            $('.test').eq(i).find('.jiaoFlag').text('▲');
+                        } else {
+                            $('.test').eq(i).find('.jiaoFlag').text('▼');
+                        }
+                    }
+                }
+            } else {
+                if (i != id) {
+                    if ($('.test').eq(i).hasClass('active')) {
+                        $('.test').eq(i).removeClass('active');
+                        $('.test').eq(i).parent().find('ul').hide();
+                        var aa = $('.test').eq(i).find('.jiaoFlag').text();
+                        if (aa == '▼') {
+                            $('.test').eq(i).find('.jiaoFlag').text('▲');
+                        } else {
+                            $('.test').eq(i).find('.jiaoFlag').text('▼');
+                        }
+                    } else {
+                        $('.test').eq(i).addClass('active');
+                        $('.test').eq(i).parent().find('ul').show();
+                        var aa = $('.test').eq(i).find('.jiaoFlag').text();
+                        if (aa == '▼') {
+                            $('.test').eq(i).find('.jiaoFlag').text('▲');
+                        } else {
+                            $('.test').eq(i).find('.jiaoFlag').text('▼');
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    function test(obj)
+    {
+        if($(obj).hasClass('active')){
+            $(obj).removeClass('active');
+            $(obj).parent().find('ul').hide();
+            var aa = $(obj).find('.jiaoFlag').text();
+            if(aa == '▼' ){
+                $(obj).find('.jiaoFlag').text('▲');
+            }else{
+                $(obj).find('.jiaoFlag').text('▼');
+            }
+        }else{
+            $(obj).addClass('active');
+            $(obj).parent().find('ul').show();
+            var aa = $(obj).find('.jiaoFlag').text();
+            if(aa == '▼' ){
+                $(obj).find('.jiaoFlag').text('▲');
+            }else{
+                $(obj).find('.jiaoFlag').text('▼');
+            }
+        }
+    }
+
+    $('.down').css('color','red');
+    $('.checkbox').click(function()
+    {
+        var flag = $(this).attr('flag');
+        if(flag && flag==1){
+            $(this).attr('flag','0');
+        }else{
+            $(this).attr('flag','1');
+        }
+    })
+    $('.allTrue').click(function()
+    {
+        $(".mtable :checkbox").prop("checked", true);
+        $(".mtable :checkbox").attr('flag','1');
+    })
+
+    $('.allNotTrue').click(function()
+    {
+        $(".mtable :checkbox").each(function ()
+        {
+            $(this).prop("checked", !$(this).prop("checked"));
+            //$(".mtable :checkbox").attr('flag','1');
+            if($(this).prop("checked")){
+                $(this).attr('flag','1');
+            }else{
+                $(this).attr('flag','0');
+            }
+        })
+    })
+
+    $('.allOnline').click(function()
+    {
+        var maxTr = $('.trData').length;
+        for(var i = 0; i < maxTr ; i++){
+            var flag = $('.trData').eq(i).children('td').eq(0).children('input').attr('flag');
+            if(flag == 1){
+                var id = $('.trData').eq(i).children('td').eq(0).children('input').val();
+                var status = 1;
+                var mid = "<?php echo $this->mid;?>";
+                $.ajax
+                ({
+                    type:'get',
+                    url:'/version/site/changeStatus/mid/'+mid+'/id/'+id+'/status/'+status,
+                    success:function(data)
+                    {
+                        if(data == 200){
+                            window.location.reload();
+                        }
+
+                    }
+                })
+            }
+        }
+        alert('批量操作成功！')
+    })
+
+    $('.allNotOnline').click(function()
+    {
+        var maxTr = $('.trData').length;
+        for(var i = 0; i < maxTr ; i++){
+            var flag = $('.trData').eq(i).children('td').eq(0).children('input').attr('flag');
+            //alert(flag);return false;
+            if(flag == 1){
+                var id = $('.trData').eq(i).children('td').eq(0).children('input').val();
+                var status = 0;
+                var mid = "<?php echo $this->mid;?>";
+                $.ajax
+                ({
+                    type:'get',
+                    url:'/version/site/changeStatus/mid/'+mid+'/id/'+id+'/status/'+status,
+                    success:function(data)
+                    {
+                        if(data == 200){
+                            window.location.reload();
+                        }
+
+                    }
+                })
+            }
+        }
+        alert('批量操作成功！');
+    })
+
+
+    $('.status_true').click(function()
+    {
+        var status = 1;
+        var id = $(this).parent().parent('tr').children('input').val();
+        var mid = "<?php echo $this->mid;?>";
+        var $_this = $(this);
+        $.ajax
+        ({
+            type:'get',
+            url:'/version/site/changeStatus/mid/'+mid+'/id/'+id+'/status/'+status,
+            success:function(data)
+            {
+                if(data == 200){
+                    $_this.parent().parent().children('td').eq(8).text('已上线');
+                    //$_this.parent().parent().removeClass('down');
+                }
+                $_this.parent().find('.status_back').show();
+            }
+        })
+    })
+
+    $('.status_false').click(function()
+    {
+        var status = 0;
+        var id = $(this).parent().parent('tr').children('input').val();
+        var mid = "<?php echo $this->mid;?>";
+        var $_this = $(this);
+        $.ajax
+        ({
+            type:'get',
+            url:'/version/site/changeStatus/mid/'+mid+'/id/'+id+'/status/'+status,
+            success:function(data)
+            {
+                if(data == 200){
+                    $_this.parent().parent().children('td').eq(8).text('已下线');
+                }
+                $_this.parent().find('.status_back').show();
+            }
+        })
+    })
+
+    $('.status_back').click(function()
+    {
+        var status = $(this).parent().parent().children('td').eq(8).text();
+        if(status == '已上线' || status == '上线'){
+            status=0;
+        }else if(status == '已下线' || status == '下线'){
+            status=1;
+        }
+        var id = $(this).parent().parent('tr').children('input').val();
+        var mid = "<?php echo $this->mid;?>";
+        var $_this = $(this);
+        $.ajax
+        ({
+            type:'get',
+            url:'/version/site/changeStatus/mid/'+mid+'/id/'+id+'/status/'+status,
+            success:function(data)
+            {
+                if(data == 200 && status == 0){
+                    $_this.parent().parent().children('td').eq(8).text('已下线');
+                    //$_this.parent().parent().removeClass('down');
+                }else if(data == 200 && status == 1){
+                    $_this.parent().parent().children('td').eq(8).text('已上线');
+                }
+            }
+        })
+    })
+
+    $('.dele').click(function(){
+        var id = $(this).attr('des');
+        if(confirm("删除会清空数据！！")){
+            $.post("<?php echo $this->get_url('site','delsite')?>",{id:id},function(d){
+                if(d.code==200){
+                    alert(d.msg);
+                    location.reload();
+                }else{
+                    alert(d.msg)
+                }
+            },'json')
+        }
+    })
+    $('.edit').click(function(){
+        var id = $(this).attr('des');
+        $.post("<?php echo $this->get_url('site','edit')?>",{id:id},function(d){
+            if(d.code == 200){
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['530px', '330px'], //宽高
+                    content: d.msg
+                })
+            }else{
+                layer.alert(d.msg,{icon:0});
+            }
+        },'json')
+    })
+    $('.noadd').click(function(){
+        var id = $(this).parent().parent().children('input').val();
+        var flag = $(this).html();
+        if(flag=='不编入'){
+            flag = 1;
+        }else{
+            flag=0
+        }
+        $.post("<?php echo $this->get_url('site','noadd')?>",{id:id,flag:flag},function(d){
+            location.reload();
+        })
+    })
+
+    $('.add').click(function(){
+        var my = layer.msg('加载中', {icon: 16,shade:0.3});
+        $.getJSON('<?php echo $this->get_url('site','siteadd')?>',function(d){
+            if(d.code == 200){
+                layer.close(my);
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['1030px', '650px'], //宽高
+                    content: d.msg
+                })
+            }else{
+                layer.alert(d.msg,{icon:0});
+            }
+        })
+    })
+
+    $('.classify_btn').click(function(){
+        var gid = "<?php echo $_REQUEST['nid']?>";
+        $.getJSON('<?php echo $this->get_url('site','classify')?>',{gid:gid},function(d){
+            if(d.code == 200){
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['1030px', '650px'], //宽高
+                    content: d.msg
+                })
+            }else{
+                layer.alert(d.msg,{icon:0});
+            }
+        })
+    })
+
+    $('.xybtn').click(function(){
+        var id = $('input[name=gid]').val();
+        var flag = $(this).val();
+        if(flag=='切换横版'){
+            flag = 1;
+        }else{
+            flag = 0;
+        }
+        $.post("<?php echo $this->get_url('site','change')?>",{id:id,flag:flag},function(d){
+            console.log(d);
+            if(d.code==200){
+                alert(d.msg);
+                location.reload();
+            }else{
+                alert(d.msg);
+            }
+        },'json')
+    })
+
+    $('.btn_order').click(function(){
+        var ids = {};
+        var orders={};
+        var els =document.getElementsByName("id");
+        for (var i = 0, j = els.length; i < j; i++){
+            ids[i]=els[i].value;
+        }
+        var order =document.getElementsByName("order");
+        for (var i = 0, j = order.length; i < j; i++){
+            orders[i]=order[i].value;
+        }
+        $.post("<?php echo $this->get_url('site','order')?>",{id:ids,order:orders},function(d){
+            location.reload();
+        })
+    })
+
+    $('.guide').click(function(){
+        var gid = $(this).attr('gid');
+        $.getJSON('<?php echo $this->get_url('site','guide')?>', {gid: gid}, function (d) {
+            if (d.code == 200) {
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['630px', '506px'], //宽高
+                    content: d.msg
+                })
+            } else {
+                layer.alert(d.msg, {icon: 0});
+            }
+        });
+    })
+
+    $('.shai_btn').click(function(){
+        var gid = "<?php echo $_REQUEST['nid'];?>";
+        $.getJSON('<?php echo $this->get_url('site','station')?>', {gid: gid}, function (d) {
+            if (d.code == 200) {
+                layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['830px', '200px'], //宽高
+                    content: d.msg
+                })
+            } else {
+                layer.alert(d.msg, {icon: 0});
+            }
+        });
+    })
+
+
+
+</script>
+

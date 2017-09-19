@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adi:ADI2 xmlns="http://www.cablelabs.com/VODSchema/default" xmlns:adi="http://www.cablelabs.com/VODSchema/adi"
+						 xmlns:vod="http://www.cablelabs.com/VODSchema/vod">
+
+
+	<adi:OpenGroupAsset type="VODRelease" product="VOD">
+		<vod:VODRelease providerID="642001" providerType="2" assetID="3001192004" updateNum="" groupAsset="Y" serialNo="20121208">
+			<adi:AssetLifetime startDateTime="2015-06-04" endDateTime="2065-06-04"/>
+		</vod:VODRelease>
+	</adi:OpenGroupAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192004" type="Title" product="VOD">
+		<vod:Title providerID="642001" assetID="3001192004" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-04" endDateTime="2065-06-04"/>
+			<vod:TitleFull><![CDATA[【娱乐星天地】人生如戏 董洁首度开口正面离婚话题]]></vod:TitleFull>
+			<vod:ShowType>News</vod:ShowType>
+			<vod:SummaryMedium><![CDATA[]]></vod:SummaryMedium>
+			<vod:SummaryShort><![CDATA[娱乐短片]]></vod:SummaryShort>
+			<vod:TitleBrief><![CDATA[]]></vod:TitleBrief>
+			<vod:Character><![CDATA[]]></vod:Character>
+			<vod:SourceType></vod:SourceType>
+			<vod:Language><![CDATA[国语]]></vod:Language>
+			<vod:Keyword><![CDATA[【娱乐星天地】人生如戏 董洁首度开口正面离婚话题]]></vod:Keyword>
+			<vod:Effect><![CDATA[]]></vod:Effect>
+			<vod:Event><![CDATA[]]></vod:Event>
+			<vod:Site><![CDATA[]]></vod:Site>
+			<vod:Items><![CDATA[1]]></vod:Items>
+			<vod:SourceInfo><![CDATA[]]></vod:SourceInfo>
+			<vod:RunTime><![CDATA[0]]></vod:RunTime>
+			<vod:PlayTime><![CDATA[2015-06-04]]></vod:PlayTime>
+			<vod:Comments><![CDATA[]]></vod:Comments>
+			<vod:IsAdvertise>0</vod:IsAdvertise>
+		</vod:Title>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192004" type="CategoryPath" product="VOD">
+		<vod:CategoryPath mso="" providerID="642001" assetID="3001192004" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-04" endDateTime="2065-06-04"/>
+			<vod:Classification><![CDATA[视频类节目]]></vod:Classification>
+			<vod:Category><![CDATA[娱乐短片]]></vod:Category>
+								</vod:CategoryPath>
+	</adi:AddMetadataAsset>
+	<adi:AddMetadataAsset groupProviderID="642001" groupAssetID="3001192004" type="Copyright" product="VOD">
+		<vod:Copyright providerID="642001" assetID="3001192004" updateNum="1">
+			<adi:AssetLifetime startDateTime="2015-06-04" endDateTime="2065-06-04"/>
+			<vod:LicenseType><![CDATA[]]></vod:LicenseType>
+			<vod:PublicationDate><![CDATA[2015-06-04]]></vod:PublicationDate>			
+			<vod:CopyName><![CDATA[]]></vod:CopyName>
+			<vod:VideoLicense><![CDATA[]]></vod:VideoLicense>
+			<vod:PublishNo><![CDATA[]]></vod:PublishNo>
+			<vod:AuthorserilNo><![CDATA[]]></vod:AuthorserilNo>
+			<vod:CopyIdea><![CDATA[]]></vod:CopyIdea>
+			<vod:CopyType><![CDATA[1]]></vod:CopyType>
+			<vod:CopyLicenser><![CDATA[]]></vod:CopyLicenser>
+			<vod:CopyLicense><![CDATA[]]></vod:CopyLicense>
+			<vod:CopySerilNo><![CDATA[]]></vod:CopySerilNo>
+			<vod:OriginalLicenseCompany><![CDATA[]]></vod:OriginalLicenseCompany>
+			<vod:TransferLicenseCompany><![CDATA[]]></vod:TransferLicenseCompany>
+			<vod:Transfer3rd><![CDATA[0]]></vod:Transfer3rd>
+			<vod:TransferAgain><![CDATA[0]]></vod:TransferAgain>
+			<vod:CountryNo><![CDATA[]]></vod:CountryNo>
+		</vod:Copyright>
+	</adi:AddMetadataAsset>
+	<adi:AcceptContentAsset type="Video" metadataOnly="N" fileName="【娱乐星天地】人生如戏 董洁首度开口正面离婚话题_15_ts(h264+mp2)-1900(1600+128)-720576" 
+			fileSize="29653428" mD5CheckSum="6ed7e78e5e1da98e37b8cdf2abf87751">
+		<vod:Video providerID="642001" assetID="3001192016" updateNum="1" fileName="【娱乐星天地】人生如戏 董洁首度开口正面离婚话题_15_ts(h264+mp2)-1900(1600+128)-720576" 
+				fileSize="29653428" mD5CheckSum="6ed7e78e5e1da98e37b8cdf2abf87751" transferContentURL="ftp://icds_ope:0wlonewave@125.210.139.136:21/icms_icds_pub04/opnewsps04/Video/2015/06/04/21/20150604201045_yulexingtiandirenshengruxidongjieshoudukaikouzhengmianlihunhuati_1156435464_1156437181.ts" 
+				encodingProfile="video/H264">
+			<adi:AssetLifetime startDateTime="2015-06-04" endDateTime="2065-06-04"/>
+			<vod:Duration><![CDATA[125]]></vod:Duration>
+			<vod:Bitrate><![CDATA[1600000]]></vod:Bitrate>
+			<vod:Numberofframes><![CDATA[2]]></vod:Numberofframes>
+			<vod:FrameHeight><![CDATA[576]]></vod:FrameHeight>
+			<vod:FrameWidth><![CDATA[720]]></vod:FrameWidth>
+			<vod:AspectRatio><![CDATA[]]></vod:AspectRatio>
+			<vod:FrameRate><![CDATA[25]]></vod:FrameRate>
+			<vod:Brightness><![CDATA[]]></vod:Brightness>
+			<vod:Contrast><![CDATA[]]></vod:Contrast>
+			<vod:FileType><![CDATA[1]]></vod:FileType>
+			<vod:Usage><![CDATA[1]]></vod:Usage>
+			<vod:ServiceType><![CDATA[10]]></vod:ServiceType>
+			<vod:MimeType><![CDATA[1]]></vod:MimeType>
+			<vod:HDFlag><![CDATA[1]]></vod:HDFlag>
+		</vod:Video>
+	</adi:AcceptContentAsset>
+	<adi:AssociateContent type="Video" effectiveDate="" groupProviderID="642001"
+			groupAssetID="3001192004" providerID="642001" assetID="3001192016"/>
+</adi:ADI2>

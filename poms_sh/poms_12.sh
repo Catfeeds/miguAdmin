@@ -1,0 +1,3 @@
+curl -m 40000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Series/SeriesOther5" &
+curl -m 40000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Series/SeriesOther6" &
+curl -m 40000 "127.0.0.1:8080/mobile/poms/ReadDirQueue?path=gwPomsXmlAll/poms20170902/Series/SeriesOther7" &

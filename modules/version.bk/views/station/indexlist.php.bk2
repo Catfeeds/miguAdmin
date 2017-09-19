@@ -1,0 +1,268 @@
+<style>		
+		ul{list-style:none;}
+		ul,li{margin:0;padding:0;}
+		#options{border-left:1px solid #999;border-bottom:1px solid #999;height:40px;}
+		#options li{background-color:#ccc;height:39px;line-height:38px;padding:0 25px;float:left;border-top:1px solid #999;border-right:1px solid #999;cursor:pointer;}
+		#options li.current_options{background-color:#fff;height:40px;}
+		#card{clear:both;}
+		#card li{padding:0 20px;border-bottom:1px solid #999;border-top:none;display:none;}
+		#card li.current_card{display:block;}
+		.search{float:left;padding:10px}
+		td ,th {text-align:center}
+		.page a {border:1px solid #999;text-decoration:none;padding:4px 5px;}
+		.page{padding:10px;}
+		.current_card a{text-decoration:none}
+	</style>
+<?php
+    $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
+    $adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
+    $adminLeftOne = !empty($_GET['adminLeftOne'])?$_GET['adminLeftOne']:'';
+    $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
+?>
+<div style='padding: 5px 0px 5px 5px;'>
+    <span><?php echo $adminLeftOneName;echo '>';?></span>
+    <span><?php echo $adminLeftTwoName;?></span>
+</div>
+	<div>
+		<ul id="options">
+			<li class="current_options">元数据</li>
+			<li>站点</li>
+			<li>屏幕</li>
+                        <li>消息</li>
+			<li>壁纸</li>
+		</ul>
+		<form action="" method="" style="border-left:1px solid #999;border-right:1px solid #999;">
+			<div style="height:39px;padding:2px">
+				<!--<div class="search"><label>查用户</label><input type="text" name="user" value="<?php echo !empty($_GET['user'])?$_GET['user']:''?>" class="form-input w100"></div>-->
+				
+				<div class="search"><label>查任务名称</label><input type="text" name="name" value="<?php echo !empty($_GET['name'])?$_GET['name']:''?>" class="form-input w100"></div>
+				
+				<div class="search"><label>牌照方</label>
+					<select class="form-input w100" id='cp'>
+						<option value="0">请选择</option>
+						<option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='642001'){echo "selected=selected"; } ?> value="642001">华数</option>
+						<option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='BESTVOTT'){echo "selected=selected"; } ?> value="BESTVOTT">百视通</option>
+						<option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='HNBB'){echo "selected=selected"; } ?> value="HNBB">芒果</option>
+						<option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='YGYH'){echo "selected=selected"; } ?> value="YGYH">银河</option>
+						<option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='ICNTV'){echo "selected=selected"; } ?> value="ICNTV">未来电视</option>
+						<option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='youpeng'){echo "selected=selected"; } ?> value="youpeng">南传</option>
+						<option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='CIBN'){echo "selected=selected"; } ?> value="CIBN">国广</option>
+					</select>
+				</div>
+				
+				<div class="search"><label>流模式</label>
+					<select class="form-input w100" id='type'>
+						<option <?php $cp=!empty($_GET['type'])?$_GET['type']:'';if($cp=='0'){echo "selected=selected"; } ?> value="0">请选择</option>
+						<option <?php $cp=!empty($_GET['type'])?$_GET['type']:'';if($cp=='1'){echo "selected=selected"; } ?> value="1">一审</option>
+						<option <?php $cp=!empty($_GET['type'])?$_GET['type']:'';if($cp=='2'){echo "selected=selected"; } ?> value="2">二审</option>
+						<option <?php $cp=!empty($_GET['type'])?$_GET['type']:'';if($cp=='3'){echo "selected=selected"; } ?> value="3">三审</option>
+						<option <?php $cp=!empty($_GET['type'])?$_GET['type']:'';if($cp=='4'){echo "selected=selected"; } ?> value="4">四审</option>
+						<option <?php $cp=!empty($_GET['type'])?$_GET['type']:'';if($cp=='5'){echo "selected=selected"; } ?> value="5">五审</option>
+					</select>
+				</div>
+				<input type="button" value="查询" class="btn search_btn">
+				<a class="btn add_btn">新建工作流</a>
+			</div>
+		<ul id="card">
+			<li class="current_card">
+				<table class="mtable" cellpadding="10" cellspacing="0" width="100%">
+					<tr>
+						<th>时间</th>
+						<th>任务名称</th>
+						<th>牌照方</th>
+						<th>流模式</th>
+						<th>相关用户</th>
+						<th>操作</th>
+					</tr>
+					<?php
+						if(!empty($list)){
+							foreach($list as $k=>$v){
+								?>
+								<tr>
+									<input type="hidden" name="id" value="<?php echo $v['id']?>">
+									<td><?php echo date('Y-m-d h:i:s',$v['addTime'])?></td>
+									<td><?php echo $v['name']?></td>
+									<td><?php
+										switch($v['cp']){
+											case '642001':echo '华数';break;
+											case 'BESTVOTT':echo '百视通';break;
+											case 'ICNTV':echo '未来电视';break;
+											case 'youpeng':echo '南传';break;
+											case 'HNBB':echo '芒果';break;
+											case 'CIBN':echo '国广';break;
+											case 'YGYH':echo '银河';break;
+										}
+										?></td>
+									<td><?php echo $v['type']?>审</td>
+									<td><?php
+                                       					    echo VerGuideManager::String($v['user']);
+                                                                         /*echo VerGuideManager::String($v['user'])*/?></td>
+									<td><a class='edit'>编辑</a>&nbsp;<a class="del">删除</a></td>
+								</tr>
+							<?php
+							}
+						}
+					?>
+				</table>
+			</li>
+			<!--2-->
+			<li class="second"></li>
+			<!--3-->
+			<li class="third"></li>
+		        <li class="forth"></li>
+			<li class="fifth"></li>	
+		</ul>
+		</form>
+		<script>
+			
+			var opList = document.getElementById('options').getElementsByTagName('li');
+			var cardList = document.getElementById('card').getElementsByTagName('li');
+                        console.log(cardList)
+			for(var i=0; i<opList.length; i++){
+				(function(i){
+					opList[i].onclick = function(){
+						for(var j=0; j<opList.length; j++){
+							opList[j].className = "";
+						}
+						
+						this.className = "current_options";
+						
+						for(var j=0; j<cardList.length; j++){
+							cardList[j].style.display = "none";
+						}
+						
+						cardList[i].style.display = 'block';
+						getData();
+					}
+				
+				})(i)
+				
+			}
+		</script>
+	</div>
+<script>
+       $(function(){
+          var flag = "<?php echo !empty($_REQUEST['flag'])?$_REQUEST['flag']:'1';?>";
+	      $('#options').children().removeClass('current_options');
+	      $('#options').children().eq(1).removeClass('current_options');
+	      $('#options').children().eq(2).removeClass('current_options');
+          if(flag=='1'){
+              $('#options').children().eq(0).addClass('current_options');
+          }else if(flag=='2'){
+	      $('#options').children().eq(1).addClass('current_options');
+          }else if(flag=='3'){
+              $('#options').children().eq(2).addClass('current_options');
+          }else if(flag=='4'){
+	      $('#options').children().eq(3).addClass('current_options');
+	  }else if(flag=='5'){
+	      $('#options').children().eq(4).addClass('current_options');
+	  }
+       })
+       $(document).on('click','.edit',function(){
+		var id = $(this).parent().parent().children('input').val();
+		var mid = "<?php echo $_REQUEST['mid']?>";
+		window.location.href="/version/station/workupdate?id="+id+"&mid="+mid;
+	})
+	$('.add_btn').click(function(){
+		var current_options = $('.current_options').html();
+		if(current_options=='元数据'){
+			var flag=1;
+		}else if(current_options=='站点'){
+			var flag=2;
+		}else if(current_options=='屏幕'){
+			var flag=3;
+		}else if(current_options=='消息'){
+			var flag=4;
+		}else if(current_options=='壁纸'){
+			var flag=5;
+		}
+		var mid=<?php echo $_REQUEST['mid']?>;
+		window.location.href="/version/station/workadd?mid="+mid+"&flag="+flag;
+	})
+        $('.search_btn').click(function(){
+            getData();
+        })
+	//$('.del').click(function(){
+	$(document).on('click','.del',function(){
+		var id = $(this).parent().parent().children('input').val();
+		$.post("<?php echo $this->get_url('station','workdel')?>",{id:id},function(d){
+		//	location.reload();
+                
+		})
+                $(this).parent().parent().remove();
+	})
+
+	function getData(){
+		var current_options = $('.current_options').html();
+		if(current_options=='元数据'){
+			var flag=1;
+		}else if(current_options=='站点'){
+			var flag=2;
+		}else if(current_options=='屏幕'){
+			var flag=3;
+		}else if(current_options=='消息'){
+			var flag=4;
+		}else if(current_options=='壁纸'){
+			var flag=5;
+		}
+		//ajax(flag);
+                var cp = $('#cp').val();
+		var user = $('input[name=user]').val();
+		var type = $('#type').val();
+		var name = $('input[name=name]').val();
+		var mid=<?php echo $_REQUEST['mid']?>;
+		var url ="/version/station/getData?mid=<?php echo $this->mid;?>&flag="+flag+"&cp="+cp+"&type="+type+"&name="+name+"&user="+user;
+		ajax(url,flag);
+
+	}
+
+	function ajax(url,flag){
+		$.ajax
+		({
+			type:'post',
+			url:url,
+			dataType:'json',
+			success:function(data)
+			{
+				console.log(data);
+				$('.current_card').empty();
+				$('.second').empty();
+				$('.third').empty();
+				$('.forth').empty();
+				$('.fifth').empty();
+				list = data.list;
+				var li = '<table class="mtable" cellpadding="10" cellspacing="0" width="100%"><tr><th>时间</th><th>任务名称</th><th>牌照方</th><th>流模式</th><th>相关用户</th><th>操作</th></tr>';
+				$.each(list, function(index, array) { //遍历返回json
+					switch(array['cp']){
+						case '642001':array['cp']='华数';break;
+						case 'BESTVOTT':array['cp']='百视通';break;
+						case 'ICNTV':array['cp']='未来电视';break;
+						case 'youpeng':array['cp']='南传';break;
+						case 'HNBB':array['cp']='芒果';break;
+						case 'CIBN':array['cp']='国广';break;
+						case 'YGYH':array['cp']='银河';break;
+					}
+					li +="<tr><input type='hidden' name='id' value="+array['id']+"><td>"+getLocalTime(array['addTime'])+"</td><td>"+array['name']+"</td><td>"+array['cp']+"</td><td>"+array['type']+"</td><td>"+array['user']+"</td><td><a class='edit'>编辑</a>&nbsp;<a class='del'>删除</a></td></tr>";
+				});
+				li +='</table>';
+                                console.log(typeof(flag));
+                                if(flag==1){
+				$('.current_card').append(li);
+                                }else if(flag==2){
+				$('.second').append(li);
+
+                                }else if(flag==3){
+				$('.third').append(li);
+                                }else if(flag==4){
+                                $('.forth').append(li);
+                                }else if(flag==5){
+                                $('.fifth').append(li);
+                                }
+			}
+		})
+	}
+
+	function getLocalTime(nS) {
+		return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+	}
+</script>
