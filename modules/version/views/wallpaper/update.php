@@ -133,8 +133,10 @@
 
     function show(){
         if($(".wall").val()==1){
+	    $(".city").show();
             $(".time").show();
         }else{
+	    $(".city").hide();
             $(".time").hide();
         }
     }
@@ -292,6 +294,21 @@
         }
         G.type=$(".wall").val();
 	G.pic_time=pic_time;
+	var code=[];
+	$('input[name="code"]:checked').each(function(){
+            code.push($(this).val());
+        })
+        G.Code=code;
+        if($(".wall").val()==1&&empty(G.Code)){
+            layer.alert('请选择省市',{icon:0});
+            return false;
+        }else if($(".wall").val()==1&&code.length>0){
+            //code.push("0-0");
+            G.Code=code;
+        }else{
+            code=["0-0"];
+            G.Code=code;
+        }
         //console.log(G);return false;
 	var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
 	//console.log(G);return false;
@@ -300,10 +317,13 @@
             if(d == 200){
                 alert('修改成功');
                 window.history.go(-1);
-            }else{
+            }else if(d==500){
                 //layer.close(load);
                 layer.alert(d.msg);
-            }
+            }else{
+		alert("错误！");
+		loaction.reload();
+	    }
         },'json')
     });
 
@@ -335,7 +355,7 @@
     }
 
 	function getcity(){
-        if($("#gid option:selected").val()!=0){
+        if($("#gid option:selected").val()!=0&&$(".wall").val()>0){
             var stationId=$("#gid option:selected").val();
 	    var id="<?php echo $_REQUEST['id'];?>";
             $(".city").children().eq(1).html("");

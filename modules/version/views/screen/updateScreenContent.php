@@ -303,9 +303,15 @@
                               
 							  
 							  
-                }else{
+                }
+		else{
+		if($screenContent[0]['width']<=10){
+			echo "<div class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']."' '>
+                                <input type='file' id='upload_file_new'>";
+		}else{
                     echo "<div class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']."' style='width:".$screenContent[0]['width']."px;height:".$screenContent[0]['height']."px;'>
                                 <input type='file' id='upload_file_new'>";
+		}
                        if($screenContent[0]['height'] == 1){
                     echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']." oldPic' width=".$screenContent[0]['width']." height=".$screenContent[0]['height'].">";
                 }else{

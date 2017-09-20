@@ -168,7 +168,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 	    <th>省份</th>
 	    <th>市</th>
             <th>缩略图</th>
-            <th>有效期</th>
+            <th>有效期(0点~0点)</th>
             <th>审核</th>
             <th>操作</th>
         </tr>

@@ -116,6 +116,15 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         </div>
     </div>
          </td></tr>
+<tr>
+        <td align="center">壁纸类型:</td>
+        <td>
+            <select class = "form-input w200 wall" onchange="show()">
+                <option value="0">普通壁纸</option>
+                <option value="1">强制壁纸</option>
+            </select>
+        </td>
+</tr>
 <tr><td width="100" align="center">
     <div>
         <div>站点:</div>
@@ -155,15 +164,6 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 	<td align="center">省市:</td>
 	<td></td>
 </tr>
-<tr>
-        <td align="center">壁纸类型:</td>
-        <td>
-            <select class = "form-input w200 wall" onchange="show()">
-                <option value="0">普通壁纸</option>
-                <option value="1">强制壁纸</option>
-            </select>
-        </td>
-    </tr>
     <tr style="display: none;" class="time">
         <td align="center">选择时间：</td>
         <td>
@@ -246,6 +246,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     });
 
     function show(){
+	getcity();
         if($(".wall").val()==1){
             $(".time").show();
         }else{
@@ -320,7 +321,6 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         G.pic = pic_false;
         G.title  = $('#title').val();
         G.gid =  $("#gid option:selected").val();
-	//alert(G.gid);return false;
 	G.start=$("#first").val();
         G.end=$("#end").val();
         G.type=$(".wall").val();
@@ -328,11 +328,17 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 		code.push($(this).val());
 	})
 	G.Code=code;
-        //console.log(G);return false;
-	if(empty(G.Code)){
+	if($(".wall").val()==1&&empty(G.Code)){
             layer.alert('请选择省市',{icon:0});
             return false;
-        }
+        }else if($(".wall").val()==1&&code.length>0){
+		//code.push("0-0");
+		G.Code=code;
+	}else{
+		code=["0-0"];
+		G.Code=code;
+	}
+	//console.log(G);return false;
         if(empty(G.title)){
             layer.alert('标题不能为空',{icon:0});
             return false;
@@ -387,7 +393,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 	window.history.go(-1);
    })
 	function getcity(){
-		if($("#gid option:selected").val()!=0){
+		if($("#gid option:selected").val()!=0&&$(".wall").val()==1){
 			var stationId=$("#gid option:selected").val();
 			$(".city").children().eq(1).html("");
 			$.getJSON("/version/wallpaper/getinfo.html?mid=1",{stationId:stationId},function(data){
