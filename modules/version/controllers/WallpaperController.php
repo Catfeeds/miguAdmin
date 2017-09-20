@@ -222,6 +222,8 @@ class WallpaperController extends VController{
 	//var_dump($gid);die;
 	$start=!empty($_POST['start'])?strtotime($_POST['start']):0;
 	$end=!empty($_POST['end'])?strtotime($_POST['end']):0;
+	//var_dump($_POST['Code']);die;
+	if($_POST['Code']!="0-0"){
 	for($i=0;$i<count($_POST['Code']);$i++){
             $tmp=$_POST['Code'][$i];
             $arr=explode("-",$tmp);
@@ -236,7 +238,7 @@ class WallpaperController extends VController{
             if($data[$i]!=false) {
                 echo 321;die;
             }
-        }
+        }}
 		$model = new VerWall();
         	$model->title = trim($_POST['title']);
         	$Code=$_REQUEST['Code'];//选择的Code
@@ -278,8 +280,8 @@ class WallpaperController extends VController{
     }
 
     public function actionDoUpdate()
-    {
-	//var_dump($_POST);die;
+    {	
+	$gid=$_POST['gid'];
         $id = trim($_POST['id']);
         $title = trim($_POST['title']);
         $thum = trim($_POST['thum']);
@@ -290,6 +292,22 @@ class WallpaperController extends VController{
 	$pic_time=!empty($_POST['pic_time'])?$_POST['pic_time']:time();
 	$startTime=!empty($_POST['start'])?strtotime($_POST['start']):0;
         $endTime=!empty($_POST['end'])?strtotime($_POST['end']):0;
+	$Code=$_POST['Code'];
+        if($Code!="0-0"){
+            for($i=0;$i<count($_POST['Code']);$i++){
+                $tmp=$_POST['Code'][$i];
+                $arr=explode("-",$tmp);
+                $cCode=$arr[1];//市code
+                $pCode=$arr[0];//省份code
+                $sql="select id from yd_ver_wall where id not in($id) and gid=$gid and province like '%$pCode%' and city like '%$cCode%' and type=1  and ((endTime>={$endTime} and startTime<={$startTime}) or (startTime<={$endTime} and startTime>={$startTime}) or (endTime>={$startTime} and endTime<={$endTime}))";
+                $data[]=SQLManager::queryRow($sql);
+            }
+            for($i=0;$i<count($data);$i++){
+                if($data[$i]!=false) {
+                    echo 321;die;//存在相同时间壁纸
+                }
+            }
+        }
         $type=$_POST['type'];//壁纸类型
         $res=VerWall::model()->findByPk($id);
         $pic_t=$res->pic;
@@ -316,9 +334,17 @@ class WallpaperController extends VController{
         //$pic = 'http://117.131.17.46:8086/file/' . $pic_true;
         //$pic = 'http://pic-portal-v3.itv.cmvideo.cn:8083/file/' . $pic_true;
         //$pic = 'http://117.144.248.58:8082/file/' . $pic_true;
-        $gid = trim($_POST['gid']);
+        //$gid = trim($_POST['gid']);
         $addTime = time();
-        $sql_set = "update yd_ver_wall set `title`='$title',`thum`='$pic_thum',`pic`='$pic',`gid`=$gid,`addTime`=$addTime,`flag`=0 ,`startTime`=$startTime,`endTime`=$endTime,`type`=$type";
+	for($i=0;$i<count($Code);$i++){
+            $tmp=$Code[$i];
+            $arr=explode("-",$tmp);
+            $cityCode[]=$arr[1];//市code
+            $provinceCode[]=$arr[0];//省份code
+        }
+        $c=join("/",$cityCode);
+        $p=join("/",$provinceCode);
+        $sql_set = "update yd_ver_wall set `province`='$p',`city`='$c', `title`='$title',`thum`='$pic_thum',`pic`='$pic',`gid`=$gid,`addTime`=$addTime,`flag`=0 ,`startTime`=$startTime,`endTime`=$endTime,`type`=$type";
         $sql_where = " where id=$id";
         $sql = $sql_set.$sql_where;
         $res = SQLManager::execute($sql);

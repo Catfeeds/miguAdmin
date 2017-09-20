@@ -117,7 +117,12 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				<?php
                                     $uid=$l['gid'];
 				    $nickname=VerAdmin::model()->findByPk($uid);
-                                    echo $nickname->nickname;
+				//var_dump($nickname);die;
+                                    if(!empty($nickname->nickname)){
+					echo $nickname->nickname;
+				}else{
+					echo "";
+				}
                                 ?>
 			    </td>
                             <td><?php echo $l['name'];?></td>
