@@ -558,6 +558,13 @@
             return false;
         }
 
+        var a = <?php echo isset($selected_guide)?$selected_guide:'0';?>;
+        var copyGuideId = $('#guide').val();
+        if(a == copyGuideId){
+            layer.alert("不能引用重复的站点导航");
+            return false;
+        }
+
         var focus = $("input[name=focus]:checked").val();
         if(focus==undefined){
             focus=$('.old_focus').html();

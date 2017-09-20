@@ -63,26 +63,28 @@ class VerScreenContentManager extends MvUi
         $cp       = trim($data['cp']);
         $gid      = trim($data['screenGuideId']);
         $epg      = trim($data['epg']);
-	if(empty($epg)){
-		$epg = '0';
-	}
+        if(empty($epg)){
+            $epg = '0';
+        }
         $action   = trim($data['action']);
         $param    = trim($data['param']);
         //$pic      = trim($data['key']);
-	if($data['key'] <> '/file/3.png'){
-	    $pic = basename($data['key']);
-	    $screenContent = VerScreenContentCopy::model()->findByPk($data['id']);
-	    //$pic = 'http://pic-portal-v3.itv.cmvideo.cn:8083/file/'.$pic;
-	    $pic = FTP_PATH.$pic;
-	    if($screenContent->attributes['pic']==$pic){
+        if($data['key'] <> '/file/3.png'){
+            $pic = basename($data['key']);
+            $screenContent = VerScreenContentCopy::model()->findByPk($data['id']);
+            //$pic = 'http://pic-portal-v3.itv.cmvideo.cn:8083/file/'.$pic;
+            $pic = FTP_PATH.$pic;
+            if(!empty($screenContent)){
+                if($screenContent->attributes['pic']==$pic){
 
-	    }else{
-               //Common::synchroPic(basename($data['key']));
-	    }	
+                }else{
+                    //Common::synchroPic(basename($data['key']));
+                }
+            }
         }else{
-	    $pic = '/file/3.png';
-	}
-	$upTime   = time();
+            $pic = '/file/3.png';
+        }
+	    $upTime   = time();
         $width    = trim($data['width']);
         $height   = trim($data['height']);
         $x        = trim($data['x']);

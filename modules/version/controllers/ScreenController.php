@@ -176,14 +176,14 @@ class ScreenController extends VController
             $this->redirect($this->getPreUrl());
         }
         $data = $_POST;
+        $this->ChangeQuoteScreenContent($data,1);
         $res = VerScreenContentManager::updateData($data);
+
         if($res>0){
             $this->die_json(array('code'=>200));
         }else{
             $this->die_json(array('code'=>404,'msg'=>'信息保存失败'));
         }
-
-
     }
 
     public function actionFirstPageDel()
@@ -192,13 +192,11 @@ class ScreenController extends VController
             $this->redirect($this->getPreUrl());
         }
         $id = $_REQUEST['id'];
-        $model = new VerScreenContent();
-        //$res = $model->deleteByPk($id);
+//        $model = new VerScreenContent();
 	    $sql = "select id,screenGuideid from yd_ver_screen_content_copy where id=$id";
         $result = VerScreenContentCopy::model()->updateAll(array('flag'=>6),'id=:id',array(':id'=>$id));
         $tmp = SQLManager::queryAll($sql);
         $screenGuideid = $tmp[0]['screenGuideid'];
-        //$res = $model->deleteByPk($id);
         $result = VerScreenContentCopy::model()->updateAll(array('upTime'=>time()),'screenGuideid=:screenGuideid',array(':screenGuideid'=>$screenGuideid));
         if($result>0){
             $this->die_json(array('code'=>200));
@@ -415,19 +413,39 @@ class ScreenController extends VController
         }
     }
 
-    public function actionSubmit(){
+    public function actionSubmit()
+    {
         $guide = $_REQUEST['guideid'];
-        $list = VerScreenContentCopy::model()->findAll("screenGuideid=$guide and flag in(5,10,20,30,40,50,100)");
-        $result = VerScreenContentCopy::model()->updateAll(array('delFlag'=>0),'screenGuideid=:screenGuideid',array(':screenGuideid'=>$guide));
+        $quote_res = $this->getQuoteInfo($guide);
+        if($quote_res){
+            $guides = $quote_res.','.$guide;
+            $list   = VerScreenContentCopy::model()->findAll("screenGuideid in ($guides) and flag in(5,10,20,30,40,50,100)");
+            $guides_arr = explode(',',$guides);
+            foreach ($guides_arr as $a=>$b){
+                $result = VerScreenContentCopy::model()->updateAll(
+                    array('delFlag'=>0),
+                    'screenGuideid=:screenGuideid',
+                    array(':screenGuideid'=>$b)
+                );
+            }
+        }else{
+            $list   = VerScreenContentCopy::model()->findAll("screenGuideid=$guide and flag in(5,10,20,30,40,50,100)");
+            $result = VerScreenContentCopy::model()->updateAll(
+                array('delFlag'=>0),
+                'screenGuideid=:screenGuideid',
+                array(':screenGuideid'=>$guide)
+            );
+        }
+
         foreach($list as $k=>$v){
             if(!empty($v->attributes['sid'])){
                 $content = VerScreenContent::model()->findByPk($v->attributes['sid']);
             }else{
                 $content = new VerScreenContent();
             }
-	    if($content == null){
-		    $content = new VerScreenContent();
-	    } 	
+            if($content == null){
+                $content = new VerScreenContent();
+            }
             $res = VerScreenContentCopy::model()->findByPk($v->attributes['id']);
             if($v->flag=='2' || $v->flag=='100'){
                 if($v->pic == '/file/3.png'){
@@ -470,19 +488,22 @@ class ScreenController extends VController
         }
     }
 
-    public function actionSubReview(){
+    public function actionSubReview()
+    {
         $guideid = $_REQUEST['guideid'];
-        $result = VerScreenContentCopy::model()->findAll("screenGuideid=$guideid");
-	//echo '<pre>';
-	//var_dump($result);die;
+        $quote_res = $this->getQuoteInfo($guideid);
+        if($quote_res){
+            $guides = $quote_res.','.$guideid;
+            $result = VerScreenContentCopy::model()->findAll("screenGuideid in ($guides)");
+        }else{
+            $result = VerScreenContentCopy::model()->findAll("screenGuideid=$guideid");
+        }
         foreach($result as $k=>$v){
-	    $flag = $v->attributes['flag'];
+	        $flag = $v->attributes['flag'];
             if($flag=='1' || $flag=='6' || $flag=='5' || $flag=='10' || $flag=='20' || $flag=='30' || $flag=='40' || $flag=='50'){
-            //if($flag=='1' || $flag=='6' || $flag=='5'){
                 $res = VerScreenContentCopy::model()->updateAll(array('delFlag'=>1,'addTime'=>time()), "delFlag in (0,1,2,3,4,5) and flag in (1,6) and screenGuideid = " . $guideid);
             }
         }
-	//var_dump($res);die;
         if(!$res){
             echo json_encode(array('code'=>200));
         }else{
@@ -661,39 +682,126 @@ class ScreenController extends VController
         }
     }
 
-    public function actionChangeQuoteScreenContent()
+    public function getQuoteInfo($guideId)
+    {
+        $res = VerScreenQuote::model()->findAll("`copyGuideId`=$guideId and `status`=1");
+        if(!empty($res)){
+            $quote_ids = array();
+            foreach ($res as $k=>$v){
+                $quote_ids[] = $v->attributes['pasteGuideId'];
+            }
+            $quote_ids = implode(',',$quote_ids);
+            return $quote_ids;
+        }else{
+            return false;
+        }
+    }
+
+//    public function actionChangeQuoteScreenContent()
+    public function ChangeQuoteScreenContent($data,$flag)
     {
         //$pasteGuideId = $_REQUEST['pasteGuideId'];
-        $id = $_REQUEST['id'];
-        $copy_res = VerScreenContent::model()->find(
+//        $id = $_REQUEST['id'];
+        //flag   1:修改，2：添加，3：删除
+
+        $id = $data['id'];
+        $copy_res = VerScreenContentCopy::model()->find(
             array(
-                'select' =>array('screenGuideid','`order`'),
-                'order'=>'id asc',
+                'select' =>array('screenGuideid','`order`','pic'),
                 'condition' => 'id=:id',
                 'params' => array(':id'=>$id),
             )
         );
         $copyGuideId  = $copy_res->attributes['screenGuideid'];
-        $res = VerScreenQuote::model()->find("`copyGuideId`=$copyGuideId and `status`=1");
-        if(empty($res)){
+        $copyOrder    = $copy_res->attributes['order'];
+        $pic    = $copy_res->attributes['pic'];
+        $copyOrder_res = VerScreenContentCopy::model()->findAll(
+            array(
+                "select"=>array('screenGuideid','`order`','id','pic'),
+                "order"=>"id asc",
+                "condition"=>'screenGuideid=:screenGuideid and `order`=:order',
+                "params"=>array(":screenGuideid"=>$copyGuideId,":order"=>$copyOrder)
+            )
+        );
+//        var_dump($copyOrder_res);die;
+        if(!empty($copyOrder_res)){
+            if(count($copyOrder_res)==1){
+                $copyGuideId = $copyOrder_res[0]->attributes['screenGuideid'];
+                $order = $copyOrder_res[0]->attributes['order'];
+                $quote_res = VerScreenQuote::model()->findAll("`copyGuideId`=$copyGuideId and `status`=1");
+                $this->doChangeQuoteScreenContent($quote_res,$order,$flag,$data);
+            }else{
+                foreach ($copyOrder_res as $k=>$v){
+                    if($v->attributes['id'] == $id){
+                        $offset = $k;
+                    }
+                }
+                $copyGuideId = $copyOrder_res[$offset]->attributes['screenGuideid'];
+                $order = $copyOrder_res[$offset]->attributes['order'];
+                $quote_res = VerScreenQuote::model()->findAll("`copyGuideId`=$copyGuideId and `status`=1");
+                //var_dump($quote_res);die;
+                $this->doChangeQuoteScreenContentBanner($quote_res,$order,$pic,$flag,$data);
+            }
+        }
+
+    }
+
+    public function doChangeQuoteScreenContent($quote_res,$order,$flag,$data)
+    {
+        if(empty($quote_res)){
             return;
         }
-        $copyGuideIds = array();
-        foreach ($res as $k=>$v){
-            $copyGuideIds[] = $v['pasteGuideId'];
+        foreach ($quote_res as $k=>$v){
+            $screenGuideid = $v['pasteGuideId'];
+            $model = VerScreenContentCopy::model()->find("`screenGuideid`=$screenGuideid and `order`=$order");
+            if($flag ==1){
+                $data['id'] = $model->attributes['id'];
+                VerScreenContentManager::updateData($data);
+            }
+        }
+    }
+
+    public function doChangeQuoteScreenContentBanner($quote_res,$order,$pic,$flag,$data)
+    {
+        if(empty($quote_res)){
+            return;
+        }
+        $ids = array();
+        foreach ($quote_res as $k=>$v){
+            $screenGuideid = $v['pasteGuideId'];
+            $res = VerScreenContentCopy::model()->findAll(
+                array(
+                    "select"=>"id,`order`,screenGuideid,pic",
+                    "order"=>"id asc",
+                    "condition"=>'screenGuideid=:screenGuideid and `order`=:order',
+                    "params"=>array(":screenGuideid"=>$screenGuideid,":order"=>$order)
+                )
+            );
+            foreach ($res as $key=>$val){
+                if($val->attributes['pic'] == $pic){
+                    $ids[] = $val->attributes['id'];
+                }
+            }
+        }
+//        var_dump($ids);die;
+        foreach ($ids as $a=>$b){
+            if($flag == 1){
+                $data['id'] = $b;
+                VerScreenContentManager::updateData($data);
+            }
         }
 
     }
 
     /*
      * 屏幕引用绑定关系表
-    CREATE TABLE `yd_ver_screen_quote` (
-      `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-      `copyGuideId` int(10) NOT NULL DEFAULT '0' COMMENT '选中复制的导航id',
-      `pasteGuideId` int(10) NOT NULL DEFAULT '0' COMMENT '进行粘贴的导航id',
-      `status` int(1) NOT NULL DEFAULT '1' COMMENT '两个导航之间的绑定关系是否有效  1有效；2无效',
-      PRIMARY KEY (`id`)
-    ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+        CREATE TABLE `yd_ver_screen_quote` (
+          `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+          `copyGuideId` int(10) NOT NULL DEFAULT '0' COMMENT '选中复制的导航id',
+          `pasteGuideId` int(10) NOT NULL DEFAULT '0' COMMENT '进行粘贴的导航id',
+          `status` int(1) NOT NULL DEFAULT '1' COMMENT '两个导航之间的绑定关系是否有效  1有效；2无效',
+          PRIMARY KEY (`id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8
     */
 }
 
