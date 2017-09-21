@@ -102,7 +102,15 @@
     </tr>-->
     <tr>
         <td height="40">已选模板：</td>
-        <td colspan="2" class="oldTemplate"><?php echo $list[0]['templateId']?></td>
+        <td colspan="2" class="oldTemplate">
+            <?php
+                $template_num =  $list[0]['templateId'];
+                if($template_num<=11){
+                    echo "模板".$template_num;
+                }
+            ?>
+
+        </td>
     </tr>
 
     <tr>
@@ -126,7 +134,7 @@
         </td>
 
         <td>
-            <select style="width:200px;margin:7px;"  name="guide"  id="guide" class="form-input w200 field">
+            <select style="width:200px;margin:7px;"  name="guide"  id="guide" class="form-input w200 field" onchange="selectGuide(this)">
                 <option value="0">--------------请选择屏幕-------------</option>
                 <?php
                     if(!empty($station_guide) && !empty($quote_res)){
@@ -748,6 +756,38 @@
             async:false
         });
         return status;
+    }
+
+    function selectGuide()
+    {
+        var selected = $('#guide option:selected').attr('templateid');
+        console.log(selected);
+        if(selected<10){
+            $('.templatePic').children('img').attr('src','/file/template/t0'+selected+'.png');
+        }else if(selected==10 || selected==11){
+            $('.templatePic').children('img').attr('src','/file/template/t'+selected+'.png');
+        }else{
+            var pic_src = showTemplatePic(selected);
+            $('.templatePic').children('img').attr('src',pic_src);
+        }
+
+    }
+
+    function showTemplatePic(selected)
+    {
+        var mid = <?php echo $this->mid;?>;
+        var pic_src = '';
+        $.ajax
+        ({
+            type:'get',
+            async:false,
+            url:'/version/screen/showTemplatePic/mid/'+mid+'/templateId/'+selected,
+            success:function(data)
+            {
+                pic_src = data;
+            }
+        });
+        return pic_src;
     }
 
 	$(".checkImg").click(function(){

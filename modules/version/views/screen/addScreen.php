@@ -117,7 +117,7 @@
     <tr>
         <td>站点引用：</td>
         <td>
-            <select style="width:200px;margin:7px;"  name="station" onchange="stationGuide(this)"  id="station" class="form-input w200 field">
+            <select style="width:200px;margin:7px;"  name="station" onchange="stationGuide(this)"  id="station" class="form-input w200 field" <!--disabled="disabled"-->>
                 <option value="0">--------------请选择站点-------------</option>
                 <?php
                     $station_res = $this->getAllStation();
@@ -129,7 +129,7 @@
         </td>
 
         <td>
-            <select style="width:200px;margin:7px;"  name="guide"  id="guide" class="form-input w200 field">
+            <select style="width:200px;margin:7px;"  name="guide" onchange="selectGuide(this)" id="guide" class="form-input w200 field" <!--disabled="disabled"-->>
                 <option value="0">--------------请选择屏幕-------------</option>
             </select>
             <input type="radio" name="copyFlag" id="copyFlag" onclick="return checkCopy()" flag="0">站点引用
@@ -158,7 +158,7 @@
             <option value="<?php echo $v['id']+11?>" onclick="showTemplate(this)"><?php echo $v['name']?></option>
         <?php endforeach;?>
     </select>
-        <input style="margin-top: 16px;margin-left: 230px;" type="radio" name="editSelf" id="editSelf" onclick="return checkeditSelf()" flag="0">自行编辑
+        <input style="margin-top: 16px;margin-left: 230px;" type="radio" name="editSelf" id="editSelf" onclick="return checkeditSelf()" flag="0" >自行编辑
 
         <div class="templatePic">
     <img src="/file/template/t01.png" alt="" width='600px' height='300px'>
@@ -389,7 +389,10 @@
                     $('.templatePic').children('img').attr('src','<?php echo $v["pic"]?>');
                     break;
             <?php endforeach;?>
+
         }
+        $('#editSelf').attr('checked','checked');
+        $('#editSelf').attr('flag','1');
     }
 
     $('.save').click(function()
@@ -489,6 +492,7 @@
             success:function(data)
             {
                 data = eval(data);
+                $("#guide").children().remove();
                 $.each(data,function(i){
                     $("#guide").append
                     (
@@ -510,6 +514,7 @@
             success:function(data)
             {
                 data = eval(data);
+                $("#guide").children().remove();
                 $.each(data,function(i)
                 {
                     $("#guide").append
@@ -578,6 +583,38 @@
             async:false
         });
         return status;
+    }
+
+    function selectGuide()
+    {
+        var selected = $('#guide option:selected').attr('templateid');
+        console.log(selected);
+        if(selected<10){
+            $('.templatePic').children('img').attr('src','/file/template/t0'+selected+'.png');
+        }else if(selected==10 || selected==11){
+            $('.templatePic').children('img').attr('src','/file/template/t'+selected+'.png');
+        }else{
+            var pic_src = showTemplatePic(selected);
+            $('.templatePic').children('img').attr('src',pic_src);
+        }
+
+    }
+
+    function showTemplatePic(selected)
+    {
+        var mid = <?php echo $this->mid;?>;
+        var pic_src = '';
+        $.ajax
+        ({
+            type:'get',
+            async:false,
+            url:'/version/screen/showTemplatePic/mid/'+mid+'/templateId/'+selected,
+            success:function(data)
+            {
+                pic_src = data;
+            }
+        });
+        return pic_src;
     }
 
 </script>

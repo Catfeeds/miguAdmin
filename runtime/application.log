@@ -598,3 +598,76 @@ REQUEST_URI=/version/screen/updateScreenContent/mid/-1/screenGuideId/204/width/2
 in D:\phpStudy\WWW\htdocs\new\newweb\protected\manager\VerScreenContentManager.php (58)
 in D:\phpStudy\WWW\htdocs\new\newweb\protected\modules\version\controllers\ScreenController.php (120)
 in D:\phpStudy\WWW\htdocs\new\newweb\index.php (15)
+2017/09/21 17:52:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\htdocs\new\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\htdocs\new\newweb\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://localhost:8081/css/admin.css
+---
+2017/09/21 19:14:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/template/t0101.png".' in D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/template/t...')
+#1 D:\phpStudy\WWW\htdocs\new\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\htdocs\new\newweb\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/template/t0101.png
+HTTP_REFERER=http://localhost:8081/version/screen/addScreen/mid/-1/nid/44/adminLeftOne/3/adminLeftTwo//adminLeftOneName/%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95/adminLeftTwoName/%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95/adminLeftNavFlag/1/one/0/two/0/three/0/siteName//son//top//leftNavFlag/0
+---
+2017/09/21 19:14:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/template/t010.png".' in D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/template/t...')
+#1 D:\phpStudy\WWW\htdocs\new\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\htdocs\new\newweb\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/template/t010.png
+HTTP_REFERER=http://localhost:8081/version/screen/addScreen/mid/-1/nid/44/adminLeftOne/3/adminLeftTwo//adminLeftOneName/%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95/adminLeftTwoName/%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95/adminLeftNavFlag/1/one/0/two/0/three/0/siteName//son//top//leftNavFlag/0
+---
+2017/09/21 19:27:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/template/t11.png".' in D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/template/t...')
+#1 D:\phpStudy\WWW\htdocs\new\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\htdocs\new\newweb\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/template/t11.png
+HTTP_REFERER=http://localhost:8081/version/screen/addScreen/mid/-1/nid/44/adminLeftOne/3/adminLeftTwo//adminLeftOneName/%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95/adminLeftTwoName/%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95/adminLeftNavFlag/1/one/0/two/0/three/0/siteName//son//top//leftNavFlag/0
+---
+2017/09/21 19:27:53 [error] [php] Trying to get property of non-object (D:\phpStudy\WWW\htdocs\new\newweb\protected\modules\version\controllers\ScreenController.php:845)
+Stack trace:
+#0 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CController.php(286): ScreenController->runAction()
+#1 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CController.php(265): ScreenController->runActionWithFilters()
+#2 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php(282): ScreenController->run()
+#3 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 D:\phpStudy\WWW\htdocs\new\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#5 D:\phpStudy\WWW\htdocs\new\newweb\index.php(15): CWebApplication->run()
+REQUEST_URI=/version/screen/showTemplatePic/mid/-1/templateId/14
+in D:\phpStudy\WWW\htdocs\new\newweb\protected\modules\version\controllers\ScreenController.php (845)
+in D:\phpStudy\WWW\htdocs\new\newweb\index.php (15)
+2017/09/21 19:30:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709061803191016.png".' in D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017090618...')
+#1 D:\phpStudy\WWW\htdocs\new\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\htdocs\new\newweb\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709061803191016.png
+HTTP_REFERER=http://localhost:8081/version/screen/addScreen/mid/-1/nid/44/adminLeftOne/3/adminLeftTwo//adminLeftOneName/%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95/adminLeftTwoName/%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95/adminLeftNavFlag/1/one/0/two/0/three/0/siteName//son//top//leftNavFlag/0
+---
+2017/09/21 19:48:46 [error] [php] Invalid argument supplied for foreach() (D:\phpStudy\WWW\htdocs\new\newweb\protected\modules\version\views\screen\updateGuideContent.php:177)
+Stack trace:
+#0 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CController.php(869): ScreenController->renderFile()
+#1 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CController.php(782): ScreenController->renderPartial()
+#2 D:\phpStudy\WWW\htdocs\new\newweb\protected\modules\version\controllers\ScreenController.php(385): ScreenController->render()
+#3 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\actions\CInlineAction.php(49): ScreenController->actionUpdateGuide()
+#4 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CController.php(286): ScreenController->runAction()
+#6 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CController.php(265): ScreenController->runActionWithFilters()
+#7 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php(282): ScreenController->run()
+#8 D:\phpStudy\WWW\htdocs\new\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 D:\phpStudy\WWW\htdocs\new\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 D:\phpStudy\WWW\htdocs\new\newweb\index.php(15): CWebApplication->run()
+REQUEST_URI=/version/screen/updateGuide/mid/-1/id/204/adminLeftOne/3/adminLeftTwo//adminLeftOneName/%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95/adminLeftTwoName/%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95/adminLeftNavFlag/1/one/0/two/0/three/0/siteName//son//top//leftNavFlag/0
+in D:\phpStudy\WWW\htdocs\new\newweb\protected\modules\version\views\screen\updateGuideContent.php (177)
+in D:\phpStudy\WWW\htdocs\new\newweb\protected\modules\version\controllers\ScreenController.php (385)
+in D:\phpStudy\WWW\htdocs\new\newweb\index.php (15)
