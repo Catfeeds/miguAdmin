@@ -295,9 +295,9 @@
                     echo "<div class='m-".$screenContent[0]['width']."' style='width:".$screenContent[0]['width']."px;height:".$screenContent[0]['height']."px;'>
                                 <input type='file' id='upload_file_new'>";
                        if($screenContent[0]['height'] == 1){
-                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']." oldPic' width=".$screenContent[0]['width']." height=".$screenContent[0]['height'].">";
+                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']." oldPic' width=".($screenContent[0]['width']/2)." height=".($screenContent[0]['height']/2).">";
                 }else{
-                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']." oldPic' width=".$screenContent[0]['width']." height=".$screenContent[0]['height'].">";
+                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']." oldPic' width=".($screenContent[0]['width']/2)." height=".($screenContent[0]['height']/2).">";
                 }         
                               echo "</div>";
                               
@@ -313,9 +313,9 @@
                                 <input type='file' id='upload_file_new'>";
 		}
                        if($screenContent[0]['height'] == 1){
-                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']." oldPic' width=".$screenContent[0]['width']." height=".$screenContent[0]['height'].">";
+                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']." oldPic' width=".($screenContent[0]['width']/2)." height=".($screenContent[0]['height']/2).">";
                 }else{
-                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']." oldPic' width=".$screenContent[0]['width']." height=".$screenContent[0]['height'].">";
+                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']." oldPic' width=".($screenContent[0]['width']/2)." height=".($screenContent[0]['height']/2).">";
                 }         
                               echo "</div>";
                 }
