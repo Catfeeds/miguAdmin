@@ -221,7 +221,7 @@ class WallpaperController extends VController{
 	$gid=$_REQUEST['gid'];
 	//var_dump($gid);die;
 	$start=!empty($_POST['start'])?strtotime($_POST['start']):0;
-	$end=!empty($_POST['end'])?strtotime($_POST['end']):0;
+	$end=!empty($_POST['end'])?strtotime($_POST['end'])+86399:0;
 	//var_dump($_POST['Code']);die;
 	if($_POST['Code']!="0-0"){
 	for($i=0;$i<count($_POST['Code']);$i++){
@@ -270,7 +270,7 @@ class WallpaperController extends VController{
         $model->addTime = time();
         $model->type=!empty($_POST['type'])?$_POST['type']:0;//默认普通类型
         $model->startTime=!empty($_POST['start'])?strtotime($_POST['start']):0;
-        $model->endTime=!empty($_POST['end'])?strtotime($_POST['end'])+86400:0;
+        $model->endTime=!empty($_POST['end'])?strtotime($_POST['end'])+86399:0;
 	$model->pic_time=time();//图片上传时间
         if($model->save()){
             echo '200';
@@ -291,7 +291,7 @@ class WallpaperController extends VController{
         $pic_thum = basename($thum);
 	$pic_time=!empty($_POST['pic_time'])?$_POST['pic_time']:time();
 	$startTime=!empty($_POST['start'])?strtotime($_POST['start']):0;
-        $endTime=!empty($_POST['end'])?strtotime($_POST['end']):0;
+        $endTime=!empty($_POST['end'])?strtotime($_POST['end'])+86399:0;
 	$Code=$_POST['Code'];
         if($Code!="0-0"){
             for($i=0;$i<count($_POST['Code']);$i++){

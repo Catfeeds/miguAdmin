@@ -1563,7 +1563,58 @@ $list = SQLManager::execute($sql);
         $this->render("new");
     }
 	public function actionAddress(){
-        $this->render("address");
+	$data=VerAddress::model()->findAll();
+        $this->render("address",array("data"=>$data));
+    }
+
+    public function actionAddressAdd(){
+	$this->render("addressadd");
+    }
+
+	public function actionAddressUpdate(){
+	$id=$_REQUEST['id'];
+	$info=VerAddress::model()->findByPk($id);
+        $this->render("addressupdate",array("info"=>$info));
+    }
+    public function actionDoAddressAdd(){
+	$model=new VerAddress();
+	$model->name=$_POST['name'];
+        for($i=0;$i<count($_POST['code']);$i++){
+            $tmp=explode("-",$_POST['code'][$i]);
+            $province[]=$tmp[0];
+            $city[]=$tmp[1];
+        }
+        $p=join("/",$province);
+        $c=join("/",$city);
+        $model->province=$p;
+        $model->city=$c;
+        $model->stationId=$_POST['stationId'];
+        $model->web_ip=$_POST['web'];
+        $model->img_ip=$_POST['img'];
+        if($model->save()){
+            echo json_encode(array('code'=>200));
+        }else{
+            echo json_encode(array('code'=>500));
+        }
+    }
+
+	public function actionGetInfo(){
+        $stationId=$_REQUEST['stationId'];
+        $data=VerStation::model()->findByPk($stationId);
+        $province=$data->province;
+        $city=$data->city;
+        $p=explode(" ",$province);
+        $c=explode(" ",$city);
+        for($i=0;$i<count($p);$i++){
+            $ptmp=Province::model()->findByAttributes(array("provinceCode"=>$p[$i]));
+            $pArray[$i]=array("provinceName"=>$ptmp->provinceName,"provinceCode"=>$ptmp->provinceCode);
+            $ctmp=City::model()->findByAttributes(array("provinceId"=>$p[$i],"cityCode"=>$c[$i]));
+            $cArray[$i]=array("cityName"=>$ctmp->cityName,"cityCode"=>$ctmp->cityCode);
+        }
+        for($m=0;$m<count($pArray);$m++){
+            $newArr[]=array("name"=>$pArray[$m]['provinceName']."-".$cArray[$m]['cityName'],"Code"=>$pArray[$m]['provinceCode']."-".$cArray[$m]['cityCode']);
+        }
+        echo json_encode($newArr);
     }
 }
 

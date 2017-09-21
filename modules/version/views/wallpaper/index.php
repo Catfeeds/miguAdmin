@@ -132,7 +132,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <span style="display:inline-block;">
         <select class="form-input w100 code" style="height:20px" onchange="getcity()">
 		<?php foreach($province as $v):?>
-			<option value="<?php echo $v['provinceCode'];?>"><?php echo $v['provinceName'];?></option>
+			<option value="<?php echo $v['provinceCode'];?>" <?php $gid =!empty($_REQUEST['province'])?$_REQUEST['province']:''; if($v['provinceCode']==$gid){echo 'selected=selected';}?>><?php echo $v['provinceName'];?></option>
 		<?php endforeach;?>
         </select></span>
 	<span style="font-size:15px;margin-left: 5px">地市:</span>
@@ -168,7 +168,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 	    <th>省份</th>
 	    <th>市</th>
             <th>缩略图</th>
-            <th>有效期(0点~0点)</th>
+            <th>有效期</th>
             <th>审核</th>
             <th>操作</th>
         </tr>
@@ -346,6 +346,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 			})
 		});
 	}
+	getcity();
 	
 	$('.btn_search').click(function(){
 	var adminLeftOne = "<?php echo $adminLeftOne;?>";

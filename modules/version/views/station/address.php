@@ -98,17 +98,42 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <th>图片服务器IP</th>
                 <th>操作</th>
             </tr>
+		<?php if(!empty($data)):?>
+                <?php foreach($data as $v):?>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?php echo $v['id']?></td>
+                <td><?php echo $v['name']?></td>
+                <td><?php echo $v['stationId']?></td>
+                <td><?php echo $v['province']?></td>
+                <td><?php echo $v['city']?></td>
+                <td><?php echo $v['web_ip']?></td>
+                <td><?php echo $v['img_ip']?></td>
+                <td><a gid=<?php echo $v['id']?> class="href" href="javascript:;">编辑</a></td>
             </tr>
+                <?php endforeach;?>
+            <?php else:?>
+            <tr>
+                <td colspan="8">暂无数据</td>
+            </tr>
+            <?php endif;?>
         </table>
     </form>
 </div>
+<script>
+    var nid="<?php echo $_GET['nid'];?>";
+    var mid ="<?php echo $_GET['mid'];?>";
+    var adminLeftOne = "<?php echo $adminLeftOne;?>";
+    var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
+    var adminLeftOneName = "<?php echo $adminLeftOneName;?>";
+    var adminLeftNavFlag  = "<?php echo !empty($_GET['adminLeftNavFlag'])?$_GET['adminLeftNavFlag']:'0'; ?>";
+    var fixedUrl = '/mid/'+mid+'/nid/'+nid+'/adminLeftOne/'+adminLeftOne+'/adminLeftTwo/'+adminLeftTwo+'/adminLeftOneName/'+adminLeftOneName+'/adminLeftNavFlag/'+adminLeftNavFlag;
+    $(".add").click(function(){
+        window.location.href="/version/station/addressadd"+fixedUrl;
+    })
+
+    $(".href").click(function(){
+	var id=$(this).attr("gid");
+	window.location.href="/version/station/addressupdate/id/"+id+fixedUrl;
+    })
+</script>
 

@@ -12,5 +12,5 @@ if(strpos($dirname,'nginx/html') > 0){
 	define('DB_PASS','root');
 	define('DB_STR','mysql:host=127.0.0.1;port=3306;dbname=mobile');
 }
-//define('FTP_PATH','http://117.144.248.58:8082/file/');
-define('FTP_PATH','http://pic-portal-v3.itv.cmvideo.cn:8083/file/');
+define('FTP_PATH','http://117.144.248.58:8082/file/');
+//define('FTP_PATH','http://pic-portal-v3.itv.cmvideo.cn:8083/file/');
