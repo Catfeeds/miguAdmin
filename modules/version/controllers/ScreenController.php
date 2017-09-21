@@ -838,6 +838,13 @@ class ScreenController extends VController
 
     }
 
+    public function actionShowTemplatePic()
+    {
+        $templateId = $_REQUEST['templateId']-11;
+        $res = VerTemplate::model()->findByPk($templateId);
+        echo $res->attributes['pic'];
+    }
+
     /*
      * 屏幕引用绑定关系表
         CREATE TABLE `yd_ver_screen_quote` (
