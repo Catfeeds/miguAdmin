@@ -42,13 +42,34 @@ class VerScreenContentManager extends MvUi
         $sql = $sql_select.$sql_where;
         $res = SQLManager::queryAll($sql);
         if(empty($res)){
-           $sql_select = "select cid,id,pic,screenGuideId,width,height,tType,type,cp,action,param,uType,title,x,y,`order`,epg,videoUrl from yd_ver_screen_content_copy";
-        $sql_where = " where `id`=$id ";
-        $sql = $sql_select.$sql_where;
-        $res = SQLManager::queryAll($sql);
+            $sql_select = "select cid,id,pic,screenGuideId,width,height,tType,type,cp,action,param,uType,title,x,y,`order`,epg,videoUrl from yd_ver_screen_content_copy";
+            $sql_where = " where `id`=$id ";
+            $sql = $sql_select.$sql_where;
+            $res = SQLManager::queryAll($sql);
         }
         return $res;
-    }	
+    }
+
+    public static function getOneOnline($screenGuideId,$order)
+    {
+        $res = array();
+        $sql_select = "select cid,id,pic,screenGuideId,width,height,tType,type,cp,action,uType,param,title,x,y,`order`,epg,videoUrl from yd_ver_screen_content";
+        $sql_where = " where `screenGuideId`=$screenGuideId AND `order`='$order'";
+        $sql_order = " order by addTime";
+        $sql = $sql_select.$sql_where.$sql_order;
+        $res = SQLManager::queryAll($sql);
+        return $res;
+    }
+
+    public static function getIdOneOnline($id)
+    {
+        $res = array();
+        $sql_select = "select cid,id,pic,screenGuideId,width,height,tType,type,cp,action,param,uType,title,x,y,`order`,epg,videoUrl from yd_ver_screen_content";
+        $sql_where = " where `id`=$id";
+        $sql = $sql_select.$sql_where;
+        $res = SQLManager::queryAll($sql);
+        return $res;
+    }
 	
     public static function updateData($data)
     {

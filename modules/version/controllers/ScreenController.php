@@ -115,22 +115,21 @@ class ScreenController extends VController
     public function actionUpdateScreenContent()
     {
         $info = $_REQUEST;
-        //var_dump($info);die;
-        if(!empty($info['id'])){
-            $screenContent = VerScreenContentManager::getIdOne($info['id']);
+        if(!empty($_REQUEST['onlineFlag'])){
+            if(!empty($info['id'])){
+                $screenContent = VerScreenContentManager::getIdOneOnline($info['id']);
+            }else{
+                $screenContent = VerScreenContentManager::getOneOnline($info['screenGuideId'],$info['order']);
+            }
         }else{
+            if(!empty($info['id'])){
+                $screenContent = VerScreenContentManager::getIdOne($info['id']);
+            }else{
                 $screenContent = VerScreenContentManager::getOne($info['screenGuideId'],$info['order']);
             }
+        }
+
         $this->render('updateScreenContent',array('screenContent'=>$screenContent));
-        /*$n = $this->renderPartial(
-                'updateScreenContent',
-                array(
-                    'screenContent'=>$screenContent,
-                ),
-                true
-            );
-            die(json_encode(array('code'=>200,'msg'=>$n)));
-        */
     }
 
     public function actionFirstPageAdd()
@@ -139,33 +138,73 @@ class ScreenController extends VController
         if(!Yii::app()->request->isAjaxRequest){
             $this->redirect($this->getPreUrl());
         }
-        $model = new VerScreenContentCopy();
-        $model->title = trim($_POST['title']);
-        $model->action = trim($_POST['action']);
-        $model->param = trim($_POST['param']);
-        $model->addTime = time();
-        $model->upTime = time();
-        $model->cp = trim($_POST['cp']);
-        $model->cid = trim($_POST['cid']);
-        $model->width = trim($_POST['width']);
-        $model->height = trim($_POST['height']);
-        $model->x = trim($_POST['x']);
-        $model->y = trim($_POST['y']);
-        $model->order = trim($_POST['order']);
-        $model->type = trim($_POST['type']);
-        $model->tType = trim($_POST['tType']);
-        $model->uType = trim($_POST['uType']);
-        $pic = trim($_POST['key']);
-        $pic = basename($pic);
-        $model->pic=FTP_PATH.$pic;
-	    $model->screenGuideid = trim($_POST['screenGuideId']);
-        $model->videoUrl = trim($_POST['videoUrl']);
-        $model->delFlag = 0;
-        $model->flag = 1;
-        if($model->save()){
-            $this->die_json(array('code'=>200));
+        $copyGuideId = trim($_POST['screenGuideId']);
+        $quote_res = $this->getQuoteInfo($copyGuideId);
+        if($quote_res){
+            $guides = $quote_res.','.$copyGuideId;
+            $code = '200';
+            foreach ($guides as $k=>$v){
+                $model = new VerScreenContentCopy();
+                $model->title = trim($_POST['title']);
+                $model->action = trim($_POST['action']);
+                $model->param = trim($_POST['param']);
+                $model->addTime = time();
+                $model->upTime = time();
+                $model->cp = trim($_POST['cp']);
+                $model->cid = trim($_POST['cid']);
+                $model->width = trim($_POST['width']);
+                $model->height = trim($_POST['height']);
+                $model->x = trim($_POST['x']);
+                $model->y = trim($_POST['y']);
+                $model->order = trim($_POST['order']);
+                $model->type = trim($_POST['type']);
+                $model->tType = trim($_POST['tType']);
+                $model->uType = trim($_POST['uType']);
+                $pic = trim($_POST['key']);
+                $pic = basename($pic);
+                $model->pic=FTP_PATH.$pic;
+                $model->screenGuideid = $v;
+                $model->videoUrl = trim($_POST['videoUrl']);
+                $model->delFlag = 0;
+                $model->flag = 1;
+                if(!$model->save()){
+                    $code = '404';
+                }
+            }
+            if($code == '200'){
+                $this->die_json(array('code'=>200));
+            }else{
+                $this->die_json(array('code'=>404,'msg'=>'信息保存失败'));
+            }
         }else{
-            $this->die_json(array('code'=>404,'msg'=>'信息保存失败'));
+            $model = new VerScreenContentCopy();
+            $model->title = trim($_POST['title']);
+            $model->action = trim($_POST['action']);
+            $model->param = trim($_POST['param']);
+            $model->addTime = time();
+            $model->upTime = time();
+            $model->cp = trim($_POST['cp']);
+            $model->cid = trim($_POST['cid']);
+            $model->width = trim($_POST['width']);
+            $model->height = trim($_POST['height']);
+            $model->x = trim($_POST['x']);
+            $model->y = trim($_POST['y']);
+            $model->order = trim($_POST['order']);
+            $model->type = trim($_POST['type']);
+            $model->tType = trim($_POST['tType']);
+            $model->uType = trim($_POST['uType']);
+            $pic = trim($_POST['key']);
+            $pic = basename($pic);
+            $model->pic=FTP_PATH.$pic;
+            $model->screenGuideid = trim($_POST['screenGuideId']);
+            $model->videoUrl = trim($_POST['videoUrl']);
+            $model->delFlag = 0;
+            $model->flag = 1;
+            if($model->save()){
+                $this->die_json(array('code'=>200));
+            }else{
+                $this->die_json(array('code'=>404,'msg'=>'信息保存失败'));
+            }
         }
 
     }
@@ -178,7 +217,6 @@ class ScreenController extends VController
         $data = $_POST;
         $this->ChangeQuoteScreenContent($data,1);
         $res = VerScreenContentManager::updateData($data);
-
         if($res>0){
             $this->die_json(array('code'=>200));
         }else{
@@ -192,7 +230,6 @@ class ScreenController extends VController
             $this->redirect($this->getPreUrl());
         }
         $id = $_REQUEST['id'];
-//        $model = new VerScreenContent();
 	    $sql = "select id,screenGuideid from yd_ver_screen_content_copy where id=$id";
         $result = VerScreenContentCopy::model()->updateAll(array('flag'=>6),'id=:id',array(':id'=>$id));
         $tmp = SQLManager::queryAll($sql);
@@ -203,7 +240,6 @@ class ScreenController extends VController
         }else{
             $this->die_json(array('code'=>404,'msg'=>'删除失败'));
         }
-
     }
 	
     public function actionGetScreenContent()
@@ -498,13 +534,18 @@ class ScreenController extends VController
         }else{
             $result = VerScreenContentCopy::model()->findAll("screenGuideid=$guideid");
         }
+        $res = 0;
+        //var_dump($result);die;
         foreach($result as $k=>$v){
 	        $flag = $v->attributes['flag'];
             if($flag=='1' || $flag=='6' || $flag=='5' || $flag=='10' || $flag=='20' || $flag=='30' || $flag=='40' || $flag=='50'){
-                $res = VerScreenContentCopy::model()->updateAll(array('delFlag'=>1,'addTime'=>time()), "delFlag in (0,1,2,3,4,5) and flag in (1,6) and screenGuideid = " . $guideid);
+
+                $res = VerScreenContentCopy::model()->updateAll(array('delFlag'=>1,'addTime'=>time()), "delFlag in (0,1,2,3,4,5) and flag in (1,6) and screenGuideid = " . $v->attributes['screenGuideid']);
+//                var_dump($res);
             }
         }
-        if(!$res){
+
+        if($res>0){
             echo json_encode(array('code'=>200));
         }else{
             echo json_encode(array('code'=>404));
@@ -756,6 +797,7 @@ class ScreenController extends VController
             $model = VerScreenContentCopy::model()->find("`screenGuideid`=$screenGuideid and `order`=$order");
             if($flag ==1){
                 $data['id'] = $model->attributes['id'];
+                $data['screenGuideId'] = $model->attributes['screenGuideid'];
                 VerScreenContentManager::updateData($data);
             }
         }
@@ -767,6 +809,7 @@ class ScreenController extends VController
             return;
         }
         $ids = array();
+        $screenGuideids = array();
         foreach ($quote_res as $k=>$v){
             $screenGuideid = $v['pasteGuideId'];
             $res = VerScreenContentCopy::model()->findAll(
@@ -780,6 +823,7 @@ class ScreenController extends VController
             foreach ($res as $key=>$val){
                 if($val->attributes['pic'] == $pic){
                     $ids[] = $val->attributes['id'];
+                    $screenGuideids[] = $val->attributes['screenGuideid'];
                 }
             }
         }
@@ -787,6 +831,7 @@ class ScreenController extends VController
         foreach ($ids as $a=>$b){
             if($flag == 1){
                 $data['id'] = $b;
+                $data['screenGuideId'] = $screenGuideids[$a];
                 VerScreenContentManager::updateData($data);
             }
         }

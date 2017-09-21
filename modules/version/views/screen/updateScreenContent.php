@@ -162,7 +162,7 @@
 //    ?>
 </style>
 <!--<pre>-->
-<?php //var_dump($list);die;?>
+<?php //var_dump($screenContent);die;?>
 <script type="text/javascript" src="/js/uploadify/jquery.uploadify.min.js"></script>
 
 <!--<div class="adddiv">
@@ -330,7 +330,7 @@
         </tr>
 
     <tr>
-        <td align="center" colspan="4">
+        <td align="center" colspan="4" class="button">
 <!--            <input type="button" value="选择媒资" class="btn meizi">-->
             <input style="width:100px;height:30px;padding:0px" type="button" value="为此推荐位添加轮播图" class="btn addBanner">
             <input style="width:100px;height:30px;padding:0px" type="button" value="保存信息" class="btn save">
@@ -370,6 +370,20 @@
     });
 </script>
 <script>
+
+    var onlineFlag = "<?php echo !empty($_REQUEST['onlineFlag'])?$_REQUEST['onlineFlag']:0;?>";
+    if(onlineFlag == 1){
+        $('.button').remove();
+        var l = $('input').length;
+        var k = $('select').length;
+        for(var i = 0 ; i<l;i++){
+            $('input').eq(i).attr('disabled','disabled');
+        }
+        for(var a = 0 ; a<k;a++){
+            $('select').eq(a).attr('disabled','disabled');
+        }
+    }
+
     function bb()
     {
         var zhi = $("#uptype").val();
@@ -579,7 +593,7 @@
         var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
         $.post('/version/screen/firstPageUpdate?mid=<?php echo $this->mid?>',G,function(d){
             if(d.code == 200){
-       alert("删除成功！");         //location.reload();
+                layer.alert("删除成功！");         //location.reload();
                 window.close();
             }else{
                 layer.close(load);

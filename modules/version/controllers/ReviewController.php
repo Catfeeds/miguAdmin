@@ -460,13 +460,12 @@ class ReviewController extends VController
 	//var_dump($workInfo);die;
         $workNum = array();
         if(!empty($workInfo)){
-	   //echo '1';die;	
             foreach ($workInfo as $K=>$v){
                 $workNum[] = $v['type'];
             }
             $maxWork = $workInfo[0]['maxLength'];
             $sign = $workNum[0];
-	    $m = count($workInfo)-1;	
+	        $m = count($workInfo)-1;
             $stationId = $workInfo[$m]['stationId'];
                 $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id=$stationId ";
                 $sql_where = " where  1=1";
@@ -530,8 +529,8 @@ class ReviewController extends VController
 
                 $sql = $sql . $sql_where;
             $list = SQLManager::queryAll($sql);
-        //echo '<pre>';
-            //var_dump($_SESSION);die;
+//            print_r($sql);
+//            var_dump($list);die;
             $this->render('screenreview',array('list'=>$list,'readFlag'=>'2'));
     }
 //        echo $sql_work;die;
@@ -584,7 +583,8 @@ class ReviewController extends VController
         }
     }*/
 
-    public function actionContentAccess(){
+    public function actionContentAccess()
+    {
         $workInfo = Common::getWorkInfo();
         //var_dump($workInfo);die;
         if(!empty($workInfo)){
@@ -601,7 +601,7 @@ class ReviewController extends VController
                         if($list->flag=='1') {
                             $sign++;
                             $list->flag = 10*$sign;
-			    $delFlag='1';	
+			                $delFlag='1';
                         }else if($list->flag < $maxWork*10){
                             $sign++;
                             $list->flag = 10*$sign;
@@ -611,26 +611,23 @@ class ReviewController extends VController
                             $delFlag='2';
                         }else{
                             $list->flag='5';
-			    $delFlag='2';
+			                $delFlag='2';
                         }
-                        //$delFlag='2';
-                        //$list->delFlag='2';
-
                     }else{
-			if($list->pic == '/file/3.png'){
-                    	$id = $_REQUEST['id'];
-                        $sql = "select * from yd_ver_screen_content_del where id = $v ORDER BY upTime desc limit 1";
-                        $res = SQLManager::queryAll($sql);
-                        $list->uType = $res['0']['uType'];
-                       	$list->pic = $res['0']['pic'];
-                        $list->tType = $res['0']['tType'];
-                        $list->title = $res['0']['title'];
-                        $list->action = $res['0']['action'];
-                        $list->param = $res['0']['param'];
-                        $list->cp = $res['0']['cp'];
-                        $list->cid = $res['0']['cid'];
-                        $list->videoUrl = $res['0']['videoUrl'];
-                        $list->type = $res['0']['type'];
+			            if($list->pic == '/file/3.png'){
+                            $id = $_REQUEST['id'];
+                            $sql = "select * from yd_ver_screen_content_del where id = $v ORDER BY upTime desc limit 1";
+                            $res = SQLManager::queryAll($sql);
+                            $list->uType = $res['0']['uType'];
+                            $list->pic = $res['0']['pic'];
+                            $list->tType = $res['0']['tType'];
+                            $list->title = $res['0']['title'];
+                            $list->action = $res['0']['action'];
+                            $list->param = $res['0']['param'];
+                            $list->cp = $res['0']['cp'];
+                            $list->cid = $res['0']['cid'];
+                            $list->videoUrl = $res['0']['videoUrl'];
+                            $list->type = $res['0']['type'];
 						}
                         $this->nolog($list);
                         $list->flag='7';
@@ -663,20 +660,20 @@ class ReviewController extends VController
                         //$delFlag='2';
                         $list->delFlag=$delFlag;
                     }else{
-			if($list->pic == '/file/3.png'){
-                    	$id = $_REQUEST['id'];
-                        $sql = "select * from yd_ver_screen_content_del where id = $v ORDER BY upTime desc limit 1";
-                        $res = SQLManager::queryAll($sql);
-                        $list->uType = $res['0']['uType'];
-                       	$list->pic = $res['0']['pic'];
-                        $list->tType = $res['0']['tType'];
-                        $list->title = $res['0']['title'];
-                        $list->action = $res['0']['action'];
-                        $list->param = $res['0']['param'];
-                        $list->cp = $res['0']['cp'];
-                        $list->cid = $res['0']['cid'];
-                        $list->videoUrl = $res['0']['videoUrl'];
-                        $list->type = $res['0']['type'];
+			            if($list->pic == '/file/3.png'){
+                            $id = $_REQUEST['id'];
+                            $sql = "select * from yd_ver_screen_content_del where id = $v ORDER BY upTime desc limit 1";
+                            $res = SQLManager::queryAll($sql);
+                            $list->uType = $res['0']['uType'];
+                            $list->pic = $res['0']['pic'];
+                            $list->tType = $res['0']['tType'];
+                            $list->title = $res['0']['title'];
+                            $list->action = $res['0']['action'];
+                            $list->param = $res['0']['param'];
+                            $list->cp = $res['0']['cp'];
+                            $list->cid = $res['0']['cid'];
+                            $list->videoUrl = $res['0']['videoUrl'];
+                            $list->type = $res['0']['type'];
 						}
                         $this->nolog($list);
                         $list->flag='7';

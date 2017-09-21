@@ -516,7 +516,7 @@ if(!empty($templateList)){
             var w = $(order).attr('size-w');
             var h = $(order).attr('size-h');
             $(order).find('.clickImg-'+w+'-'+h).remove();
-            $(order).append("<li><img style='display:block;float:left;position:relative;z-index:1' src='"+data[i]['pic']+"' width='"+width+"' height='"+height+"' id='"+data[i]['id']+"' ></li>");
+            $(order).append("<li><img style='display:block;float:left;position:relative;z-index:1' src='"+data[i]['pic']+"' width='"+width+"' height='"+height+" 'onclick='add(this)' id='"+data[i]['id']+"' ></li>");
         }
         banner(l);
     }
@@ -524,11 +524,8 @@ if(!empty($templateList)){
     function showDataAgainCopy(data)
     {
 
-//        var data=<?php //echo $templateList;?>//;
         var l= data.length;
         l= data.length;
-//        console.log(data);
-
         for(var i = 0 ; i<data.length ; i++){
             var order = '.order-'+data[i]['order'];
 
@@ -594,9 +591,16 @@ if(!empty($templateList)){
 
     function add(obj)
     {
+        var statusFlag = $('.centerTopNav').attr('statusFlag'); //编辑|待发布|现网
+        if(statusFlag == 3){
+            onlineFlag=1;
+        }else{
+            onlineFlag=0;
+        }
+
         var screenGuideId = $('.guideFlag').attr('guideId');
         var quote_flag = checkQuote(screenGuideId);
-        if(quote_flag == 1){
+        if(quote_flag == 1 && (statusFlag==1 ||statusFlag==2)){
             layer.alert('此屏幕内容是引用屏幕不能被编辑');
             return false;
         }
@@ -606,8 +610,6 @@ if(!empty($templateList)){
             return false;
         }
          var reviewFlag = checkReviewDatacopy();
-    //             console.log(reviewFlag);
-         //alert(reviewFlag);
          if(reviewFlag=='2'){
                var releaseFlag = checkReviewsTimes();
                  var auth = "<?php echo $_SESSION['auth'];?>";
@@ -616,31 +618,25 @@ if(!empty($templateList)){
                  }else{
                      layer.alert('现在有数据还在工作流审核环节中暂且不能编辑！');
                         return false;
-                //console.log('现在有数据还在工作流审核环节中暂且不能编辑');
                  }
          }
         if($('.submit_btn').val() == '发布'){
             layer.alert('发布新数据之后才可以继续编辑');
-        return false;
+            return false;
         }
-        //console.log(flag);
-        /*if( flag==1){
-           return false;
-        }*/
         var mid = "<?php echo $_GET['mid']?>";
         var screenGuideId = $('.guideFlag').attr('guideId');
         var epg = "<?php echo $_GET['epg']?>";
         var order = $(obj).parent('div').attr('order');
 
-        /*getScreenContentInfo(screenGuideId,order);  //获取这个推荐位的信息
-        return false;*/
+
         if($(obj).parent().is('div')){
             var width = $(obj).parent('div').attr('size-w');
             var height = $(obj).parent('div').attr('size-h');
             var x = $(obj).parent('div').attr('x');
             var y = $(obj).parent('div').attr('y');
             var order = $(obj).parent('div').attr('order');
-            window.open('/version/screen/addScreenContent/mid/'+mid+'/screenGuideId/'+screenGuideId+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/epg/'+epg+'/order/'+order+fixedUrl);
+            window.open('/version/screen/addScreenContent/mid/'+mid+'/screenGuideId/'+screenGuideId+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/epg/'+epg+'/order/'+order+'/onlineFlag/'+onlineFlag+fixedUrl);
         }else if($(obj).parent().parent().is('ul')){
             var width = $(obj).parent().parent().parent().parent().parent().attr('size-w');
             var height = $(obj).parent().parent().parent().parent().parent().attr('size-h');
@@ -648,17 +644,16 @@ if(!empty($templateList)){
             var y = $(obj).parent().parent().parent().parent().parent().attr('y');
             var order = $(obj).parent().parent().parent().parent().parent().attr('order');
             var id = $(obj).attr('id');
-            window.open('/version/screen/updateScreenContent/mid/'+mid+'/screenGuideId/'+screenGuideId+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/epg/'+epg+'/order/'+order+"/id/"+id+fixedUrl);
+            window.open('/version/screen/updateScreenContent/mid/'+mid+'/screenGuideId/'+screenGuideId+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/epg/'+epg+'/order/'+order+'/onlineFlag/'+onlineFlag+"/id/"+id+fixedUrl);
         }else if($(obj).parent().is('li')){
             var width = $(obj).parent().parent('div').attr('size-w');
             var height = $(obj).parent().parent('div').attr('size-h');
             var x = $(obj).parent().parent('div').attr('x');
             var y = $(obj).parent().parent('div').attr('y');
             var order = $(obj).parent().parent('div').attr('order');
-                var id = $(obj).attr('id');
-            window.open('/version/screen/updateScreenContent/mid/'+mid+'/screenGuideId/'+screenGuideId+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/epg/'+epg+'/order/'+order+'/id/'+id+fixedUrl);
+            var id = $(obj).attr('id');
+            window.open('/version/screen/updateScreenContent/mid/'+mid+'/screenGuideId/'+screenGuideId+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/epg/'+epg+'/order/'+order+'/onlineFlag/'+onlineFlag+'/id/'+id+fixedUrl);
         }
-
     }
 
     function getScreenContentInfo(screenGuideId,order)
@@ -778,8 +773,6 @@ if(!empty($templateList)){
     }
 
     function aaa(screenId){
-        //var screenId = $(obj).children('img').attr('guideId');
-//      alert(screenId);return false;
         $.ajax
         ({
             type:'post',
@@ -967,29 +960,26 @@ if(!empty($templateList)){
             }
 
     }
-	 function chang_left_navi1(e){
-                if($(e).attr('src') == '/file/u1855.png'){
-                        $(e).attr('src','/file/u1857.png');
-                        $(e.parentNode.children).each(function(){
-                            if(this.tagName == 'LI'){
-                                    $(this).addClass("navi_none");
-                            }
-                        })
-                }else{
-                        $(e).attr('src','/file/u1855.png');
-                        $(e.parentNode.children).each(function(){
-                            if(this.tagName == 'LI'){
-                                    $(this).removeClass("navi_none");
-                            }
-                        })
-                }
+    function chang_left_navi1(e){
+            if($(e).attr('src') == '/file/u1855.png'){
+                    $(e).attr('src','/file/u1857.png');
+                    $(e.parentNode.children).each(function(){
+                        if(this.tagName == 'LI'){
+                                $(this).addClass("navi_none");
+                        }
+                    })
+            }else{
+                    $(e).attr('src','/file/u1855.png');
+                    $(e.parentNode.children).each(function(){
+                        if(this.tagName == 'LI'){
+                                $(this).removeClass("navi_none");
+                        }
+                    })
+            }
 
-        }
+    }
 
-        $('.aaa').click(function(){
-
-
-
+    $('.aaa').click(function(){
         $.getJSON('<?php echo $this->get_url('screen','copyscreen')?>',{nid:<?php echo $_GET['nid']; ?>},function(d){
             if(d.code == 200){
                 layer.open({

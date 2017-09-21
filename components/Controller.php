@@ -90,7 +90,8 @@ class Controller extends CController
 	public function getPreUrl(){
 		return Yii::app()->request->urlReferrer;
 	}
-        public function WeixinUser($code){
+
+    public function WeixinUser($code){
         echo $code;
     	$appid = "wx3f9bb59f5ba78010";
         $secret = "5f17728db47200477af5b2d9943211b0";
