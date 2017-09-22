@@ -1,7 +1,7 @@
 <?php
 $admin = $this->getMvAdmin();
 $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
-$adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
+$adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:'';
 $adminLeftOne = !empty($_GET['adminLeftOne'])?$_GET['adminLeftOne']:'';
 $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 ?>
@@ -54,7 +54,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 </style>
 <?php
 $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
-$adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
+$adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:'';
 $adminLeftOne = !empty($_GET['adminLeftOne'])?$_GET['adminLeftOne']:'';
 $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 ?>
@@ -69,10 +69,24 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <span style="font-size:14px;">站点</span>
             <select onchange="" name="station" style="width:120px;height:20px;"  class="form-input" id="station">
                 <option value="0">请选择</option>
+		<?php $station=VerStation::model()->findAll();?>
+                <?php foreach($station as $v):?>
+                    <option <?php if(!empty($_GET['stationId'])&&$_GET['stationId']==$v['id']){echo "selected=selected";}?> value="<?php echo $v['id']?>"><?php echo $v['name']?></option>
+                <?php endforeach;?>
             </select>
             <span style="float:left;font-size:14px;">省份</span>
-            <select name="province" style="width:100px;height:20px;"  class="form-input" id="province">
+            <select onchange="getcity()" name="province" style="width:100px;height:20px;"  class="form-input" id="province">
                 <option value="0" title="ShowType">请选择</option>
+		<?php
+                    $province=Province::model()->findAll();
+                    foreach($province as $k){
+			if(!empty($_GET['province'])&&$_GET['province']==$k['provinceCode']){
+                            echo '<option selected=selected value="'.$k['provinceCode'].'">'.$k['provinceName'].'</option>';
+                        }else{
+                            echo '<option  value="'.$k['provinceCode'].'">'.$k['provinceName'].'</option>';
+                        }
+                    }
+                ?>
             </select>
             <span style="float:left;font-size:14px;">地市</span>
             <select name="city" style="width:100px;height:20px;"  class="form-input" id="city">
@@ -84,7 +98,6 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 	<?php if($_SESSION['auth']=='1'):?>
         <div class="inputDivTwo">
             <input class="btn add" type="button" value="添加" name="add" style="font-size: 14px;width:85px;">
-            <input class="btn del" type="button" value="删除" name="del" style="font-size: 14px;width:85px;">
         </div>
         <?php endif;?>
         <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
@@ -104,11 +117,31 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <td><?php echo $v['id']?></td>
                 <td><?php echo $v['name']?></td>
                 <td><?php echo $v['stationId']?></td>
-                <td><?php echo $v['province']?></td>
-                <td><?php echo $v['city']?></td>
+                <td>
+		    <?php 
+                        $province=$v['province'];
+                        $tmp=explode("/",$province);
+                        for($i=0;$i<count($tmp);$i++){
+                            $match=Province::model()->findByAttributes(array("provinceCode"=>$tmp[$i]));
+                            $pro[$i]=$match->provinceName;
+                        }
+                        echo join("/",$pro);
+                    ?>
+		</td>
+                <td>
+		    <?php
+                    $city=$v['city'];
+                    $ctmp=explode("/",$city);
+                    for($i=0;$i<count($ctmp);$i++){
+                        $match_c=City::model()->findByAttributes(array("cityCode"=>$ctmp[$i],"provinceId"=>$tmp[$i]));
+                        $c[$i]=$match_c->cityName;
+                    }
+                    echo join("/",$c);
+                    ?>
+		</td>
                 <td><?php echo $v['web_ip']?></td>
                 <td><?php echo $v['img_ip']?></td>
-                <td><a gid=<?php echo $v['id']?> class="href" href="javascript:;">编辑</a></td>
+                <td><a gid=<?php echo $v['id']?> class="href" href="javascript:;">编辑</a>&nbsp;<a href="javascript:;" gid="<?php echo $v['id']?>" class="del">删除</a></td>
             </tr>
                 <?php endforeach;?>
             <?php else:?>
@@ -134,6 +167,33 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     $(".href").click(function(){
 	var id=$(this).attr("gid");
 	window.location.href="/version/station/addressupdate/id/"+id+fixedUrl;
+    })
+    $(".search").click(function(){
+        var title=$("input[name='title']").val();
+        var province=$("#province option:selected").val();
+        var stationId=$("#station option:selected").val();
+        window.location.href="/version/station/address.html?title="+title+"&province="+province+"&stationId="+stationId+"&mid="+mid+"&nid="+nid+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftNavFlag="+adminLeftNavFlag;
+    })
+    function getcity(){
+        var province=$("#province option:selected").val();
+	$("#city").children().remove();
+        $.getJSON("/version/wallpaper/getcity?mid=1",{id:province},function(data){
+            $.each(data,function(i){
+                $("#city").append('<option value="'+data[i]['cityCode']+'">'+data[i]['cityName']+'</option>');
+            })
+        });
+    }
+    $(".del").click(function(){
+        var id=$(this).attr("gid");
+        $.post('/version/station/addressdel?mid=1',{id:id},function(d){
+            if(d.code== 200){
+                alert('删除成功');
+                location.reload();;
+            }else{
+                alert('删除失败');
+                location.reload();
+            }
+        },'json')
     })
 </script>
 

@@ -1563,7 +1563,18 @@ $list = SQLManager::execute($sql);
         $this->render("new");
     }
 	public function actionAddress(){
-	$data=VerAddress::model()->findAll();
+	$criteria = new CDbCriteria();
+        $criteria->select = '*';
+        if(!empty($_REQUEST['title'])){
+            $criteria->addSearchCondition("name",$_REQUEST['title']);
+        }
+        if(!empty($_REQUEST['stationId'])){
+            $criteria->addCondition("stationId=".$_REQUEST['stationId']);
+        }
+        if(!empty($_REQUEST['province'])){
+            $criteria->addSearchCondition("province",$_REQUEST['province']);
+        }
+	$data=VerAddress::model()->findAll($criteria);
         $this->render("address",array("data"=>$data));
     }
 
@@ -1571,10 +1582,45 @@ $list = SQLManager::execute($sql);
 	$this->render("addressadd");
     }
 
+	public function actionAddressDel(){
+        $id=$_REQUEST['id'];
+        $model=VerAddress::model()->deleteByPk($id);
+        if($model>0){
+            echo json_encode(array("code"=>200));
+        }else{
+            echo json_encode(array("code"=>500));
+        }
+    }
+
 	public function actionAddressUpdate(){
 	$id=$_REQUEST['id'];
 	$info=VerAddress::model()->findByPk($id);
         $this->render("addressupdate",array("info"=>$info));
+    }
+
+    public function actionDoAddressUpdate(){
+        $model=VerAddress::model()->findByPk($_REQUEST['id']);
+        $code=$_REQUEST['code'];
+        $img=$_REQUEST['img'];
+        $web=$_REQUEST['web'];
+
+        for($i=0;$i<count($code);$i++){
+            $tmp=explode("-",$code[$i]);
+            $province[$i]=$tmp[0];
+            $city[$i]=$tmp[1];
+        }
+        $p=join("/",$province);
+        $c=join("/",$city);
+        $model->province=$p;
+        $model->city=$c;
+        $model->web_ip=$web;
+        $model->img_ip=$img;
+        $res=$model->update(array("id","province","city","web_ip","img_ip"));
+        if($res>0){
+            echo json_encode(array("code"=>200));
+        }else{
+            echo json_encode(array("code"=>500));
+        }
     }
     public function actionDoAddressAdd(){
 	$model=new VerAddress();
