@@ -2585,3 +2585,38 @@ Stack trace:
 REQUEST_URI=/images/admin_logo.png
 HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
 ---
+2017/09/25 16:36:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/25 16:36:44 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mobile.yd_ver_screen_review' doesn't exist. The SQL statement executed was: select * from yd_ver_screen_review where copy_id = '225' order by audtime desc limit 1.
+in D:\phpStudy\WWW\newweb\protected\components\log\SQLManager.php (25)
+in D:\phpStudy\WWW\newweb\protected\modules\version\views\screen\updateScreenContent.php (344)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\ScreenController.php (132)
+2017/09/25 16:36:44 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mobile.yd_ver_screen_review' doesn't exist. The SQL statement executed was: select * from yd_ver_screen_review where copy_id = '225' order by audtime desc limit 1' in D:\phpStudy\WWW\newweb\framework\db\CDbCommand.php:543
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 D:\phpStudy\WWW\newweb\protected\components\log\SQLManager.php(25): CDbCommand->queryAll()
+#2 D:\phpStudy\WWW\newweb\protected\modules\version\views\screen\updateScreenContent.php(344): SQLManager::queryAll('select * from y...')
+#3 D:\phpStudy\WWW\newweb\framework\web\CBaseController.php(126): require('D:\\phpStudy\\WWW...')
+#4 D:\phpStudy\WWW\newweb\framework\web\CBaseController.php(95): CBaseController->renderInternal('D:\\phpStudy\\WWW...', Array, true)
+#5 D:\phpStudy\WWW\newweb\framework\web\CController.php(869): CBaseController->renderFile('D:\\phpStudy\\WWW...', Array, true)
+#6 D:\phpStudy\WWW\newweb\framework\web\CController.php(782): CController->renderPartial('updateScreenCon...', Array, true)
+#7 D:\phpStudy\WWW\newweb\protected\modules\version\controllers\ScreenController.php(132): CController->render('updateScreenCon...', Array)
+#8 D:\phpStudy\WWW\newweb\framework\web\actions\CInlineAction.php(49): ScreenController->actionUpdateScreenContent()
+#9 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): CController->run('updatescreencon...')
+#13 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('version/screen/...')
+#14 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#16 {main}
+REQUEST_URI=/version/screen/updateScreenContent/mid/1/screenGuideId/25/width/2/height/6/x/0/y/0/epg/%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95/order/117/onlineFlag/0/id/225/adminLeftOne/3/adminLeftTwo//adminLeftOneName/%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95/adminLeftTwoName/%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95/adminLeftNavFlag/1/one/0/two/0/three/0/siteName//son//top//leftNavFlag/0
+HTTP_REFERER=http://127.0.0.1:8081/version/screen/index.html?mid=1&nid=8&epg=%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95&leftLiId=1&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95
+---

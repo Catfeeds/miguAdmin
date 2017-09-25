@@ -147,7 +147,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <th>资产ID</th>
             <th>牌照方</th>
             <th>标题</th>
-	    <th>资费类型</th>
+	        <th>资费类型</th>
             <th>类型</th>
             <th>语言</th>
             <th>状态</th>
@@ -172,11 +172,19 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             case 'HNBB':echo '芒果';break;
                             case 'CIBN':echo '国广';break;
                             case 'YGYH':echo '银河';break;
-			    case 'poms':echo "咪咕";break;
+			                case 'poms':echo "咪咕";break;
                         }
                         ?></td>
                     <td><?php echo $l['title']?></td>
-		    <td><?php if($l['prdpack_id']==1002381){echo "收费";}else{echo "免费";}?></td>
+                    <?php $cps = array('642001','BESTVOTT','ICNTV','youpeng','HNBB','YGYH');?>
+		    <td><?php
+                if($l['prdpack_id']==1002381 && $l['cp']=='poms'){
+                    echo "收费";
+                }else if(in_array($l['cp'],$cps)){
+                    echo "";
+                }else{
+                    echo "免费";
+                }?></td>
                     <td><?php switch($l['ShowType']){
                             case 'Movie':echo '电影';break;
                             case 'Column':echo '栏目';break;

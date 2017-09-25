@@ -327,11 +327,37 @@
                 <?php endif;?>
             </div>
         </td>
-        </tr>
-
+</table>
+<table style="width:900px;" class="mtable mt10" cellpadding="10" cellspacing="0">
     <tr>
-        <td align="center" colspan="4" class="button">
-<!--            <input type="button" value="选择媒资" class="btn meizi">-->
+        <th style="background: #A3BAD5;height:30px;" colspan="7">审核纪录</th>
+    </tr>
+    <tr>
+
+        <td >审核人</td>
+        <td>审核时间</td>
+        <td>审核状态</td>
+        <td>驳回理由</td>
+    </tr>
+    <?php
+    /*$id = $screenContent[0]['id'];
+    $sql = "select * from yd_ver_screen_review where copy_id = '$id' order by audtime desc limit 1";
+    $res = SQLManager::queryAll($sql);
+    if(!empty($res)){
+        */?><!--
+        <tr>
+
+            <td ><?php /*echo $res['0']['auditor']; */?></td>
+            <td><?php /*echo date("Y-m-d H:i:s",$res['0']['audtime']); */?></td>
+            <td><?php /*echo $res['0']['status']; */?></td>
+            <td><?php /*echo $res['0']['message']; */?></td>
+        </tr>
+        --><?php
+/*    }*/
+    ?>
+    <tr>
+        <td align="center" colspan="4">
+            <!--            <input type="button" value="选择媒资" class="btn meizi">-->
             <input style="width:100px;height:30px;padding:0px" type="button" value="为此推荐位添加轮播图" class="btn addBanner">
             <input style="width:100px;height:30px;padding:0px" type="button" value="保存信息" class="btn save">
             <input style="width:100px;height:30px;padding:0px" type="button" value="删除此条数据" class="btn del">
