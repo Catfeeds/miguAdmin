@@ -79,6 +79,14 @@
             layer.alert('请选择省市',{icon:0});
             return false;
         }
+	if(isValidIP(web)==false){
+            layer.alert('请输入正确格式的IP',{icon:0});
+            return false;
+        }
+        if(isValidIP(img)==false){
+            layer.alert('请输入正确格式的IP',{icon:0});
+            return false;
+        }
 	G.web=web;
         G.img=img;
         G.stationId=stationId;
@@ -90,9 +98,16 @@
                 alert('添加成功');
                 window.history.go(-1);
             }else{
-                layer.close(load);
-                layer.alert(d.msg);
+               	alert("添加失败");
+		location.reload();
             }
         },'json')
     })
+    $(".cancel").click(function(){
+	window.history.go(-1);
+    })
+    function isValidIP(ip) {
+	var reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5]):\d{0,6}$/
+        return reg.test(ip);
+    }
 </script>

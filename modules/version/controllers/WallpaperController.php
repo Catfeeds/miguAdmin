@@ -80,8 +80,12 @@ class WallpaperController extends VController{
                     if(!empty($_REQUEST['title'])){
                         $criteria->addCondition("title like '%{$_REQUEST['title']}%'");
                     }
-		    if($_REQUEST['type']!=-1){
-                        $criteria->addCondition(" type=".$_REQUEST['type']);
+		    if(!empty($_REQUEST['type'])){
+			if($_REQUEST['type']==1){
+                        	$criteria->addCondition(" type=0");
+			}else{
+				$criteria->addCondition(" type=1");
+			}
                     }
                     if(!empty($_REQUEST['province'])) {
                         $criteria->addCondition(" province like '%{$_REQUEST['province']}%'");
@@ -688,9 +692,6 @@ class WallpaperController extends VController{
                 if($res[$m]==$new[$n]){
                     $new[$n]['checked']="checked";
                 }
-		//else{
-                  //  $new[$n]['checked']="";
-                //}
             }
         }
 

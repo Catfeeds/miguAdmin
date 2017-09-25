@@ -118,9 +118,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 	<span style="font-size:15px;margin-left: 5px">类型:</span>
 	<span style="display:inline-block;">
 	<select id="type" class="form-input w100" style="height:20px">
-		<option value="-1">请选择</option>
-		<option value="0">普通类型</option>
-		<option value="1">强制类型</option>
+		<option value="0">请选择</option>
+		<option value="1" <?php if(!empty($_GET['type'])&&$_GET['type']==1){echo "selected=selected";}?>>普通类型</option>
+		<option value="2" <?php if(!empty($_GET['type'])&&$_GET['type']==2){echo "selected=selected";}?>>强制类型</option>
 	</select></span>
 	<span style="font-size:15px;margin-left: 5px">省份:</span>
 	<?php 
