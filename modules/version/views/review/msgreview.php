@@ -68,9 +68,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <span style="font-size:15px;margin-left: 5px">状态:&nbsp;&nbsp;&nbsp;</span>
         <select style="height:20px;width:80px" name="type" class="form-input" id="type">
             <option value="0">请选择</option>
-            <option value="1">未审核</option>
-            <option value="2">已通过</option>
-            <option value="3">已驳回</option>
+            <option value="1" <?php if(!empty($_GET['type']) && $_GET['type'] == '1'){echo "selected=selected";}?>>未审核</option>
+            <option value="2" <?php if(!empty($_GET['type']) && $_GET['type'] == '2'){echo "selected=selected";}?>>已通过</option>
+            <option value="3" <?php if(!empty($_GET['type']) && $_GET['type'] == '3'){echo "selected=selected";}?>>已驳回</option>
         </select>
 
         <input style="width：80px;height:20px;margin-left: 5px" class="btn btn_search" value="查询" type="button">
