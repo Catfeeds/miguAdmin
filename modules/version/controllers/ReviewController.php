@@ -457,7 +457,6 @@ class ReviewController extends VController
     public function actionScreenReview()
     {
         $workInfo = Common::getWorkInfo();
-	//var_dump($workInfo);die;
         $workNum = array();
         if(!empty($workInfo)){
             foreach ($workInfo as $K=>$v){
@@ -467,17 +466,16 @@ class ReviewController extends VController
             $sign = $workNum[0];
 	        $m = count($workInfo)-1;
             $stationId = $workInfo[$m]['stationId'];
-                $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id=$stationId ";
-                $sql_where = " where  1=1";
-                if(!empty($_REQUEST['title'])){
-                    $sql_where .= " and a.title='%{$_REQUEST['title']}%'";
-                }
-                if(!empty($_REQUEST['cp'])){
-                    $sql_where .= " and a.cp='{$_REQUEST['cp']}'";
-                }
+            $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id=$stationId ";
+            $sql_where = " where  1=1";
+            if(!empty($_REQUEST['title'])){
+                $sql_where .= " and a.title='%{$_REQUEST['title']}%'";
+            }
+            if(!empty($_REQUEST['cp'])){
+                $sql_where .= " and a.cp='{$_REQUEST['cp']}'";
+            }
 
- //               $sql_top = $sql . $sql_where;
-
+ //         $sql_top = $sql . $sql_where;
             //$sql_bottom = " inner join yd_ver_station s on s.id=g.gid GROUP BY p.flag";
             $sql_bottom = " group by a.id";
             if(in_array($sign,$workNum) && $sign==1){
@@ -500,10 +498,10 @@ class ReviewController extends VController
                 $this->render('screenreview',array('list'=>$list,'readFlag'=>'1'));die;
             }
 //	var_dump($sql_work);die;
-        $list = SQLManager::queryAll($sql_work);
+            $list = SQLManager::queryAll($sql_work);
             $this->render('screenreview',array('list'=>$list,'readFlag'=>'1'));
-    }else{
-         if(!empty($_REQUEST['allbtn'])){
+        }else{
+            if(!empty($_REQUEST['allbtn'])){
                 $allbtn=$_REQUEST['allbtn'];
                 if($allbtn=='已通过'){
                      $sql="select p.*,g.title as gtitle,s.name from yd_ver_screen_content_log p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag='1' inner join yd_ver_station s on s.id=g.gid ";
@@ -517,22 +515,22 @@ class ReviewController extends VController
          		$sql="select p.*,g.title as gtitle,s.name from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag=1 and p.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station s on s.id=g.gid";
             }
             $sql_where = " where  1=1";
-                if(!empty($_REQUEST['stationId'])){
-                    $sql_where .= " and s.id='{$_REQUEST['stationId']}'";
-                }
-                if(!empty($_REQUEST['title'])){
-                    $sql_where .= " and p.title like '%{$_REQUEST['title']}%'";
-                }
-                if(!empty($_REQUEST['cp'])){
-                    $sql_where .= " and p.cp='{$_REQUEST['cp']}'";
-                }
+            if(!empty($_REQUEST['stationId'])){
+                $sql_where .= " and s.id='{$_REQUEST['stationId']}'";
+            }
+            if(!empty($_REQUEST['title'])){
+                $sql_where .= " and p.title like '%{$_REQUEST['title']}%'";
+            }
+            if(!empty($_REQUEST['cp'])){
+                $sql_where .= " and p.cp='{$_REQUEST['cp']}'";
+            }
 
-                $sql = $sql . $sql_where;
+            $sql = $sql . $sql_where;
             $list = SQLManager::queryAll($sql);
 //            print_r($sql);
 //            var_dump($list);die;
             $this->render('screenreview',array('list'=>$list,'readFlag'=>'2'));
-    }
+        }
 //        echo $sql_work;die;
     //    $list = SQLManager::queryAll($sql_work);
     //    $this->render('screenreview',array('list'=>$list));
@@ -848,17 +846,17 @@ class ReviewController extends VController
     public function actionMsgReview()
     {
         $username=$_SESSION['nickname'];
-	$sql = "select t3.type from yd_ver_admin t1 left join yd_ver_review_work t2 on t1.id = t2.uid left join yd_ver_work t3 on t2.workid = t3.id where t1.nickname = '$username' and t3.flag = 4";
+	    $sql = "select t3.type from yd_ver_admin t1 left join yd_ver_review_work t2 on t1.id = t2.uid left join yd_ver_work t3 on t2.workid = t3.id where t1.nickname = '$username' and t3.flag = 4";
 	 
-	$type = SQLManager::QueryAll($sql);
-	if(!empty($type['0']['type'])){
+	    $type = SQLManager::QueryAll($sql);
+	    if(!empty($type['0']['type'])){
                 $list['typea'] = $type['0']['type'];
         }
 
         $flag= '4';
         $res  = Common::getUser($username,$flag);
        
-	$page = 20;
+	    $page = 20;
         $data = $this->getPageInfo($page);
        // $list = array();
         if(!empty($_REQUEST['type'])){
@@ -866,20 +864,20 @@ class ReviewController extends VController
 
         }
 
-	if(!empty($_REQUEST['gid'])){
+	    if(!empty($_REQUEST['gid'])){
             $list['gud']=$_REQUEST['gid'];
         }
 
-	 $uid = $_SESSION['userid'];
-            $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 4 left join  yd_ver_review_work as
- c on c.workid=b.id where c.uid=$uid  group by a.id";
-            $st = SQLManager::QueryAll($sql);
+	    $uid = $_SESSION['userid'];
+        $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 4 left join  yd_ver_review_work as
+c on c.workid=b.id where c.uid=$uid  group by a.id";
+        $st = SQLManager::QueryAll($sql);
 	
-	if(!empty($st) && $_SESSION['auth'] <> 1){
-		$list['gid'] = $st;
-	}
+        if(!empty($st) && $_SESSION['auth'] <> 1){
+            $list['gid'] = $st;
+        }
 	
-       $list['cp']=$res['cp'];
+        $list['cp']=$res['cp'];
         $list['review']=$res['review'];
         if($_SESSION['auth']==1){
             $list['workid'] ='';
@@ -890,7 +888,7 @@ class ReviewController extends VController
 	
         $tmp =VideoManager::getMsgReview($data,$list);
         
-	$url = $this->createUrl($this->action->id);
+	    $url = $this->createUrl($this->action->id);
         $pagination = $this->renderPagination($url,$tmp['count'],$page,$data['currentPage'],$tmp['alwaysCount']);
         $list = array();
         if(!empty($res['review']) || $_SESSION['auth']=='1'){
@@ -960,7 +958,7 @@ WHERE
   public function actionTopicReview()
     {
         $username=$_SESSION['nickname'];
-	$flag= '6';
+	    $flag= '6';
         $res  = Common::getUser($username,$flag);
 		
         $page = 20;
@@ -1163,6 +1161,30 @@ WHERE
             }
         }
         $this->render('wallreview',array('list'=>$list,'page'=>$pagination,'res'=>$res));
-    }	
+    }
+
+
+//    public function actionGetQuoteInfo()
+    public function GetQuoteInfo($pasteGuideId)
+    {
+//        $pasteGuideId = $_REQUEST['guideId'];
+        $res = VerScreenQuote::model()->findAll("`pasteGuideId`=$pasteGuideId and `status`=1");
+        if(!empty($res)){
+            return $res;
+        }else{
+            return false;
+        }
+    }
+
+    public function actionGetQuoteInfo()
+    {
+        $copyGuideId = $_REQUEST['guideId'];
+        $res = VerScreenQuote::model()->findAll("`copyGuideId`=$copyGuideId and `status`=1");
+        $stuList = array();
+        if (!empty($res)) {
+            $stuList = json_decode(CJSON::encode($res),true);
+        }
+        echo json_encode($stuList);
+    }
 }
 

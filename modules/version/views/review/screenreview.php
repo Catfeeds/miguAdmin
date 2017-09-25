@@ -50,7 +50,6 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 </div>
 <div class="mt10" style="margin-top:0px;">
     <div class="inputDiv">
-        <!--<input style="width:120px;height:18px;" placeholder="请输入查询条件" type="text" name="title" class="form-input w100" value="<?php //echo !empty($_GET['title'])?$_GET['title']:'';?>">-->
         <input style="width:120px;height:18px;" placeholder="请输入查询条件" type="text" name="title" class="form-input w100" value="">
         <span>站点:</span>
         <select name="stationId" id="stationId" style="width:70px;height:20px;"  class="form-input w100">
@@ -83,7 +82,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <option  value="已通过"  >已通过</option>
             <option  value="已驳回"  >已驳回</option>
         </select>
-        <input style="width:50px;height:20px;margin-left: 5px;" class="btn btn1 btn-gray audit_search search " type="button" value="查询" name="" style="font-size: 14px;/*margin-right:550px;*/">
+        <input style="width:50px;height:20px;margin-left: 5px;font-size: 14px;" class="btn btn1 btn-gray audit_search search " type="button" value="查询" name="" >
         <!--<input type="button" style='width:30px;height:20px;float:right;margin-right: 10px;' class="btn page_btn" value="go">
         <span style="float:right;font-size:14px">&nbsp;页</span>
         <input type="text" style='width:30px;height:18px;float:right' class="form-input " value="" name="page"  >
@@ -117,9 +116,16 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <?php
         if(!empty($list)){
             foreach($list as $k=>$v){
+                $quote_res = $this->GetQuoteInfo($v['screenGuideid']);
+                $copyGuides = array();
+                if($quote_res){
+                    foreach ($quote_res as $key=>$val){
+                        $copyGuides[] = $val->attributes['pasteGuideId'];
+                    }
+                }
                 ?>
-                <tr>
-                    <td><input type="checkbox" name="id" value="<?php echo $v['id']?>"></td>
+                <tr class="tr_list">
+                    <td><input type="checkbox" name="id" value="<?php echo $v['id']?>"  <?php if(in_array($v['screenGuideid'],$copyGuides)){echo "disabled=disabled";}?> screenGuidid="<?=$v['screenGuideid']?>" onclick="checkQuote(this)" ></td>
                     <td><?php echo date("Y-m-d h:i:s",$v['addTime'])?></td>
                     <td><?php echo $v['name']?></td>
                     <td><?php echo $v['gtitle']?></td>
@@ -155,6 +161,46 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     var leftNavFlag  = "<?php echo !empty($_GET['leftNavFlag'])?$_GET['leftNavFlag']:'0'; ?>";
     var adminLeftNavFlag  = "<?php echo !empty($_GET['adminLeftNavFlag'])?$_GET['adminLeftNavFlag']:'0'; ?>";
     var fixedUrl = '/adminLeftOne/'+adminLeftOne+'/adminLeftTwo/'+adminLeftTwo+'/adminLeftOneName/'+adminLeftOneName+'/adminLeftTwoName/'+adminLeftTwoName+'/adminLeftNavFlag/'+adminLeftNavFlag+'/one/'+one+'/two/'+two+'/three/'+three+'/siteName/'+siteName+'/son/'+son+'/top/'+topName+'/leftNavFlag/'+leftNavFlag;
+
+    function checkQuote(obj)
+    {
+        var copyGuideId = $(obj).attr('screenguidid');
+        var pic = $(obj).parent().parent().children().eq(5).children('img').attr('src');
+        var mid = <?=$this->mid;?>;
+        var pasteGuideIds = new Array();
+        $.ajax
+        ({
+            type:'get',
+            url:"/version/review/GetQuoteInfo/mid/"+mid+"/guideId/"+copyGuideId,
+            success:function(data)
+            {
+                data = eval(data);
+                if(!empty(data)){
+                    $.each(data,function (i) {
+                        pasteGuideIds.push(data[i]['pasteGuideId']);
+                    })
+                }
+
+            },
+            async:false
+        });
+        if(!empty(pasteGuideIds)){
+            for(var i = 0 ; i<pasteGuideIds.length ; i++){
+                for(var j = 0 ; j<$('.tr_list').length ; j++){
+                    var tmp_pasteGuide = $('.tr_list').eq(j).children().eq(0).children('input').attr('screenguidid');
+                    var tmp_pic =  $('.tr_list').eq(j).children().eq(5).children('img').attr('src');
+                    if(pasteGuideIds[i] == tmp_pasteGuide && pic == tmp_pic){
+                        var checked_status = $('.tr_list').eq(j).children().eq(0).children('input').prop('checked');
+                        if(empty(checked_status) || checked_status == undefined){
+                            $('.tr_list').eq(j).children().eq(0).children('input').prop("checked",true);
+                        }else if(checked_status){
+                            $('.tr_list').eq(j).children().eq(0).children('input').prop('checked',false);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     $('.chose').click(function(){
         $('.allbtn').removeClass('gray').addClass('chose');
@@ -196,7 +242,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 	}
 	
 	window.location.href = headerUrl+center+fixedUrl;
-    })
+    });
 
     $(document).on('click','.img',function(){
         var img = $(this).children('img').attr('src');
@@ -212,14 +258,14 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 layer.alert(d.msg,{icon:0});
             }
         })
-    })
+    });
 
     $('.btnall').click(function(){
         $(".center :checkbox").prop("checked", true);
-    })
+    });
     $('.btnno').click(function(){
         $(".center :checkbox").prop("checked", false);
-    })
+    });
 
     $('.sub_btn').click(function(){
         var text = $(this).val();
@@ -238,7 +284,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         $.post("<?php echo $this->get_url('review','contentaccess')?>",{id:ids,flag:flag},function(){
             location.reload();
         })
-    })
+    });
 
     $('.access_btn').click(function(){
         var text = $(this).val();
@@ -249,30 +295,14 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         }
         var url = '/version/review/accessdata?mid='+"<?php echo $_GET['mid']?>"+"&flag="+flag;
         ajax(url);
-    })
+    });
 
     $('.allbtn').click(function(){
         var url = '/version/review/reviewdata?mid='+"<?php echo $_GET['mid']?>";
         //ajax(url);
         window.location.reload();
-    })
-    /*function access_btnChange()
-    {
-        var text = $('#allbtn').val();
-//        alert(text);return false;
+    });
 
-        if(text=='已通过'){
-            var flag=1;
-        }else if(text=='待审核'){
-            window.location.reload();return false;
-        }else{
-            var flag=2;
-        }
-
-        //alert(flag);return false;
-        var url = '/version/review/accessdata?mid='+"<?php echo $_GET['mid']?>"+"&flag="+flag;
-        ajax(url);
-    }*/
 
 
     function ajax(url){

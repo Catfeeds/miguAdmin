@@ -107,6 +107,8 @@
                 $template_num =  $list[0]['templateId'];
                 if($template_num<=11){
                     echo "模板".$template_num;
+                }else{
+                    echo "自定义模板：".$list[0]['template_name'];
                 }
             ?>
 
@@ -186,7 +188,16 @@
         <td height="100">模板预览：</td>
         <td colspan="2">
 <div class="templatePic">
-    <img src="/file/template/t01.png" alt="" width='600px' height='300px'>
+    <?php
+        if($list[0]['templateId']>11){
+            $src = $list[0]['pic'];
+        }else if($list[0]['templateId']>=10){
+            $src = "/file/template/t{$list[0]['templateId']}.png";
+        }else{
+            $src = "/file/template/t0{$list[0]['templateId']}.png";
+        }
+    ?>
+    <img src="<?=$src?>" alt="" width='600px' height='300px'>
 	<input type="button" value="查看大图" class="btn checkImg">
 </div>
  </td></tr>

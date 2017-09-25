@@ -366,6 +366,10 @@ class ScreenController extends VController
         $id = $_REQUEST['id'];
         $sql = "select * from yd_ver_screen_guide where id=$id";
         $list = SQLManager::queryAll($sql);
+        if($list[0]['templateId']>11){
+           $sql = "select a.* ,b.name AS template_name,b.id as template_id ,b.pic from yd_ver_screen_guide as a LEFT JOIN yd_ver_template as b on (a.templateId-11)=b.id where a.id=$id";
+           $list = SQLManager::queryAll($sql);
+        }
 	    $template="select * from yd_ver_template";
         $data=SQLManager::queryAll($template);
         $quote = "select c.id as stationId,c.name,a.copyGuideId,a.pasteGuideId,a.status from yd_ver_screen_quote as a left join yd_ver_screen_guide as b on a.copyGuideId=b.id left join yd_ver_station as c on c.id=b.gid WHERE a.pasteGuideId=$id AND a.status=1";
@@ -764,7 +768,6 @@ class ScreenController extends VController
                 "params"=>array(":screenGuideid"=>$copyGuideId,":order"=>$copyOrder)
             )
         );
-//        var_dump($copyOrder_res);die;
         if(!empty($copyOrder_res)){
             if(count($copyOrder_res)==1){
                 $copyGuideId = $copyOrder_res[0]->attributes['screenGuideid'];
@@ -844,6 +847,8 @@ class ScreenController extends VController
         $res = VerTemplate::model()->findByPk($templateId);
         echo $res->attributes['pic'];
     }
+
+
 
     /*
      * 屏幕引用绑定关系表

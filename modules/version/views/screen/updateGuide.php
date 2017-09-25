@@ -120,7 +120,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             }
         }
 //         if(flag == 1){
-            alert('修改排序成功');
+            layer.alert('修改排序成功');
             window.location.reload();
 //        }
 
