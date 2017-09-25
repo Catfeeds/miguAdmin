@@ -328,7 +328,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     $('.btn_search').click(function(){
         var stationId =$('#gid').val();
         var type =$('#type').val();
-	var nid = "<?php echo $_GET['nid']?>";
+	    var nid = "<?php echo $_GET['nid']?>";
         var allbtn = $('#allbtn').val();
         var headerUrl = "/version/review/wallreview/mid/<?php echo $this->mid;?>"+'/nid/'+nid;
         var center = '';
@@ -336,21 +336,21 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         if(stationId>0){
             center += '/stationId/'+stationId;
         }
-	if(type>0){
+	    if(type>0){
             center += '/type/'+type;
         }
         window.location.href = headerUrl+center+fixedUrl;return false;
 	//alert(allbtn);return false;
-	 var username = "<?php echo $admin['nickname']?>";
-	if(allbtn=='已通过'){
+	    var username = "<?php echo $admin['nickname']?>";
+	    if(allbtn=='已通过'){
             var flag=1;
-	     url = '/version/wallpaper/log?mid='+"<?php echo $_GET['mid']?>"+"&flag="+flag;	
-	    window.location.href = url;	return false;
+	        url = '/version/wallpaper/log?mid='+"<?php echo $_GET['mid']?>"+"&flag="+flag;
+	        window.location.href = url;	return false;
         }else if(allbtn=='未审核'){
             window.location.reload();return false;	
         }else{
             var flag=2;
-	   url = '/version/wallpaper/log?mid='+"<?php echo $_GET['mid']?>"+"&flag="+flag;
+	        url = '/version/wallpaper/log?mid='+"<?php echo $_GET['mid']?>"+"&flag="+flag;
             window.location.href = url;return false;	
         }
         if(allbtn != '请选择'){
@@ -423,6 +423,23 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
     function getLocalTime(nS) {
         return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+    }
+
+    $('.page_btn').click(function(){
+        var num = $('input[name=pagenum]').val();
+        var test = window.location.href;
+        var count = getRepeatData(test);
+        if(count>2){
+            window.location.href=test+"&page="+num;
+        }else{
+            window.location.href=test+"/page/"+num;
+        }
+
+    });
+
+    function getRepeatData(input){
+       var ary = input.split("&");
+       return ary.length;
     }
 </script>
 

@@ -435,5 +435,22 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     function getLocalTime(nS) {
         return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
     }
+
+    $('.page_btn').click(function(){
+        var num = $('input[name=pagenum]').val();
+        var test = window.location.href;
+        var count = getRepeatData(test);
+        if(count>2){
+            window.location.href=test+"&page="+num;
+        }else{
+            window.location.href=test+"/page/"+num;
+        }
+
+    });
+
+    function getRepeatData(input){
+        var ary = input.split("&");
+        return ary.length;
+    }
 </script>
 
