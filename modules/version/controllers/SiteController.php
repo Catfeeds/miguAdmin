@@ -3,11 +3,11 @@ class SiteController extends VController
 {
     public function actionIndex(){
         $username=$_SESSION['nickname'];
-	$flag=2;
+	    $flag=2;
         if(!empty($_REQUEST['type'])){
-	    $res = Common::getWork($_REQUEST['type'],$_REQUEST['nid']);
+	        $res = Common::getWork($_REQUEST['type'],$_REQUEST['nid']);
         }else{
-	   $res = Common::getUser($username,$flag);
+	        $res = Common::getUser($username,$flag);
         }
         $page = 20;
         $data = $this->getPageInfo($page);
@@ -23,8 +23,8 @@ class SiteController extends VController
         $tmp =VerSiteListManager::getDatas($data,$list,$gid);
         $url = $this->createUrl($this->action->id);
         $pagination = $this->renderPagination($url,$tmp['count'],$page,$data['currentPage'],$tmp['cou']);
-	$cou = !empty($tmp['cou'])?$tmp['cou']:'0';
-	$online = !empty($tmp['online'])?$tmp['online']:'0';
+        $cou = !empty($tmp['cou'])?$tmp['cou']:'0';
+        $online = !empty($tmp['online'])?$tmp['online']:'0';
         $this->render('index',array('list'=>$tmp['list'],'gid'=>$gid,'page'=>$pagination,'type'=>$type,'cou'=>$cou,'onlie'=>$online,'res'=>$res));
     }
 
@@ -89,32 +89,32 @@ class SiteController extends VController
 
     public function actionClassify(){
         $gid = $_REQUEST['gid'];
-	//var_dump($gid);die;
-	$sql = "select * from yd_ver_category where gid=$gid";
-	$res = SQLManager::QueryAll($sql);
-	//echo '<pre>';
-	//var_dump($res);
+        //var_dump($gid);die;
+        $sql = "select * from yd_ver_category where gid=$gid";
+        $res = SQLManager::QueryAll($sql);
+        //echo '<pre>';
+        //var_dump($res);
         $cp=array();
-	if(!empty($res[0]['cp'])){
-		$cp = explode(' ',$res[0]['cp']);
-	}
+        if(!empty($res[0]['cp'])){
+            $cp = explode(' ',$res[0]['cp']);
+        }
         $type=array();
-	if(!empty($res[0]['type'])){
+	    if(!empty($res[0]['type'])){
                 $type = explode(' ',$res[0]['type']);
         }
         $simple_set=array();
         if(!empty($res[0]['simple_set'])){
             $simple_set = explode(' ',$res[0]['simple_set']);
         }
-	if(!empty($res) ){
-	   $n = $this->renderPartial(
+	    if(!empty($res) ){
+	        $n = $this->renderPartial(
               'updateClassify',
               array(
                  'gid'=>$gid,
-		 'res'=>$res,
+		    'res'=>$res,
                  'cp'=>$cp,
-		 'type'=>$type,
-         'simple_set'=>$simple_set
+		    'type'=>$type,
+            'simple_set'=>$simple_set
               ),
               true
             );
@@ -822,8 +822,8 @@ public function actionTopic2(){
         $model->year            = !empty($_POST['year'])?trim($_POST['year']):'';
         $model->short           = !empty($_POST['short'])?trim($_POST['short']):'';
         $model->gid             = !empty($_POST['gid'])?trim($_POST['gid']):'';
-        $model->simple_set     = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
-	$model->is_free         = !empty($_POST['fee'])?trim($_POST['fee']):'';
+        $model->simple_set      = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
+	    $model->is_free         = !empty($_POST['fee'])?trim($_POST['fee']):'';
         $list = $_REQUEST;
         $gid = $_REQUEST['gid'];
         $sql="select * from  yd_ver_sitelist where id=$gid";
@@ -881,7 +881,7 @@ public function actionTopic2(){
         $model->short           = !empty($_POST['short'])?trim($_POST['short']):'';
         $model->simple_set     = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
         $model->id             = !empty($_POST['id'])?trim($_POST['id']):'';
-	$model->is_free         = !empty($_POST['fee'])?trim($_POST['fee']):'';
+	    $model->is_free         = !empty($_POST['fee'])?trim($_POST['fee']):'';
         $list = $_REQUEST;
         $gid = $_REQUEST['gid'];
         $sql="select * from  yd_ver_sitelist where id=$gid";
@@ -967,6 +967,7 @@ public function actionTopic2(){
         $cate->gid             = !empty($_POST['gid'])?trim($_POST['gid']):'';
         $cate->short           = !empty($_POST['short'])?trim($_POST['short']):'';
         $cate->simple_set      = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
+        $cate->is_free      = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
         if(!$cate->save()){
             var_dump($cate->getErrors());
         }

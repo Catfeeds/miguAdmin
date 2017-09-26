@@ -180,7 +180,7 @@
             <option value="<?php echo $v['id']+11?>" onclick="showTemplate(this)"><?php echo $v['name']?></option>
     <?php endforeach;?>
     </select>
-            <input style="margin-top: 16px;margin-left: 230px;" type="radio" name="editSelf" id="editSelf" onclick="return checkeditSelf()" flag="0">自行编辑
+            <input style="margin-top: 16px;margin-left: 230px;" type="radio" name="editSelf" id="editSelf" onclick="return checkeditSelf()" flag="0" <?php if(!empty($station_guide) && !empty($quote_res)){ //echo "checked=checked";}else{echo "checked=checked";};?>>自行编辑
         </td>
     </tr>
 </div>
@@ -579,7 +579,7 @@
             return false;
         }
 
-        var a = <?php echo isset($selected_guide)?$selected_guide:'0';?>;
+        var a = <?php echo isset($selected_guide)?$selected_guide:'-1';?>;
         var copyGuideId = $('#guide').val();
         if(a == copyGuideId){
             layer.alert("不能引用重复的站点导航");

@@ -143,8 +143,8 @@
             layer.alert('请选择牌照方');
             return false;
         }
-	G.type = "";
-	$("input[name='type']:checked").each(function() {
+        G.type = "";
+        $("input[name='type']:checked").each(function() {
 
             G.type += $(this).val()+' ';
 
@@ -175,8 +175,8 @@
         G.boxoffice = $('input[name=boxoffice]').val();
         G.prize = $('input[name=prize]').val();
         G.gid = $('input[name=gid]').val();
-	G.fee=$("#fee").val();
-//	console.log(G);return false;
+	    G.fee=$("#fee").val();
+        //	console.log(G);return false;
         $.post("<?php echo $this->get_url('site','categoryAdd')?>",G,function(d){
 	    if(d == 200){
 		 alert('添加成功！')
