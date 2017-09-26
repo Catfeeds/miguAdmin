@@ -96,8 +96,8 @@
 	<span style="float:left;font-size:14px;">资费</span>
 	<select style="width:60px;height:20px;"  name="isfree" class="form-input w100" id="free">
 		<option value="0">请选择</option>
-	 	<option value="nfree">收费</option>
-		<option value="free">免费</option>
+	 	<option value="nfree" <?php if(!empty($_GET['isfree']) && $_GET['isfree'] == 'nfree'){echo "selected=selected";};?>>收费</option>
+		<option value="free" <?php if(!empty($_GET['isfree']) && $_GET['isfree'] == 'free'){echo "selected=selected";};?>>免费</option>
 	<select>
                <span  style="font-size:14px;">&nbsp;时间范围&nbsp;&nbsp;</span>
         <input placeholder="开始时间" style="width:60px;height:18px;" type="text" name="first" id="first" class="form-input w100" value="<?php echo !empty($_GET['first'])?$_GET['first']:''?>">

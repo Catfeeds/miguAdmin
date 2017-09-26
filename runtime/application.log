@@ -3062,3 +3062,56 @@ Stack trace:
 REQUEST_URI=/images/admin_logo.png
 HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
 ---
+2017/09/26 15:08:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 15:08:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 15:09:12 [error] [php] Undefined index: free (D:\phpStudy\WWW\newweb\protected\modules\version\views\content\contentindex.php:99)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(869): ContentController->renderFile()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(782): ContentController->renderPartial()
+#2 D:\phpStudy\WWW\newweb\protected\modules\version\controllers\ContentController.php(760): ContentController->render()
+#3 D:\phpStudy\WWW\newweb\framework\web\actions\CInlineAction.php(49): ContentController->actionContentIndex()
+#4 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): ContentController->runAction()
+#6 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): ContentController->runActionWithFilters()
+#7 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): ContentController->run()
+#8 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/content/contentindex?mid=-1&isfree=nfree&type=0&cp=0&title=&first=&end=&pro=undefined&adminLeftNavFlag=1&adminLeftOne=1&adminLeftTwo=1&adminLeftOneName=%E5%85%A8%E9%87%8F%E6%95%B0%E6%8D%AE&adminLeftTwoName=%E5%85%A8%E9%87%8F%E5%BD%B1%E8%A7%86%E5%BA%93
+in D:\phpStudy\WWW\newweb\protected\modules\version\views\content\contentindex.php (99)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\ContentController.php (760)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/26 15:09:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 15:09:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---

@@ -1210,23 +1210,7 @@
         })
     })
 
-    /*function s_btnchange()
-    {
-        var text = $('#s_btnchange').val();
-        var test = window.location.href;
-        var nid = "<?php echo $_GET['nid']?>";
-        var gid = "<?php echo $_REQUEST['nid']?>";
-        if(text=='1'){
-            //var test = window.location.href;
-            var url = "/version/site/index/mid/<?php echo $this->mid;?>"+"/gid/"+gid+'/nid/'+nid+'/status/1/page/1';
-//            window.location.href=test+"&status="+1+"&page=1"
-        }else if(text=='0'){
-            var url = "/version/site/index/mid/<?php echo $this->mid;?>"+"/gid/"+gid+'/nid/'+nid+'/status/3'
-        }else{
-            var url = "/version/site/index/mid/<?php echo $this->mid;?>"+"/gid/"+gid+'/nid/'+nid+'/status/0/page/1';
-        }
-        window.location.href = url+fixedUrl;
-    }*/
+
 
     $('.s_btn').click(function(){
         var text = $(this).val();
