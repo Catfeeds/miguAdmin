@@ -1574,6 +1574,9 @@ $list = SQLManager::execute($sql);
         if(!empty($_REQUEST['province'])){
             $criteria->addSearchCondition("province",$_REQUEST['province']);
         }
+	if(!empty($_REQUEST['city'])){
+            $criteria->addSearchCondition("city",$_REQUEST['city']);
+        }
 	$data=VerAddress::model()->findAll($criteria);
         $this->render("address",array("data"=>$data));
     }

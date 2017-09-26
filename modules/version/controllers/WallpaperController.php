@@ -21,12 +21,14 @@ class WallpaperController extends VController{
 		$gud ="(". substr($gud,1,strlen($gud)-1)."";
 	}
 
-	
+//var_dump($gud);die;	
+	//$id=!empty($_GET['gid'])?$_GET['gid']:'';
 	$id=$_GET['nid'];
         $type = isset($_GET['type']) ? $_GET['type'] : '';
         $username=$_SESSION['nickname'];
         $flag=5;
         $res = Common::getStation($username,$flag);
+//var_dump($res);die;
 	if(!empty($id) && empty($type)){
             $page = 10;
             $data = $this->getPageInfo($page);
@@ -41,6 +43,23 @@ class WallpaperController extends VController{
 		//}
 		  if(!empty($gud)){
                         $criteria->addCondition("gid in".$gud.")");
+			//$criteria->addCondition("");
+                    }
+		  if(!empty($_REQUEST['gid'])){
+			$gid=$_REQUEST['gid'];
+			$criteria->addCondition("gid=$gid");
+		    }
+		  if(!empty($_REQUEST['province'])){
+			$province=$_REQUEST['province'];
+			$criteria->addCondition("province like '%$province%'");
+		    }
+		  if(!empty($_REQUEST['city'])){
+			$city=$_REQUEST['city'];
+                        $criteria->addCondition("city like '%$city%'");
+		    }
+		  if(!empty($_REQUEST['title'])){
+                        $city=$_REQUEST['title'];
+                        $criteria->addCondition("title like '%$city%'");
                     }
 
 		}
@@ -70,11 +89,15 @@ class WallpaperController extends VController{
              
 		    $criteria->addCondition("gid=".$res['stationId'][0]);
                 }else{
-                    if(!empty($gid)){
-                        $criteria->addCondition("gid=".$gid);
+                    /*if(!empty($gid)){
+                        $criteria->addCondition("gid=$gid");
                     }
 		     if(!empty($gud)){
                         $criteria->addCondition("gid in".$gud.")");
+                    }*/
+
+		    if(!empty($gid)){
+                        $criteria->addCondition("gid=$gid");
                     }
 
                     if(!empty($_REQUEST['title'])){
@@ -83,13 +106,16 @@ class WallpaperController extends VController{
 		    if(!empty($_REQUEST['type'])){
 			if($_REQUEST['type']==1){
                         	$criteria->addCondition(" type=0");
-			}else{
+			}elseif($_REQUEST['type']==2){
 				$criteria->addCondition(" type=1");
 			}
                     }
                     if(!empty($_REQUEST['province'])) {
                         $criteria->addCondition(" province like '%{$_REQUEST['province']}%'");
                     }
+		    if(!empty($_REQUEST['city'])){
+			$criteria->addCondition(" city like '%{$_REQUEST['city']}%'");
+		    }
                 }
             }else{
                 $criteria->addCondition("flag=7");
@@ -339,7 +365,11 @@ class WallpaperController extends VController{
         //$pic = 'http://pic-portal-v3.itv.cmvideo.cn:8083/file/' . $pic_true;
         //$pic = 'http://117.144.248.58:8082/file/' . $pic_true;
         //$gid = trim($_POST['gid']);
-        $addTime = time();
+        if($startTime!=$res->startTime||$endTime!=$res->endTime){
+            $addTime=time();
+        }else{
+            $addTime= $res->addTime;
+        }
 	for($i=0;$i<count($Code);$i++){
             $tmp=$Code[$i];
             $arr=explode("-",$tmp);

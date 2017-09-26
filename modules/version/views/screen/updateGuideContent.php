@@ -180,7 +180,7 @@
             <option value="<?php echo $v['id']+11?>" onclick="showTemplate(this)"><?php echo $v['name']?></option>
     <?php endforeach;?>
     </select>
-            <input style="margin-top: 16px;margin-left: 230px;" type="radio" name="editSelf" id="editSelf" onclick="return checkeditSelf()" flag="0" <?php if(!empty($station_guide) && !empty($quote_res)){ //echo "checked=checked";}else{echo "checked=checked";};?>>自行编辑
+            <input style="margin-top: 16px;margin-left: 230px;" type="radio" name="editSelf" id="editSelf" onclick="return checkeditSelf()" flag="<?php if(!empty($station_guide) && !empty($quote_res)){ echo "0";}else{echo "1";};?>" <?php if(!empty($station_guide) && !empty($quote_res)){ /*echo "checked=checked";*/}else{echo "checked=checked";};?>>自行编辑
         </td>
     </tr>
 </div>

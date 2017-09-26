@@ -112,15 +112,16 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <th>操作</th>
             </tr>
 		<?php if(!empty($data)):?>
-                <?php foreach($data as $v):?>
+                <?php foreach($data as $k):?>
             <tr>
-                <td><?php echo $v['id']?></td>
-                <td><?php echo $v['name']?></td>
-                <td><?php echo $v['stationId']?></td>
+                <td><?php echo $k['id']?></td>
+                <td><?php echo $k['name']?></td>
+                <td><?php echo $k['stationId']?></td>
                 <td>
 		    <?php 
-                        $province=$v['province'];
+                        $province=$k['province'];
                         $tmp=explode("/",$province);
+			$pro=array();
                         for($i=0;$i<count($tmp);$i++){
                             $match=Province::model()->findByAttributes(array("provinceCode"=>$tmp[$i]));
                             $pro[$i]=$match->provinceName;
@@ -130,18 +131,19 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 		</td>
                 <td>
 		    <?php
-                    $city=$v['city'];
+                    $city=$k['city'];
                     $ctmp=explode("/",$city);
-                    for($i=0;$i<count($ctmp);$i++){
-                        $match_c=City::model()->findByAttributes(array("cityCode"=>$ctmp[$i],"provinceId"=>$tmp[$i]));
-                        $c[$i]=$match_c->cityName;
+		    $c=array();
+                    for($j=0;$j<count($ctmp);$j++){
+                        $match_c=City::model()->findByAttributes(array("cityCode"=>$ctmp[$j],"provinceId"=>$tmp[$j]));
+                        $c[$j]=$match_c->cityName;
                     }
                     echo join("/",$c);
                     ?>
 		</td>
-                <td><?php echo $v['web_ip']?></td>
-                <td><?php echo $v['img_ip']?></td>
-                <td><a gid=<?php echo $v['id']?> class="href" href="javascript:;">编辑</a>&nbsp;<a href="javascript:;" gid="<?php echo $v['id']?>" class="del">删除</a></td>
+                <td><?php echo $k['web_ip']?></td>
+                <td><?php echo $k['img_ip']?></td>
+                <td><a gid=<?php echo $k['id']?> class="href" href="javascript:;">编辑</a>&nbsp;<a href="javascript:;" gid="<?php echo $k['id']?>" class="del">删除</a></td>
             </tr>
                 <?php endforeach;?>
             <?php else:?>
@@ -172,7 +174,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         var title=$("input[name='title']").val();
         var province=$("#province option:selected").val();
         var stationId=$("#station option:selected").val();
-        window.location.href="/version/station/address.html?title="+title+"&province="+province+"&stationId="+stationId+"&mid="+mid+"&nid="+nid+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftNavFlag="+adminLeftNavFlag;
+	var city=$("#city option:selected").val();
+        window.location.href="/version/station/address.html?title="+title+"&province="+province+"&city="+city+"&stationId="+stationId+"&mid="+mid+"&nid="+nid+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftNavFlag="+adminLeftNavFlag;
     })
     function getcity(){
         var province=$("#province option:selected").val();
@@ -184,16 +187,22 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         });
     }
     $(".del").click(function(){
-        var id=$(this).attr("gid");
-        $.post('/version/station/addressdel?mid=1',{id:id},function(d){
-            if(d.code== 200){
-                alert('删除成功');
-                location.reload();;
-            }else{
-                alert('删除失败');
-                location.reload();
-            }
-        },'json')
+	var id=$(this).attr("gid");
+        layer.confirm('确定删除？', {
+            title:"删除提示",
+            btn: ['删除','取消'] //按钮
+        }, function(){
+            $.post('/version/station/addressdel?mid=1',{id:id},function(d){
+                if(d.code==200){
+                    layer.alert('删除成功',{icon: 1});
+                }else{
+                    layer.alert('删除失败',{icon: 1});
+                    location.reload();
+                }
+            },'json')
+        }, function(){
+            layer.close;
+        });
     })
 </script>
 

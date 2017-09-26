@@ -129,6 +129,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				<td>
 				<?php
                                     $arr=explode("/",$l['province']);
+				    $obj=array();
+				    $provinceName=array();
                                     for($i=0;$i<count($arr);$i++){
                                         $obj[]=Province::model()->findByAttributes(array("provinceCode"=>$arr[$i]));
                                     }
@@ -141,6 +143,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             <td>
 				 <?php
                                 $newarr=explode("/",$l['city']);
+				$cityobj=array();
+				$cityName=array();
                                 for($i=0;$i<count($newarr);$i++){
                                     $cityobj[]=City::model()->findByAttributes(array("cityCode"=>$newarr[$i],"provinceId"=>$arr[$i]));
                                 }
