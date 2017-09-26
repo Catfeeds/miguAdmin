@@ -71,7 +71,7 @@ background: #F0FDFF;
                     case 'HNBB':echo '芒果';break;
                     case 'CIBN':echo '国广';break;
                     case 'YGYH':echo '银河';break;
-		    case 'poms':echo '咪咕';break;
+		            case 'poms':echo '咪咕';break;
               }?>" style="height:25px;line-height: 25px"></td>
 
         </tr>
@@ -619,7 +619,7 @@ background: #F0FDFF;
         'multi': true,//允许同时上传多张图片
         'uploadLimit': 10,//一次最多只允许上传10张图片
         'fileTypeExts': '*',//限制允许上传的图片后缀
-        'sizeLimit': 10240000000,//限制上传的图片不得超过200KB
+        'sizeLimit': '10MB',//限制上传的图片不得超过200KB
         'onSelect'      : function(file){
 
             var type = file.type;
