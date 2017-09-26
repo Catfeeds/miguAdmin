@@ -443,6 +443,10 @@ class VideoManager extends Video{
             $sql_where .=" and v.`short` like '%{$list['short']}%'";
         }
 
+        if(!empty($list['fee'])){
+            $sql_where .=" and v.`prdpack_id`='1002381'";
+        }
+
         $sql=$sql_select.$sql_from.$sql_where.$sql_group;
         $res=SQLManager::queryAll($sql);
         return $res;

@@ -165,19 +165,13 @@
         <td colspan="2">
         <select <?php if(!empty($station_guide) && !empty($quote_res)){ echo "disabled=disabled";};?> name="template" onchange="showTemplate()"  id="template" class="form-input w200 field">
         <option value="0">--------------请选择-------------</option>
-        <option onclick="showTemplate(this)" value="1" >1</option>
-        <option value="2" onclick='showTemplate(this)'>2</option>
-        <option value="3" onclick="showTemplate(this)">3</option>
-        <option value="4" onclick="showTemplate(this)">4</option>
-        <option value="5" onclick="showTemplate(this)">5</option>
-        <option value="6" onclick="showTemplate(this)">6</option>
-        <option value="7" onclick="showTemplate(this)">7</option>
-        <option value="8" onclick="showTemplate(this)">8</option>
-        <option value="9" onclick="showTemplate(this)">9</option>
-        <option value="10" onclick="showTemplate(this)">10</option>
-        <option value="11" onclick="showTemplate(this)">11河南模板</option>
+            <?php
+                for ($i = 1 ; $i<12 ; $i++){?>
+                    <option onclick="showTemplate(this)" value="<?php echo $i;?>" <?php if($i == $list[0]['templateId']){echo "selected='selected'";}?>><?php echo $i;?></option>
+                <?php }
+            ?>
 	<?php foreach($template as $v):?>
-            <option value="<?php echo $v['id']+11?>" onclick="showTemplate(this)"><?php echo $v['name']?></option>
+            <option value="<?php echo $v['id']+11?>" onclick="showTemplate(this)" <?php if(($v['id']+11) == $list[0]['templateId']){echo "selected='selected'";}?>><?php echo $v['name']?></option>
     <?php endforeach;?>
     </select>
             <input style="margin-top: 16px;margin-left: 230px;" type="radio" name="editSelf" id="editSelf" onclick="return checkeditSelf()" flag="<?php if(!empty($station_guide) && !empty($quote_res)){ echo "0";}else{echo "1";};?>" <?php if(!empty($station_guide) && !empty($quote_res)){ /*echo "checked=checked";*/}else{echo "checked=checked";};?>>自行编辑
