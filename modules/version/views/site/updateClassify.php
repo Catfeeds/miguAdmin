@@ -188,7 +188,7 @@
 //	console.log(G);return false;
         $.post("<?php echo $this->get_url('site','categoryUpdate')?>",G,function(d){
 	    if(d == 200){
-		 alert('修改成功!'); 	
+		 layer.alert('修改成功!');
 		 location.reload();
             }else{
 //		alert('121');
