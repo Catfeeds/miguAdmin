@@ -445,6 +445,8 @@ class VideoManager extends Video{
 
         if(!empty($list['fee'])){
             $sql_where .=" and v.`prdpack_id`='1002381'";
+        }else{
+            $sql_where .=" and v.`prdpack_id`='1002261'";
         }
 
         $sql=$sql_select.$sql_from.$sql_where.$sql_group;

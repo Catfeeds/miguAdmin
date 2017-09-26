@@ -116,7 +116,7 @@
 		    <select name="isfree" class="form-input w100" id="fee">
                         <option value="-1">请选择</option>
                         <option value="0">否</option>
-                        <option  value="1" >是</option>
+                        <option value="1" >是</option>
                     </select>
 		</td>
 	    </tr>

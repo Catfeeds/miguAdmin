@@ -823,7 +823,7 @@ public function actionTopic2(){
         $model->short           = !empty($_POST['short'])?trim($_POST['short']):'';
         $model->gid             = !empty($_POST['gid'])?trim($_POST['gid']):'';
         $model->simple_set      = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
-	    $model->is_free         = !empty($_POST['fee'])?trim($_POST['fee']):'';
+	    $model->is_free         = isset($_POST['fee'])?trim($_POST['fee']):'';
         $list = $_REQUEST;
         $gid = $_REQUEST['gid'];
         $sql="select * from  yd_ver_sitelist where id=$gid";
@@ -881,7 +881,7 @@ public function actionTopic2(){
         $model->short           = !empty($_POST['short'])?trim($_POST['short']):'';
         $model->simple_set     = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
         $model->id             = !empty($_POST['id'])?trim($_POST['id']):'';
-	    $model->is_free         = !empty($_POST['fee'])?trim($_POST['fee']):'';
+	    $model->is_free         = isset($_POST['fee'])?trim($_POST['fee']):'';
         $list = $_REQUEST;
         $gid = $_REQUEST['gid'];
         $sql="select * from  yd_ver_sitelist where id=$gid";
