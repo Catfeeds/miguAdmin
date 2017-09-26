@@ -619,7 +619,7 @@
                         var copyGuideId = <?php echo !empty($quote_res['copyGuideId'])?$quote_res['copyGuideId']:'0'; ?>;
                         var pasteGuideId = <?php echo $_GET['id'];?>;
                         var unbind_res = unbindCopy(copyGuideId,pasteGuideId);
-                        if(res == 200){
+                        if(unbind_res == 200){
                             layer.alert("解除绑定成功");
                             layer.close(load);
                             window.location.href=opener.location.href;
