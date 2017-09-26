@@ -595,7 +595,7 @@
         }else if(bindFlag == 1 && copyFlag==0){
             G = {'focus':focus,'templateId':templateId,'id':id,'title':title,'pic_true':pic_true,'pic_false':pic_false,'oldTemplateId':oldTemplateId,'pic_three':pic_three,'copyFlag':2};
         }
-        console.log(G);return false;
+//        console.log(G);return false;
         var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
         $.ajax
         ({
