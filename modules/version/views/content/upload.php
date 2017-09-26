@@ -55,9 +55,9 @@
             var img = ['.jpg','.jpeg','.png','.gif'];
             var myself = this;
             //layer.alert(file.name);
-            if(file.size>500000){
+            if(file.size>10000000){
                 myself.cancelUpload();
-                layer.alert("请上传500K以下的图");
+                layer.alert("请上传10MB以下的图");
                 return false;
             }
             if(!in_array(type,img)){
