@@ -102,7 +102,7 @@
     </tr>-->
     <tr>
         <td height="40">已选模板：</td>
-        <td colspan="2" class="oldTemplate">
+        <td colspan="2" class="oldTemplate" oldTemplate="<?php echo $list[0]['templateId'];?>">
             <?php
                 $template_num =  $list[0]['templateId'];
                 if($template_num<=11){
@@ -532,7 +532,7 @@
         var templateId = $('#template  option:selected').val();
         var id = $('.hidden').text();
         var mid = <?php echo $this->mid;?>;
-        var oldTemplateId = $('.oldTemplate').text();
+        var oldTemplateId = $('.oldTemplate').attr('oldTemplate');
         if($('#main').children('img').length>0){
             var pic_true = $('#main').children('img').attr('src');
         }else{
@@ -595,7 +595,7 @@
         }else if(bindFlag == 1 && copyFlag==0){
             G = {'focus':focus,'templateId':templateId,'id':id,'title':title,'pic_true':pic_true,'pic_false':pic_false,'oldTemplateId':oldTemplateId,'pic_three':pic_three,'copyFlag':2};
         }
-
+        console.log(G);return false;
         var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
         $.ajax
         ({
