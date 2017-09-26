@@ -2837,3 +2837,30 @@ Stack trace:
 REQUEST_URI=/file/template/t11.png
 HTTP_REFERER=http://127.0.0.1:8081/version/screen/addScreen/mid/-1/nid/44/adminLeftOne/3/adminLeftTwo//adminLeftOneName/%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95/adminLeftTwoName/%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95/adminLeftNavFlag/1/one/0/two/0/three/0/siteName//son//top//leftNavFlag/0
 ---
+2017/09/26 11:51:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709151038296340.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017091510...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709151038296340.png
+HTTP_REFERER=http://127.0.0.1:8081/version/screen/addScreen/mid/-1/nid/44/adminLeftOne/3/adminLeftTwo//adminLeftOneName/%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95/adminLeftTwoName/%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95/adminLeftNavFlag/1/one/0/two/0/three/0/siteName//son//top//leftNavFlag/0
+---
+2017/09/26 11:51:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709141647062174.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017091416...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709141647062174.png
+HTTP_REFERER=http://127.0.0.1:8081/version/screen/addScreen/mid/-1/nid/44/adminLeftOne/3/adminLeftTwo//adminLeftOneName/%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95/adminLeftTwoName/%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95/adminLeftNavFlag/1/one/0/two/0/three/0/siteName//son//top//leftNavFlag/0
+---
+2017/09/26 11:51:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709141647062174.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017091416...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709141647062174.png
+HTTP_REFERER=http://127.0.0.1:8081/version/screen/addScreen/mid/-1/nid/44/adminLeftOne/3/adminLeftTwo//adminLeftOneName/%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95/adminLeftTwoName/%E5%AF%BC%E8%88%AA%E5%B1%8F%E5%B9%95/adminLeftNavFlag/1/one/0/two/0/three/0/siteName//son//top//leftNavFlag/0
+---

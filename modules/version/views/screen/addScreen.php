@@ -143,7 +143,7 @@
 </td><td colspan="2">
     <select style="width:200px;margin:7px;"  name="template" onchange="showTemplate()"  id="template" class="form-input w200 field">
         <option value="0">--------------请选择-------------</option>
-        <option onclick="showTemplate(this)" value="1" >1</option>
+        <option onclick="showTemplate(this)" value="1" selected="selected">1</option>
         <option value="2" onclick='showTemplate(this)'>2</option>
         <option value="3" onclick="showTemplate(this)">3</option>
         <option value="4" onclick="showTemplate(this)">4</option>
@@ -158,7 +158,7 @@
             <option value="<?php echo $v['id']+11?>" onclick="showTemplate(this)"><?php echo $v['name']?></option>
         <?php endforeach;?>
     </select>
-        <input style="margin-top: 16px;margin-left: 230px;" type="radio" name="editSelf" id="editSelf" onclick="return checkeditSelf()" flag="0" >自行编辑
+        <input style="margin-top: 16px;margin-left: 230px;" type="radio" name="editSelf" id="editSelf" onclick="return checkeditSelf()" flag="1"  checked="checked">自行编辑
 
         <div class="templatePic">
     <img src="/file/template/t01.png" alt="" width='600px' height='300px'>
@@ -391,7 +391,7 @@
             <?php endforeach;?>
 
         }
-        $('#editSelf').attr('checked','checked');
+        $('#editSelf').prop('checked','checked');
         $('#editSelf').attr('flag','1');
     }
 
@@ -596,7 +596,7 @@
         if(selected<10){
             $('.templatePic').children('img').attr('src','/file/template/t0'+selected+'.png');
         }else if(selected==10 || selected==11){
-            $('.templatePic').children('img').attr('src','/file/template/t'+selected+'.png');
+            $('.templatePic').children('img').attr('src','/file/template/t'+selected+'.jpg');
         }else{
             var pic_src = showTemplatePic(selected);
             $('.templatePic').children('img').attr('src',pic_src);

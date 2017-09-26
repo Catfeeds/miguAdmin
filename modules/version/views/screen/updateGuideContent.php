@@ -192,8 +192,8 @@
         if($list[0]['templateId']>11){
             $src = $list[0]['pic'];
         }else if($list[0]['templateId']==10){
-            $src = "/file/template/t{$list[0]['templateId']}.png";
-        }else if($list[0]['templateId']==10){
+            $src = "/file/template/t{$list[0]['templateId']}.jpg";
+        }else if($list[0]['templateId']==11){
             $src = "/file/template/t{$list[0]['templateId']}.jpg";
         }else{
             $src = "/file/template/t0{$list[0]['templateId']}.png";
@@ -783,7 +783,7 @@
         if(selected<10){
             $('.templatePic').children('img').attr('src','/file/template/t0'+selected+'.png');
         }else if(selected==10 || selected==11){
-            $('.templatePic').children('img').attr('src','/file/template/t'+selected+'.png');
+            $('.templatePic').children('img').attr('src','/file/template/t'+selected+'.jpg');
         }else{
             var pic_src = showTemplatePic(selected);
             $('.templatePic').children('img').attr('src',pic_src);
