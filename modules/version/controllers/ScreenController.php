@@ -413,11 +413,13 @@ class ScreenController extends VController
             if($res>0){
                 echo '200';
             }else{
-                if(!empty($_REQUEST['copyFlag']) && $_REQUEST['copyFlag'] == 1){
+                if(!empty($_REQUEST['copyFlag']) && $_REQUEST['copyFlag'] == 1 && $_REQUEST['copyGuideId'] != $_REQUEST['a']){
                     $sql_delContent = "delete from yd_ver_screen_content where `screenGuideid`=$id";
                     $sql_delContent_copy = "delete from yd_ver_screen_content_copy  where `screenGuideid`=$id";
                     $res2 = SQLManager::execute($sql_delContent);
                     $res3 = SQLManager::execute($sql_delContent_copy);
+                    echo '200';
+                }else if(!empty($_REQUEST['copyFlag']) && $_REQUEST['copyFlag'] == 1 && $_REQUEST['copyGuideId'] == $_REQUEST['a']){
                     echo '200';
                 }else if(!empty($_REQUEST['copyFlag']) && $_REQUEST['copyFlag'] == 2){
                     echo '200';

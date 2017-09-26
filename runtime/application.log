@@ -3124,3 +3124,219 @@ Stack trace:
 REQUEST_URI=/images/admin_logo.png
 HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
 ---
+2017/09/26 15:55:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 15:55:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709151432032521.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017091514...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709151432032521.png
+HTTP_REFERER=http://127.0.0.1:8081/version/template/default.html?mid=-1&nid=51&epg=%E6%A8%A1%E6%9D%BF%E7%AE%A1%E7%90%86&pro=%E7%AE%A1%E7%90%86%E5%91%9801&adminLeftNavFlag=1&adminLeftOne=5&adminLeftTwo=3&adminLeftOneName=%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86
+---
+2017/09/26 15:55:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709151038296340.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017091510...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709151038296340.png
+HTTP_REFERER=http://127.0.0.1:8081/version/template/default.html?mid=-1&nid=51&epg=%E6%A8%A1%E6%9D%BF%E7%AE%A1%E7%90%86&pro=%E7%AE%A1%E7%90%86%E5%91%9801&adminLeftNavFlag=1&adminLeftOne=5&adminLeftTwo=3&adminLeftOneName=%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86
+---
+2017/09/26 15:55:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709151034269125.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017091510...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709151034269125.png
+HTTP_REFERER=http://127.0.0.1:8081/version/template/default.html?mid=-1&nid=51&epg=%E6%A8%A1%E6%9D%BF%E7%AE%A1%E7%90%86&pro=%E7%AE%A1%E7%90%86%E5%91%9801&adminLeftNavFlag=1&adminLeftOne=5&adminLeftTwo=3&adminLeftOneName=%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86
+---
+2017/09/26 15:55:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709141647062174.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017091416...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709141647062174.png
+HTTP_REFERER=http://127.0.0.1:8081/version/template/default.html?mid=-1&nid=51&epg=%E6%A8%A1%E6%9D%BF%E7%AE%A1%E7%90%86&pro=%E7%AE%A1%E7%90%86%E5%91%9801&adminLeftNavFlag=1&adminLeftOne=5&adminLeftTwo=3&adminLeftOneName=%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86
+---
+2017/09/26 15:55:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/20170914164234992.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017091416...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/20170914164234992.png
+HTTP_REFERER=http://127.0.0.1:8081/version/template/default.html?mid=-1&nid=51&epg=%E6%A8%A1%E6%9D%BF%E7%AE%A1%E7%90%86&pro=%E7%AE%A1%E7%90%86%E5%91%9801&adminLeftNavFlag=1&adminLeftOne=5&adminLeftTwo=3&adminLeftOneName=%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86
+---
+2017/09/26 15:55:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 15:55:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709141052384742.jpg".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017091410...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709141052384742.jpg
+HTTP_REFERER=http://127.0.0.1:8081/version/template/default.html?mid=-1&nid=51&epg=%E6%A8%A1%E6%9D%BF%E7%AE%A1%E7%90%86&pro=%E7%AE%A1%E7%90%86%E5%91%9801&adminLeftNavFlag=1&adminLeftOne=5&adminLeftTwo=3&adminLeftOneName=%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86
+---
+2017/09/26 15:55:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709141427288271.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017091414...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709141427288271.png
+HTTP_REFERER=http://127.0.0.1:8081/version/template/default.html?mid=-1&nid=51&epg=%E6%A8%A1%E6%9D%BF%E7%AE%A1%E7%90%86&pro=%E7%AE%A1%E7%90%86%E5%91%9801&adminLeftNavFlag=1&adminLeftOne=5&adminLeftTwo=3&adminLeftOneName=%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86
+---
+2017/09/26 15:55:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709061803191016.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017090618...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709061803191016.png
+HTTP_REFERER=http://127.0.0.1:8081/version/template/default.html?mid=-1&nid=51&epg=%E6%A8%A1%E6%9D%BF%E7%AE%A1%E7%90%86&pro=%E7%AE%A1%E7%90%86%E5%91%9801&adminLeftNavFlag=1&adminLeftOne=5&adminLeftTwo=3&adminLeftOneName=%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86
+---
+2017/09/26 15:55:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709081544005696.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017090815...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709081544005696.png
+HTTP_REFERER=http://127.0.0.1:8081/version/template/default.html?mid=-1&nid=51&epg=%E6%A8%A1%E6%9D%BF%E7%AE%A1%E7%90%86&pro=%E7%AE%A1%E7%90%86%E5%91%9801&adminLeftNavFlag=1&adminLeftOne=5&adminLeftTwo=3&adminLeftOneName=%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86
+---
+2017/09/26 15:55:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "file/201709061749072905.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('file/2017090617...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/file/201709061749072905.png
+HTTP_REFERER=http://127.0.0.1:8081/version/template/default.html?mid=-1&nid=51&epg=%E6%A8%A1%E6%9D%BF%E7%AE%A1%E7%90%86&pro=%E7%AE%A1%E7%90%86%E5%91%9801&adminLeftNavFlag=1&adminLeftOne=5&adminLeftTwo=3&adminLeftOneName=%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86
+---
+2017/09/26 15:55:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 15:55:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 15:55:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 16:07:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 16:07:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 16:07:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 16:07:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 16:07:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 16:08:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 16:22:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 16:22:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/26 16:22:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---

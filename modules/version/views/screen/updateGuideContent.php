@@ -548,7 +548,7 @@
         }else if($('.old_pic_three').length>0){
             var pic_three = $('.old_pic_three').attr('src');
         }else{
-             var pic_three = '0';
+            var pic_three = '0';
         }
         //alert(pic_three);return fasle;
         var title = $('#title').val();
@@ -575,10 +575,10 @@
 
         var a = <?php echo isset($selected_guide)?$selected_guide:'-1';?>;
         var copyGuideId = $('#guide').val();
-        if(a == copyGuideId){
+        /*if(a == copyGuideId && copyFlag==1){
             layer.alert("不能引用重复的站点导航");
             return false;
-        }
+        }*/
 
         var focus = $("input[name=focus]:checked").val();
         if(focus==undefined){
@@ -591,7 +591,7 @@
         }
         var G = {'focus':focus,'templateId':templateId,'id':id,'title':title,'pic_true':pic_true,'pic_false':pic_false,'oldTemplateId':oldTemplateId,'pic_three':pic_three};
         if(copyFlag == 1){
-            G = {'focus':focus,'templateId':templateId,'id':id,'title':title,'pic_true':pic_true,'pic_false':pic_false,'oldTemplateId':oldTemplateId,'pic_three':pic_three,'copyFlag':1};
+            G = {'focus':focus,'templateId':templateId,'id':id,'title':title,'pic_true':pic_true,'pic_false':pic_false,'oldTemplateId':oldTemplateId,'pic_three':pic_three,'copyFlag':1,'copyGuideId':copyGuideId,'a':a};
         }else if(bindFlag == 1 && copyFlag==0){
             G = {'focus':focus,'templateId':templateId,'id':id,'title':title,'pic_true':pic_true,'pic_false':pic_false,'oldTemplateId':oldTemplateId,'pic_three':pic_three,'copyFlag':2};
         }
@@ -606,7 +606,7 @@
             {
 //                console.log(data);
                 if(data == 200){
-                    if(copyFlag == 1){
+                    if(copyFlag == 1 && a != copyGuideId){
                         var copyGuideId = $('#guide').val();
                         var pasteGuideId = <?php echo $_GET['id'];?>;
                         var res = copyAction(copyGuideId,pasteGuideId);

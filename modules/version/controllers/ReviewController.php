@@ -1075,7 +1075,7 @@ WHERE
     public function actionWallReview()
     {
         $username=$_SESSION['nickname'];
-	$flag= '5';
+	    $flag= '5';
         $res  = Common::getUser($username,$flag);
         $page = 20;
         $data = $this->getPageInfo($page);
@@ -1083,13 +1083,13 @@ WHERE
         if(!empty($_REQUEST['type'])){
             $list['type']=$_REQUEST['type'];
         }
-	if(!empty($_REQUEST['stationId'])){
+	    if(!empty($_REQUEST['stationId'])){
             $list['stationId'] = $_REQUEST['stationId'];
         }
-	$uid = $_SESSION['userid'];
+	    $uid = $_SESSION['userid'];
         $sql = "select a.*,c.uid from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 5 left join  yd_ver_review_work as c on c.workid=b.id  where c.uid=$uid  group by a.id";
             
-	$st = SQLManager::QueryAll($sql);
+	    $st = SQLManager::QueryAll($sql);
 
         if(!empty($st) && $_SESSION['auth'] <> 1){
                 $list['gid'] = $st;
@@ -1119,7 +1119,7 @@ WHERE
       public function actionAllTopicReview()
     {
         $username=$_SESSION['nickname'];
-	$flag= '5';
+	    $flag= '5';
         $res  = Common::getUser($username,$flag);
         $page = 20;
         $data = $this->getPageInfo($page);
@@ -1127,14 +1127,14 @@ WHERE
         if(!empty($_REQUEST['type'])){
             $list['type']=$_REQUEST['type'];
         }
-	if(!empty($_REQUEST['stationId'])){
+	    if(!empty($_REQUEST['stationId'])){
             $list['stationId'] = $_REQUEST['stationId'];
         }
-	$uid = $_SESSION['userid'];
+	    $uid = $_SESSION['userid'];
             $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 5 left join  yd_ver_review_work as
  c on c.workid=b.id  where c.uid=$uid  group by a.id";
             
-	$st = SQLManager::QueryAll($sql);
+	    $st = SQLManager::QueryAll($sql);
 
         if(!empty($st) && $_SESSION['auth'] <> 1){
                 $list['gid'] = $st;
@@ -1150,7 +1150,7 @@ WHERE
 
         $tmp =VideoManager::getWallReview($data,$list);
         //print_r($tmp);die;
-	$url = $this->createUrl($this->action->id);
+	    $url = $this->createUrl($this->action->id);
         $pagination = $this->renderPagination($url,$tmp['count'],$page,$data['currentPage'],$tmp['alwaysCount']);
         $list = array();
         if(!empty($res['review']) || $_SESSION['auth']=='1'){

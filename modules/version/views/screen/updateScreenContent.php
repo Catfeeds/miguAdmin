@@ -356,7 +356,7 @@
 /*    }*/
     ?>
     <tr>
-        <td align="center" colspan="4">
+        <td align="center" colspan="4" class="button">
             <!--            <input type="button" value="选择媒资" class="btn meizi">-->
             <input style="width:100px;height:30px;padding:0px" type="button" value="为此推荐位添加轮播图" class="btn addBanner">
             <input style="width:100px;height:30px;padding:0px" type="button" value="保存信息" class="btn save">
