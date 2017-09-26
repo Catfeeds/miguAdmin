@@ -522,8 +522,10 @@
                         '<option templateId="'+data[i]['templateId']+'" value="'+data[i]['id']+'">'+data[i]['title']+'</option>'
                     );
                 });
-            }
+            },
+            async:false
         });
+        selectGuide();
     }
 
     function checkCopy()
@@ -588,7 +590,9 @@
     function selectGuide()
     {
         var selected = $('#guide option:selected').attr('templateid');
-        console.log(selected);
+        if(selected == undefined){
+            selected = $('#guide').children().eq(0).attr('templateid');
+        }
         if(selected<10){
             $('.templatePic').children('img').attr('src','/file/template/t0'+selected+'.png');
         }else if(selected==10 || selected==11){
