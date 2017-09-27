@@ -540,26 +540,26 @@ class VideoManager extends Video{
         //$sql_where = " where";
         $sql_order = ' group by a.id order by a.addTime desc';
         $sql_limit = ' limit '.$data['start'].','.$data['limit'];
-	$sql_join = ' left join yd_ver_station as b on a.gid=b.id LEFT JOIN yd_ver_work c ON b.id = c.stationId and c.flag = 5 ';
-	$sql_join_log = ' left join yd_ver_wall_log as d on a.id=d.vid';
+	    $sql_join = ' left join yd_ver_station as b on a.gid=b.id LEFT JOIN yd_ver_work c ON b.id = c.stationId and c.flag = 5 ';
+	    $sql_join_log = ' left join yd_ver_wall_log as d on a.id=d.vid';
       //  $sql_where=" where 1=1";
-       	                    if($_SESSION['auth']=='1'){
-                if(empty($list['type']) || $list['type'] == 1){
+        if($_SESSION['auth']=='1'){
+            if(empty($list['type']) || $list['type'] == 1){
                 $sql_where =" where a.flag in (1,2,3,4,5)";
             }else if($list['type'] == 2){
                 $sql_where =" where a.flag = 6";
             }else{
                 $sql_where =" where a.flag = 0";
-                }
-                }else{
-                 if(empty($list['type']) || $list['type'] == 1){
+            }
+        }else{
+            if(empty($list['type']) || $list['type'] == 1){
                 $sql_where=" where  a.flag in (1,2,3,4,5)";
-                }else if($list['type'] == 2){
+            }else if($list['type'] == 2){
                 $sql_where=" where  a.flag = 6";
-                 }else{
+            }else{
                 $sql_where=" where  a.flag = 0";
-}
-                }
+            }
+        }
 
 
 	 if(!empty($list['review'])){
