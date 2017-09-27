@@ -6,7 +6,7 @@
     	width:150px;
     	height:86px;
     }
-      #main-false .upImg{
+    #main-false .upImg{
     	margin-top:5px;
     	width:214px;
     	height:123px;
@@ -77,7 +77,6 @@
                         <option <?php if($v['id']==$wallpaper->attributes['gid']){echo 'selected=selected';}?> value="<?php echo $v['id']; ?>" ><?php echo $v['name']; ?></option>
                     <?php } ?>
                 <?php }?>
-
             </select>
          <?php }else{ ?>
                 <select id="gid" name="gid" onchange="getcity()" class = "form-input w200" >
@@ -120,9 +119,53 @@
         </tr>
 
     </table>
+
+    <table style="width:900px;" class="mtable mt10" cellpadding="10" cellspacing="0">
+        <tr>
+            <th style="background: #A3BAD5;height:30px;" colspan="7">审核纪录</th>
+        </tr>
+        <tr>
+            <td>审核工作流</td>
+            <td>审核人</td>
+            <td>审核时间</td>
+            <td>审核状态</td>
+            <td>驳回理由</td>
+        </tr>
+       <?php
+            if(!empty($reject_res)){
+                foreach($reject_res as $k=>$v) {
+                    var_dump($reject_res);die;
+                    ?>
+                    <tr class="reject">
+                        <?php $offset = $k+1; if($offset>5){$offset=5;}?>
+                        <td><?php echo $offset; ?>审</td>
+                        <td><?php echo $v->attributes["user$offset"]; ?></td>
+                        <td><?php echo date("Y-m-d H:i:s", $v->attributes["addTime$offset"]); ?></td>
+                        <td><?php echo $v->attributes["message$offset"]; ?></td>
+                        <td><?php if ($v->attributes["message$offset"] != '通过') {
+                                echo $v->attributes["message$offset"];
+                            }; ?></td>
+                    </tr>
+                    <?php
+                }
+            }
+       ?>
+    </table>
 </form>
 <script type="text/javascript" src="/js/uploadify/jquery.uploadify.min.js"></script>
 <script type="text/javascript">
+//    var remove_arr = new Array();
+    for(var i = 0 ; i < $('.reject').length ; i++){
+        var tmp = $('.reject').eq(i).children();
+        if(tmp.eq(1).text() == 0 && tmp.eq(3).text() == 0){
+//            console.log(i);
+//            remove_arr.push(i);
+            $('.reject').eq(i).addClass('remove_flag');
+        }
+    }
+    $('.remove_flag').remove();
+
+
     $('#first,#end').datetimepicker({
         lang:'ch',
         validateOnBlur:false,
@@ -285,7 +328,7 @@
         G.gid  = $('#gid').val();
         G.thum = pic_true;
         G.pic = pic_false;
-	if($(".wall").val()==0){
+	    if($(".wall").val()==0){
             G.start=0;
             G.end=0;
         }else{

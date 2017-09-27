@@ -95,6 +95,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <tr>
                     <th>编号</th>
                     <th>提审人</th>
+                    <th>提交审核时间</th>
                     <th>站点</th>
 			<th>省份</th>
                     <th>市</th>
@@ -103,7 +104,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <th>缩略图</th>
                     <th>壁纸</th>
                     <th>审核</th>
-                    <th>提交审核时间</th>
+
 			<th>有效期</th>
                     <th>操作</th>
                 </tr>
@@ -115,16 +116,17 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             <td><input type="checkbox" class="checkbox" name="id" value="<?php echo $l['id']?>"></td>
                             <td>
 				<?php
-                                    $uid=$l['gid'];
+                                    /*$uid=$l['gid'];
 				    $nickname=VerAdmin::model()->findByPk($uid);
-				//var_dump($nickname);die;
                                     if(!empty($nickname->nickname)){
 					echo $nickname->nickname;
 				}else{
 					echo "";
-				}
+				}*/
+                                  echo  $l['user'];
                                 ?>
 			    </td>
+                            <td><?php if(!empty($l['addTime'])){echo date('Y-m-d H:i',$l['addTime']);}?></td>
                             <td><?php echo $l['name'];?></td>
 				<td>
 				<?php
@@ -159,7 +161,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             <td><img src="<?php echo $l['thum']?>" width="150px" height="86px"></td>
                             <td><img src="<?php echo $l['pic']?>" width="214px" height="123px"></td>
                             <td><?php echo $l['flag']?></td>
-                            <td><?php if(!empty($l['addTime'])){echo date('Y-m-d H:i',$l['addTime']);}?></td>
+
 				<td><?php if(!empty($l['startTime'])){echo date("Y-m-d",$l['startTime']);}else{echo "";}?>~<?php if(!empty($l['endTime'])){echo date("Y-m-d",$l['endTime']);}else{echo "";}?></td>
                             <td>
                                 <?php

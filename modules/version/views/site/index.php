@@ -527,10 +527,9 @@
                 <th>发布时间</th>
                 <!--<th>状态码</th>-->
                 <th>状态</th>
-                <th>操作</th>
+                <!--<th>操作</th>-->
             </tr>
             <?php
-            //var_dump($list);
             if(!empty($list)){
                 foreach($list as $l){?>
                     <tr class='trData <?php
@@ -574,18 +573,18 @@
                                 echo '已上线';
                             }
                             ?></td>
-                        <td><?php
-                            if(in_array('2',$res['status']) || $_SESSION['auth']=='1'){
-				if($l['vstatus']==0){
-                                echo "<a class='status_true'>上线&nbsp;</a><a onclick=\"alert('下线失败！')\">下线&nbsp;</a>";
-				}else if($l['vstatus']==1){
-                                echo "<a onclick=\"alert('上线失败！')\">上线&nbsp;</a><a class='status_false'>下线&nbsp;</a>";
-                                }
-                            }else{
-                                echo "<a>上线&nbsp;</a><a>下线&nbsp;</a>";
-                            }
-                            ?>
-                        </td>
+<!--                        <td>--><?php
+//                            if(in_array('2',$res['status']) || $_SESSION['auth']=='1'){
+//				if($l['vstatus']==0){
+//                                echo "<a class='status_true'>上线&nbsp;</a><a onclick=\"alert('下线失败！')\">下线&nbsp;</a>";
+//				}else if($l['vstatus']==1){
+//                                echo "<a onclick=\"alert('上线失败！')\">上线&nbsp;</a><a class='status_false'>下线&nbsp;</a>";
+//                                }
+//                            }else{
+//                                echo "<a>上线&nbsp;</a><a>下线&nbsp;</a>";
+//                            }
+//                            ?>
+<!--                        </td>-->
                     </tr>
                     <?php
                 }

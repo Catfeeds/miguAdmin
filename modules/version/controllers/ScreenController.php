@@ -862,6 +862,16 @@ class ScreenController extends VController
           PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8
     */
+
+    /*
+     * 糖果乐园当贝支付回调存数据表
+        CREATE TABLE `qm_dangbei_order` (
+          `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+          `datastr` text COMMENT '当贝返回主体json',
+          `sign` varchar(32) NOT NULL DEFAULT '0' COMMENT '签名',
+          PRIMARY KEY (`id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+    */
 }
 
 

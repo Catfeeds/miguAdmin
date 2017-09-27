@@ -1071,7 +1071,8 @@ WHERE
             }
         }
         $this->render('topicreview',array('list'=>$list,'page'=>$pagination,'res'=>$res));
-    }	
+    }
+
     public function actionWallReview()
     {
         $username=$_SESSION['nickname'];
@@ -1090,7 +1091,7 @@ WHERE
         $sql = "select a.*,c.uid from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 5 left join  yd_ver_review_work as c on c.workid=b.id  where c.uid=$uid  group by a.id";
             
 	    $st = SQLManager::QueryAll($sql);
-
+//        var_dump($st);die;
         if(!empty($st) && $_SESSION['auth'] <> 1){
                 $list['gid'] = $st;
         }
@@ -1103,8 +1104,8 @@ WHERE
             //$list['workid']=Common::WorkidList($username,$flag);
         }
         $tmp =VideoManager::getWallReview($data,$list);
-        //print_r($tmp);die;
-	$url = $this->createUrl($this->action->id);
+//        print_r($tmp);die;
+	    $url = $this->createUrl($this->action->id);
         $pagination = $this->renderPagination($url,$tmp['count'],$page,$data['currentPage'],$tmp['alwaysCount']);
         $list = array();
         if(!empty($res['review']) || $_SESSION['auth']=='1'){
@@ -1114,8 +1115,11 @@ WHERE
                 $list=$tmp['list'];
             }
         }
+//        echo '<pre>';
+//        var_dump($list);die;
         $this->render('wallreview',array('list'=>$list,'page'=>$pagination,'res'=>$res));
-    }	
+    }
+
       public function actionAllTopicReview()
     {
         $username=$_SESSION['nickname'];

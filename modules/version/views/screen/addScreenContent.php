@@ -395,7 +395,8 @@
             }else{
                 layer.alert(value.msg,{icon:0});
             }
-            //$('#upload_file_new').hide();
+            $('#upload_file_new').width(<?php echo ($_REQUEST['width']/2)?>);
+            $('#upload_file_new').height(<?php echo ($_REQUEST['height']/2)?>);
         },
         'onError':function(err)
         {
