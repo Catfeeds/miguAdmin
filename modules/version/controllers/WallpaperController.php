@@ -195,6 +195,7 @@ class WallpaperController extends VController{
     public function actionUpdate()
     {
         try{
+            $reject_res = array();
             if(!empty($_GET['id'])){
                 $paper = VerWall::model()->findByPk($_GET['id']);
                 $id = $_GET['id'];
@@ -204,6 +205,8 @@ class WallpaperController extends VController{
                     $c = $provinceCode[0]['city'];//查询出来的城市编码
                     $cityCode = array_map(create_function('$record','return $record->attributes;'),City::model()->findAll("provinceId = $p"));
                 }
+
+                $reject_res = $this->GetReviewInfo($id);
             }else{
                 $paper = new VerWall();
                 $paper->addTime = time();
@@ -243,7 +246,7 @@ class WallpaperController extends VController{
         $cityCode = isset($cityCode) ? $cityCode : '';
         $c = isset($c) ? $c : '';
 	//var_dump($p);die;
-        $this->render('update',array('wallpaper'=>$paper,'province'=>$province,'provinceCode'=>$p,'city'=>$cityCode,'cityCode'=>$c));
+        $this->render('update',array('wallpaper'=>$paper,'province'=>$province,'provinceCode'=>$p,'city'=>$cityCode,'cityCode'=>$c,'reject_res'=>$reject_res));
     }
 
     public function actionDoNewAdd()
@@ -726,6 +729,22 @@ class WallpaperController extends VController{
         }
 
 	echo json_encode($new);
+    }
+
+//    public function actionGetReviewInfo()
+    public function GetReviewInfo($vid)
+    {
+//        $vid = Yii::app()->request->getParam('vid');
+        $res = VerWallLog::model()->findAll(
+            array(
+                'select'=>'*',
+//                'order'=>'addTime1,addTime2,addTime3,addTime4,addTime5 asc',
+                'group'=>'addTime,addTime1,addTime2,addTime3,addTime4,addTime5',
+                'condition'=>'vid=:vid',
+                'params'=>array(':vid'=>$vid),
+            )
+        );
+        return $res;
     }
 }
 
