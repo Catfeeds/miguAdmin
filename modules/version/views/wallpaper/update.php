@@ -134,6 +134,7 @@
        <?php
             if(!empty($reject_res)){
                 foreach($reject_res as $k=>$v) {
+                    var_dump($reject_res);die;
                     ?>
                     <tr class="reject">
                         <?php $offset = $k+1; if($offset>5){$offset=5;}?>
