@@ -354,8 +354,8 @@
     ({
         'auto': true,//关闭自动上传
         'buttonImage': '/images/up1.png',
-        'width': <?php echo $_GET['width'];?>,
-        'height': <?php echo $_GET['height'];?>,
+        'width': 70,
+        'height': 26,
         'swf': '/js/uploadify/uploadify.swf',
         'uploader': '/upload/img',
         'method': 'post',//方法，服务端可以用$_POST数组获取数据
@@ -395,7 +395,8 @@
             }else{
                 layer.alert(value.msg,{icon:0});
             }
-            $('#upload_file_new').hide();
+            $('#upload_file_new').width(<?php echo $_REQUEST['width']?>);
+            $('#upload_file_new').height(<?php echo $_REQUEST['height']?>);
         },
         'onError':function(err)
         {
