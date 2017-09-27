@@ -616,7 +616,7 @@ $sql_where .=" or (a.flag = 0";
 
         $count = $sql_count . $sql_from . $sql_join . $sql_where;
         $list = $sql_select . $sql_from . $sql_join .$sql_join_log . $sql_where . $sql_order . $sql_limit;
-        echo $list;die;
+//        echo $list;die;
         //$res['count'
 	    $sql = $sql_count . $sql_from ;//var_dump($sql);die;
         $res['count'] = Yii::app()->db->createCommand($count)->queryScalar();
