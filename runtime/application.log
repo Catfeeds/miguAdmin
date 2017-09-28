@@ -6749,3 +6749,186 @@ HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
 =======
 >>>>>>> 8b04290da429ef892654493e83a940af124f8a60
 >>>>>>> 0f71442b5b29d037e61deb7a0fd0c7e2838f447f
+2017/09/28 17:45:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/28 17:45:37 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:47:09 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:47:10 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:47:10 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:47:10 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:47:10 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:47:53 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:48:15 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:48:18 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:49:51 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:49:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/28 17:49:58 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:50:10 [error] [php] Missing argument 2 for VController::GetReviewInfo(), called in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php on line 209 and defined (D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php:249)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): WallpaperController->runAction()
+#2 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): WallpaperController->runActionWithFilters()
+#3 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): WallpaperController->run()
+#4 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#6 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/wallpaper/update.html?id=92&nid=34&adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=1&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E5%A3%81%E7%BA%B8%E8%AE%BE%E7%BD%AE&mid=-1
+in D:\phpStudy\WWW\newweb\protected\modules\version\components\VController.php (249)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\WallpaperController.php (209)
+in D:\phpStudy\WWW\newweb\index.php (12)
+2017/09/28 17:51:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---

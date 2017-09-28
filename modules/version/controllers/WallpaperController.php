@@ -206,7 +206,6 @@ class WallpaperController extends VController{
                     $cityCode = array_map(create_function('$record','return $record->attributes;'),City::model()->findAll("provinceId = $p"));
                 }
 
-                $reject_res = $this->GetReviewInfo($id);
             }else{
                 $paper = new VerWall();
                 $paper->addTime = time();

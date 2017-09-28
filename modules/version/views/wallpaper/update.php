@@ -132,7 +132,7 @@
             <td>审核消息</td>
         </tr>
         <?php
-        $res = $this->GetReviewInfo(2,$_REQUEST['id']);
+        $res = $this->GetReviewInfo(2,$_GET['id']);
         if(!empty($res)){
             ?>
             <?php
