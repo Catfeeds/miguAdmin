@@ -553,7 +553,7 @@ if(!empty($templateList)){
 
     function banner(l)
     {
-        for(var i = 0 ; i<200 ; i++){
+        for(var i = 0 ; i<999999 ; i++){
             if($('.order-'+i).find('li').length>1){
                 var aa = $('.order-'+i).html();
                 var bb = $('.order-'+i);
