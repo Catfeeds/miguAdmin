@@ -162,7 +162,8 @@ padding:5px 10px;
             <td>审核消息</td>
         </tr>
         <?php
-        $res = $this->GetReviewInfo(1,$_REQUEST['id']);
+        $bind_id = !empty($_REQUEST['id'])?$_REQUEST['id']:'0';
+        $res = $this->GetReviewInfo(1,$bind_id);
         if(!empty($res)){
             ?>
             <?php

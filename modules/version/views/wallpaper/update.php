@@ -132,7 +132,8 @@
             <td>审核消息</td>
         </tr>
         <?php
-        $res = $this->GetReviewInfo(2,$_GET['id']);
+        $bind_id = !empty($_REQUEST['id'])?$_REQUEST['id']:'0';
+        $res = $this->GetReviewInfo(2,$bind_id);
         if(!empty($res)){
             ?>
             <?php

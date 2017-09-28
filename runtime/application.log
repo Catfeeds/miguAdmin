@@ -6932,3 +6932,29 @@ Stack trace:
 REQUEST_URI=/images/admin_logo.png
 HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
 ---
+2017/09/28 17:53:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 D:\phpStudy\WWW\newweb\index.php(12): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1:8081/css/admin.css
+---
+2017/09/28 17:53:11 [error] [php] Undefined index: id (D:\phpStudy\WWW\newweb\protected\modules\version\views\content\message.php:165)
+Stack trace:
+#0 D:\phpStudy\WWW\newweb\framework\web\CController.php(869): ContentController->renderFile()
+#1 D:\phpStudy\WWW\newweb\framework\web\CController.php(782): ContentController->renderPartial()
+#2 D:\phpStudy\WWW\newweb\protected\modules\version\controllers\ContentController.php(271): ContentController->render()
+#3 D:\phpStudy\WWW\newweb\framework\web\actions\CInlineAction.php(49): ContentController->actionMessage()
+#4 D:\phpStudy\WWW\newweb\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 D:\phpStudy\WWW\newweb\framework\web\CController.php(286): ContentController->runAction()
+#6 D:\phpStudy\WWW\newweb\framework\web\CController.php(265): ContentController->runActionWithFilters()
+#7 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(282): ContentController->run()
+#8 D:\phpStudy\WWW\newweb\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 D:\phpStudy\WWW\newweb\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 D:\phpStudy\WWW\newweb\index.php(12): CWebApplication->run()
+REQUEST_URI=/version/content/message.html?adminLeftNavFlag=1&adminLeftOne=3&adminLeftTwo=3&adminLeftOneName=%E7%AB%99%E7%82%B9%E5%B1%8F%E5%B9%95&adminLeftTwoName=%E6%B6%88%E6%81%AF%E7%AE%A1%E7%90%86&mid=-1&nid=9
+in D:\phpStudy\WWW\newweb\protected\modules\version\views\content\message.php (165)
+in D:\phpStudy\WWW\newweb\protected\modules\version\controllers\ContentController.php (271)
+in D:\phpStudy\WWW\newweb\index.php (12)
