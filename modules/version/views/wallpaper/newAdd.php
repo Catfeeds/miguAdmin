@@ -94,7 +94,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <div class="name">名称：</div>
 </td><td>
         <div class="insertName">
-            <input style="width:400px;margin:7px;" class="form-input" type="text" name="name" id="title" class='t-name' placeholder="输入新建屏幕对应名称">
+            <input style="width:400px;margin:7px;" class="form-input" type="text" name="name" id="title" class='t-name' placeholder="输入新建壁纸对应名称">
         </div>
     </div>
  </td></tr>

@@ -541,7 +541,7 @@ class VideoManager extends Video{
         $sql_order = ' group by a.id order by a.addTime desc';
         $sql_limit = ' limit '.$data['start'].','.$data['limit'];
 	    $sql_join = ' left join yd_ver_station as b on a.gid=b.id LEFT JOIN yd_ver_work c ON b.id = c.stationId and c.flag = 5 ';
-	    $sql_join_log = ' left join yd_ver_wall_log as d on a.id=d.vid';
+	    $sql_join_log = ' left join yd_ver_wall_reject as d on a.id=d.vid';
       //  $sql_where=" where 1=1";
         if($_SESSION['auth']=='1'){
             if(empty($list['type']) || $list['type'] == 1){
@@ -683,9 +683,10 @@ $sql_where .=" or (a.flag = 0";
         $res = array();
 	
         $sql_count = 'select count(a.id)';
-        $sql_select = 'select a.*,b.name';
+        $sql_select = 'select a.*,b.name,d.user';
         
-	$sql_from = " from yd_ver_message as a left join yd_ver_station as b on a.gid=b.id LEFT JOIN yd_ver_work c ON b.id = c.stationId and c.flag = 4";
+	    $sql_from = " from yd_ver_message as a left join yd_ver_station as b on a.gid=b.id LEFT JOIN yd_ver_work c ON b.id = c.stationId and c.flag = 4";
+	    $sql_join = " left join yd_ver_message_reject as d on a.id=d.vid";
         //$sql_where = " where";
         $sql_order = ' group by a.id order by a.cTime desc';
         $sql_limit = ' limit '.$data['start'].','.$data['limit'];
@@ -760,7 +761,7 @@ $sql_where .=" or (a.flag = 0";
 
         $count = $sql_count . $sql_from;
         $whereCount = $sql_count . $sql_from. $sql_where;
-        $list = $sql_select . $sql_from . $sql_where . $sql_order . $sql_limit;
+        $list = $sql_select . $sql_from . $sql_join . $sql_where . $sql_order . $sql_limit;
     //echo $list;
 	$res['alwaysCount'] = Yii::app()->db->createCommand($count)->queryScalar();
         $res['count'] = Yii::app()->db->createCommand($whereCount)->queryScalar();

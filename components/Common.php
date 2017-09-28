@@ -109,14 +109,14 @@ class Common
 			return $res;
 		}
 
-	public static function EditWorkid($username,$flag){
-		$user = VerAdmin::model()->find("nickname='$username'");
-		//var_dump($user);die;
-		$sql = "select w.id from yd_ver_work w inner join yd_ver_worker k on w.id=k.workid and k.uid='{$user->attributes['id']}' and w.flag=$flag";
-		$tmp = SQLManager::queryRow($sql);
-		$res = $tmp['id'];
-		return $res;
-	}
+        public static function EditWorkid($username,$flag){
+            $user = VerAdmin::model()->find("nickname='$username'");
+            //var_dump($user);die;
+            $sql = "select w.id from yd_ver_work w inner join yd_ver_worker k on w.id=k.workid and k.uid='{$user->attributes['id']}' and w.flag=$flag";
+            $tmp = SQLManager::queryRow($sql);
+            $res = $tmp['id'];
+            return $res;
+        }
 	
      //session  存入uid
     public static function getUserInfo()

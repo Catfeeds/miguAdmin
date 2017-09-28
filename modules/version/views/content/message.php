@@ -151,6 +151,36 @@ padding:5px 10px;
         </td>
     </tr>
 </table>
+    <table style="width:900px;" class="mtable mt10" cellpadding="10" cellspacing="0">
+        <tr>
+            <th style="background: #A3BAD5;height:30px;" colspan="7">审核纪录</th>
+        </tr>
+        <tr>
+            <td>审核工作流</td>
+            <td>审核人</td>
+            <td>审核时间</td>
+            <td>审核消息</td>
+        </tr>
+        <?php
+        $res = $this->GetReviewInfo(1,$_REQUEST['id']);
+        if(!empty($res)){
+            ?>
+            <?php
+            foreach ($res as $k => $v) {
+                ?>
+                <tr class="reject">
+                    <td><?php echo $v['review_times']; ?>审</td>
+                    <td><?php echo $v["username"]; ?></td>
+                    <td><?php echo date("Y-m-d H:i:s", $v["add_time"]); ?></td>
+                    <td><?php echo $v["message"]; ?></td>
+                </tr>
+                <?php
+            }?>
+
+
+        <?php }
+        ?>
+    </table>
 </form>
 <script>
 

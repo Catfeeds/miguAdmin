@@ -93,14 +93,15 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
                 <tr>
                     <th>编号</th>
-                    <th>推荐内容</th>
-		    <th>站点</th>
-                    <th>标题</th>
-		    <th>页面类型/action</th>
-		    <th>vid/param</th>
-                    <th>显示内容</th>
-		     <th>审核</th>
+                    <th>审核</th>
                     <th>提交审核时间时间</th>
+                    <th>推荐内容</th>
+		            <th>站点</th>
+                    <th>标题</th>
+		            <th>页面类型/action</th>
+		            <th>vid/param</th>
+                    <th>显示内容</th>
+		            <th>审核</th>
                     <th>操作</th>
                 </tr>
                 <?php
@@ -110,6 +111,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         <tr>
                             <input type="hidden" name='id' value="<?php echo $l['id']?>">
                             <td><input type="checkbox" class="checkbox" name="id" value="<?php echo $l['id']?>"></td>
+                            <td><?=$l['user'];?></td>
+                            <td><?php if(!empty($l['cTime'])){echo date('Y-m-d H:i',$l['cTime']);}?></td>
                             <td>
                             <?php
 				switch ( $l['type']){
@@ -179,14 +182,15 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 			 <?php } ?>
 			   <td><div style="width:200px;word-wrap:break-word;"><?php echo $l['info']?></div></td> 
 			   <td><?php echo $l['flag']?></td>
-                            <td><?php if(!empty($l['cTime'])){echo date('Y-m-d H:i',$l['cTime']);}?></td>
-                            <td>
-                                <?php
-                                if(0){
-                                    echo "<a href='javascript:void(0)' gid='{$l['id']}' class='review'>通过</a>&nbsp;";
-                                    echo "<a href='javascript:void(0)' gid='{$l['id']}' class='reject'>驳回</a>";
-                                }?>
-                            </td>
+
+            <td>
+                <?php
+
+                if(0){
+                    echo "<a href='javascript:void(0)' gid='{$l['id']}' class='review'>通过</a>&nbsp;";
+                    echo "<a href='javascript:void(0)' gid='{$l['id']}' class='reject'>驳回</a>";
+                }?>
+            </td>
                         </tr>
                         <?php
                     }

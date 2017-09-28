@@ -233,6 +233,27 @@ class VController extends Controller{
         return $res;
     }
 
+    public function recordReview($type,$bind_id,$review_times,$review_flag,$message)
+    {
+        $model = new VerReviewRecord();
+        $model->user_id = $_SESSION['userid'];
+        $model->add_time = time();
+        $model->type = $type;
+        $model->bind_id = $bind_id;
+        $model->review_times = $review_times;
+        $model->review_flag = $review_flag;
+        $model->message = $message;
+        $model->save();
+    }
+
+    public function GetReviewInfo($type,$bind_id)
+    {
+//        $vid = Yii::app()->request->getParam('vid');
+       $sql = "select a.*,b.username from yd_ver_review_record as a left join yd_ver_admin as b on a.user_id=b.id where a.type=$type and a.bind_id=$bind_id";
+       $res = SQLManager::queryAll($sql);
+       return $res;
+    }
+
 }
 
 

@@ -7,6 +7,14 @@ class MessageController extends VController
 		try{
 			$username = $_SESSION['nickname'];
 			$flag=4;
+
+			$review_flag = 3;   //提交审核
+			$review_times = 1;
+			$review_message = '提审';
+			$bind_id = $_REQUEST['id'];
+			$review_type = 1;   //消息
+			$this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
 			$workid = Common::EditWorkid($username,$flag);
 			$reject = VerMessageReject::model()->find("vid = '{$_REQUEST['id']}' and flag=$flag");
 			if(empty($reject)){
@@ -44,6 +52,15 @@ class MessageController extends VController
 				$flag=$tmp->attributes['flag']+1;
 				$result = VerMessage::model()->updateAll(array('flag'=>$flag),'id=:id',array(':id'=>$_REQUEST['gid']));
 			}
+
+            $review_flag = 1;   //审核通过
+            $review_times = $tmp->attributes['flag'];
+            $review_message = '通过';
+            $bind_id = $_REQUEST['gid'];
+            $review_type = 1;   //消息
+            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
+
 			if($result){
 				echo json_encode(array('code'=>200));
 			}else{
@@ -77,6 +94,13 @@ class MessageController extends VController
 				$newflag=$tmp->attributes['flag']+1;
 				$result = VerMessage::model()->updateAll(array('flag'=>$newflag),'id=:id',array(':id'=>$v));
 			}
+
+            $review_flag = 1;   //审核通过
+            $review_times = $tmp->attributes['flag'];
+            $review_message = '通过';
+            $bind_id = $v;
+            $review_type = 1;   //消息
+            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
 		}
 	}
 
@@ -111,6 +135,15 @@ class MessageController extends VController
 				case '4':$reject->message4=$message;$reject->addTime4  = time();$reject->user4=$username;break;
 				case '5':$reject->message5=$message;$reject->addTime5  = time();$reject->user5=$username;break;
 			}
+
+            $review_flag = 2;   //驳回
+            $review_times = $tmp->attributes['flag'];
+            $review_message = $message;
+            $bind_id = $_REQUEST['gid'];
+            $review_type = 1;   //消息
+            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
+
 			$reject->delFlag='0';
 			$reject->vid  = $_REQUEST['gid'];
 			$reject->save();
@@ -131,6 +164,15 @@ class MessageController extends VController
 					case '4':$reject->message4=$message;$reject->addTime4  = time();$reject->user4=$username;break;
 					case '5':$reject->message5=$message;$reject->addTime5  = time();$reject->user5=$username;break;
 				}
+
+                $review_flag = 2;   //驳回
+                $review_times = $tmp->attributes['flag'];
+                $review_message = $message;
+                $bind_id = $v;
+                $review_type = 1;   //消息
+                $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
+
 				$reject->delFlag='0';
 				$reject->vid  = $v;
 				$reject->save();

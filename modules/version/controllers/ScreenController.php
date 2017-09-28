@@ -872,6 +872,22 @@ class ScreenController extends VController
           PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8
     */
+
+    /*
+     * 壁纸消息等审核驳回记录表
+        CREATE TABLE `yd_ver_review_record` (
+          `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+          `type` int(10) NOT NULL DEFAULT '0' COMMENT '记录的种类 1：消息；2：壁纸 自定义',
+          `bind_id` int(10) NOT NULL DEFAULT 0 COMMENT '关联壁纸、消息等表的主键id',
+          `user_id` int(10) NOT NULL DEFAULT 0 COMMENT '审核或驳回人信息',
+          `review_times` int(10) NOT NULL DEFAULT 0 COMMENT '表示是几审的操作',
+          `review_flag` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1：通过；2：驳回；3：提审',
+          `message` varchar(255) not null default '0' comment '通过或驳回是的消息 通过即默认为通过，驳回则为输入的驳回理由',
+          `add_time` int(11) NOT NULL DEFAULT 0 COMMENT '添加这条数据的时间',
+          PRIMARY KEY (`id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+    */
+
 }
 
 

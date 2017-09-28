@@ -420,6 +420,15 @@ class WallpaperController extends VController{
             if(empty($reject)){
                 $reject = new VerWallReject();
             }
+
+            $review_flag = 3;   //提交审核
+            $review_times = 1;
+            $review_message = '提审';
+            $bind_id = $_REQUEST['id'];
+            $review_type = 2;   //壁纸
+            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
+
             $reject->user = $username;
             $reject->addTime=time();
             $reject->vid=$_REQUEST['id'];
@@ -452,6 +461,14 @@ class WallpaperController extends VController{
                 $flag=$tmp->attributes['flag']+1;
                 $result = VerWall::model()->updateAll(array('flag'=>$flag),'id=:id',array(':id'=>$_REQUEST['gid']));
             }
+
+            $review_flag = 1;   //审核通过
+            $review_times = $tmp->attributes['flag'];
+            $review_message = '通过';
+            $bind_id = $_REQUEST['id'];
+            $review_type = 2;   //壁纸
+            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
             if($result){
                 echo json_encode(array('code'=>200));
             }else{
@@ -475,23 +492,31 @@ class WallpaperController extends VController{
         foreach($arr as $k=>$v){
             $tmp = VerWall::model()->findByPk($v);
          
-	   $this->AccessReject($v,$flag);
+	        $this->AccessReject($v,$flag);
         
-	    $this->rejectlog($v,1);
-	     $sql = "select c.type from yd_ver_wall as a left join yd_ver_station as b on a.gid=b.id left join yd_ver_work c on b.id = c.stationId and c.flag = 5 where a.id = ".$tmp->attributes['id'];
+	        $this->rejectlog($v,1);
+	        $sql = "select c.type from yd_ver_wall as a left join yd_ver_station as b on a.gid=b.id left join yd_ver_work c on b.id = c.stationId and c.flag = 5 where a.id = ".$tmp->attributes['id'];
 //                        $AA['0']['type'] = ""; 
 			$AA =  SQLManager::QueryAll($sql);
-		if(empty($AA)){$AA['0']['type'] = "";
- }		
-	    if($tmp->attributes['flag']==0 || $tmp->attributes['flag']== 6){
-			return false;	
-	    }
+            if(empty($AA)){
+                $AA['0']['type'] = "";
+             }
+            if($tmp->attributes['flag']==0 || $tmp->attributes['flag']== 6){
+                return false;
+            }
             if($tmp->attributes['flag']==$AA['0']['type'] || $tmp->attributes['flag']=='5'){
                 $result = VerWall::model()->updateAll(array('flag'=>6),'id=:id',array(':id'=>$v));
             }else{
                 $newflag=$tmp->attributes['flag']+1;
                 $result = VerWall::model()->updateAll(array('flag'=>$newflag),'id=:id',array(':id'=>$v));
             }
+
+            $review_flag = 1;   //审核通过
+            $review_times = $tmp->attributes['flag'];
+            $review_message = '通过';
+            $bind_id = $v;
+            $review_type = 2;   //壁纸
+            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
 		
         }
     }
@@ -527,6 +552,14 @@ class WallpaperController extends VController{
                 case '4':$reject->message4=$message;$reject->addTime4  = time();$reject->user4=$username;break;
                 case '5':$reject->message5=$message;$reject->addTime5  = time();$reject->user5=$username;break;
             }
+
+            $review_flag = 2;   //驳回
+            $review_times = $tmp->attributes['flag'];
+            $review_message = $message;
+            $bind_id = $_REQUEST['gid'];
+            $review_type = 2;   //壁纸
+            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
             $reject->delFlag='0';
             $reject->vid  = $_REQUEST['gid'];
             $reject->save();
@@ -551,6 +584,14 @@ class WallpaperController extends VController{
                 $reject->delFlag='0';
                 $reject->vid  = $v;
                 $reject->save();
+
+                $review_flag = 2;   //驳回
+                $review_times = $tmp->attributes['flag'];
+                $review_message = $message;
+                $bind_id = $v;
+                $review_type = 2;   //壁纸
+                $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
                 $this->rejectlog($v,2);
                 $resulst = VerWall::model()->updateAll(array('flag'=>0),'id=:id',array(':id'=>$v));
             }
@@ -731,20 +772,10 @@ class WallpaperController extends VController{
 	echo json_encode($new);
     }
 
-//    public function actionGetReviewInfo()
-    public function GetReviewInfo($vid)
-    {
-//        $vid = Yii::app()->request->getParam('vid');
-        $res = VerWallLog::model()->findAll(
-            array(
-                'select'=>'*',
-//                'order'=>'addTime1,addTime2,addTime3,addTime4,addTime5 asc',
-                'group'=>'addTime,addTime1,addTime2,addTime3,addTime4,addTime5',
-                'condition'=>'vid=:vid',
-                'params'=>array(':vid'=>$vid),
-            )
-        );
-        return $res;
-    }
+
+
+
+
+
 }
 
