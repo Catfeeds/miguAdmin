@@ -120,7 +120,6 @@
 
     </table>
 
-    </table>
     <table style="width:900px;" class="mtable mt10" cellpadding="10" cellspacing="0">
         <tr>
             <th style="background: #A3BAD5;height:30px;" colspan="7">审核纪录</th>
