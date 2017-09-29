@@ -94,7 +94,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <tr>
                     <th>编号</th>
                     <th>审核</th>
-                    <th>提交审核时间时间</th>
+                    <th>提交审核时间</th>
                     <th>推荐内容</th>
 		            <th>站点</th>
                     <th>标题</th>

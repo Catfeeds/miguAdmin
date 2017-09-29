@@ -157,7 +157,7 @@ padding:5px 10px;
         </tr>
         <tr>
             <td>审核工作流</td>
-            <td>审核人</td>
+            <td>提审人</td>
             <td>审核时间</td>
             <td>审核消息</td>
         </tr>
