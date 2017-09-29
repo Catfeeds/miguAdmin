@@ -888,6 +888,10 @@ class ScreenController extends VController
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8
     */
 
+    /*
+     * 测试文件权限
+     * */
+
 }
 
 
