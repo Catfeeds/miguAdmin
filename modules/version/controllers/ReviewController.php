@@ -465,8 +465,14 @@ class ReviewController extends VController
             $maxWork = $workInfo[0]['maxLength'];
             $sign = $workNum[0];
 	        $m = count($workInfo)-1;
-            $stationId = $workInfo[$m]['stationId'];
-            $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id=$stationId ";
+//            $stationId = $workInfo[$m]['stationId'];
+            $stationId = array();
+            foreach ($workInfo as $k=>$v){
+                $stationId[] = $v['stationId'];
+            }
+            $tmp_stationId = explode(',',$stationId);
+//            $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id=$stationId ";
+            $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id in ($tmp_stationId) ";
             $sql_where = " where  1=1";
             if(!empty($_REQUEST['title'])){
                 $sql_where .= " and a.title='%{$_REQUEST['title']}%'";
@@ -488,7 +494,7 @@ class ReviewController extends VController
                 //$sql_center = " and a.flag in (1,6) or a.flag=$workFlag";
                 $sql_center = " and  a.flag=$workFlag";
                 $sql_work = $sql_top.$sql_center.$sql_bottom;
-                if($sign==$maxWork){
+                if($sign==5){
                    $sign = $sign;
                 }else{
                    $sign++;
@@ -509,7 +515,7 @@ class ReviewController extends VController
                 }else if($allbtn=='已驳回'){
                      $sql="select p.*,g.title as gtitle,s.name from yd_ver_screen_content_log p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag='2' inner join yd_ver_station s on s.id=g.gid ";
                 }else{
-         		$sql="select p.*,g.title as gtitle,s.name from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag=1 and p.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station s on s.id=g.gid";
+         		    $sql="select p.*,g.title as gtitle,s.name from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag=1 and p.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station s on s.id=g.gid";
                 }
             }else{
          		$sql="select p.*,g.title as gtitle,s.name from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag=1 and p.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station s on s.id=g.gid";
@@ -581,19 +587,43 @@ class ReviewController extends VController
         }
     }*/
 
+    public function newGetWorkInfo($id)
+    {
+        $screenGuideid_res = VerScreenContentCopy::model()->find(
+            array(
+                'select'=>'screenGuideid',
+                'condition'=>'id=:id',
+                'param'=>array(':id'=>$id),
+            ));
+        $station_res = VerScreenGuide::model()->find(
+            array(
+                'select'=>'gid',
+                'condition'=>'id=:id',
+                'param'=>array(':id'=>$screenGuideid_res->attributes['screenGuideid']),
+            ));
+        $uid = $_SESSION['userid'];
+        $stationId = $station_res->attributes['gid'];
+        $sql = "select a.type,b.type as maxLength,b.stationId from yd_ver_review_work as a left join yd_ver_work as b on b.id=a.workid  where a.uid=$uid and b.flag=3 and b.stationId=$stationId";  //确定当前用户是几审用户以及此工作流需要几审
+        $res = SQLManager::queryAll($sql);
+        return $res;
+    }
+
     public function actionContentAccess()
     {
         $workInfo = Common::getWorkInfo();
         //var_dump($workInfo);die;
         if(!empty($workInfo)){
-            $maxWork = $workInfo[0]['maxLength'];
+//            $maxWork = $workInfo[0]['maxLength'];
             $flag = $_REQUEST['flag'];
             if(!empty($_REQUEST['id'])){
                 $arr = explode(' ',trim($_REQUEST['id']));
                 foreach($arr as $k=>$v){
                     $list = VerScreenContentCopy::model()->findByPk($v);
                     $screenGuideid = $list->screenGuideid;
-                    $sign = $workInfo[0]['type'];
+//                    $sign = $workInfo[0]['type'];
+                    $new_workInfo = $this->newGetWorkInfo($v);
+                    $sign = $new_workInfo[0]['type'];
+                    $maxWork = $new_workInfo[0]['maxLength'];
                     if($flag=='1'){
                         $this->addlog($list);
                         if($list->flag=='1') {

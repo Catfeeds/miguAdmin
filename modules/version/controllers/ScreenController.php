@@ -581,7 +581,6 @@ class ScreenController extends VController
         }
     }
 
-
     public function CopyScreenContent($sid,$copySid)
     {
     //   $sid = $_REQUEST['sid'];

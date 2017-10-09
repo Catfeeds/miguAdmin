@@ -6,6 +6,7 @@
  * Date: 2015/8/19 0019
  * Time: 11:48
  */
+
 class GuideController extends VController{
 	public function actionDefault(){
 		$this->render('default');
@@ -270,7 +271,7 @@ class GuideController extends VController{
 		echo json_encode($pro);
 	}
 
-        public function actionContent(){
+    public function actionContent(){
                 $page = 100;
 		$data = $this->getPageInfo($page);
                 $url = $this->createUrl($this->action->id);
@@ -303,7 +304,7 @@ class GuideController extends VController{
 			$content->title=$_POST['title'];
                         $pic_true = trim($_POST['url']);
         		$pic_true = basename($pic_true);
-        		if($flag->province==90){
+      		if($flag->province==90){
 				$content->url="http://pic-portal-v3.itv.cmvideo.cn:8083/file/".$pic_true;//存公网
 			}else{
 				$content->url=FTP_PATH.$pic_true;//同步图片服务器ip
