@@ -186,6 +186,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             })
         });
     }
+	getcity();
     $(".del").click(function(){
 	var id=$(this).attr("gid");
         layer.confirm('确定删除？', {
