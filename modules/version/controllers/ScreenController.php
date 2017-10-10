@@ -71,10 +71,11 @@ class ScreenController extends VController
                 'params'=>array(':screenGuideid'=>$screenGuideid),
             ));
         $data = array();
-//        echo '<pre>';
-//        var_dump($res);die;
-        $data['max'] = $res[0]->attributes['order'];
-        $data['min'] = $res[count($res)-1]->attributes['order'];
+        if(!empty($res)){
+            $data['max'] = $res[0]->attributes['order'];
+            $data['min'] = $res[count($res)-1]->attributes['order'];
+        }
+
         echo json_encode($data);
     }
 
