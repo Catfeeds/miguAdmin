@@ -461,7 +461,7 @@ if(!empty($templateList)){
             var width = $(order).css('width');
             var height = $(order).css('height');
             var w = $(order).attr('size-w');
-            var h = $(order).attr('size-h');console.log(w);
+            var h = $(order).attr('size-h');//console.log(w);
             $(order).find('.clickImg-'+w+'-'+h).remove();
             $(order).append("<li><img style='display:block;float:left;position:relative;z-index:1' src='"+data[i]['pic']+"' width='"+w+"' height='"+h+"'  id='"+data[i]['id']+"'></li>");
         }
@@ -670,7 +670,7 @@ if(!empty($templateList)){
             url:'/version/screen/getScreenContentInfo/mid/'+mid+'/order/'+order+'/screenGuideId/'+screenGuideId,
             success:function(data)
             {
-                console.log(data);
+                //console.log(data);
             }
         })
     }
