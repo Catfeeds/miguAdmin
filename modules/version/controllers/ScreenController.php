@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 class ScreenController extends VController
 {
     public function actionIndex()
@@ -51,8 +52,9 @@ class ScreenController extends VController
     public function actionGetHasScreen()
     {
         $screenId = $_REQUEST['screenId'];
-        $model = new VerScreenGuide();
-        $res = $model->findAllByPk($screenId);
+//        $model = new VerScreenGuide();
+//        $res = $model->findAllByPk($screenId);
+        $res = VerScreenGuide::model()->findAllByPk($screenId);
         $html = HTML::getTemplate($res[0]['templateId']);
         echo $html;
     }
