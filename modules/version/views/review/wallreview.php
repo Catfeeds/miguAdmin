@@ -106,7 +106,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <th>审核</th>
 
 			<th>有效期</th>
-                    <th>操作</th>
+<!--                    <th>操作</th>-->
                 </tr>
                 <?php
                 if(!empty($list)){
@@ -163,14 +163,14 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             <td><?php echo $l['flag']?></td>
 
 				<td><?php if(!empty($l['startTime'])){echo date("Y-m-d",$l['startTime']);}else{echo "";}?>~<?php if(!empty($l['endTime'])){echo date("Y-m-d",$l['endTime']);}else{echo "";}?></td>
-                            <td>
+<!--                            <td>-->
                                 <?php
-                                if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
-                                    echo "<a href='javascript:void(0)' gid='{$l['id']}' class='review'>通过</a>&nbsp;";
-                                    echo "<a href='javascript:void(0)' gid='{$l['id']}' class='reject'>驳回</a>";
-                                }
+                                //if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
+                                    //echo "<a href='javascript:void(0)' gid='{$l['id']}' class='review'>通过</a>&nbsp;";
+                                    //echo "<a href='javascript:void(0)' gid='{$l['id']}' class='reject'>驳回</a>";
+                                //}
                                 ?>
-                            </td>
+<!--                            </td>-->
                         </tr>
                         <?php
                     }
