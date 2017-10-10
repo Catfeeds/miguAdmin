@@ -423,17 +423,22 @@ if(!empty($templateList)){
 
     function getOnlineContent(screenId)
     {
+        console.log('1====='+<?php echo time();?>);
         $.ajax
         ({
-            type:'post',
+            type:'get',
+//            async:false,
             url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+screenId,
             success:function(data)
             {
+                console.log('2====='+<?php echo time();?>);
                 $('.templateParent').remove();
                 $('.center-ul').after(data);
                 getScreenContent(screenId);
+                console.log('3====='+<?php echo time();?>);
             }
         })
+        console.log('4====='+<?php echo time();?>);
     }
 
     var flag = <?php echo $flag;?>;
@@ -735,16 +740,15 @@ if(!empty($templateList)){
 
     function getScreenContentCopy(screenId)
     {
-        document.getElementById("screenid").value = screenId
-
+        document.getElementById("screenid").value = screenId;
         $.ajax
         ({
             type:'post',
+//            async:false,
             url:"/version/screen/getScreenContentCopy/mid/<?php echo $this->mid;?>/stationId/<?php echo $_GET['nid'];?>/screenGuideId/"+screenId,
             dataType:'json',
             success:function(data)
             {
-
                 flag= data.flag;
                 data = data.list;
 
@@ -767,7 +771,6 @@ if(!empty($templateList)){
 
                     }
                 }
-
             }
         })
     }
@@ -775,7 +778,8 @@ if(!empty($templateList)){
     function aaa(screenId){
         $.ajax
         ({
-            type:'post',
+            type:'get',
+            async:false,
             url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+screenId,
             success:function(data)
             {
@@ -797,14 +801,15 @@ if(!empty($templateList)){
     }
 
     function bbb(screenId){
-
+        console.log('1====='+<?php echo time();?>);
         $.ajax
         ({
             type:'post',
+            async:false,
             url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+screenId,
             success:function(data)
             {
-
+                console.log('1====='+<?php echo time();?>);
                 $('.templateParent').remove();
                 for(var i = 0 ; i<$('.active').parent().children('li').length ; i++){
                     if($('.active').parent().children('li').eq(i).children('img').hasClass('guideFlag')){
@@ -818,22 +823,23 @@ if(!empty($templateList)){
                 $('.active').children('img').eq(0).show();
                 $('.active').children('img').eq(1).hide();
                 $('.center-ul').after(data);
-
                 getScreenContentCopy(screenId);
-
+                console.log('1====='+<?php echo time();?>);
                 var statusFlag = $('.centerTopNav').attr('statusFlag'); //编辑|待发布|现网
                 if(statusFlag == '3' || statusFlag == '2'){
                   // $('.plus_button').remove();
                 }
            }
         })
+        console.log('1====='+<?php echo time();?>);
     }
 
     function getDaiFaBu(guideId)
     {
         $.ajax
         ({
-            type:'post',
+            type:'get',
+//            async:false,
             url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+guideId,
             success:function(data)
             {
