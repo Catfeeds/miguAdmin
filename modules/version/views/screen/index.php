@@ -548,7 +548,7 @@ if(!empty($templateList)){
 
             $(order).append("" +
                 "<li>" +
-                "<img style='display:block;float:left;position:relative;z-index:1' src='"+data[i]['pic']+"' width='"+width+"' height='"+height+"' onclick='add(this)' id='"+data[i]['id']+"'>" +
+                "<img time='<?php echo time()?>' style='display:block;float:left;position:relative;z-index:1' src='"+data[i]['pic']+"' width='"+width+"' height='"+height+"' onclick='add(this)' id='"+data[i]['id']+"'>" +
                 "</li>");
         }
 
