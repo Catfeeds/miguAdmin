@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
+//header("Access-Control-Allow-Origin: *");
 class ScreenController extends VController
 {
     public function actionIndex()
@@ -52,11 +52,30 @@ class ScreenController extends VController
     public function actionGetHasScreen()
     {
         $screenId = $_REQUEST['screenId'];
-//        $model = new VerScreenGuide();
-//        $res = $model->findAllByPk($screenId);
         $res = VerScreenGuide::model()->findAllByPk($screenId);
         $html = HTML::getTemplate($res[0]['templateId']);
         echo $html;
+    }
+
+    public function actionGetMaxOrder()
+    {
+        if(!Yii::app()->request->isAjaxRequest){
+            $this->redirect($this->getPreUrl());
+        }
+        $screenGuideid = $_REQUEST['guideid'];
+        $res = VerScreenContentCopy::model()->findAll(
+            array(
+                'select'=>'`order`',
+                'order'=>'`order` desc',
+                'condition'=>'screenGuideid=:screenGuideid',
+                'params'=>array(':screenGuideid'=>$screenGuideid),
+            ));
+        $data = array();
+//        echo '<pre>';
+//        var_dump($res);die;
+        $data['max'] = $res[0]->attributes['order'];
+        $data['min'] = $res[count($res)-1]->attributes['order'];
+        echo json_encode($data);
     }
 
     public function actionAddData()
@@ -275,7 +294,7 @@ class ScreenController extends VController
 		$sql = "select type from yd_ver_work where stationId = $stationid";
 		$res = SQLManager::queryAll($sql);
 		if(!empty( $res[0]['type'])){
-		    $type =  $res[0]['type'];
+		    $type = $res[0]['type'];
 		}else{
 		    $type="999";
 		}

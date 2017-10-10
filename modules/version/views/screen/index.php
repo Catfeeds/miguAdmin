@@ -423,7 +423,6 @@ if(!empty($templateList)){
 
     function getOnlineContent(screenId)
     {
-        console.log('1====='+<?php echo time();?>);
         $.ajax
         ({
             type:'get',
@@ -431,14 +430,11 @@ if(!empty($templateList)){
             url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+screenId,
             success:function(data)
             {
-                console.log('2====='+<?php echo time();?>);
                 $('.templateParent').remove();
                 $('.center-ul').after(data);
                 getScreenContent(screenId);
-                console.log('3====='+<?php echo time();?>);
             }
         })
-        console.log('4====='+<?php echo time();?>);
     }
 
     var flag = <?php echo $flag;?>;
@@ -528,7 +524,6 @@ if(!empty($templateList)){
 
     function showDataAgainCopy(data)
     {
-
         var l= data.length;
         l= data.length;
         for(var i = 0 ; i<data.length ; i++){
@@ -548,17 +543,18 @@ if(!empty($templateList)){
 
             $(order).append("" +
                 "<li>" +
-                "<img time='<?php echo time()?>' style='display:block;float:left;position:relative;z-index:1' src='"+data[i]['pic']+"' width='"+width+"' height='"+height+"' onclick='add(this)' id='"+data[i]['id']+"'>" +
+                "<img  style='display:block;float:left;position:relative;z-index:1' src='"+data[i]['pic']+"' width='"+width+"' height='"+height+"' onclick='add(this)' id='"+data[i]['id']+"'>" +
                 "</li>");
         }
-
-
         banner(l);
     }
 
     function banner(l)
     {
-        for(var i = 0 ; i<999999 ; i++){
+        var guideid = $('.active').children('img').eq(0).attr('guideid');
+        var info = getMaxOrder(guideid);
+        info = JSON.parse(info);
+        for(var i = (info.min)-1 ; i<(info.max)+1 ; i++){
             if($('.order-'+i).find('li').length>1){
                 var aa = $('.order-'+i).html();
                 var bb = $('.order-'+i);
@@ -571,7 +567,24 @@ if(!empty($templateList)){
                 slider.startAuto();
             }
         }
-            $('.bx-controls').hide();
+        $('.bx-controls').hide();
+    }
+
+    function getMaxOrder(guideid)
+    {
+        var mid = <?php echo $this->mid;?>;
+        var d = 1;
+        $.ajax
+        ({
+            type:'get',
+            async:false,
+            url:'/version/screen/getMaxOrder/mid/'+mid+'/guideid/'+guideid,
+            success:function(data)
+            {
+                d = data;
+            }
+        })
+        return d;
     }
 
     function checkQuote(guideId)
@@ -779,7 +792,7 @@ if(!empty($templateList)){
         $.ajax
         ({
             type:'get',
-            async:false,
+//            async:false,
             url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+screenId,
             success:function(data)
             {
@@ -801,15 +814,13 @@ if(!empty($templateList)){
     }
 
     function bbb(screenId){
-        console.log('1====='+<?php echo time();?>);
         $.ajax
         ({
             type:'post',
-            async:false,
+//            async:false,
             url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+screenId,
             success:function(data)
             {
-                console.log('2====='+<?php echo time();?>);
                 $('.templateParent').remove();
                 for(var i = 0 ; i<$('.active').parent().children('li').length ; i++){
                     if($('.active').parent().children('li').eq(i).children('img').hasClass('guideFlag')){
@@ -824,14 +835,12 @@ if(!empty($templateList)){
                 $('.active').children('img').eq(1).hide();
                 $('.center-ul').after(data);
                 getScreenContentCopy(screenId);
-                console.log('3====='+<?php echo time();?>);
                 var statusFlag = $('.centerTopNav').attr('statusFlag'); //编辑|待发布|现网
                 if(statusFlag == '3' || statusFlag == '2'){
                   // $('.plus_button').remove();
                 }
            }
         })
-        console.log('4====='+<?php echo time();?>);
     }
 
     function getDaiFaBu(guideId)
