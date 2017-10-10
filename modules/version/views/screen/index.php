@@ -809,7 +809,7 @@ if(!empty($templateList)){
             url:"/version/screen/GetHasScreen/mid/<?php echo $this->mid;?>/screenId/"+screenId,
             success:function(data)
             {
-                console.log('1====='+<?php echo time();?>);
+                console.log('2====='+<?php echo time();?>);
                 $('.templateParent').remove();
                 for(var i = 0 ; i<$('.active').parent().children('li').length ; i++){
                     if($('.active').parent().children('li').eq(i).children('img').hasClass('guideFlag')){
@@ -824,14 +824,14 @@ if(!empty($templateList)){
                 $('.active').children('img').eq(1).hide();
                 $('.center-ul').after(data);
                 getScreenContentCopy(screenId);
-                console.log('1====='+<?php echo time();?>);
+                console.log('3====='+<?php echo time();?>);
                 var statusFlag = $('.centerTopNav').attr('statusFlag'); //编辑|待发布|现网
                 if(statusFlag == '3' || statusFlag == '2'){
                   // $('.plus_button').remove();
                 }
            }
         })
-        console.log('1====='+<?php echo time();?>);
+        console.log('4====='+<?php echo time();?>);
     }
 
     function getDaiFaBu(guideId)
