@@ -33,7 +33,7 @@
 			<p><input type="checkbox" value="youpeng" name="cps">南传</p>
 			<p><input type="checkbox" value="HNBB" name="cps">芒果</p>
 			<p><input type="checkbox" value="CIBN" name="cps">国广</p>
-			<p><input type="checkbox" value="YGYH" name="cps">银河</p></td>
+			<p><input type="checkbox" value="YGYH" name="cps">银河</p>
 			<p><input type="checkbox" value="poms" name="cps">咪咕</p></td>
             </tr>
             <tr>
