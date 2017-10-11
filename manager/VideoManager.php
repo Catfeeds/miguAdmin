@@ -444,7 +444,8 @@ class VideoManager extends Video{
         }
 
         if(!empty($list['fee'])){
-            $sql_where .=" and v.`prdpack_id`='1002381'";
+	    if($list['fee']==1){
+            $sql_where .=" and v.`prdpack_id`='1002381'";}
         }else{
             $sql_where .=" and v.`prdpack_id`='1002261'";
         }
@@ -744,7 +745,7 @@ $sql_where .=" or (a.flag = 0";
 		    }
 
             }
-            $sql_where .=")";
+            $sql_where .="))";
        }         
          if(!empty($list['gud'])){
             $sql_where .= " and a.gid ='".$list['gud']."'";
@@ -762,7 +763,7 @@ $sql_where .=" or (a.flag = 0";
         $count = $sql_count . $sql_from;
         $whereCount = $sql_count . $sql_from. $sql_where;
         $list = $sql_select . $sql_from . $sql_join . $sql_where . $sql_order . $sql_limit;
-    //echo $list;
+    //echo $list;die;
 	$res['alwaysCount'] = Yii::app()->db->createCommand($count)->queryScalar();
         $res['count'] = Yii::app()->db->createCommand($whereCount)->queryScalar();
 	$res['list'] = SQLManager::queryAll($list);
