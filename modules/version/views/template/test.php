@@ -36,7 +36,7 @@
 <input type="hidden" value="-1" name="mid">
 <input type="submit" class="btn" value="生成模板" />
 </form>
-<table id="template_table" cellspacing="<?php echo $cellspacing/2;?>" style="/*width:<?php //echo ($max_line*$width)/2+(($max_line-1)*$cellspacing)/2;?>px*/;">
+<table id="template_table" cellspacing="<?php echo $cellspacing/2;?>" style="width:<?php echo ($max_line*$width)/2+(($max_line-1)*$cellspacing)/2;?>px;padding-left:45px" background="http://117.144.248.58:8082/file/1507791890767920.jpg">
 
     <?php
         for($a = 0 ; $a<$max_column ; $a++){
@@ -152,6 +152,9 @@
 		    firstTD.append(','+ html.replace(/,(<br>)/g, '$1'));
 		    var width=(MMRC.endCellIndex - MMRC.startCellIndex + 1)*<?php echo $width;?>+(MMRC.endCellIndex - MMRC.startCellIndex)*<?php echo $cellspacing;?>;
 		    var height=(MMRC.endRowIndex - MMRC.startRowIndex + 1)*<?php echo $height?>+(MMRC.endRowIndex - MMRC.startRowIndex)*<?php echo  $cellspacing;?>;
+		    //获取单元格右侧横坐标
+			var tmp=firstTD.text().split("x");
+			var x=parseInt(tmp[0])+width;
 		    	//去除内容
 			var text=firstTD.html();
 			if(text.charAt(text.length-1)==","){
@@ -168,7 +171,12 @@
                     var rc = firstTD.attr({ colspan: MMRC.endCellIndex - MMRC.startCellIndex + 1, rowspan: MMRC.endRowIndex - MMRC.startRowIndex + 1 }).data('rc');
                     rc.maxc = rc.c + MMRC.endCellIndex - MMRC.startCellIndex; rc.maxr = rc.r + MMRC.endRowIndex - MMRC.startRowIndex;
                     firstTD.data('rc', rc);
-
+		//添加背景色
+		/*if(x<1620){
+			firstTD.attr('bgcolor','#FF0000');
+		}else{
+			firstTD.attr('bgcolor','#0000FF');
+		}*/
                 }
                 tb.find('td').removeClass('selected');
                 startTD = endTD = null;

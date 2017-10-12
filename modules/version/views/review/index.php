@@ -66,6 +66,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='HNBB'){echo "selected=selected"; } ?> value="HNBB">芒果</option>
             <option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='CIBN'){echo "selected=selected"; } ?> value="CIBN">国广</option>
             <option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='YGYH'){echo "selected=selected"; } ?> value="YGYH">银河</option>
+            <option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='poms'){echo "selected=selected"; } ?> value="poms">咪咕</option>
         </select>
 	<span style="float:left;font-size:14px;">&nbsp;&nbsp;&nbsp;类型</span>
      
@@ -181,6 +182,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                     case 'HNBB':echo '芒果';break;
                                     case 'CIBN':echo '国广';break;
                                     case 'YGYH':echo '银河';break;
+				    case 'poms':echo "咪咕";break;
                                 }
                                 ?></td>
                             <td><?php echo $l['title']?></td>
