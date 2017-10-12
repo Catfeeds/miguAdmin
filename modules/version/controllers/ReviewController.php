@@ -470,7 +470,8 @@ class ReviewController extends VController
             foreach ($workInfo as $k=>$v){
                 $stationId[] = $v['stationId'];
             }
-            $tmp_stationId = explode(',',$stationId);
+	    $tmp_stationId=join(",",$stationId);
+            //$tmp_stationId = explode(',',$stationId);
 //            $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id=$stationId ";
             $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id in ($tmp_stationId) ";
             $sql_where = " where  1=1";
@@ -593,13 +594,13 @@ class ReviewController extends VController
             array(
                 'select'=>'screenGuideid',
                 'condition'=>'id=:id',
-                'param'=>array(':id'=>$id),
+                'params'=>array(':id'=>$id)
             ));
         $station_res = VerScreenGuide::model()->find(
             array(
                 'select'=>'gid',
                 'condition'=>'id=:id',
-                'param'=>array(':id'=>$screenGuideid_res->attributes['screenGuideid']),
+                'params'=>array(':id'=>$screenGuideid_res->attributes['screenGuideid'])
             ));
         $uid = $_SESSION['userid'];
         $stationId = $station_res->attributes['gid'];
