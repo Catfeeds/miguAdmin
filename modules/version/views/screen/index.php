@@ -385,7 +385,7 @@ if(!empty($templateList)){
 
     function guideShow(obj)
     {
-        var screenGuideId = $('.active').children('img').eq(0).attr('guideid');
+        var screenGuideId = $(obj).children('img').eq(0).attr('guideid');
         var quote_flag = checkQuote(screenGuideId);
         if(quote_flag == 1 /*&& (statusFlag==1 ||statusFlag==2)*/){
             //layer.alert('此屏幕内容是引用屏幕不能被编辑');
