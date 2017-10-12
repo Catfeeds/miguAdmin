@@ -162,9 +162,11 @@ class ScreenController extends VController
         }
         $copyGuideId = trim($_POST['screenGuideId']);
         $quote_res = $this->getQuoteInfo($copyGuideId);
+	//var_dump($quote_res);die;
         if($quote_res){
             $guides = $quote_res.','.$copyGuideId;
             $code = '200';
+	    $guides = explode(',',$guides);	
             foreach ($guides as $k=>$v){
                 $model = new VerScreenContentCopy();
                 $model->title = trim($_POST['title']);

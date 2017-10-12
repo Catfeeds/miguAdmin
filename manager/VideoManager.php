@@ -745,7 +745,7 @@ $sql_where .=" or (a.flag = 0";
 		    }
 
             }
-            $sql_where .="))";
+            $sql_where .=")";
        }         
          if(!empty($list['gud'])){
             $sql_where .= " and a.gid ='".$list['gud']."'";

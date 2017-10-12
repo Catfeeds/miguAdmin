@@ -79,7 +79,7 @@ padding:5px 10px;
                 <select id="gid" name="gid" class = "form-input w200" >
 			<option>请选择</option>
 			<?php foreach($st as $k => $v){ ?>
-				<option value = "<?php echo $v['id']; ?>" ><?php echo $v['name']; ?></option>
+				<option value = "<?php echo $v['id']; ?>" <?php if($v['id']==$message->attributes['gid']){echo 'selected=selected';}?>><?php echo $v['name']; ?></option>
 			<?php } ?>
 		</select>
         <?php  } ?>

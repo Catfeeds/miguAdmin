@@ -472,20 +472,20 @@ if($_SESSION['auth']=='1'){
                                         ?>
                                         <li class="menus">
                                             <span style="position: relative" class='test active'>
-                                                <img src="../../../file/button/folder_true.png" onclick="two(this)" class="two" >
+                                                <img src="../../../file/button/folder_false.png" onclick="two(this)" class="two" >
                                                <div style="display: inline;position: absolute;top:5px;"><?php echo $val['name']; ?></div>
                                                 <img src="../../file/button/del.png" title="删除" des="<?php echo $val['id']; ?>" class="dele" style="visibility:hidden;">
                                                 <!--                                                                                        <input type="button" des="--><?php //echo $val['id'] ?><!--" class="edit" value="编">-->
                                                                                         <img src="../../file/button/edit.png" title="编辑" des="<?php echo $val['id']?>" class="edit" style="visibility:hidden;">
                                                                                         <span style="display: block;float: right;margin-right: 20px;"><?php echo $val['id']; ?></span>
                                             </span>
-                                            <ul>
+                                            <ul style="display:none">
                                                 <?php
                                                 $c = -1;
                                                     foreach($tmp as $l){
                                                         $c++;?>
-                                                           <li class="test2" style="<?php if($_GET['nid'] == $l['id']){ echo "background: rgb(163, 186, 213)"; } ?>">
-                                                               <a href="<?php echo $l['url'] == '#'?'#':Yii::app()->createUrl($l['url'],array('mid'=>$_GET['mid'],'nid'=>$l['id'],'epg'=>$l['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">&nbsp;&nbsp;&nbsp;<?php echo $l['name']; ?> </a>
+                                                           <li class="test2 <?php if($_GET['nid'] == $l['id']){echo 'light';}?>" style="<?php if($_GET['nid'] == $l['id']){ echo "background: rgb(163, 186, 213)"; } ?>">
+                                                               <a href="<?php echo $l['url'] == '#'?'#':Yii::app()->createUrl($l['url'],array('mid'=>$_GET['mid'],'nid'=>$l['id'],'epg'=>$l['name'],'top'=>$v['name'].$v['id'],'par'=>$val['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">&nbsp;&nbsp;&nbsp;<?php echo $l['name']; ?> </a>
 
                                                                <img src="../../file/button/del.png" title="删除" des="<?php echo $l['id']; ?>" class="dele" style="visibility:hidden;">
                                                                <img src="../../file/button/edit.png" title="编辑" des="<?php echo $l['id']?>" class="edit" style="visibility:hidden;">
@@ -549,9 +549,10 @@ if($_SESSION['auth']=='1'){
     <div class="mt10" style="float:left;">
         <div style='margin-bottom:10px;'>
             <span><?php echo $adminLeftOneName;echo '>';?></span>
-            <span><?php echo $adminLeftTwoName;echo '>';?></span>
-            <span><?php if(!empty($_GET['top'])){echo $_GET['top'];echo '>';}?></span>
+            <span>通用专题></span>
+	    <span><?php if(!empty($_GET['top'])){echo $_GET['top'];echo '>';}?></span>
             <span><?php if(!empty($_GET['par'])){echo $_GET['par'];echo '>';}?></span>
+            <span><?php echo $adminLeftTwoName;?></span>
             <span><?php if(!empty($_GET['son'])){echo $_GET['son'];}?></span>
         </div>
         <div>
@@ -1032,6 +1033,7 @@ if($_SESSION['auth']=='1'){
                     if(j == twoId){
                         $('.two').eq(twoId).parent().siblings('ul').slideDown(100).children('li');
                         $('.two').eq(twoId).attr('src','../../../file/button/folder_true.png');
+			//$_this.parent().siblings('ul').show();
                     }else{
                         $_this.parent().parent('li').siblings('li').removeClass('inactives');
                         $_this.addClass('inactives');
@@ -1612,6 +1614,7 @@ if($_SESSION['auth']=='1'){
         {
             $('.heightLight').parent('ul').slideDown(100).children('li');
             $('.heightLight').parent('ul').attr('src','../../../file/button/folder_true.png');
+	    $('.light').parent('ul').show();
         }
         $('a').css('text-decoration','none');
 function add(obj)

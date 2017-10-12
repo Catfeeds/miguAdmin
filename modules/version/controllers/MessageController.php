@@ -87,13 +87,19 @@ class MessageController extends VController
                        	$sql = "select c.type from yd_ver_message as a left join yd_ver_station as b on a.gid=b.id left join yd_ver_work c on b.id = c.stationId and c.flag = 4 where a.id = ".$tmp->attributes['id'];
 			 $AA =  SQLManager::QueryAll($sql);
 			if(empty($AA)){ $AA['0']['type'] = "";}
-			if($tmp->attributes['flag'] == 0 || $tmp->attributes['flag'] == 6){return false;}	
-			if($tmp->attributes['flag']== $AA['0']['type'] || $tmp->attributes['flag']=='5'){
-				$result = VerMessage::model()->updateAll(array('flag'=>6),'id=:id',array(':id'=>$v));
-			}else{
-				$newflag=$tmp->attributes['flag']+1;
-				$result = VerMessage::model()->updateAll(array('flag'=>$newflag),'id=:id',array(':id'=>$v));
-			}
+			if($tmp->attributes['flag'] == 0 || $tmp->attributes['flag'] == 6){return false;}
+			$auth = $_SESSION['auth'];
+			if($auth == 1){
+                $newflag=6;
+            }else{
+                $newflag=$tmp->attributes['flag']+1;
+            }
+            if($tmp->attributes['flag']== $AA['0']['type'] || $tmp->attributes['flag']=='5'){
+                $result = VerMessage::model()->updateAll(array('flag'=>6),'id=:id',array(':id'=>$v));
+            }else{
+                //$newflag=$tmp->attributes['flag']+1;
+                $result = VerMessage::model()->updateAll(array('flag'=>$newflag),'id=:id',array(':id'=>$v));
+            }
 
             $review_flag = 1;   //审核通过
             $review_times = $tmp->attributes['flag'];
