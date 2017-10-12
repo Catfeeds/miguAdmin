@@ -1039,7 +1039,7 @@ if($_SESSION['auth']=='1'){
         $('.addyiji').click(function(){
       
         	if(<?php echo $estatus ?>){
-        		alert("权限不足 无法操作！");return false;
+        		layer.alert("权限不足 无法操作！");return false;
         	}
             var gid = $(this).attr('gid');
             $.getJSON('<?php echo $this->get_url('station','topadd')?>', {gid: gid}, function (d) {
@@ -1078,11 +1078,11 @@ if($_SESSION['auth']=='1'){
         })
 
         		   if(x == 500){
- 
-        		alert("审核中！请勿编辑");return false;
+
+                       layer.alert("审核中！请勿编辑");return false;
         	}else if(x == 300)
         	{
-        		alert("请发布数据之后再进行编辑");return false;
+                layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
             var auth = "<?php echo $_SESSION['auth']?>";
@@ -1099,7 +1099,7 @@ if($_SESSION['auth']=='1'){
             }, function(){
                 $.post("<?php echo $this->get_url('site','delsite')?>",{id:id},function(d){
                     if(d.code==200){
-                        alert(d.msg);
+                        layer.alert(d.msg);
                         //location.reload();
                         var adminLeftOne = "<?php echo $adminLeftOne;?>";
                         var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
@@ -1107,7 +1107,7 @@ if($_SESSION['auth']=='1'){
                         var adminLeftTwoName = "<?php echo $adminLeftTwoName;?>";
                         window.location.href="/version/station/topic.html?mid=-1&nid=39"+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
                     }else{
-                        alert(d.msg)
+                        layer.alert(d.msg)
                     }
                 },'json')
             })
@@ -1115,7 +1115,7 @@ if($_SESSION['auth']=='1'){
         $('.edit').click(function(){
 		   var id = $(this).attr('des');
         if(<?php echo $estatus ?>){
-                        alert("权限不足 无法操作！");return false;
+            layer.alert("权限不足 无法操作！");return false;
                 }
                  var x;
                  $.ajax
@@ -1130,11 +1130,11 @@ if($_SESSION['auth']=='1'){
         })
 
         	   if(x == 500){
- 
-        		alert("审核中！请勿编辑");return false;
+
+                   layer.alert("审核中！请勿编辑");return false;
         	}else if(x == 300)
         	{
-        		alert("请发布数据之后再进行编辑");return false;
+                layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
             var auth = "<?php echo $_SESSION['auth']?>";
@@ -1161,14 +1161,14 @@ if($_SESSION['auth']=='1'){
 
         $('.modules a').click(function(){
         if(<?php echo $estatus ?>){
-        		alert("权限不足 无法操作！");return false;
+            layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         		   if(x == 500){
- 
-        		alert("审核中！请勿编辑");return false;
+
+                       layer.alert("审核中！请勿编辑");return false;
         	}else if(x == 300)
         	{
-        		alert("请发布数据之后再进行编辑");return false;
+                layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
             var auth = "<?php echo $_SESSION['auth']?>";
@@ -1212,14 +1212,14 @@ if($_SESSION['auth']=='1'){
 
         $('.del').click(function(){
         	if(<?php echo $estatus ?>){
-        		alert("权限不足 无法操作！");return false;
+                layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         		   if(x == 500){
- 
-        		alert("审核中！请勿编辑");return false;
+
+                       layer.alert("审核中！请勿编辑");return false;
         	}else if(x == 300)
         	{
-        		alert("请发布数据之后再进行编辑");return false;
+                layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
             var G = {};
@@ -1227,7 +1227,7 @@ if($_SESSION['auth']=='1'){
             if(confirm('你确定删除此条内容吗？')){
                 $.getJSON('<?php echo $this->get_url('site','del')?>',G,function(d){
                     if(d.code==200){
-                       alert(d.msg);
+                        layer.alert(d.msg);
                        location.reload();
                     }else{
                        layer.alert(d.msg,{icon:0});
@@ -1238,14 +1238,14 @@ if($_SESSION['auth']=='1'){
 
         $('.guide').click(function(){
         	if(<?php echo $estatus ?>){
-        		alert("权限不足 无法操作！");return false;
+                layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         	   if(x == 500){
- 
-        		alert("审核中！请勿编辑");return false;
+
+                   layer.alert("审核中！请勿编辑");return false;
         	}else if(x == 300)
         	{
-        		alert("请发布数据之后再进行编辑");return false;
+                layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
             var auth = "<?php echo $_SESSION['auth']?>";
@@ -1272,19 +1272,19 @@ if($_SESSION['auth']=='1'){
 
         $('.add_topic').click(function(){
         	if(<?php echo $estatus ?>){
-        		alert("权限不足 无法操作！");return false;
+                layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         		   if(x == 500){
- 
-        		alert("审核中！请勿编辑");return false;
+
+                       layer.alert("审核中！请勿编辑");return false;
         	}else if(x == 300)
         	{
-        		alert("请发布数据之后再进行编辑");return false;
+                layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
             if($('.bg').length>0){
                 if($('.bg').val().length>1){
-                    alert('您已经新建过专题了！');
+                    layer.alert('您已经新建过专题了！');
                     return false;
                 }
             }
@@ -1332,7 +1332,7 @@ if($_SESSION['auth']=='1'){
                              '<li class="lit" >'+
 
                             '<img src="/file/3.png" style="position:relative;z-index:9999" alt="" onclick="addTop(this)" order="'+order+'" position="'+position+'">'+
-                                                        '<img style="position:absolute;top:30px;left:60px;width:30px;height:30px;border-radius:10px;" src="/file/u1892.png">'+
+                                                        '<img style="position:absolute;top:10px;left:60px;width:30px;height:30px;border-radius:10px;" src="/file/u1892.png">'+
                         '</li>'
                     );
                 }
@@ -1343,16 +1343,16 @@ if($_SESSION['auth']=='1'){
         function addTop(obj)
         {
         	if(<?php echo $estatus ?>){
-        		alert("权限不足 无法操作！");return false;
+                layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         	
         	
         		   if(x == 500){
- 
-        		alert("审核中！请勿编辑");return false;
+
+                       layer.alert("审核中！请勿编辑");return false;
         	}else if(x == 300)
         	{
-        		alert("请发布数据之后再进行编辑");return false;
+                layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
             var gid = "<?php echo $_GET['nid']?>";
@@ -1425,14 +1425,14 @@ if($_SESSION['auth']=='1'){
         function editTop(obj)
         {
                         if(<?php echo $estatus ?>){
-                        alert("权限不足 无法操作！");return false;
+                            layer.alert("权限不足 无法操作！");return false;
                 } var x = getstatus()
            if(x == 500){
 
-                        alert("审核中！请勿编辑");return false;
+               layer.alert("审核中！请勿编辑");return false;
                 }else if(x == 300)
                 {
-                        alert("请发布数据之后再进行编辑");return false;
+                    layer.alert("请发布数据之后再进行编辑");return false;
 
                 }
 	
@@ -1491,28 +1491,28 @@ if($_SESSION['auth']=='1'){
         }
 		function onsub(){
 			if(<?php echo $estatus ?>){
-        		alert("权限不足 无法操作！");return false;
+                layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         		   if(x == 500){
- 
-        		alert("审核中！请勿编辑");return false;
+
+                       layer.alert("审核中！请勿编辑");return false;
         	}else if(x == 300)
         	{
-        		alert("请发布数据之后再进行编辑");return false;
+                layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
 		}
         function delTop(obj)
         {
         	if(<?php echo $estatus ?>){
-        		alert("权限不足 无法操作！");return false;
+                layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         	   if(x == 500){
- 
-        		alert("审核中！请勿编辑");return false;
+
+                   layer.alert("审核中！请勿编辑");return false;
         	}else if(x == 300)
         	{
-        		alert("请发布数据之后再进行编辑");return false;
+                layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
             var mid = "<?php echo $this->mid;?>";
@@ -1538,7 +1538,7 @@ if($_SESSION['auth']=='1'){
                 },
                 error:function()
                 {
-                    alert('删除失败，请再试一次。');
+                    layer.alert('删除失败，请再试一次。');
                 }
             })
 
@@ -1547,14 +1547,14 @@ if($_SESSION['auth']=='1'){
         function addNews(obj)
         {
         	if(<?php echo $estatus ?>){
-        		alert("权限不足 无法操作！");return false;
+                layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus() 
         	  if(x == 500){
- 
-        		alert("审核中！请勿编辑");return false;
+
+                  layer.alert("审核中！请勿编辑");return false;
         	}else if(x == 300)
         	{
-        		alert("请发布数据之后再进行编辑");return false;
+                layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
             var gid = "<?php echo $_GET['nid']?>";
@@ -1587,14 +1587,14 @@ function add(obj)
         {
         	
         	if(<?php echo $estatus ?>){
-        		alert("权限不足 无法操作！");return false;
+                layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()  
         	 if(x == 500){
- 
-        		alert("审核中！请勿编辑");return false;
+
+                 layer.alert("审核中！请勿编辑");return false;
         	}else if(x == 300)
         	{
-        		alert("请发布数据之后再进行编辑");return false;
+                layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
             var mid = "<?php echo $_GET['mid']?>";
