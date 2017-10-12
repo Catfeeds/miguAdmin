@@ -385,6 +385,13 @@ if(!empty($templateList)){
 
     function guideShow(obj)
     {
+        var screenGuideId = $('.guideFlag').attr('guideId');
+        var quote_flag = checkQuote(screenGuideId);
+        if(quote_flag == 1 /*&& (statusFlag==1 ||statusFlag==2)*/){
+            //layer.alert('此屏幕内容是引用屏幕不能被编辑');
+            $('.content_btn').remove();
+            $('.submit_btn').remove();
+        }
 
         $('.bg').removeClass('active');
         $('.nv_button').removeClass('white');
@@ -606,13 +613,7 @@ if(!empty($templateList)){
         return status;
     }
 
-     var screenGuideId = $('.guideFlag').attr('guideId');
-     var quote_flag = checkQuote(screenGuideId);
-     if(quote_flag == 1 /*&& (statusFlag==1 ||statusFlag==2)*/){
-         //layer.alert('此屏幕内容是引用屏幕不能被编辑');
-         $('.content_btn').remove();
-         $('.submit_btn').remove();
-     }
+
 
     function add(obj)
     {
