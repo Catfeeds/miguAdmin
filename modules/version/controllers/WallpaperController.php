@@ -503,10 +503,16 @@ class WallpaperController extends VController{
             if($tmp->attributes['flag']==0 || $tmp->attributes['flag']== 6){
                 return false;
             }
+            $auth = $_SESSION['auth'];
+            if($auth == 1){
+                $newflag=6;
+            }else{
+                $newflag=$tmp->attributes['flag']+1;
+            }
             if($tmp->attributes['flag']==$AA['0']['type'] || $tmp->attributes['flag']=='5'){
                 $result = VerWall::model()->updateAll(array('flag'=>6),'id=:id',array(':id'=>$v));
             }else{
-                $newflag=$tmp->attributes['flag']+1;
+//                $newflag=$tmp->attributes['flag']+1;
                 $result = VerWall::model()->updateAll(array('flag'=>$newflag),'id=:id',array(':id'=>$v));
             }
 
