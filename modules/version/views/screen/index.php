@@ -349,6 +349,17 @@ if(!empty($templateList)){
         $('.centerTopNav').attr('statusFlag','1');//编辑
         $('.centerTopNav').attr('statusFlag','1');//编辑
         bbb(guideId);
+
+        var screenGuideId = $('.active').children('img').eq(0).attr('guideid');
+        var quote_flag = checkQuote(screenGuideId);
+        if(quote_flag == 1 /*&& (statusFlag==1 ||statusFlag==2)*/){
+            //layer.alert('此屏幕内容是引用屏幕不能被编辑');
+            $('.content_btn').hide();
+            $('.submit_btn').hide();
+        }else{
+            $('.content_btn').show();
+            $('.submit_btn').show();
+        }
     }
     index();
 
@@ -382,6 +393,7 @@ if(!empty($templateList)){
         }
        window.open("/version/screen/updateGuideView/mid/<?php echo $this->mid;?>/nid/<?php echo $_GET['nid']?>"+fixedUrl);
     });
+
 
     function guideShow(obj)
     {
