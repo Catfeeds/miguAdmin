@@ -4,26 +4,26 @@
             <input type="hidden" name="gid" value="<?php echo $gid?>">
             <tr>
                 <td>节目类型</td>
-                <td>
+                <td style="text-align: left" width="300x">
                 <input style="margin-left: 20px"  type="checkbox" name="type"  value="电影" >电影
                 <input style="margin-left: 20px"  type="checkbox" name="type"  value="综艺" >综艺
-                <input  type="checkbox" name="type"  value="新闻" >新闻
-                <input  type="checkbox" name="type"  value="电视剧" >电视剧
-                <input  type="checkbox" name="type"  value="动漫" >动漫
-                <input  type="checkbox" name="type"  value="教育" >教育
-                <input  type="checkbox" name="type"  value="体育" >体育
-                <input  type="checkbox" name="type"  value="音乐" >音乐
-                <input  type="checkbox" name="type"  value="娱乐" >娱乐
-                <input  type="checkbox" name="type"  value="健康" >健康
-                <input  type="checkbox" name="type"  value="旅游" >旅游
-                <input  type="checkbox" name="type"  value="法制" >法制
-                <input  type="checkbox" name="type"  value="搞笑" >搞笑
-                <input  type="checkbox" name="type"  value="时尚" >时尚
-                <input  type="checkbox" name="type"  value="军事" >军事
-                <input  type="checkbox" name="type"  value="财经" >财经
-                <input  type="checkbox" name="type"  value="曲艺" >曲艺
-                <input  type="checkbox" name="type"  value="奥运" >奥运
-                <input  type="checkbox" name="type"  value="纪实" >纪实
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="新闻" >新闻
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="电视剧" >电视剧<br>
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="动漫" >动漫
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="教育" >教育
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="体育" >体育
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="音乐" >音乐<br>
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="娱乐" >娱乐
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="健康" >健康
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="旅游" >旅游
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="法制" >法制<br>
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="搞笑" >搞笑
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="时尚" >时尚
+                <input style="margin-left: 20px" type="checkbox" name="type"  value="军事" >军事
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="财经" >财经<br>
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="曲艺" >曲艺
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="奥运" >奥运
+                <input style="margin-left: 20px"  type="checkbox" name="type"  value="纪实" >纪实
                 </td>
                 <td>内容提供商</td>
                 <td>
@@ -33,13 +33,13 @@
 			<p><input type="checkbox" value="youpeng" name="cps">南传</p>
 			<p><input type="checkbox" value="HNBB" name="cps">芒果</p>
 			<p><input type="checkbox" value="CIBN" name="cps">国广</p>
-			<p><input type="checkbox" value="YGYH" name="cps">银河</p></td>
+			<p><input type="checkbox" value="YGYH" name="cps">银河</p>
 			<p><input type="checkbox" value="poms" name="cps">咪咕</p></td>
             </tr>
             <tr>
                 <td>优先级</td>
                 <td>
-                    <select name="order" class="form-input w100" id="orders">
+                    <select name="order" class="form-input w300" id="orders">
                         <option value="0">请选择</option>
                         <option  value="1" >1</option>
                         <option  value="2">2</option>
@@ -60,14 +60,14 @@
             </tr>
             <tr>
                 <td>评分</td>
-                <td><input type="text" value="" name="score" class="form-input w100"></td>
+                <td><input type="text" value="" name="score" class="form-input w300"></td>
                 <td>清晰度</td>
-                <td><input type="text" name="hdflag" class="form-input w100" value=""></td>
+                <td><input type="text" name="hdflag" class="form-input w300" value=""></td>
             </tr>
             <tr>
                 <td>国家地区</td>
                 <td>
-                    <select name="CountryOfOrigin" class="form-input w100" id="CountryOfOrigin">
+                    <select name="CountryOfOrigin" class="form-input w300" id="CountryOfOrigin">
                         <option value="0">请选择</option>
                         <option  value="1" >内地</option>
                         <option  value="2">港台</option>
@@ -78,42 +78,42 @@
                     </select>
                 </td>
                 <td>发行年份</td>
-                <td><input type="text" name="year" class="form-input w100" value=""></td>
+                <td><input type="text" name="year" class="form-input w300" value=""></td>
             </tr>
             <tr>
                 <td>配音语言</td>
-                <td><input type="text" name="language" value="" class="form-input w100"></td>
+                <td><input type="text" name="language" value="" class="form-input w300"></td>
                 <td>关键字</td>
-                <td><input type="text" name="short" value=""  class="form-input w100"></td>
+                <td><input type="text" name="short" value=""  class="form-input w300"></td>
             </tr>
             <tr>
                 <td>是否完结</td>
                 <td>
-                    <select name="end" class="form-input w100" id="end">
+                    <select name="end" class="form-input w300" id="end">
 			<option value="-1">请选择</option>
                         <option value="0">否</option>
                         <option  value="1" >是</option>
                     </select>
                 </td>
                 <td>标签(多关键字用/分割)</td>
-                <td><input type="text" name="keyword" class="form-input w100" value=""></td>
+                <td><input type="text" name="keyword" class="form-input w300" value=""></td>
             </tr>
             <tr>
                 <td>导演</td>
-                <td><input type="text" name="director" value="" class="form-input w100"></td>
+                <td><input type="text" name="director" value="" class="form-input w300"></td>
                 <td>演员</td>
-                <td><input type="text" name="actor" class="form-input w100" value=""></td>
+                <td><input type="text" name="actor" class="form-input w300" value=""></td>
             </tr>
             <tr>
                 <td>奖项</td>
-                <td><input type="text" name="prize" value="" class="form-input w100"></td>
+                <td><input type="text" name="prize" value="" class="form-input w300"></td>
                 <td>票房</td>
-                <td><input type="text" name="boxoffice" class="form-input w100" value=""></td>
+                <td><input type="text" name="boxoffice" class="form-input w300" value=""></td>
             </tr>
 	    <tr>
 		<td>是否免费</td>
 		<td>
-		    <select name="isfree" class="form-input w100" id="fee">
+		    <select name="isfree" class="form-input w300" id="fee">
                         <option value="-1">请选择</option>
                         <option value="0">否</option>
                         <option value="1" >是</option>
@@ -122,9 +122,9 @@
 	    </tr>
             <tr>
                 <td align="center" colspan="4">
-                    <input type="button" value="保存信息" class="btn save_btn">
+                    <input style="width:80px;height:30px;padding:0px;float: none" type="button" value="保存信息" class="btn save_btn">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="button" value="取消" class="gray">
+                    <input style="width:80px;height:30px;padding:0px" type="button" value="取消" class="gray">
                 </td>
             </tr>
         </table>
