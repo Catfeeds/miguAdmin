@@ -103,7 +103,13 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
              <select style="height:20px;" name="gid" id="gid" class="form-input w100">
                     <option value="0">请选择</option>
                  <?php
-                 $sql = "select id,name from yd_ver_station";
+                 if($_SESSION['auth'] == 1){
+                     $sql = "select id,name from yd_ver_station";
+                 }else{
+                     $uid = $_SESSION['userid'];
+                     $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 5  left join yd_ver_worker as c on c.workid=b.id where c.type = 1 and  c.uid=$uid group
+ by a.id";
+                 }
                  $result = SQLManager::queryAll($sql);
                  if (!empty($res)) {?>
                      <?php
