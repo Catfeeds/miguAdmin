@@ -1,3 +1,4 @@
+
 <style type="text/css">
     .page {
         margin-left: 11px;
@@ -123,21 +124,21 @@
 
 
 <table class="mtable" width="100%" cellspacing="0" cellpadding="10">
-    <input type="hidden" name="id" value="<?php echo $screenContent->id;?>">
+    <input type="hidden" name="id" value="<?php echo $bkimg->id;?>">
     <tr>
         <td width="100" align="right">尺寸：</td>
-        <td><?php echo $screenContent->width;?>X<?php echo $screenContent->height;?></td>
+        <td><?php echo $bkimg->width;?>X<?php echo $bkimg->height;?></td>
     </tr>
     <tr>
         <td width="100" align="right">位置：</td>
-        <td><?php echo $screenContent->x;?>X<?php echo $screenContent->y;?></td>
+        <td><?php echo $bkimg->x;?>X<?php echo $bkimg->y;?></td>
     </tr>
     <tr>
         <td width="100" align="right">类型：</td>
         <td>
-             <?php if($screenContent->type==1){
+             <?php if($bkimg->type==1){
                     echo '图片';
-                }?><?php if($screenContent->type==2){
+                }?><?php if($bkimg->type==2){
                     echo '视频';
                 }?>
             (不同类型，需要配置的数据不同)
@@ -146,7 +147,7 @@
 
     <tr>
         <td width="100" align="right">标题：</td>
-        <td><?php echo $screenContent->title ?>
+        <td><?php echo $bkimg->title ?>
         </td>
     </tr>
     <tr>
@@ -154,16 +155,16 @@
         <td>
         
 
-              <?php if($screenContent->tType==1){echo '咪咕';}?>
-               <?php if($screenContent->tType==5){echo '自有节目';}?>
-                <!--<option value="6" <?php //if($screenContent[0]['tType']==6){echo 'selected';}?>>广告位,全屏大图</option>-->
-               <?php if($screenContent->tType==99){echo '包名加类名跳转';}?>
-               <?php if($screenContent->tType==100){echo 'action跳转';}?>
-          <?php if($screenContent->tType==101){echo '包名跳转';}?>
-          <?php if($screenContent->tType==102){echo 'Uri跳转';}?>
-                <!--<option value="96" <?php if($screenContent->tType==96){echo 'selected';}?>>本地播放</option>-->
-        <?php if($screenContent->tType==97){echo '二维码';}?>
-          <?php if($screenContent->tType==98){echo '其他';}?>
+              <?php if($bkimg->tType==1){echo '咪咕';}?>
+               <?php if($bkimg->tType==5){echo '自有节目';}?>
+                <!--<option value="6" <?php //if($bkimg[0]['tType']==6){echo 'selected';}?>>广告位,全屏大图</option>-->
+               <?php if($bkimg->tType==99){echo '包名加类名跳转';}?>
+               <?php if($bkimg->tType==100){echo 'action跳转';}?>
+          <?php if($bkimg->tType==101){echo '包名跳转';}?>
+          <?php if($bkimg->tType==102){echo 'Uri跳转';}?>
+                <!--<option value="96" <?php if($bkimg->tType==96){echo 'selected';}?>>本地播放</option>-->
+        <?php if($bkimg->tType==97){echo '二维码';}?>
+          <?php if($bkimg->tType==98){echo '其他';}?>
      
         </td>
     </tr>
@@ -172,58 +173,58 @@
 <!--        <td>-->
 <!--            <select name="cp" class="form-input w300" id="cp">-->
 <!--                <option  value="0">请选择</option>-->
-<!--                <option  --><?php //if($screenContent[0]['cp']==1){echo 'selected';}?><!-- value="1">华数客户端</option>-->
-<!--                <option  --><?php //if($screenContent[0]['cp']==2){echo 'selected';}?><!-- value="2">百视通客户端</option>-->
-<!--                <option  --><?php //if($screenContent[0]['cp']==3){echo 'selected';}?><!-- value="3">未来电视</option>-->
-<!--                <option  --><?php //if($screenContent[0]['cp']==4){echo 'selected';}?><!-- value="4">南传</option>-->
-<!--                <option  --><?php //if($screenContent[0]['cp']==5){echo 'selected';}?><!-- value="5">芒果</option>-->
-<!--                <option  --><?php //if($screenContent[0]['cp']==6){echo 'selected';}?><!-- value="6">国广</option>-->
-<!--                <option  --><?php //if($screenContent[0]['cp']==7){echo 'selected';}?><!-- value="7">银河</option>-->
+<!--                <option  --><?php //if($bkimg[0]['cp']==1){echo 'selected';}?><!-- value="1">华数客户端</option>-->
+<!--                <option  --><?php //if($bkimg[0]['cp']==2){echo 'selected';}?><!-- value="2">百视通客户端</option>-->
+<!--                <option  --><?php //if($bkimg[0]['cp']==3){echo 'selected';}?><!-- value="3">未来电视</option>-->
+<!--                <option  --><?php //if($bkimg[0]['cp']==4){echo 'selected';}?><!-- value="4">南传</option>-->
+<!--                <option  --><?php //if($bkimg[0]['cp']==5){echo 'selected';}?><!-- value="5">芒果</option>-->
+<!--                <option  --><?php //if($bkimg[0]['cp']==6){echo 'selected';}?><!-- value="6">国广</option>-->
+<!--                <option  --><?php //if($bkimg[0]['cp']==7){echo 'selected';}?><!-- value="7">银河</option>-->
 <!--            </select>-->
 <!--        </td>-->
 <!--    </tr>-->
     <tr class="utp" style="">
         <td width="100" align="right">页面类型</td>
         <td>
-             <?php if($screenContent->uType==4){echo '海报专题';}?>
-             <?php if($screenContent->uType==13){echo '排行榜专题';}?>
-              <?php if($screenContent->uType==17){echo '河南专题';}?>
-              <?php if($screenContent->uType==2){echo '海报栏目';}?>
-               <?php if($screenContent->uType==15){echo '视频栏目';}?>
-                <?php if($screenContent->uType==7){echo '竖图单片详情页';}?>
-               <?php if($screenContent->uType==8){echo '多集数字详情页';}?>
-            <?php if($screenContent->uType==10){echo '多集标题详情页';}?>
-              <?php if($screenContent->uType==9){echo '横图单片详情页';}?>
-              <?php if($screenContent->uType==1){echo '搜索';}?>
-                <?php if($screenContent->uType==6){echo '历史';}?>
-               <?php if($screenContent->uType==5){echo '收藏';}?>
-               <?php if($screenContent->uType==11){echo '设置';}?>
-               <?php if($screenContent->uType==16){echo '本地播放';}?>
-             <?php if($screenContent->uType==12){echo '壁纸';}?>
+             <?php if($bkimg->uType==4){echo '海报专题';}?>
+             <?php if($bkimg->uType==13){echo '排行榜专题';}?>
+              <?php if($bkimg->uType==17){echo '河南专题';}?>
+              <?php if($bkimg->uType==2){echo '海报栏目';}?>
+               <?php if($bkimg->uType==15){echo '视频栏目';}?>
+                <?php if($bkimg->uType==7){echo '竖图单片详情页';}?>
+               <?php if($bkimg->uType==8){echo '多集数字详情页';}?>
+            <?php if($bkimg->uType==10){echo '多集标题详情页';}?>
+              <?php if($bkimg->uType==9){echo '横图单片详情页';}?>
+              <?php if($bkimg->uType==1){echo '搜索';}?>
+                <?php if($bkimg->uType==6){echo '历史';}?>
+               <?php if($bkimg->uType==5){echo '收藏';}?>
+               <?php if($bkimg->uType==11){echo '设置';}?>
+               <?php if($bkimg->uType==16){echo '本地播放';}?>
+             <?php if($bkimg->uType==12){echo '壁纸';}?>
       
         </td>
     </tr>
     <tr class="act" style="">
         <td width="100" align="right">action：</td>
-        <td><?php echo $screenContent->action ?></td>
+        <td><?php echo $bkimg->action ?></td>
     </tr>
 
     <tr class="act" style="">
         <td width="100" align="right">param：</td>
-        <td><?php echo $screenContent->param ?></td>
+        <td><?php echo $bkimg->param ?></td>
     </tr>
     <tr  class="upvid" style="">
         <td width="100" align="right">vid：</td>
-        <td><?php echo $screenContent->cid ?></td>
+        <td><?php echo $bkimg->cid ?></td>
     </tr>
     <tr  class="videoUrl" style="">
         <td width="100" align="right">videoUrl：</td>
-        <td><?php echo $screenContent->videoUrl ?></td>
+        <td><?php echo $bkimg->videoUrl ?></td>
     </tr>
     <tr>
         <td width="100" align="right">当前图片为：</td>
         <td><div class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?>">
-        <img src="<?php echo $screenContent->picSrc;?>" class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?> oldPic"></div>
+        <img src="<?php echo $bkimg->picSrc;?>" class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?> oldPic"></div>
         </td>
 </tr>
     <tr>
@@ -238,7 +239,7 @@
 </table>
 
 <script>
-    var tType = "<?php echo $screenContent->tType;?>";
+    var tType = "<?php echo $bkimg->tType;?>";
     if(tType == 1){
         $("#show").show();
     }else if(tType == 22){
@@ -359,16 +360,16 @@
             var value = eval('('+data+')');
             if(value.code == 200){
                 $('input[name=key]').val(value.key);
-                <?php if($screenContent->height == 1){?>
-                var l = $('#main').find('.<?php echo "m-".$screenContent->width;?>').find('img');
+                <?php if($bkimg->height == 1){?>
+                var l = $('#main').find('.<?php echo "m-".$bkimg->width;?>').find('img');
                 <?php }else{?>
-                var l = $('#main').find('.<?php echo "m-".$screenContent->width."-".$screenContent->height;?>').find('img');
+                var l = $('#main').find('.<?php echo "m-".$bkimg->width."-".$bkimg->height;?>').find('img');
                 <?php }?>
                 if(l.length < 1){
-                    <?php if($screenContent->height == 1){?>
-                    $('#main').find('.<?php echo "m-".$screenContent->width?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
+                    <?php if($bkimg->height == 1){?>
+                    $('#main').find('.<?php echo "m-".$bkimg->width?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
                     <?php }else{?>
-                    $('#main').find('.<?php echo "m-".$screenContent->width."-".$screenContent->height;?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
+                    $('#main').find('.<?php echo "m-".$bkimg->width."-".$bkimg->height;?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
                     <?php }?>
                 }else{
                     $(l).attr('src',value.url);
@@ -404,15 +405,15 @@
         G.cp     = $('#cp').val();
         G.cid    = $('#upvid').val();
         G.videoUrl    = $('#videoUrl').val();
-//        G.screenGuideId  = "<?php //echo $screenContent[0]['screenGuideId'] ;?>//";
-//        G.epg    = "<?php //echo $screenContent[0]['epg'] ;?>//";
-        G.width  = "<?php echo $screenContent->width?>";
-        G.height  = "<?php echo $screenContent->height?>";
-        G.x  = "<?php echo $screenContent->x?>";
-        G.y  = "<?php echo $screenContent->y?>";
-        G.order  = "<?php echo $screenContent->order?>";
+//        G.screenGuideId  = "<?php //echo $bkimg[0]['screenGuideId'] ;?>//";
+//        G.epg    = "<?php //echo $bkimg[0]['epg'] ;?>//";
+        G.width  = "<?php echo $bkimg->width?>";
+        G.height  = "<?php echo $bkimg->height?>";
+        G.x  = "<?php echo $bkimg->x?>";
+        G.y  = "<?php echo $bkimg->y?>";
+        G.order  = "<?php echo $bkimg->order?>";
         G.id = $('input[name=id]').val();
-         G.nid="<?php echo $screenContent->sid?>";
+         G.nid="<?php echo $bkimg->sid?>";
 //        console.log(G);return false;
         if(empty(G.tType)){
             layer.alert('上传类型不能为空',{icon:0});
@@ -467,15 +468,15 @@
         G.cp     = $('#cp').val();
         G.cid    = $('#upvid').val();
         G.videoUrl    = $('#videoUrl').val();
-//        G.screenGuideId  = "<?php //echo $screenContent[0]['screenGuideId'] ;?>//";
-//        G.epg    = "<?php //echo $screenContent[0]['epg'] ;?>//";
-        G.width  = "<?php echo $screenContent->width?>";
-        G.height  = "<?php echo $screenContent->height?>";
-        G.x  = "<?php echo $screenContent->x?>";
-        G.y  = "<?php echo $screenContent->y?>";
-        G.order  = "<?php echo $screenContent->order?>";
+//        G.screenGuideId  = "<?php //echo $bkimg[0]['screenGuideId'] ;?>//";
+//        G.epg    = "<?php //echo $bkimg[0]['epg'] ;?>//";
+        G.width  = "<?php echo $bkimg->width?>";
+        G.height  = "<?php echo $bkimg->height?>";
+        G.x  = "<?php echo $bkimg->x?>";
+        G.y  = "<?php echo $bkimg->y?>";
+        G.order  = "<?php echo $bkimg->order?>";
         G.id = $('input[name=id]').val();
-         G.nid="<?php echo $screenContent->sid?>";
+         G.nid="<?php echo $bkimg->sid?>";
 //        console.log(G);return false;
 
 
@@ -496,14 +497,14 @@
     });
     $('.addBanner').click(function()
     {
-        var order = "<?php echo $screenContent->order ; ?>";
-//        var gid = "<?php //echo $screenContent[0]['screenGuideId'] ;?>//";
-//        var epg = "<?php //echo $screenContent[0]['epg'] ;?>//";
-        var width  = "<?php echo $screenContent->width?>";
-        var height  = "<?php echo $screenContent->height?>";
-        var x  = "<?php echo $screenContent->x?>";
-        var y  = "<?php echo $screenContent->y?>";
-        var nid="<?php echo $screenContent->sid?>";
+        var order = "<?php echo $bkimg->order ; ?>";
+//        var gid = "<?php //echo $bkimg[0]['screenGuideId'] ;?>//";
+//        var epg = "<?php //echo $bkimg[0]['epg'] ;?>//";
+        var width  = "<?php echo $bkimg->width?>";
+        var height  = "<?php echo $bkimg->height?>";
+        var x  = "<?php echo $bkimg->x?>";
+        var y  = "<?php echo $bkimg->y?>";
+        var nid="<?php echo $bkimg->sid?>";
         var picSrc = $('.hasPic').attr('src');
         window.location.href = "/version/station/Banner/mid/"+"<?php echo $this->mid;?>"+"/order/"+order+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/nid/'+nid;
     });
