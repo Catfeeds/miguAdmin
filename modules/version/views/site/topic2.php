@@ -1,4 +1,4 @@
-<?php var_dump($screenContent);die;?>
+<?php //var_dump($screenContent);die;?>
 <style type="text/css">
     .page {
         margin-left: 11px;
