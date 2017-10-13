@@ -1,511 +1,1433 @@
 
-<style type="text/css">
-    .page {
-        margin-left: 11px;
-        margin-top: 2px;
-    }
-    .page {
-        width: 99%;
-        height: 37px;
-        line-height: 37px;
-        margin: 0 auto;
-        text-align: center;
-    }
-    .m-page {
-        margin: 20px auto;
-        text-align: center;
-        clear: both;
-        overflow: hidden;
-    }
-    .page ul li {
-        float: left;
-        line-height: 37px;
-        height: 37px;
-        font-size: 15px;
-    }
-    .pageGo{
-        width:180px;
-        height:33px;
-        /*background:#52CAF4;*/
-        border:1px solid #ccc;
-    }
-    label{
-        width:10%;
-        height:10%;
-        display:block;
+<?php
+if (!empty($html)) {
+        $a = "/<style[\s\S]*?<\/style>/";
+        preg_match_all($a, $html, $matches);
 
-    }
-    #search{
-        width:200px;
-    }
-    .adddiv{
-        margin-top: 1rem;
-    }
-    .add {
-        background-color: #0099CC;
-        padding: 8px 20px;
-        display: inline-block;
-        border-radius: 4px;
-        border: 1px solid #6699CC;
-        color: #fff;
-        font-family: "microsoft yahei";
-        font-size: 18px;
-        background-image: -moz-linear-gradient(top, #00CCFF,#0099CC);
-        background-image: -webkit-gradient(linear,left top,left bottom, color-stop(0, #00CCFF), color-stop(1, #0099CC));
-        cursor: pointer;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00CCFF', endColorstr='#0099CC', GradientType='0');
-        /*display: block;*/
-        float: left;
-        margin-left: 1rem;
-    }
-    .choseNum{
+        $html = str_replace($matches[0][0], "", $html);
+        $html = str_replace("131px", "95px", $html);
+		
+		
+		$b = "/<a[\s\S]*?<\/a>/";
+		preg_match_all($b, $html, $matches);
+		foreach ($matches[0] as $key => $value) {
+			$html = str_replace($matches[0][$key], "", $html);
+		}
 
-        background-color: #0099CC;
-        padding: 8px 20px;
-        display: none;
-        border-radius: 4px;
-        border: 1px solid #6699CC;
-        color: #fff;
-        font-family: "microsoft yahei";
-        font-size: 18px;
-        background-image: -moz-linear-gradient(top, #00CCFF,#0099CC);
-        background-image: -webkit-gradient(linear,left top,left bottom, color-stop(0, #00CCFF), color-stop(1, #0099CC));
-        cursor: pointer;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00CCFF', endColorstr='#0099CC', GradientType='0');
-        /*display: block;*/
-        float: left;
-    }
+}
+$res['status'][] = 1;
+$res['status'][] =2;
+?>
+  <style>
+        .layui-layer-dialog{
+	min-width:340px;
+}
+.layui-layer-dialog .layui-layer-content{
+	padding: 30px 20px 40px 70px;
+}
+.layui-layer-title{
+	background:#A3BBD5;
+	    padding: 0 20px 0 10px;
+	    text-align: center
+}
+.layui-layer-content{
+	background: #F1FDFF;
+	
+}
+.layui-layer-btn{
+	background: #F1FDFF;
+}
+.layui-layer-btn a{
+	padding:0px;
+	width:90px;
+	height:20px;
+	line-height:20px;
+	background: url("/file/u116.png") no-repeat;
+	border-radius: 2px;
+}
+.layui-layer-btn .layui-layer-btn1{
+	background: url("/file/u1971.png") no-repeat;
+	border-radius: 2px;
+}
+                        .mt10 {
+                                margin-left: 10px;
+                        }
+                        .menus {
+                                margin-top: 5px;
+                                margin-left: 10px;
+                        }
+                        .topPic {
+                                position: relative;
+                                border-radius: 15px;
+                                margin-top: 15px;
+                                background: #F2F2F2;
+                        }
+                        .centerTop {
+                                width: 158px;
+                                height: 400px;
+                                float: left;
+                                margin-left: 15px;
+                        }
+                        .centerTopApp {
+                                width: 158px;
+                                height: 280px;
+                                float: left;
+                                margin-left: 15px;
+                        }
+                        .top_app {
+                                width: 158px;
+                                height: 28px;
+                                margin-top: 20px;
+                                background: #E2EEFB;
+                                border-radius: 10px;
+                        }
+                        .centerTopApp img {
+                                width: 158px;
+                                height: 55px;
+                        }
 
-    .up-main li{
-        float: left;
-        margin-right: 10px;
-    }
-    .up-h-1,.up-h-2,.up-h-8,.up-h-9{background-color:#fff;width:75px;height:150px;}
-    .up-h-8,.up-h-9{width:150px;}
-    .up-h-2{margin-top:10px;}
-    .mt5{margin-top:10px;}
-    .mr5{margin-right:5px;}
-    .up-h-3,.up-h-7{width:150px;height:310px;background-color:#fff;}
-    .up-h-4{width:310px;height:150px;background-color:#fff;}
-    .up-h-5,.up-h-6{width:150px;background-color:#fff;height:150px;}
-    <?php //echo '#'.$address?>{position: relative;}
-    #upload_file{background-color:#000;cursor:pointer;/*position: absolute;*/top:0;left:0;}
-    #upload_file object{left:0;top:0;}
-    .myt{text-align:center;position:relative;
-        border: 1px solid #787878;}
-    .myt1{text-align:center;position:relative;border: 1px solid #787878;}
-    .myt1 span{display: inline-block;width:70px;height:25px;position: absolute;top:0;left:0;}
-    .myt span{display: inline-block;width:70px;height:25px;position: absolute;top:0;left:0;}
-    #page span {margin: 5px;}
-    .infoSpan{float:left;margin-left:100px;}
-    .charging{display: none;}
-    .m-1{    width:125px;  height:52.5px;  border:1px solid #ccc;  border-radius: 8px;  margin-bottom: 10px;  float:left;  }
-    .m-1-2{  width:125px;  height:115px;  margin-bottom: 20px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
-    .m-1-3{  width:128px;  height:182.5px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
-    .m-2-3{  width:280px;  height:182.5px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
-    .m-2-6{  width:280px;  height:390px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
-    .m-2-4{  width:280px;  height:250px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
-    .m-3-4{  width:420px;  height:250px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
-    .m-2-2{  width:280px;  height:115px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
-    .m-4-4{  width:580px;  height:250px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
-    .m-825-429{width:580px;  height:250px;  border:1px solid #ccc;  border-radius: 8px;  float:left; }
-    .m-405-285 {width:280px;  height:115px;  border:1px solid #ccc;  border-radius: 8px;  float:left;}
-    .m-492-357{width:280px;  height:115px;  border:1px solid #ccc;  border-radius: 8px;  float:left;}
-    .m-318-171{ width:250px;  height:100px;  border:1px solid #ccc;  border-radius: 8px;  margin-bottom: 10px;  float:left;  }
-    #pageType{;}
-    .page2{;}
-    .typeUrl{;}
-    #url{;}
-    td{height:10px;}
+                        .appImg img {
+                                width: 25px;
+                                height: 25px;
+                        }
+
+                        .appImg {
+                                position: absolute;
+                                left: 15px;
+                                top: 5px;
+                        }
+                        .appTitle {
+                                position: absolute;
+                                left: 15px;
+                                top: 32px;
+                        }
+                        .editTop:hover {
+                                cursor: pointer;
+                        }
+                        .delTop:hover {
+                                cursor: pointer;
+                        }
+
+                        .lit {
+                                position: relative;
+                                width: 158px;
+                                height: 55px;
+                                border-radius: 10px;
+                                margin-top: 5px;
+                                background:#F2F2F2;
+                        }
+                        .centerTop .lit img {
+                                width: 158px;
+                                height: 55px;
+                        }
+                        .title {
+                                position: absolute;
+                                top: 15px;
+                                left: 5px;
+                        }
+                        .editTop {
+                                position: absolute;
+                                top: 0px;
+                                right: 0px;
+                                z-index: 9999;
+                                border-radius: 5px;
+                                width: 60px;
+                                height: 20px;
+                                background: #B9B9B9;
+                                color: white;
+                        }
+                        .delTop {
+                                position: absolute;
+                                top: 35px;
+                                right: 0px;
+                                z-index: 9999;
+                                border-radius: 5px;
+                                width: 60px;
+                                height: 20px;
+                                background: #B9B9B9;
+                                color: white;
+                        }
+                        .centerTop img {
+                                width: 158px;
+                                height: 90px;
+                        }
+                        .fl img {
+                                width: 139px;
+                                height: 220px;
+                        }
+                        .ui-a {
+                                width: 139px;
+                                height: 220px;
+                        }
+                        .test2 {
+                                height: 30px;
+                                line-height: 25px;
+                        }
+                        .menus span {
+                                font-family: 黑体;
+                        }
+                        .menus ul {
+                                font-family: 宋体;
+                        }
+                        /*a{font-size: 12px;font-family: "microsoft yahei";font-weight: bold;}*/
+                        .ui-a {
+                                position: relative;
+                        }
+                        .ui-b {
+                                position: relative;
+                        }
+                        .ui-a a {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background-color: #898989;
+                                padding: 5px 10px;
+                                font-size: 12px;
+                                font-family: "microsoft yahei";
+                                font-weight: bold;
+                                color: white
+                        }
+                        .ui-a a img {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background-color: #898989;
+                        }/*padding:5px 10px;*/
+                        .mt6 {
+                                margin-top: 10px;
+                        }
+                        .ui-b a {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background-color: #898989;
+                                padding: 5px 10px;
+                        }
+                        .mt6 {
+                                margin-top: 10px;
+                                float: left;
+                        }
+                        .mt7 {
+                                margin-top: 10px;
+                                float: left;
+                        }
+                        .cc {
+                                margin-left: 10px;
+                        }
+                        #overlay {
+                                width: 1300px;
+                                height: 700px;
+                                position: absolute;
+                                z-index: 2
+                        }
+                        #menubox {
+                                width: 200px;
+                                padding-top: 15px;
+                        }
+                        .yiji {
+                                /*background:#43adff;
+                                 width:200px;
+                                 height:80px;*/
+                                border-width: 0px;
+                                /*position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 84px;
+                                height: 27px;
+                                background: inherit;
+                                background-color: rgba(22, 155, 213, 1);
+                                border: none;
+                                border-radius: 5px;
+                                -moz-box-shadow: none;
+                                -webkit-box-shadow: none;
+                                box-shadow: none;
+                        }
+                        .erji {
+                                border-width: 0px;
+                                /* position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 86px;
+                                height: 27px;
+                                background: inherit;
+                                background-color: rgba(72, 187, 236, 1);
+                                border: none;
+                                border-radius: 5px;
+                                -moz-box-shadow: none;
+                                -webkit-box-shadow: none;
+                                box-shadow: none;
+                        }
+                        .edit {
+                                border-width: 0px;
+                                /*position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 20px;
+                                height: 20px;y
+                                }
+                                .dele{
+                                border-width: 0px;
+                                /*position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 20px;
+                                height: 20px;
+                        }
+                        #menubox {
+                                padding-left: 8px;
+                                padding-right: 8px;
+                                z
+                                margin-right: 15px;
+                                width: 270px;
+                                min-height: 845px;
+                                float: left;
+                                overflow: hidden;
+                                background: #f7fbfc;
+                                border-bottom: 1px solid #c2d1d8;
+                                border-right: 1px solid #c2d1d8;
+                                -webkit-box-shadow: 1px 1px 0 0 #fff;
+                                box-shadow: 1px 1px 0 0 #fff;
+                        }
+                        .menubox ul li {
+                                border-bottom: 0px solid #d9e4ea;
+                        }
+
+                        .menubox ul li span {
+                                display: block;
+                        }
+                        .active {
+                                display: block;
+                        }
+                        .edit {
+                                display: block;
+                                float: right;
+                        }
+                        .dele {
+                                display: block;
+                                float: right;
+                        }
+                        .jiaoFlag {
+                                font-size: 14px;
+                        }
+                        .mr10 {
+                                margin-right: 10px;
+                        }
+                        .stationName {
+                                position: relative;
+                        }
+                        .one {
+                                width: 24px;
+                                height: 23px;
+                        }
+                        .two {
+                                width: 24px;
+                                height: 23px;
+                        }
+                        .topicTop {
+                                padding: 10px 0px;
+                        }
+                        .topicBg {
+                                position: relative;
+                        }
+                        .topicBgEdit {
+                                /*width:200px;*/
+                                height: 20px;
+                                /*border:1px solid #ccc;*/
+                                position: absolute;
+                                top: 45px;
+                                left: 90px;
+                                text-align: center;
+                                line-height: 20px;
+                                color: black;
+                        }
+                        .uploadify-button {
+                                border-radius: 8px;
+                        }
+                        .swfupload {
+                                top: 0px;
+                                left: 0px;
+                        }
+	.m-1{ position:relative; background:#666666;   width:125px;  height:52.5px;  border:1px solid #ccc;  border-radius: 8px;  margin-bottom: 10px;  float:left;  }
+.m-1-2{  position:relative;background:#666666;  width:160px;  height:115px;  margin-bottom: 20px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
+.m-1-3{  position:relative;background:#666666;  width:128px;  height:182.5px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
+.m-2-3{  position:relative;background:#666666;  width:280px;  height:152.5px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
+.m-2-6{  position:relative;background:#666666;  width:280px;  height:390px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
+.m-2-4{  position:relative;background:#666666;  width:330px;  height:200px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 10px;  }
+.m-3-4{  position:relative;background:#666666;  width:420px;  height:250px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
+.m-2-2{  position:relative;background:#666666;  width:280px;  height:115px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
+.m-4-4{  position:relative; width:580px; height:250px;  border:1px solid #ccc;  border-radius: 8px; float:left;  }
+.parent-1{ position:relative; width:189px;  height:390px;  float:left;  margin-right: 20px;  }
+.parent-1-1{ position:relative; width:189px;  height:326px;  float:left;  margin-right: 20px;  }
+.parent-1-2{ position:relative; width:330px;  height:329px;  float:left;  margin-right: 10px;  }
+.parent-1-3{ position:relative; width:420px;  height:390px;  float:left;  margin-right: 10px;  }
+.parent-1-4{ position:relative; width:580px;  height:390px;  float:left;  margin-right: 20px;  }
+.fill-1-3{  width:19px;  height:182.5px;  float: left;  }
+.fill-1-2{  width:19px;  height:115.5px;  float: left;  }
+.fill-1-4{  width:280px;  height:20px;  float:left  }
+.fill-1-5{  width:580px;  height:20px;  float:left;  }
+.fill-1-6{  width:15px;  height:115.5px;  float: left;  }
+.clickImg-1-1{  width:186px;  height:74px;  border:1px solid #ccc;  text-align: center;border-radius:8px;  }
+.clickImg-1-2{  width:160px;  height:115px;  text-align: center;  }
+.clickImg-1-3{  width:128px;  height:158.5px;  text-align: center;  }
+.clickImg-2-3{  width:280px;  height:152.5px;  text-align: center;  }
+.clickImg-2-6{  width:280px;  height:390px;  text-align: center;  }
+.clickImg-2-4{  width:330px;  height:200px;  text-align: center;  }
+.clickImg-3-4{  width:420px;  height:250px;  text-align: center;  }
+.clickImg-2-2{  width:280px;  height:115px;  text-align: center;  }
+.clickImg-4-4{  width:580px;  height:250px;  text-align: center;  }
+.half-1{   width:60px;height:52px;border:1px solid #ccc;border-radius: 8px;float:left;margin-top:3px;}
+.clickImg-half-1{  width:60px;height:52px;text-align: center;}
+.m-1-1{ width:186px;  height:75px;  border:1px solid #ccc;  border-radius: 8px;position:relative;background:#666666;margin-bottom: 7px}
 </style>
-
-
 <script type="text/javascript" src="/js/uploadify/jquery.uploadify.min.js"></script>
-
-
-<table class="mtable" width="100%" cellspacing="0" cellpadding="10">
-    <input type="hidden" name="id" value="<?php echo $bkimg->id;?>">
-    <tr>
-        <td width="100" align="right">尺寸：</td>
-        <td><?php echo $bkimg->width;?>X<?php echo $bkimg->height;?></td>
-    </tr>
-    <tr>
-        <td width="100" align="right">位置：</td>
-        <td><?php echo $bkimg->x;?>X<?php echo $bkimg->y;?></td>
-    </tr>
-    <tr>
-        <td width="100" align="right">类型：</td>
-        <td>
-             <?php if($bkimg->type==1){
-                    echo '图片';
-                }?><?php if($bkimg->type==2){
-                    echo '视频';
-                }?>
-            (不同类型，需要配置的数据不同)
-        </td>
-    </tr>
-
-    <tr>
-        <td width="100" align="right">标题：</td>
-        <td><?php echo $bkimg->title ?>
-        </td>
-    </tr>
-    <tr>
-        <td width="100" align="right">推荐内容：</td>
-        <td>
-        
-
-              <?php if($bkimg->tType==1){echo '咪咕';}?>
-               <?php if($bkimg->tType==5){echo '自有节目';}?>
-                <!--<option value="6" <?php //if($bkimg[0]['tType']==6){echo 'selected';}?>>广告位,全屏大图</option>-->
-               <?php if($bkimg->tType==99){echo '包名加类名跳转';}?>
-               <?php if($bkimg->tType==100){echo 'action跳转';}?>
-          <?php if($bkimg->tType==101){echo '包名跳转';}?>
-          <?php if($bkimg->tType==102){echo 'Uri跳转';}?>
-                <!--<option value="96" <?php if($bkimg->tType==96){echo 'selected';}?>>本地播放</option>-->
-        <?php if($bkimg->tType==97){echo '二维码';}?>
-          <?php if($bkimg->tType==98){echo '其他';}?>
-     
-        </td>
-    </tr>
-<!--    <tr id="show" style="">-->
-<!--        <td width="100" align="right">牌照方：</td>-->
-<!--        <td>-->
-<!--            <select name="cp" class="form-input w300" id="cp">-->
-<!--                <option  value="0">请选择</option>-->
-<!--                <option  --><?php //if($bkimg[0]['cp']==1){echo 'selected';}?><!-- value="1">华数客户端</option>-->
-<!--                <option  --><?php //if($bkimg[0]['cp']==2){echo 'selected';}?><!-- value="2">百视通客户端</option>-->
-<!--                <option  --><?php //if($bkimg[0]['cp']==3){echo 'selected';}?><!-- value="3">未来电视</option>-->
-<!--                <option  --><?php //if($bkimg[0]['cp']==4){echo 'selected';}?><!-- value="4">南传</option>-->
-<!--                <option  --><?php //if($bkimg[0]['cp']==5){echo 'selected';}?><!-- value="5">芒果</option>-->
-<!--                <option  --><?php //if($bkimg[0]['cp']==6){echo 'selected';}?><!-- value="6">国广</option>-->
-<!--                <option  --><?php //if($bkimg[0]['cp']==7){echo 'selected';}?><!-- value="7">银河</option>-->
-<!--            </select>-->
-<!--        </td>-->
-<!--    </tr>-->
-    <tr class="utp" style="">
-        <td width="100" align="right">页面类型</td>
-        <td>
-             <?php if($bkimg->uType==4){echo '海报专题';}?>
-             <?php if($bkimg->uType==13){echo '排行榜专题';}?>
-              <?php if($bkimg->uType==17){echo '河南专题';}?>
-              <?php if($bkimg->uType==2){echo '海报栏目';}?>
-               <?php if($bkimg->uType==15){echo '视频栏目';}?>
-                <?php if($bkimg->uType==7){echo '竖图单片详情页';}?>
-               <?php if($bkimg->uType==8){echo '多集数字详情页';}?>
-            <?php if($bkimg->uType==10){echo '多集标题详情页';}?>
-              <?php if($bkimg->uType==9){echo '横图单片详情页';}?>
-              <?php if($bkimg->uType==1){echo '搜索';}?>
-                <?php if($bkimg->uType==6){echo '历史';}?>
-               <?php if($bkimg->uType==5){echo '收藏';}?>
-               <?php if($bkimg->uType==11){echo '设置';}?>
-               <?php if($bkimg->uType==16){echo '本地播放';}?>
-             <?php if($bkimg->uType==12){echo '壁纸';}?>
-      
-        </td>
-    </tr>
-    <tr class="act" style="">
-        <td width="100" align="right">action：</td>
-        <td><?php echo $bkimg->action ?></td>
-    </tr>
-
-    <tr class="act" style="">
-        <td width="100" align="right">param：</td>
-        <td><?php echo $bkimg->param ?></td>
-    </tr>
-    <tr  class="upvid" style="">
-        <td width="100" align="right">vid：</td>
-        <td><?php echo $bkimg->cid ?></td>
-    </tr>
-    <tr  class="videoUrl" style="">
-        <td width="100" align="right">videoUrl：</td>
-        <td><?php echo $bkimg->videoUrl ?></td>
-    </tr>
-    <tr>
-        <td width="100" align="right">当前图片为：</td>
-        <td><div class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?>">
-        <img src="<?php echo $bkimg->picSrc;?>" class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?> oldPic"></div>
-        </td>
-</tr>
-    <tr>
-        <td align="center" colspan="2">
-            <input type="button" value="为此推荐位添加轮播图" class="btn addBanner">
-            <input type="button" value="保存信息" class="btn save">
-            <input type="button" value="删除此条数据" class="btn del">
-            <input type="button" value="取消" class="gray" >
-
-        </td>
-    </tr>
-</table>
-
-<script>
-    var tType = "<?php echo $bkimg->tType;?>";
-    if(tType == 1){
-        $("#show").show();
-    }else if(tType == 22){
-        $('.page2').show();
-    }
-
-    $('.meizi').click(function(){
-//        var G= {};
-//        G.cid = '<?php //echo !empty($id) ? $id :''?>//';
-        var mid = "<?php echo $this->mid;?>";
-        var my = layer.msg('加载中', {icon: 16,shade:0.3});
-        $.getJSON('<?php echo $this->get_url('addContent','meizi')?>',function(d){
-            if(d.code == 200){
-                layer.close(my);
-                layer.open({
-                    type: 1,
-                    skin: 'layui-layer-rim', //加上边框
-                    area: ['1030px', '506'], //宽高
-                    content: d.msg
-                })
-            }else{
-                layer.alert(d.msg,{icon:0});
-            }
-        })
-    });
-</script>
-<script>
-    function bb()
-    {
-        var zhi = $("#uptype").val();
-        if(zhi == '2'){
-            $('.videoUrl').show();
+<div style="width:5000px;">
+    <div class="left">
+        <?php
+        //        $nav = $this->getVersitelist();
+        if($_SESSION['auth']=='1'){
+            $nav = $this->getVersitelist();
         }else{
-            $('.videoUrl').hide();
+            $uid = $_SESSION['userid'];
+	
+            $nav = $this->getSitelist($uid,6);
         }
-    }
-    bb();
+	
+        $admin = $this->getMvAdmin();
+        $admin = $this->getMvAdmin();
+        $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
+        $adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
+        $adminLeftOne = !empty($_GET['adminLeftOne'])?$_GET['adminLeftOne']:'';
+        $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
+		$_GET['type'] = !empty($_GET['type'])?$_GET['type']:'';
+		$_GET['top'] = !empty($_GET['top'])?$_GET['top']:'';
+		$_GET['par'] = !empty($_GET['par'])?$_GET['par']:'';
+		$_GET['son'] = !empty($_GET['son'])?$_GET['son']:'';
+		$_GET['one'] = !empty($_GET['one'])?$_GET['one']:'';
+		$_GET['two'] = !empty($_GET['two'])?$_GET['two']:'';
+		$_GET['three'] = !empty($_GET['three'])?$_GET['three']:'';
+		$_GET['leftNavFlag'] = !empty($_GET['leftNavFlag'])?$_GET['leftNavFlag']:'';
+		$_GET['adminLeftTwoName'] = !empty($_GET['adminLeftTwoName'])?$_GET['adminLeftTwoName']:'';
+		$_GET['three'] = !empty($_GET['three'])?$_GET['three']:'';
+        ?>
+        <div class="admin_left">
+        <div id="menubox">
+            <ul id="J_navlist">
+                <?php
+                //print_r($nav);
+                if(!empty($nav)){
+                    $a = -1;
+                    foreach($nav as $v){
+                        if($v->pid == 0 && $v->type==1 && $v->protype==0 && $v->name=='专题'){
+                            $a++;
+                            ?>
+                            <li class="<?php echo !empty($_GET['nid']) && $_GET['nid'] == $v['id']?'thismenu':''?>">
+                            <span>
+                                <?php
+                                    $data = VerSiteListManager::getList($v['id']);
+                                    if(!empty($data)){?>
+                                        <li class="menu stationName">
+                                            <!--一级名称 -->
+                                            <span style="position: relative">
+                                                <img id="pic1" src="../../../file/button/station_true.png" onclick="one(this)" class="one" >
+                                                <div style="display: inline;position: absolute;top :0px;font-size:18px;"><?php echo $v['name'].$v['id']?></div>
+                                            </span>
+                                            <a gid="<?php echo $v['id']?>" class="guide yiji">添加一级</a>
+                                            <ul >
+                                                <?php
+                                                    $b=-1;
+                                                    foreach($data as $val){
 
-    function aa()
-    {
-        var zhi = $("#tType").val();
-        switch(zhi){
-            case '1':
-                $('#show').hide();
-                $('.act').hide();
-                $('.utp').show();
-                $('.upvid').show();
-                break;
-            case '2':
-                $('#show').hide();
-                $('.upvid').hide();
-                $('.utp').hide();
-                $('.act').show();
-                break;
-            case '3':
-                $('#show').show();
-                $('.upvid').hide();
-                $('.utp').hide();
-                $('.act').show();
-                break;
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-            case '9':
-            case '10':
-            case '96':
-            case '97':
-            case '98':
-            case '99':
-            case '100':
-            case '101':
-            case '102':
-                $('#show').hide();
-                $('.upvid').hide();
-                $('.utp').hide();
-                $('.act').show();
-                break;
+                                                        ?>
+                                                           <li>
+                                                               <span>
+                                <?php
+                                    $tmp = VerSiteListManager::getList($val['id']);
+                                    if(1){
+                                        $b++;
+                                        ?>
+                                        <li class="menus">
+                                            <span style="position: relative" class='test active'>
+                                                <img src="../../../file/button/folder_true.png" onclick="two(this)" class="two" >
+                                               <div style="display: inline;position: absolute;top:5px;"><?php echo $val['name']; ?></div>
+                                                <img src="../../file/button/del.png" title="删除" des="<?php echo $val['id']; ?>" class="dele" style="visibility:hidden;">
+                                                <!--                                                                                        <input type="button" des="--><?php //echo $val['id'] ?><!--" class="edit" value="编">-->
+                                                                                        <img src="../../file/button/edit.png" title="编辑" des="<?php echo $val['id']?>" class="edit" style="visibility:hidden;">
+                                                                                        <span style="display: block;float: right;margin-right: 20px;"><?php echo $val['id']; ?></span>
+                                            </span>
+                                            <ul>
+                                                <?php
+                                                $c = -1;
+                                                    foreach($tmp as $l){
+                                                        $c++;?>
+                                                           <li class="test2">
+                                                               <a href="<?php echo $l['url'] == '#'?'#':Yii::app()->createUrl($l['url'],array('mid'=>$_GET['mid'],'nid'=>$l['id'],'epg'=>$l['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">&nbsp;&nbsp;&nbsp;<?php echo $l['name']; ?> </a>
+
+                                                               <img src="../../file/button/del.png" title="删除" des="<?php echo $l['id']; ?>" class="dele" style="visibility:hidden;">
+                                                               <img src="../../file/button/edit.png" title="编辑" des="<?php echo $l['id']?>" class="edit" style="visibility:hidden;">
+                                                               <span style="display: block;float: right;margin-right: 20px;"><?php echo $l['id']; ?></span>
+                                                           </li>
+                                                    <?php } ?>
+                                            </ul>
+                                        </li>
+                                    <?php }else{ ?>
+                                        <li>
+                                            <a href="<?php echo $val['url'] == '#'?'#':Yii::app()->createUrl($val['url'],array('mid'=>$_GET['mid'],'nid'=>$val['id'],'epg'=>$val['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val['name']?></a>&nbsp;&nbsp;
+                                            <img src="../../file/button/del.png" title="删除" des="<?php echo $val['id']; ?>" class="dele" style="visibility:hidden;">
+                                            <!--                                                                                        <input type="button" des="--><?php //echo $val['id'] ?><!--" class="edit" value="编">-->
+                                            <img src="../../file/button/edit.png" title="编辑" des="<?php echo $val['id']?>" class="edit" style="visibility:hidden;">
+                                            <span style="display: block;float: right;margin-right: 20px;"><?php echo $val['id']; ?></span>
+                                        </li>
+                                   <?php } ?>
+                                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <img gid="<?php echo $val['id']?>" class="adderji" title="添加二级" src="../../file/button/add_garden.png" style="float:right;">
+<!--                                    <a gid="--><?php //echo $val['id'] ?><!--" class="guide erji">添加二级</a>-->
+                            </span>
+
+                                                           </li>
+                                                    <?php } ?>
+                                            </ul>
+                                        </li>
+                                    <?php }else{ ?>
+                                        <li>
+                                            <a href="<?php echo $v['url'] == '#'?'#':Yii::app()->createUrl($v['url'],array('mid'=>$_GET['mid'],'nid'=>$v['id'],'epg'=>$v['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>"><?php echo $v['id']?><?php echo $v['name']?></a>
+                                        </li>
+                                   <?php } ?>
+                            </span>
+                        </li>
+                        <?php }
+                                                        }
+                                                        }else{
+                    ?>
+                    <li class="">
+                        <span><a href="#" style="color:;">待添加<em></em></a></span>
+                        <div class="submenu none" style="">
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                        </div>
+                    </li>
+                <?php } ?>
+            </ul>
+            <script type="text/javascript" language="javascript">
+                                navList(12);
+            </script>
+        </div>
+    </div>
+    </div>
+    <div class="mt10" style="float:left;">
+        <div style='margin-bottom:10px;'>
+            <span><?php echo $adminLeftOneName;echo '>';?></span>
+            <span><?php echo $adminLeftTwoName;echo '>';?></span>
+            <span><?php if(!empty($_GET['top'])){echo $_GET['top'];echo '>';}?></span>
+            <span><?php if(!empty($_GET['par'])){echo $_GET['par'];echo '>';}?></span>
+            <span><?php if(!empty($_GET['son'])){echo $_GET['son'];}?></span>
+        </div>
+        <div>
+        	<div class="t1" style="line-height:40px;text-align:center;border:1px solid #ccc;border-right:none;border-bottom:none;width:100px;height:40px;float: left">编辑</div>
+        	<div class="t2" style="line-height:40px;text-align:center;border:1px solid #ccc;border-right:none;border-bottom:none;width:100px;height:40px;float: left">待发布</div>
+        	<div class="t3" style="background: rgb(226, 238, 251);line-height:40px;text-align:center;border:1px solid #ccc;border-bottom:none;width:100px;height:40px;float: left">现网</div>
+        	<br/>
+                <table cellspacing="0" cellpadding="10" class="mtable center" width="800px">
+                
+           <tr <?php echo !empty($bkimg->attributes['url']) || !empty($bkimg->attributes['id'])?"style='display:none;'":"style='display:block;'"?>><td colspan="2" style="text-align: left;padding-left: 15px;height:30px;">
+   
+        </div>
+
+        <?php
+
+        if(!empty($bkimg->attributes['type'])){
+        ?>
+
+        <form action="" method="post" enctype="multipart/form-data">
+                 </td></tr>
+                  <tr><td colspan="2" style="text-align: left;padding-left: 15px;height:30px;">
+            <input type="hidden" value="<?php echo $_REQUEST['nid']?>" name="gid">
+            <input type="hidden" name="url" value="" class="upImg">
+            <div class="topicTop">
+                <span>专题模板：</span>
+               <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';
+               if($type=='1'){echo "海报专题"; }
+			   else  if($type=='2'){echo "排行榜专题"; }
+			   else  if($type=='4'){echo "河南专题"; }
+                  ?>
+                <span></span>
+            </div>
+
+           </td></tr>  <tr style = "height:152px;background:#F0FDFF ">
+                    <td style="width:250px;">专题背景图</td>
+                    <td style="text-align: left;padding-left: 15px;">
+            <div class="topicBg" id="main">
+                <img src="<?php echo !empty($bkimg->attributes['url'])?$bkimg->attributes['url']:'/file/5.png'?>" alt="" class="topicBgImg bg" width="216px" height="127px">
+               
+            </div>
+</td>
+                         <tr style = "height:275px;background:#E2EEFB ">
+                    <td colspan="2" style="width:1795px;height:400px;overflow:auto;padding-top:15px;">
+            </form>
+                <?php
+                }
+                ?>
+
+                <div>
+                    <?php //echo $html;?>
+                </div>
+
+                <div>
+                    <?php
+                    if(!empty($topList)){
+                        //var_dump($list);die;
+                        foreach ($topList['list'] as $k=>$v) {
+                            //var_dump($v[0]['id']);die;
+                            ?>
+                            <div class="centerTop">
+                                <div class="topPic">
+                                    <span class="editTop" onclick="editTop(this)" uiId="<?php /*var_dump($v);die;*/echo $v[0]['id']; ?>" position="<?php echo $v[0]['position']; ?>">修改</span>
+                                    <!--<span class="delTop" onclick="delTop(this)" uiId="<?php //echo $v[0]['id'] ?>" position="<?php //echo $v[0]['position']; ?>">删除</span>-->
+                                    <img src="<?php echo $v[0]['pic'] ?>" alt="" imgFlag="1" order='<?php echo $v[0]['scort'];?>' position="<?php echo $v[0]['position']; ?>">
+                                </div>
+                                <ul class='topUl'>
+                                    <?php foreach ($v as $key=>$val) {
+                                        if($key>0){
+                                            ?>
+                                            <li class="lit" style="background:white;">
+                                                <span class="editTop" onclick="editTop(this)" uiId="<?php echo $val['id'] ?>" order='<?php echo $val['scort'];?>' position="<?php echo $v[0]['position']; ?>">修改</span>
+                                                <!--<span class="delTop" onclick="delTop(this)" uiId="<?php //echo $val['id'] ?>" order='<?php //echo $val['scort'];?>' position="<?php //echo $v[0]['position']; ?>" >删除</span>-->
+                                                <span class="title"><?php echo $val['title']; ?></span>
+                                            </li>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                            <?php
+                            echo "<script>$('b').css({'float':'left','width':'200px'});</script>";
+                        }
+                    }
+                    ?>
+                    <?php
+                    //if(!empty($list['res'])){
+                    if(!empty($topList['res'])){
+                    $list['res']=$topList['res'];
+                    ?>
+                    <div class="centerTopApp">
+                        <div class="top_app">
+                            应用排行榜
+                        </div>
+                        <ul class='topUl'>
+                            <?php foreach ($list['res'] as $k=>$v){?>
+                                <li class="lit" style="background:white;">
+                                    <span class="editTop" appFlag="1" onclick="editTop(this)" uiId="<?php echo $v['id'] ?>" order='<?php echo $v['scort'];?>'>修改</span>
+                                    <!--<span class="delTop" onclick="delTop(this)" uiId="<?php //echo $v['id'] ?>" order='<?php //echo $v['scort'];?>'>删除</span>-->
+                                    <span class="appImg">
+                <img src="<?php echo $v['pic'];?>" alt="" appFlag="1" onclick="addTop(this)" order="1">
+            </span>
+                                    <span class="appTitle"><?php echo $v['title']?></span>
+                                </li>
+                            <?php }?>
+                            <?php
+                            echo "</ul>
+</div>";
+                            }
+                            ?>
+                            <?php //var_dump($news);die;?>
+                            <?php
+                            if(!empty($news)){?>
+                                <div class="newsCenter">
+                                    <ul class="topUl">
+                                        <?php foreach($news as $k=>$v){?>
+                                            <li class="lit" style="background: #0b93d5;">
+                                                <span class="editTop" onclick="editTop(this)" uiId="<?php echo $v['id'] ?>">修改</span>
+                                                <span class="delTop" onclick="delTop(this)" uiId="<?php echo $v['id'] ?>">删除</span>
+                                                <!--                            <img src="../../file/3.png" alt="" appFlag="1" onclick="addNews(this)" order="5">-->
+                                                <span class="newsTitle" ><?php echo $v['title']?></span>
+                                            </li>
+                                        <?php }?>
+
+                                    </ul>
+                                </div>
+
+                            <?php }?>
+
+                            <?php echo $html; //echo "<script>$('b').css('float','left');</script>";?>
+                    </div>
+   </td>
+
+                </tr>
+            </table>
+                </div>
+    </div>
+<script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
+    <script>
+    $('.t1').click(function(){
+    	    	var topid = "<?php echo !empty($_GET['topid'])?$_GET['topid']:""; ?>"
+	var mid = "<?php echo $_GET['mid']; ?>"
+	var nid = "<?php echo $_GET['nid']; ?>"
+	var type = "<?php echo $_GET['type']; ?>"
+	var top = "<?php echo $_GET['top']; ?>"
+	var par = "<?php echo $_GET['par']; ?>"
+	var son = "<?php echo $_GET['son']; ?>"
+	var one = "<?php echo $_GET['one']; ?>"
+	var two = "<?php echo $_GET['two']; ?>"
+	var three = "<?php echo $_GET['three']; ?>"
+	var leftNavFlag = "<?php echo $_GET['leftNavFlag']; ?>"
+	var adminLeftNavFlag = "<?php echo $_GET['adminLeftNavFlag']; ?>"
+	var adminLeftOne = "<?php echo $_GET['adminLeftOne']; ?>"
+	var adminLeftTwo = "<?php echo $_GET['adminLeftTwo']; ?>"
+	var adminLeftOneName = "<?php echo $_GET['adminLeftOneName']; ?>"
+	var adminLeftTwoName = "<?php echo $_GET['adminLeftTwoName']; ?>"
+	window.location.href="/version/site/topic.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
+               
+	
+})
+    $('.t2').click(function(){
+    	    	var topid = "<?php echo !empty($_GET['topid'])?$_GET['topid']:""; ?>"
+	var mid = "<?php echo $_GET['mid']; ?>"
+	var nid = "<?php echo $_GET['nid']; ?>"
+	var type = "<?php echo $_GET['type']; ?>"
+	var top = "<?php echo $_GET['top']; ?>"
+	var par = "<?php echo $_GET['par']; ?>"
+	var son = "<?php echo $_GET['son']; ?>"
+	var one = "<?php echo $_GET['one']; ?>"
+	var two = "<?php echo $_GET['two']; ?>"
+	var three = "<?php echo $_GET['three']; ?>"
+	var leftNavFlag = "<?php echo $_GET['leftNavFlag']; ?>"
+	var adminLeftNavFlag = "<?php echo $_GET['adminLeftNavFlag']; ?>"
+	var adminLeftOne = "<?php echo $_GET['adminLeftOne']; ?>"
+	var adminLeftTwo = "<?php echo $_GET['adminLeftTwo']; ?>"
+	var adminLeftOneName = "<?php echo $_GET['adminLeftOneName']; ?>"
+	var adminLeftTwoName = "<?php echo $_GET['adminLeftTwoName']; ?>"
+	window.location.href="/version/site/topic1.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
+               
+	
+})
+    $('.t3').click(function(){
+    	    	var topid = "<?php echo !empty($_GET['topid'])?$_GET['topid']:""; ?>"
+		var mid = "<?php echo $_GET['mid']; ?>"
+	var nid = "<?php echo $_GET['nid']; ?>"
+	var type = "<?php echo $_GET['type']; ?>"
+	var top = "<?php echo $_GET['top']; ?>"
+	var par = "<?php echo $_GET['par']; ?>"
+	var son = "<?php echo $_GET['son']; ?>"
+	var one = "<?php echo $_GET['one']; ?>"
+	var two = "<?php echo $_GET['two']; ?>"
+	var three = "<?php echo $_GET['three']; ?>"
+	var leftNavFlag = "<?php echo $_GET['leftNavFlag']; ?>"
+	var adminLeftNavFlag = "<?php echo $_GET['adminLeftNavFlag']; ?>"
+	var adminLeftOne = "<?php echo $_GET['adminLeftOne']; ?>"
+	var adminLeftTwo = "<?php echo $_GET['adminLeftTwo']; ?>"
+	var adminLeftOneName = "<?php echo $_GET['adminLeftOneName']; ?>"
+	var adminLeftTwoName = "<?php echo $_GET['adminLeftTwoName']; ?>"
+	window.location.href="/version/site/topic2.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
+               
+	
+})
+    
+        <?php
+        if(empty($_GET['leftNavFlag'])){
+            echo "$('.mt10').hide();";
         }
+        ?>
 
-    }
-    aa();
+        var adminLeftOne = "<?php echo $adminLeftOne;?>";
+        var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
+        var adminLeftOneName = "<?php echo $adminLeftOneName;?>";
+        var adminLeftTwoName = "<?php echo $adminLeftTwoName;?>";
 
-    $('#upload_file_new').uploadify
-    ({
-        'auto': true,//关闭自动上传
-        'buttonImage': '/images/up1.png',
-        'width': 70,
-        'height': 26,
-        'swf': '/js/uploadify/uploadify.swf',
-        'uploader': '/upload/img',
-        'method': 'post',//方法，服务端可以用$_POST数组获取数据
-        'buttonText': '选择图片',//设置按钮文本
-        'queueID' : 'queueid',
-        'multi': false,//允许同时上传多张图片
-        'uploadLimit': 10,//一次最多只允许上传10张图片
-        'fileTypeExts': '*',//限制允许上传的图片后缀
-        'sizeLimit': 1024000000000,//限制上传的图片不得超过200KB
-        'onSelect'      : function(file)
+        $('#upload_file_true').uploadify
+        ({
+            'auto': true,//关闭自动上传
+            'buttonImage': '/file/u1892.png',
+            'width': 32,
+            'height': 30,
+            'text-lieng':'center',
+            'line-height':'19px',
+            'swf': '/js/uploadify/uploadify.swf',
+            'uploader': '/upload/img',
+            'method': 'post',//方法，服务端可以用$_POST数组获取数据
+            'buttonText': '选择图片',//设置按钮文本
+            'queueID' : 'queueid',
+            'multi': false,//允许同时上传多张图片
+            'uploadLimit': 10,//一次最多只允许上传10张图片
+            'fileTypeExts': '*',//限制允许上传的图片后缀
+            'sizeLimit': 1024000000000,//限制上传的图片不得超过200KB
+            'onSelect'      : function(file)
+            {
+                var type = file.type;
+                var img = ['.jpg','.jpeg','.png','.gif'];
+                var myself = this;
+                //layer.alert(file.size);
+                if(!in_array(type,img)){
+                    myself.cancelUpload();
+                    layer.alert("这不是图片");
+                    return false;
+                }
+            },
+            'onUploadStart' :function(file)
+            {
+                start = layer.load(0, {icon: 16,shade: [0.3,'#000']});
+            },
+            'onUploadSuccess' : function(file, data, response)
+            {//每次成功上传后执行的回调函数，从服务端返回数据到前端
+                layer.close(start);
+                var value = eval('('+data+')');
+                if(value.code == 200){
+                    $('input[name=key]').val(value.key);
+                    var l = $('#main').find('img');
+                    if(l.length < 1){
+                        $('#main').append('<img src="'+value.url+'" width="100px" height="66px" class="upImg">');
+                    }else{
+                        $(l).attr('src',value.url);
+                        $('.upImg').val(value.url);
+                    }
+                }else{
+                    layer.alert(value.msg,{icon:0});
+                }
+//            $('#upload_file_true').hide();
+            },
+            'onError':function(err)
+            {
+                layer.alert(err);
+            }
+
+        });
+        /*$('.topicBgEdit').click(function()
         {
-            var type = file.type;
-            var img = ['.jpg','.jpeg','.png','.gif'];
-            var myself = this;
-            if(!in_array(type,img)){
-                myself.cancelUpload();
-                layer.alert("这不是图片");
+            if($('.mtable').css('display') =='none'){
+                $('.mtable').show();
+            }else{
+                $('.mtable').hide();
+            }
+        })*/
+
+        $('.grey').click(function()
+        {
+            $('.mtable').hide();
+        })
+
+        $('.test').mousemove(function()
+        {
+            $(this).children('img').eq(1).css({"visibility":"visible"});
+            $(this).children('img').eq(2).css({"visibility":"visible"});
+        });
+
+        $('.test').mouseout(function()
+        {
+            $(this).children('img').eq(1).css({"visibility":"hidden"});
+            $(this).children('img').eq(2).css({"visibility":"hidden"});;
+        });
+
+        $('.test2').mousemove(function()
+        {
+            $(this).children('img').eq(0).css({"visibility":"visible"});
+            $(this).children('img').eq(1).css({"visibility":"visible"});
+        });
+
+        $('.test2').mouseout(function()
+        {
+            $(this).children('img').eq(0).css({"visibility":"hidden"});
+            $(this).children('img').eq(1).css({"visibility":"hidden"});
+        });
+        function yiji()
+        {
+            var maxAddYiJi = $('.menu').find('.yiji').length;
+//            console.log(maxAddYiJi);
+            if(maxAddYiJi>0){
+                for(var i = 0 ; i<maxAddYiJi; i++){
+                    var gid = $('.menu').find('.yiji').eq(i).attr('gid');
+                    $('.stationName').eq(i).append('<img gid="'+gid+'" title="添加一级" class="addyiji" style="position: absolute;top:0px;left:250px;" src="../../file/button/add_garden.png">');
+                }
+                $('.menu').find('.yiji').remove();
+            }
+        }
+        yiji();
+
+
+        function two(obj)
+        {
+            if($(obj).parent().siblings('ul').css('display')=='block'){
+                $(obj).parent().parent('li').siblings('li').removeClass('inactives');
+                $(obj).addClass('inactives');
+                $(obj).attr('src','../../../file/button/folder_false.png');
+                $(obj).parent().siblings('ul').slideUp(100).children('li');
+            }else{
+                $(obj).parent().siblings('ul').slideDown(100).children('li');
+                $(obj).attr('src','../../../file/button/folder_true.png');
+            }
+        }
+
+        function one(obj)
+        {
+            if($(obj).parent().parent().next('ul').css('display')=='block'){
+                $(obj).parent().parent().parent('li').siblings('li').removeClass('inactives');
+                $(obj).addClass('inactives');
+                $(obj).attr('src','../../../file/button/station_false.png');
+                $(obj).parent().parent().next('ul').slideUp(100).children('li');
+
+            }else{
+                $(obj).parent().parent().next('ul').slideDown(100).children('li');
+                $(obj).attr('src','../../../file/button/station_true.png');
+            }
+        }
+
+        var leftNavFlag = "<?php echo !empty($_GET['leftNavFlag'])?$_GET['leftNavFlag']:'0';?>";
+        if(leftNavFlag=='0'){
+            var max = $('.one').length;
+            for(var i = 0 ; i<max ; i++){
+                $('.one').eq(i).parent().parent().parent('li').siblings('li').removeClass('inactives');
+                $('.one').eq(i).addClass('inactives');
+                $('.one').eq(i).attr('src','../../../file/button/station_false.png');
+                $('.one').eq(i).parent().parent().next('ul').slideUp(100).children('li');
+
+                var maxTwo = $('.one').eq(i).parent().parent().next('ul').find('.two').length;
+                var $_this = $('.one').eq(i).parent().parent().next('ul').find('.two');
+                for(var j = 0 ; j< maxTwo ; j++){
+                    $_this.parent().parent('li').siblings('li').removeClass('inactives');
+                    $_this.addClass('inactives');
+                    $_this.attr('src','../../../file/button/folder_false.png');
+                    $_this.parent().siblings('ul').slideUp(100).children('li');
+                }
+            }
+
+        }else{
+            var oneId = "<?php echo !empty($_GET['one'])?$_GET['one']:'0';?>";
+            var twoId = "<?php echo !empty($_GET['two'])?$_GET['two']:'0';?>";
+            var threeId = "<?php echo !empty($_GET['three'])?$_GET['three']:'0';?>";
+            var max = $('.one').length;
+            for(var i = 0 ; i<max ; i++){
+                if(i == oneId){
+                    $('.one').eq(oneId).parent().parent().next('ul').slideDown(100).children('li');
+                    $('.one').eq(oneId).attr('src','../../../file/button/station_true.png');
+                }else{
+                    $('.one').eq(i).parent().parent().parent('li').siblings('li').removeClass('inactives');
+                    $('.one').eq(i).addClass('inactives');
+                    $('.one').eq(i).attr('src','../../../file/button/station_false.png');
+                    $('.one').eq(i).parent().parent().next('ul').slideUp(100).children('li');
+                }
+
+
+                var maxTwo = $('.one').eq(i).parent().parent().next('ul').find('.two').length;
+                var $_this = $('.one').eq(i).parent().parent().next('ul').find('.two');
+                for(var j = 0 ; j< maxTwo ; j++){
+                    if(j == twoId){
+                        $('.two').eq(twoId).parent().siblings('ul').slideDown(100).children('li');
+                        $('.two').eq(twoId).attr('src','../../../file/button/folder_true.png');
+                    }else{
+                        $_this.parent().parent('li').siblings('li').removeClass('inactives');
+                        $_this.addClass('inactives');
+                        $_this.attr('src','../../../file/button/folder_false.png');
+                        $_this.parent().siblings('ul').hide();
+                    }
+                }
+
+            }
+            $('.one').eq(oneId).parent('span').parent().next('ul').children('li').children('ul').children('li').find('.two').eq(twoId).parent().siblings('ul').children('li').eq(threeId).css('background','#A3bAD5');
+            $('.one').eq(oneId).parent('span').parent().next('ul').children('li').children('ul').children('li').find('.two').eq(twoId).parent().siblings('ul').children('li').eq(threeId).addClass('heightLight');
+            checkTwo(twoId);
+        }
+
+        /*function checkTwo(twoId)
+         {
+         if($('.heightLight').parent('ul').css('display')=='none'){
+         $('.heightLight').parent('ul').slideDown(100).children('li');
+         $('.heightLight').parent('ul').attr('src','../../../file/button/folder_true.png');
+         }
+         }*/
+
+        $('.adderji').click(function(){
+            var gid = $(this).attr('gid');
+            $.getJSON('<?php echo $this->get_url('station','topadd')?>', {gid: gid}, function (d) {
+                if (d.code == 200) {
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['630px', '506px'], //宽高
+                        content: d.msg
+                    })
+                } else {
+                    layer.alert(d.msg, {icon: 0});
+                }
+            });
+        })
+
+        $('.addyiji').click(function(){
+            var gid = $(this).attr('gid');
+            $.getJSON('<?php echo $this->get_url('station','topadd')?>', {gid: gid}, function (d) {
+                if (d.code == 200) {
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['630px', '506px'], //宽高
+                        content: d.msg
+                    })
+                } else {
+                    layer.alert(d.msg, {icon: 0});
+                }
+            });
+        })
+
+        if($('#type').val()=='2'){
+            $('b').css({'float':'left','width':'200px'});
+        }
+
+        $('.dele').click(function(){
+            var auth = "<?php echo $_SESSION['auth']?>";
+            var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
+            if(auth=='1' || flag=='1'){
+
+            }else{
                 return false;
             }
-        },
-        'onUploadStart' :function(file)
-        {
-            start = layer.load(0, {icon: 16,shade: [0.3,'#000']});
-        },
-        'onUploadSuccess' : function(file, data, response)
-        {//每次成功上传后执行的回调函数，从服务端返回数据到前端
-            layer.close(start);
-            var value = eval('('+data+')');
-            if(value.code == 200){
-                $('input[name=key]').val(value.key);
-                <?php if($bkimg->height == 1){?>
-                var l = $('#main').find('.<?php echo "m-".$bkimg->width;?>').find('img');
-                <?php }else{?>
-                var l = $('#main').find('.<?php echo "m-".$bkimg->width."-".$bkimg->height;?>').find('img');
-                <?php }?>
-                if(l.length < 1){
-                    <?php if($bkimg->height == 1){?>
-                    $('#main').find('.<?php echo "m-".$bkimg->width?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
-                    <?php }else{?>
-                    $('#main').find('.<?php echo "m-".$bkimg->width."-".$bkimg->height;?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
-                    <?php }?>
+            var id = $(this).attr('des');
+            layer.confirm("删除会清空数据！", {
+        	title:"消息提示",
+            btn: ['删除','取消'] //按钮
+            }, function(){
+                $.post("<?php echo $this->get_url('site','delsite')?>",{id:id},function(d){
+                    if(d.code==200){
+                        alert(d.msg);
+                        //location.reload();
+                        var adminLeftOne = "<?php echo $adminLeftOne;?>";
+                        var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
+                        var adminLeftOneName = "<?php echo $adminLeftOneName;?>";
+                        var adminLeftTwoName = "<?php echo $adminLeftTwoName;?>";
+                        window.location.href="/version/station/topic.html?mid=-1&nid=39"+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
+                    }else{
+                        alert(d.msg)
+                    }
+                },'json')
+            })
+        })
+        $('.edit').click(function(){
+            var auth = "<?php echo $_SESSION['auth']?>";
+            var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
+            if(auth=='1' || flag=='1'){
+
+            }else{
+                return false;
+            }
+            var id = $(this).attr('des');
+            $.post("<?php echo $this->get_url('site','edit')?>",{id:id},function(d){
+                if(d.code == 200){
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['530px', '330px'], //宽高
+                        content: d.msg
+                    })
                 }else{
-                    $(l).attr('src',value.url);
+                    layer.alert(d.msg,{icon:0});
                 }
+            },'json')
+        })
+
+        $('.modules a').click(function(){
+            var auth = "<?php echo $_SESSION['auth']?>";
+            var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
+            if(auth=='1' || flag=='1'){
+
             }else{
-                layer.alert(value.msg,{icon:0});
+                return false;
             }
-//            $('#upload_file_new').hide();
-        },
-        'onError':function(err)
+            var img = $(this).parent('li');
+            if($(this).html() !== '删除') {
+                var k = $(this);
+                var v = $(k).attr('pos');
+                var gid = '<?php echo !empty($_REQUEST['nid']) ? $_REQUEST['nid'] :''?>';
+                var id = '';
+                id = $(this).attr('dss');
+                if(empty(id)){
+                    id = '';
+                }
+                if (empty(v)) return false;
+                var my = layer.msg('加载中', {icon: 16, shade: 0.3});
+                $.getJSON('<?php echo $this->get_url('site','upload')?>', {val: v,id:id, gid: gid}, function (d) {
+                    if (d.code == 200) {
+                        layer.close(my);
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['930px', '600px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+                $('body').on('click', '.gray', function () {
+                    layer.closeAll();
+                })
+            }
+
+        });
+
+        $('.del').click(function(){
+            var G = {};
+            G.id = $(this).attr('dss');
+            if(confirm('你确定删除此条内容吗？')){
+                $.getJSON('<?php echo $this->get_url('site','del')?>',G,function(d){
+                    if(d.code==200){
+                       alert(d.msg);
+                       location.reload();
+                    }else{
+                       layer.alert(d.msg,{icon:0});
+                    }
+                },'json')
+            }
+        })
+
+        $('.guide').click(function(){
+            var auth = "<?php echo $_SESSION['auth']?>";
+            var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
+            if(auth=='1' || flag=='1'){
+
+            }else{
+                return false;
+            }
+            var gid = $(this).attr('gid');
+            $.getJSON('<?php echo $this->get_url('station','topadd')?>', {gid: gid}, function (d) {
+                if (d.code == 200) {
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['630px', '506px'], //宽高
+                        content: d.msg
+                    })
+                } else {
+                    layer.alert(d.msg, {icon: 0});
+                }
+            });
+        })
+
+        $('.add_topic').click(function(){
+            if($('.bg').length>0){
+                if($('.bg').val().length>1){
+                    alert('您已经新建过专题了！');
+                    return false;
+                }
+            }
+            var gid = "<?php echo $_REQUEST['nid'];?>";
+            $.getJSON('<?php echo $this->get_url('station','bkadd')?>', {gid: gid}, function (d) {
+                if (d.code == 200) {
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['630px', '506px'], //宽高
+                        content: d.msg
+                    })
+                } else {
+                    layer.alert(d.msg, {icon: 0});
+                }
+            });
+        })
+        function indexApp()
         {
-            layer.alert(err);
-        }
-
-    });
-
-    $('.save').click(function()
-    {
-        var k = $(this);
-        var G = {};
-        if($('#main').children('div').children('img').length>0){
-            var picSrc = $('.upImg').attr('src');
-        }else{
-            var picSrc = $('.oldPic').attr('src');
-        }
-        G.key = picSrc;
-        G.uType  = $('#uType').val();   //选择咪咕后
-        G.type   = $('#uptype').val();  //图片视频
-        G.tType  = $('#tType').val();   //推荐内容
-        G.title  = $('#title').val();
-        G.action = $('#action').val();
-        G.param  = $('#param').val();
-        G.cp     = $('#cp').val();
-        G.cid    = $('#upvid').val();
-        G.videoUrl    = $('#videoUrl').val();
-//        G.screenGuideId  = "<?php //echo $bkimg[0]['screenGuideId'] ;?>//";
-//        G.epg    = "<?php //echo $bkimg[0]['epg'] ;?>//";
-        G.width  = "<?php echo $bkimg->width?>";
-        G.height  = "<?php echo $bkimg->height?>";
-        G.x  = "<?php echo $bkimg->x?>";
-        G.y  = "<?php echo $bkimg->y?>";
-        G.order  = "<?php echo $bkimg->order?>";
-        G.id = $('input[name=id]').val();
-         G.nid="<?php echo $bkimg->sid?>";
-//        console.log(G);return false;
-        if(empty(G.tType)){
-            layer.alert('上传类型不能为空',{icon:0});
-            return false;
-        }
-        if(empty(G.title)){
-            layer.alert('标题不能为空',{icon:0});
-            return false;
-        }
-        if(empty(G.key)){
-            layer.alert('系统错误2',{icon:0});
-            return false;
-        }
-
-        var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
-        $.post('/version/station/updatecontent?mid=<?php echo $this->mid?>',G,function(d){
-            if(d.code == 200){
-                alert('修改成功');
-                //location.reload();
-                window.close();
-            }else{
-                layer.close(load);
-                layer.alert(d.msg);
+            var max = $('.centerTop').length;
+            if(max <5 ){
+                $('.centerTopApp').hide();
+            }else if(max == 5){
+                $('.centerTopApp').show();
+                $('.centerTop').eq(4).hide();
             }
-        },'json')
-    });
-
-    $('.gray').click(function()
-    {
-        window.close();
-        //window.location.reload();
-    });
-
-    $('.del').click(function()
-    {
-        var id = $('input[name=id]').val();
-        if(confirm('你确定删除此条数据吗？')){
-           var k = $(this);
-        var G = {};
-        if($('#main').children('div').children('img').length>0){
-            var picSrc = $('.upImg').attr('src');
-        }else{
-            var picSrc = $('.oldPic').attr('src');
         }
-        G.key = picSrc;
-        G.uType  = $('#uType').val();   //选择咪咕后
-        G.type   = '3';  //图片视频
-        G.tType  = $('#tType').val();   //推荐内容
-        G.title  = $('#title').val();
-        G.action = $('#action').val();
-        G.param  = $('#param').val();
-        G.cp     = $('#cp').val();
-        G.cid    = $('#upvid').val();
-        G.videoUrl    = $('#videoUrl').val();
-//        G.screenGuideId  = "<?php //echo $bkimg[0]['screenGuideId'] ;?>//";
-//        G.epg    = "<?php //echo $bkimg[0]['epg'] ;?>//";
-        G.width  = "<?php echo $bkimg->width?>";
-        G.height  = "<?php echo $bkimg->height?>";
-        G.x  = "<?php echo $bkimg->x?>";
-        G.y  = "<?php echo $bkimg->y?>";
-        G.order  = "<?php echo $bkimg->order?>";
-        G.id = $('input[name=id]').val();
-         G.nid="<?php echo $bkimg->sid?>";
-//        console.log(G);return false;
+        indexApp();
 
+        function indexTop()
+        {
+            var max = $('.centerTop').length;
+            for(var i = 0; i < max ; i++){
+                var liMax = $('.centerTop').eq(i).children('ul').children('li').length;
+                var order = liMax+2;
+                var position = $('.centerTop').eq(i).children('ul').children('li').children('span').attr('position');
+                if(position){
+                    position = position;
+                }else{
+                    var position= $('.centerTop').eq(i).children('div').children('span').attr('position');
+                }
+                if(liMax<4){
+                    $('.centerTop').eq(i).children('ul').append
+                    (
+                             '<li class="lit" >'+
 
-        var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
-        $.post('/version/station/updatecontent?mid=<?php echo $this->mid?>',G,function(d){
-            if(d.code == 200){
-                alert('删除成功');
-                //location.reload();
-                window.close();
-            }else{
-                layer.close(load);
-                layer.alert(d.msg);
+                            '<img src="/file/3.png" style="position:relative;z-index:9999" alt="" onclick="addTop(this)" order="'+order+'" position="'+position+'">'+
+                                                        '<img style="position:absolute;top:30px;left:60px;width:30px;height:30px;border-radius:10px;" src="/file/u1892.png">'+
+                        '</li>'
+                    );
+                }
             }
-        },'json')
-    }
+        }
+        indexTop();
+
+        function addTop(obj)
+        {
+        	return false;
+            var gid = "<?php echo $_GET['nid']?>";
+            var mid = "<?php echo $this->mid?>";
+            var order = $(obj).attr('order');
+            if($(obj).attr('position')){
+                var imgFlag = 1;
+                var position = $(obj).attr('position');
+                $.getJSON('<?php echo $this->get_url('site','rankingAddView')?>', {gid: gid,mid:mid,imgFlag:imgFlag,order:order,position:position}, function (d)
+                {
+                    if (d.code == 200) {
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['730px', '556px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+                return true;
+            }
+            if($(obj).attr('imgFlag') == '1'){
+                $.getJSON('<?php echo $this->get_url('site','rankingAddView')?>', {gid: gid,mid:mid,order:order}, function (d)
+                {
+                    if (d.code == 200) {
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['730px', '556px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+            }else if($(obj).attr('appFlag') == '1'){
+                $.getJSON('<?php echo $this->get_url('site','rankingAddView')?>', {gid: gid,mid:mid,appFlag:1,order:order}, function (d)
+                {
+                    if (d.code == 200) {
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['730px', '556px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+            }else{
+                var imgFlag = 1;
+                $.getJSON('<?php echo $this->get_url('site','rankingAddView')?>', {gid: gid,mid:mid,imgFlag:imgFlag,order:order}, function (d)
+                {
+                    if (d.code == 200) {
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['730px', '556px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+            }
+        }
+
+        function editTop(obj)
+        {
+        	return false;
+            var mid = "<?php echo $this->mid;?>";
+            var id = $(obj).attr('uiId');
+            var imgFlag = $(obj).parent('div').find('img').attr('imgFlag');
+
+        if(imgFlag){
+                //alert('2');
+                $.getJSON('<?php echo $this->get_url('site','rankingEditView')?>', {id:id,mid:mid}, function (d)
+                {
+                    if (d.code == 200) {
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['730px', '556px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+            }else if($(obj).attr('appFlag') == '1'){
+                //alert('1');return false;
+                $.getJSON('<?php echo $this->get_url('site','rankingEditView')?>', {id:id,mid:mid,imgFlag:1,appFlag:1}, function (d)
+                {
+                    if (d.code == 200) {
+                        layer.open({
+                            type: 1,
+
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['730px', '556px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+            }else{
+                //alert('3');return false;
+                $.getJSON('<?php echo $this->get_url('site','rankingEditView')?>', {id:id,mid:mid,imgFlag:1}, function (d)
+                {
+                    if (d.code == 200) {
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['730px', '330px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+            }
+        }
+
+        function delTop(obj)
+        {
+        	return false;
+            var mid = "<?php echo $this->mid;?>";
+            var id = $(obj).attr('uiId');
+            var imgFlag = $(obj).parent('div').find('img').attr('imgFlag');
+            var order = $(obj).attr('order');
+            var $_this = $(obj);
+            $.ajax
+            ({
+                type:"get",
+                url:"/version/site/delRanking/mid/"+mid+'/id/'+id,
+                success:function(data)
+                {
+                    if(data == '200'){
+                        if(imgFlag){
+                            $_this.parent().children('img').attr('src','../../file/3.png')
+                        }else{
+                            $_this.parent().children('span').eq(2).remove();
+                            $_this.parent().append("<img src='../../file/3.png'  onclick='addTop(this)' style='width:200px;height:60px;' order='"+order+"'>");
+                        }
+                    }
+                    window.location.reload();
+                },
+                error:function()
+                {
+                    alert('删除失败，请再试一次。');
+                }
+            })
+
+        }
+
+        function addNews(obj)
+        {
+        	return false;
+            var gid = "<?php echo $_GET['nid']?>";
+            var mid = "<?php echo $this->mid?>";
+            var order = $('.newsCenter').eq(0).children('ul').children('li').length;
+            var imgFlag = 1;
+            var news = 'news';
+            $.getJSON('<?php echo $this->get_url('top','rankingAddView')?>', {gid: gid,mid:mid,imgFlag:imgFlag,order:order,position:news}, function (d)
+            {
+                if (d.code == 200) {
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['730px', '556px'], //宽高
+                        content: d.msg
+                    })
+                } else {
+                    layer.alert(d.msg, {icon: 0});
+                }
+            });
+        }
+
+        function checkTwo(twoId)
+        {
+            $('.heightLight').parent('ul').slideDown(100).children('li');
+            $('.heightLight').parent('ul').attr('src','../../../file/button/folder_true.png');
+        }
+        $('a').css('text-decoration','none');
+function add(obj)
+        {
+        	return false;
+            var mid = "<?php echo $_GET['mid']?>";
+            var nid="<?php echo $_GET['nid']?>";
+            var screenGuideId = $('.guideFlag').attr('guideId');
+            var order = $(obj).parent('div').attr('order');
+
+            if($(obj).parent().is('div')){
+                var width = $(obj).parent('div').attr('size-w');
+                var height = $(obj).parent('div').attr('size-h');
+                var x = $(obj).parent('div').attr('x');
+                var y = $(obj).parent('div').attr('y');
+                var order = $(obj).parent('div').attr('order');
+                window.open('/version/station/new/mid/'+mid+'/nid/'+nid+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/order/'+order);
+            }else if($(obj).parent().parent().is('ul')){
+                var width = $(obj).parent().parent().parent().parent().parent().attr('size-w');
+                var height = $(obj).parent().parent().parent().parent().parent().attr('size-h');
+                var x = $(obj).parent().parent().parent().parent().parent().attr('x');
+                var y = $(obj).parent().parent().parent().parent().parent().attr('y');
+                var order = $(obj).parent().parent().parent().parent().parent().attr('order');
+                var id = $(obj).attr('id');
+		window.open('/version/station/updateContent/mid/'+mid+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/order/'+order+'/id/'+id+'/nid/'+nid);
+            }else if($(obj).parent().is('li')){
+                var width = $(obj).parent().parent('div').attr('size-w');
+                var height = $(obj).parent().parent('div').attr('size-h');
+                var x = $(obj).parent().parent('div').attr('x');
+                var y = $(obj).parent().parent('div').attr('y');
+                var order = $(obj).parent().parent('div').attr('order');
+                var id = $(obj).attr('id');
+                window.open('/version/station/updateContent/mid/'+mid+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/order/'+order+'/id/'+id+'/nid/'+nid);
+            }
+
+        }
+//显示内容
+        function showData()
+        {   
+            var data=<?php echo $result;?>;
+            var l= data.length;
+            l= data.length;
+	    //console.log(l);return false;
+            for(var i = 0 ; i<data.length ; i++){
+                var order = '.order-'+data[i]['order'];
+                if(i>=1){
+                   // if(data[i]['order'] == data[i-1]['order']){
+                        $(order).find(".plus_button").remove()
+                    //}
+                }
+                var width = $(order).css('width');
+                var height = $(order).css('height');
+                var w = $(order).attr('size-w');
+                var h = $(order).attr('size-h');
+                $(order).find('.clickImg-'+w+'-'+h).remove();
+                $(order).append("<li><img style='display:block;float:left;position:relative;z-index:1' src='"+data[i]['picSrc']+"' width='"+width+"' height='"+height+"' id='"+data[i]['id']+"' onclick='add(this)'></li>");
+            }
+            banner(l);
+        }
+        function banner(l)
+        {
+            for(var i = 0 ; i<200 ; i++){
+                if($('.order-'+i).find('li').length>1){
+                    var aa = $('.order-'+i).html();
+                    var bb = $('.order-'+i);
+                    bb.children().remove();
+                    bb.append("<ul class='"+i+"-bxslider'></ul>");
+                    var str = "."+i+'-bxslider';
+                    bb.find(str).append(aa);
+                    slider = $(str).bxSlider();
+                    slider.startAuto();
+                }
+            }
+            $('.bx-controls').hide();
+        }
+
+        showData();
+    </script>
 
 
-    });
-    $('.addBanner').click(function()
-    {
-        var order = "<?php echo $bkimg->order ; ?>";
-//        var gid = "<?php //echo $bkimg[0]['screenGuideId'] ;?>//";
-//        var epg = "<?php //echo $bkimg[0]['epg'] ;?>//";
-        var width  = "<?php echo $bkimg->width?>";
-        var height  = "<?php echo $bkimg->height?>";
-        var x  = "<?php echo $bkimg->x?>";
-        var y  = "<?php echo $bkimg->y?>";
-        var nid="<?php echo $bkimg->sid?>";
-        var picSrc = $('.hasPic').attr('src');
-        window.location.href = "/version/station/Banner/mid/"+"<?php echo $this->mid;?>"+"/order/"+order+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/nid/'+nid;
-    });
-</script>
+
