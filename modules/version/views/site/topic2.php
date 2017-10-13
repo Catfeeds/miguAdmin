@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 <?php
 if (!empty($html)) {
         $a = "/<style[\s\S]*?<\/style>/";
@@ -108,8 +106,6 @@ $res['status'][] =2;
                         .delTop:hover {
                                 cursor: pointer;
                         }
-=======
-<?php //var_dump($screenContent);die;?>
 <style type="text/css">
     .page {
         margin-left: 11px;
@@ -415,6 +411,302 @@ $res['status'][] =2;
                                 border-bottom: 0px solid #d9e4ea;
                         }
 
+=======
+
+<?php
+if (!empty($html)) {
+        $a = "/<style[\s\S]*?<\/style>/";
+        preg_match_all($a, $html, $matches);
+
+        $html = str_replace($matches[0][0], "", $html);
+        $html = str_replace("131px", "95px", $html);
+		
+		
+		$b = "/<a[\s\S]*?<\/a>/";
+		preg_match_all($b, $html, $matches);
+		foreach ($matches[0] as $key => $value) {
+			$html = str_replace($matches[0][$key], "", $html);
+		}
+
+}
+$res['status'][] = 1;
+$res['status'][] =2;
+?>
+  <style>
+        .layui-layer-dialog{
+	min-width:340px;
+}
+.layui-layer-dialog .layui-layer-content{
+	padding: 30px 20px 40px 70px;
+}
+.layui-layer-title{
+	background:#A3BBD5;
+	    padding: 0 20px 0 10px;
+	    text-align: center
+}
+.layui-layer-content{
+	background: #F1FDFF;
+	
+}
+.layui-layer-btn{
+	background: #F1FDFF;
+}
+.layui-layer-btn a{
+	padding:0px;
+	width:90px;
+	height:20px;
+	line-height:20px;
+	background: url("/file/u116.png") no-repeat;
+	border-radius: 2px;
+}
+.layui-layer-btn .layui-layer-btn1{
+	background: url("/file/u1971.png") no-repeat;
+	border-radius: 2px;
+}
+                        .mt10 {
+                                margin-left: 10px;
+                        }
+                        .menus {
+                                margin-top: 5px;
+                                margin-left: 10px;
+                        }
+                        .topPic {
+                                position: relative;
+                                border-radius: 15px;
+                                margin-top: 15px;
+                                background: #F2F2F2;
+                        }
+                        .centerTop {
+                                width: 158px;
+                                height: 400px;
+                                float: left;
+                                margin-left: 15px;
+                        }
+                        .centerTopApp {
+                                width: 158px;
+                                height: 280px;
+                                float: left;
+                                margin-left: 15px;
+                        }
+                        .top_app {
+                                width: 158px;
+                                height: 28px;
+                                margin-top: 20px;
+                                background: #E2EEFB;
+                                border-radius: 10px;
+                        }
+                        .centerTopApp img {
+                                width: 158px;
+                                height: 55px;
+                        }
+
+                        .appImg img {
+                                width: 25px;
+                                height: 25px;
+                        }
+
+                        .appImg {
+                                position: absolute;
+                                left: 15px;
+                                top: 5px;
+                        }
+                        .appTitle {
+                                position: absolute;
+                                left: 15px;
+                                top: 32px;
+                        }
+                        .editTop:hover {
+                                cursor: pointer;
+                        }
+                        .delTop:hover {
+                                cursor: pointer;
+                        }
+
+                        .lit {
+                                position: relative;
+                                width: 158px;
+                                height: 55px;
+                                border-radius: 10px;
+                                margin-top: 5px;
+                                background:#F2F2F2;
+                        }
+                        .centerTop .lit img {
+                                width: 158px;
+                                height: 55px;
+                        }
+                        .title {
+                                position: absolute;
+                                top: 15px;
+                                left: 5px;
+                        }
+                        .editTop {
+                                position: absolute;
+                                top: 0px;
+                                right: 0px;
+                                z-index: 9999;
+                                border-radius: 5px;
+                                width: 60px;
+                                height: 20px;
+                                background: #B9B9B9;
+                                color: white;
+                        }
+                        .delTop {
+                                position: absolute;
+                                top: 35px;
+                                right: 0px;
+                                z-index: 9999;
+                                border-radius: 5px;
+                                width: 60px;
+                                height: 20px;
+                                background: #B9B9B9;
+                                color: white;
+                        }
+                        .centerTop img {
+                                width: 158px;
+                                height: 90px;
+                        }
+                        .fl img {
+                                width: 139px;
+                                height: 220px;
+                        }
+                        .ui-a {
+                                width: 139px;
+                                height: 220px;
+                        }
+                        .test2 {
+                                height: 30px;
+                                line-height: 25px;
+                        }
+                        .menus span {
+                                font-family: 黑体;
+                        }
+                        .menus ul {
+                                font-family: 宋体;
+                        }
+                        /*a{font-size: 12px;font-family: "microsoft yahei";font-weight: bold;}*/
+                        .ui-a {
+                                position: relative;
+                        }
+                        .ui-b {
+                                position: relative;
+                        }
+                        .ui-a a {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background-color: #898989;
+                                padding: 5px 10px;
+                                font-size: 12px;
+                                font-family: "microsoft yahei";
+                                font-weight: bold;
+                                color: white
+                        }
+                        .ui-a a img {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background-color: #898989;
+                        }/*padding:5px 10px;*/
+                        .mt6 {
+                                margin-top: 10px;
+                        }
+                        .ui-b a {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background-color: #898989;
+                                padding: 5px 10px;
+                        }
+                        .mt6 {
+                                margin-top: 10px;
+                                float: left;
+                        }
+                        .mt7 {
+                                margin-top: 10px;
+                                float: left;
+                        }
+                        .cc {
+                                margin-left: 10px;
+                        }
+                        #overlay {
+                                width: 1300px;
+                                height: 700px;
+                                position: absolute;
+                                z-index: 2
+                        }
+                        #menubox {
+                                width: 200px;
+                                padding-top: 15px;
+                        }
+                        .yiji {
+                                /*background:#43adff;
+                                 width:200px;
+                                 height:80px;*/
+                                border-width: 0px;
+                                /*position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 84px;
+                                height: 27px;
+                                background: inherit;
+                                background-color: rgba(22, 155, 213, 1);
+                                border: none;
+                                border-radius: 5px;
+                                -moz-box-shadow: none;
+                                -webkit-box-shadow: none;
+                                box-shadow: none;
+                        }
+                        .erji {
+                                border-width: 0px;
+                                /* position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 86px;
+                                height: 27px;
+                                background: inherit;
+                                background-color: rgba(72, 187, 236, 1);
+                                border: none;
+                                border-radius: 5px;
+                                -moz-box-shadow: none;
+                                -webkit-box-shadow: none;
+                                box-shadow: none;
+                        }
+                        .edit {
+                                border-width: 0px;
+                                /*position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 20px;
+                                height: 20px;y
+                                }
+                                .dele{
+                                border-width: 0px;
+                                /*position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 20px;
+                                height: 20px;
+                        }
+                        #menubox {
+                                padding-left: 8px;
+                                padding-right: 8px;
+                                z
+                                margin-right: 15px;
+                                width: 270px;
+                                min-height: 845px;
+                                float: left;
+                                overflow: hidden;
+                                background: #f7fbfc;
+                                border-bottom: 1px solid #c2d1d8;
+                                border-right: 1px solid #c2d1d8;
+                                -webkit-box-shadow: 1px 1px 0 0 #fff;
+                                box-shadow: 1px 1px 0 0 #fff;
+                        }
+                        .menubox ul li {
+                                border-bottom: 0px solid #d9e4ea;
+                        }
+
+>>>>>>> 598d9642259e7d4fcc799923d3f752f971efe128
                         .menubox ul li span {
                                 display: block;
                         }
@@ -1065,6 +1357,374 @@ $res['status'][] =2;
                     content: d.msg
                 })
 >>>>>>> 7e1584426825d6020e882eabeb3db96d000211ec
+=======
+
+                                                        ?>
+                                                           <li>
+                                                               <span>
+                                <?php
+                                    $tmp = VerSiteListManager::getList($val['id']);
+                                    if(1){
+                                        $b++;
+                                        ?>
+                                        <li class="menus">
+                                            <span style="position: relative" class='test active'>
+                                                <img src="../../../file/button/folder_true.png" onclick="two(this)" class="two" >
+                                               <div style="display: inline;position: absolute;top:5px;"><?php echo $val['name']; ?></div>
+                                                <img src="../../file/button/del.png" title="删除" des="<?php echo $val['id']; ?>" class="dele" style="visibility:hidden;">
+                                                <!--                                                                                        <input type="button" des="--><?php //echo $val['id'] ?><!--" class="edit" value="编">-->
+                                                                                        <img src="../../file/button/edit.png" title="编辑" des="<?php echo $val['id']?>" class="edit" style="visibility:hidden;">
+                                                                                        <span style="display: block;float: right;margin-right: 20px;"><?php echo $val['id']; ?></span>
+                                            </span>
+                                            <ul>
+                                                <?php
+                                                $c = -1;
+                                                    foreach($tmp as $l){
+                                                        $c++;?>
+                                                           <li class="test2">
+                                                               <a href="<?php echo $l['url'] == '#'?'#':Yii::app()->createUrl($l['url'],array('mid'=>$_GET['mid'],'nid'=>$l['id'],'epg'=>$l['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">&nbsp;&nbsp;&nbsp;<?php echo $l['name']; ?> </a>
+
+                                                               <img src="../../file/button/del.png" title="删除" des="<?php echo $l['id']; ?>" class="dele" style="visibility:hidden;">
+                                                               <img src="../../file/button/edit.png" title="编辑" des="<?php echo $l['id']?>" class="edit" style="visibility:hidden;">
+                                                               <span style="display: block;float: right;margin-right: 20px;"><?php echo $l['id']; ?></span>
+                                                           </li>
+                                                    <?php } ?>
+                                            </ul>
+                                        </li>
+                                    <?php }else{ ?>
+                                        <li>
+                                            <a href="<?php echo $val['url'] == '#'?'#':Yii::app()->createUrl($val['url'],array('mid'=>$_GET['mid'],'nid'=>$val['id'],'epg'=>$val['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val['name']?></a>&nbsp;&nbsp;
+                                            <img src="../../file/button/del.png" title="删除" des="<?php echo $val['id']; ?>" class="dele" style="visibility:hidden;">
+                                            <!--                                                                                        <input type="button" des="--><?php //echo $val['id'] ?><!--" class="edit" value="编">-->
+                                            <img src="../../file/button/edit.png" title="编辑" des="<?php echo $val['id']?>" class="edit" style="visibility:hidden;">
+                                            <span style="display: block;float: right;margin-right: 20px;"><?php echo $val['id']; ?></span>
+                                        </li>
+                                   <?php } ?>
+                                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <img gid="<?php echo $val['id']?>" class="adderji" title="添加二级" src="../../file/button/add_garden.png" style="float:right;">
+<!--                                    <a gid="--><?php //echo $val['id'] ?><!--" class="guide erji">添加二级</a>-->
+                            </span>
+
+                                                           </li>
+                                                    <?php } ?>
+                                            </ul>
+                                        </li>
+                                    <?php }else{ ?>
+                                        <li>
+                                            <a href="<?php echo $v['url'] == '#'?'#':Yii::app()->createUrl($v['url'],array('mid'=>$_GET['mid'],'nid'=>$v['id'],'epg'=>$v['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>"><?php echo $v['id']?><?php echo $v['name']?></a>
+                                        </li>
+                                   <?php } ?>
+                            </span>
+                        </li>
+                        <?php }
+                                                        }
+                                                        }else{
+                    ?>
+                    <li class="">
+                        <span><a href="#" style="color:;">待添加<em></em></a></span>
+                        <div class="submenu none" style="">
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                        </div>
+                    </li>
+                <?php } ?>
+            </ul>
+            <script type="text/javascript" language="javascript">
+                                navList(12);
+            </script>
+        </div>
+    </div>
+    </div>
+    <div class="mt10" style="float:left;">
+        <div style='margin-bottom:10px;'>
+            <span><?php echo $adminLeftOneName;echo '>';?></span>
+            <span><?php echo $adminLeftTwoName;echo '>';?></span>
+            <span><?php if(!empty($_GET['top'])){echo $_GET['top'];echo '>';}?></span>
+            <span><?php if(!empty($_GET['par'])){echo $_GET['par'];echo '>';}?></span>
+            <span><?php if(!empty($_GET['son'])){echo $_GET['son'];}?></span>
+        </div>
+        <div>
+        	<div class="t1" style="line-height:40px;text-align:center;border:1px solid #ccc;border-right:none;border-bottom:none;width:100px;height:40px;float: left">编辑</div>
+        	<div class="t2" style="line-height:40px;text-align:center;border:1px solid #ccc;border-right:none;border-bottom:none;width:100px;height:40px;float: left">待发布</div>
+        	<div class="t3" style="background: rgb(226, 238, 251);line-height:40px;text-align:center;border:1px solid #ccc;border-bottom:none;width:100px;height:40px;float: left">现网</div>
+        	<br/>
+                <table cellspacing="0" cellpadding="10" class="mtable center" width="800px">
+                
+           <tr <?php echo !empty($bkimg->attributes['url']) || !empty($bkimg->attributes['id'])?"style='display:none;'":"style='display:block;'"?>><td colspan="2" style="text-align: left;padding-left: 15px;height:30px;">
+   
+        </div>
+
+        <?php
+
+        if(!empty($bkimg->attributes['type'])){
+        ?>
+
+        <form action="" method="post" enctype="multipart/form-data">
+                 </td></tr>
+                  <tr><td colspan="2" style="text-align: left;padding-left: 15px;height:30px;">
+            <input type="hidden" value="<?php echo $_REQUEST['nid']?>" name="gid">
+            <input type="hidden" name="url" value="" class="upImg">
+            <div class="topicTop">
+                <span>专题模板：</span>
+               <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';
+               if($type=='1'){echo "海报专题"; }
+			   else  if($type=='2'){echo "排行榜专题"; }
+			   else  if($type=='4'){echo "河南专题"; }
+                  ?>
+                <span></span>
+            </div>
+
+           </td></tr>  <tr style = "height:152px;background:#F0FDFF ">
+                    <td style="width:250px;">专题背景图</td>
+                    <td style="text-align: left;padding-left: 15px;">
+            <div class="topicBg" id="main">
+                <img src="<?php echo !empty($bkimg->attributes['url'])?$bkimg->attributes['url']:'/file/5.png'?>" alt="" class="topicBgImg bg" width="216px" height="127px">
+               
+            </div>
+</td>
+                         <tr style = "height:275px;background:#E2EEFB ">
+                    <td colspan="2" style="width:1795px;height:400px;overflow:auto;padding-top:15px;">
+            </form>
+                <?php
+                }
+                ?>
+
+                <div>
+                    <?php //echo $html;?>
+                </div>
+
+                <div>
+                    <?php
+                    if(!empty($topList)){
+                        //var_dump($list);die;
+                        foreach ($topList['list'] as $k=>$v) {
+                            //var_dump($v[0]['id']);die;
+                            ?>
+                            <div class="centerTop">
+                                <div class="topPic">
+                                    <span class="editTop" onclick="editTop(this)" uiId="<?php /*var_dump($v);die;*/echo $v[0]['id']; ?>" position="<?php echo $v[0]['position']; ?>">修改</span>
+                                    <!--<span class="delTop" onclick="delTop(this)" uiId="<?php //echo $v[0]['id'] ?>" position="<?php //echo $v[0]['position']; ?>">删除</span>-->
+                                    <img src="<?php echo $v[0]['pic'] ?>" alt="" imgFlag="1" order='<?php echo $v[0]['scort'];?>' position="<?php echo $v[0]['position']; ?>">
+                                </div>
+                                <ul class='topUl'>
+                                    <?php foreach ($v as $key=>$val) {
+                                        if($key>0){
+                                            ?>
+                                            <li class="lit" style="background:white;">
+                                                <span class="editTop" onclick="editTop(this)" uiId="<?php echo $val['id'] ?>" order='<?php echo $val['scort'];?>' position="<?php echo $v[0]['position']; ?>">修改</span>
+                                                <!--<span class="delTop" onclick="delTop(this)" uiId="<?php //echo $val['id'] ?>" order='<?php //echo $val['scort'];?>' position="<?php //echo $v[0]['position']; ?>" >删除</span>-->
+                                                <span class="title"><?php echo $val['title']; ?></span>
+                                            </li>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                            <?php
+                            echo "<script>$('b').css({'float':'left','width':'200px'});</script>";
+                        }
+                    }
+                    ?>
+                    <?php
+                    //if(!empty($list['res'])){
+                    if(!empty($topList['res'])){
+                    $list['res']=$topList['res'];
+                    ?>
+                    <div class="centerTopApp">
+                        <div class="top_app">
+                            应用排行榜
+                        </div>
+                        <ul class='topUl'>
+                            <?php foreach ($list['res'] as $k=>$v){?>
+                                <li class="lit" style="background:white;">
+                                    <span class="editTop" appFlag="1" onclick="editTop(this)" uiId="<?php echo $v['id'] ?>" order='<?php echo $v['scort'];?>'>修改</span>
+                                    <!--<span class="delTop" onclick="delTop(this)" uiId="<?php //echo $v['id'] ?>" order='<?php //echo $v['scort'];?>'>删除</span>-->
+                                    <span class="appImg">
+                <img src="<?php echo $v['pic'];?>" alt="" appFlag="1" onclick="addTop(this)" order="1">
+            </span>
+                                    <span class="appTitle"><?php echo $v['title']?></span>
+                                </li>
+                            <?php }?>
+                            <?php
+                            echo "</ul>
+</div>";
+                            }
+                            ?>
+                            <?php //var_dump($news);die;?>
+                            <?php
+                            if(!empty($news)){?>
+                                <div class="newsCenter">
+                                    <ul class="topUl">
+                                        <?php foreach($news as $k=>$v){?>
+                                            <li class="lit" style="background: #0b93d5;">
+                                                <span class="editTop" onclick="editTop(this)" uiId="<?php echo $v['id'] ?>">修改</span>
+                                                <span class="delTop" onclick="delTop(this)" uiId="<?php echo $v['id'] ?>">删除</span>
+                                                <!--                            <img src="../../file/3.png" alt="" appFlag="1" onclick="addNews(this)" order="5">-->
+                                                <span class="newsTitle" ><?php echo $v['title']?></span>
+                                            </li>
+                                        <?php }?>
+
+                                    </ul>
+                                </div>
+
+                            <?php }?>
+
+                            <?php echo $html; //echo "<script>$('b').css('float','left');</script>";?>
+                    </div>
+   </td>
+
+                </tr>
+            </table>
+                </div>
+    </div>
+<script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
+    <script>
+    $('.t1').click(function(){
+    	    	var topid = "<?php echo !empty($_GET['topid'])?$_GET['topid']:""; ?>"
+	var mid = "<?php echo $_GET['mid']; ?>"
+	var nid = "<?php echo $_GET['nid']; ?>"
+	var type = "<?php echo $_GET['type']; ?>"
+	var top = "<?php echo $_GET['top']; ?>"
+	var par = "<?php echo $_GET['par']; ?>"
+	var son = "<?php echo $_GET['son']; ?>"
+	var one = "<?php echo $_GET['one']; ?>"
+	var two = "<?php echo $_GET['two']; ?>"
+	var three = "<?php echo $_GET['three']; ?>"
+	var leftNavFlag = "<?php echo $_GET['leftNavFlag']; ?>"
+	var adminLeftNavFlag = "<?php echo $_GET['adminLeftNavFlag']; ?>"
+	var adminLeftOne = "<?php echo $_GET['adminLeftOne']; ?>"
+	var adminLeftTwo = "<?php echo $_GET['adminLeftTwo']; ?>"
+	var adminLeftOneName = "<?php echo $_GET['adminLeftOneName']; ?>"
+	var adminLeftTwoName = "<?php echo $_GET['adminLeftTwoName']; ?>"
+	window.location.href="/version/site/topic.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
+               
+	
+})
+    $('.t2').click(function(){
+    	    	var topid = "<?php echo !empty($_GET['topid'])?$_GET['topid']:""; ?>"
+	var mid = "<?php echo $_GET['mid']; ?>"
+	var nid = "<?php echo $_GET['nid']; ?>"
+	var type = "<?php echo $_GET['type']; ?>"
+	var top = "<?php echo $_GET['top']; ?>"
+	var par = "<?php echo $_GET['par']; ?>"
+	var son = "<?php echo $_GET['son']; ?>"
+	var one = "<?php echo $_GET['one']; ?>"
+	var two = "<?php echo $_GET['two']; ?>"
+	var three = "<?php echo $_GET['three']; ?>"
+	var leftNavFlag = "<?php echo $_GET['leftNavFlag']; ?>"
+	var adminLeftNavFlag = "<?php echo $_GET['adminLeftNavFlag']; ?>"
+	var adminLeftOne = "<?php echo $_GET['adminLeftOne']; ?>"
+	var adminLeftTwo = "<?php echo $_GET['adminLeftTwo']; ?>"
+	var adminLeftOneName = "<?php echo $_GET['adminLeftOneName']; ?>"
+	var adminLeftTwoName = "<?php echo $_GET['adminLeftTwoName']; ?>"
+	window.location.href="/version/site/topic1.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
+               
+	
+})
+    $('.t3').click(function(){
+    	    	var topid = "<?php echo !empty($_GET['topid'])?$_GET['topid']:""; ?>"
+		var mid = "<?php echo $_GET['mid']; ?>"
+	var nid = "<?php echo $_GET['nid']; ?>"
+	var type = "<?php echo $_GET['type']; ?>"
+	var top = "<?php echo $_GET['top']; ?>"
+	var par = "<?php echo $_GET['par']; ?>"
+	var son = "<?php echo $_GET['son']; ?>"
+	var one = "<?php echo $_GET['one']; ?>"
+	var two = "<?php echo $_GET['two']; ?>"
+	var three = "<?php echo $_GET['three']; ?>"
+	var leftNavFlag = "<?php echo $_GET['leftNavFlag']; ?>"
+	var adminLeftNavFlag = "<?php echo $_GET['adminLeftNavFlag']; ?>"
+	var adminLeftOne = "<?php echo $_GET['adminLeftOne']; ?>"
+	var adminLeftTwo = "<?php echo $_GET['adminLeftTwo']; ?>"
+	var adminLeftOneName = "<?php echo $_GET['adminLeftOneName']; ?>"
+	var adminLeftTwoName = "<?php echo $_GET['adminLeftTwoName']; ?>"
+	window.location.href="/version/site/topic2.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
+               
+	
+})
+    
+        <?php
+        if(empty($_GET['leftNavFlag'])){
+            echo "$('.mt10').hide();";
+        }
+        ?>
+
+        var adminLeftOne = "<?php echo $adminLeftOne;?>";
+        var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
+        var adminLeftOneName = "<?php echo $adminLeftOneName;?>";
+        var adminLeftTwoName = "<?php echo $adminLeftTwoName;?>";
+
+        $('#upload_file_true').uploadify
+        ({
+            'auto': true,//关闭自动上传
+            'buttonImage': '/file/u1892.png',
+            'width': 32,
+            'height': 30,
+            'text-lieng':'center',
+            'line-height':'19px',
+            'swf': '/js/uploadify/uploadify.swf',
+            'uploader': '/upload/img',
+            'method': 'post',//方法，服务端可以用$_POST数组获取数据
+            'buttonText': '选择图片',//设置按钮文本
+            'queueID' : 'queueid',
+            'multi': false,//允许同时上传多张图片
+            'uploadLimit': 10,//一次最多只允许上传10张图片
+            'fileTypeExts': '*',//限制允许上传的图片后缀
+            'sizeLimit': 1024000000000,//限制上传的图片不得超过200KB
+            'onSelect'      : function(file)
+            {
+                var type = file.type;
+                var img = ['.jpg','.jpeg','.png','.gif'];
+                var myself = this;
+                //layer.alert(file.size);
+                if(!in_array(type,img)){
+                    myself.cancelUpload();
+                    layer.alert("这不是图片");
+                    return false;
+                }
+            },
+            'onUploadStart' :function(file)
+            {
+                start = layer.load(0, {icon: 16,shade: [0.3,'#000']});
+            },
+            'onUploadSuccess' : function(file, data, response)
+            {//每次成功上传后执行的回调函数，从服务端返回数据到前端
+                layer.close(start);
+                var value = eval('('+data+')');
+                if(value.code == 200){
+                    $('input[name=key]').val(value.key);
+                    var l = $('#main').find('img');
+                    if(l.length < 1){
+                        $('#main').append('<img src="'+value.url+'" width="100px" height="66px" class="upImg">');
+                    }else{
+                        $(l).attr('src',value.url);
+                        $('.upImg').val(value.url);
+                    }
+                }else{
+                    layer.alert(value.msg,{icon:0});
+                }
+//            $('#upload_file_true').hide();
+            },
+            'onError':function(err)
+            {
+                layer.alert(err);
+            }
+
+        });
+        /*$('.topicBgEdit').click(function()
+        {
+            if($('.mtable').css('display') =='none'){
+                $('.mtable').show();
+>>>>>>> 598d9642259e7d4fcc799923d3f752f971efe128
             }else{
                 $('.mtable').hide();
             }
@@ -1246,6 +1906,7 @@ $res['status'][] =2;
             if(auth=='1' || flag=='1'){
 
             }else{
+<<<<<<< HEAD
                 return false;
             }
 <<<<<<< HEAD
@@ -1278,6 +1939,39 @@ $res['status'][] =2;
                 return false;
             }
             var id = $(this).attr('des');
+=======
+                return false;
+            }
+            var id = $(this).attr('des');
+            layer.confirm("删除会清空数据！", {
+        	title:"消息提示",
+            btn: ['删除','取消'] //按钮
+            }, function(){
+                $.post("<?php echo $this->get_url('site','delsite')?>",{id:id},function(d){
+                    if(d.code==200){
+                        alert(d.msg);
+                        //location.reload();
+                        var adminLeftOne = "<?php echo $adminLeftOne;?>";
+                        var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
+                        var adminLeftOneName = "<?php echo $adminLeftOneName;?>";
+                        var adminLeftTwoName = "<?php echo $adminLeftTwoName;?>";
+                        window.location.href="/version/station/topic.html?mid=-1&nid=39"+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
+                    }else{
+                        alert(d.msg)
+                    }
+                },'json')
+            })
+        })
+        $('.edit').click(function(){
+            var auth = "<?php echo $_SESSION['auth']?>";
+            var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
+            if(auth=='1' || flag=='1'){
+
+            }else{
+                return false;
+            }
+            var id = $(this).attr('des');
+>>>>>>> 598d9642259e7d4fcc799923d3f752f971efe128
             $.post("<?php echo $this->get_url('site','edit')?>",{id:id},function(d){
                 if(d.code == 200){
                     layer.open({
@@ -1286,6 +1980,7 @@ $res['status'][] =2;
                         area: ['530px', '330px'], //宽高
                         content: d.msg
                     })
+<<<<<<< HEAD
 =======
         },
         'onUploadStart' :function(file)
@@ -1310,6 +2005,8 @@ $res['status'][] =2;
                     $('#main').find('.<?php echo "m-".$screenContent->width."-".$screenContent->height;?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
                     <?php }?>
 >>>>>>> 7e1584426825d6020e882eabeb3db96d000211ec
+=======
+>>>>>>> 598d9642259e7d4fcc799923d3f752f971efe128
                 }else{
                     layer.alert(d.msg,{icon:0});
                 }
@@ -1321,6 +2018,7 @@ $res['status'][] =2;
             var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
             if(auth=='1' || flag=='1'){
 
+<<<<<<< HEAD
             }else{
                 return false;
             }
@@ -1379,6 +2077,66 @@ $res['status'][] =2;
             }else{
                 return false;
             }
+=======
+            }else{
+                return false;
+            }
+            var img = $(this).parent('li');
+            if($(this).html() !== '删除') {
+                var k = $(this);
+                var v = $(k).attr('pos');
+                var gid = '<?php echo !empty($_REQUEST['nid']) ? $_REQUEST['nid'] :''?>';
+                var id = '';
+                id = $(this).attr('dss');
+                if(empty(id)){
+                    id = '';
+                }
+                if (empty(v)) return false;
+                var my = layer.msg('加载中', {icon: 16, shade: 0.3});
+                $.getJSON('<?php echo $this->get_url('site','upload')?>', {val: v,id:id, gid: gid}, function (d) {
+                    if (d.code == 200) {
+                        layer.close(my);
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['930px', '600px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+                $('body').on('click', '.gray', function () {
+                    layer.closeAll();
+                })
+            }
+
+        });
+
+        $('.del').click(function(){
+            var G = {};
+            G.id = $(this).attr('dss');
+            if(confirm('你确定删除此条内容吗？')){
+                $.getJSON('<?php echo $this->get_url('site','del')?>',G,function(d){
+                    if(d.code==200){
+                       alert(d.msg);
+                       location.reload();
+                    }else{
+                       layer.alert(d.msg,{icon:0});
+                    }
+                },'json')
+            }
+        })
+
+        $('.guide').click(function(){
+            var auth = "<?php echo $_SESSION['auth']?>";
+            var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
+            if(auth=='1' || flag=='1'){
+
+            }else{
+                return false;
+            }
+>>>>>>> 598d9642259e7d4fcc799923d3f752f971efe128
             var gid = $(this).attr('gid');
             $.getJSON('<?php echo $this->get_url('station','topadd')?>', {gid: gid}, function (d) {
                 if (d.code == 200) {
@@ -1452,6 +2210,9 @@ $res['status'][] =2;
             }
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 598d9642259e7d4fcc799923d3f752f971efe128
         indexTop();
 
         function addTop(obj)
@@ -1522,6 +2283,7 @@ $res['status'][] =2;
                     }
                 });
             }
+<<<<<<< HEAD
 =======
         G.key = picSrc;
         G.uType  = $('#uType').val();   //选择咪咕后
@@ -1701,6 +2463,161 @@ function add(obj)
 
         }
 <<<<<<< HEAD
+=======
+        }
+
+        function editTop(obj)
+        {
+        	return false;
+            var mid = "<?php echo $this->mid;?>";
+            var id = $(obj).attr('uiId');
+            var imgFlag = $(obj).parent('div').find('img').attr('imgFlag');
+
+        if(imgFlag){
+                //alert('2');
+                $.getJSON('<?php echo $this->get_url('site','rankingEditView')?>', {id:id,mid:mid}, function (d)
+                {
+                    if (d.code == 200) {
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['730px', '556px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+            }else if($(obj).attr('appFlag') == '1'){
+                //alert('1');return false;
+                $.getJSON('<?php echo $this->get_url('site','rankingEditView')?>', {id:id,mid:mid,imgFlag:1,appFlag:1}, function (d)
+                {
+                    if (d.code == 200) {
+                        layer.open({
+                            type: 1,
+
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['730px', '556px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+            }else{
+                //alert('3');return false;
+                $.getJSON('<?php echo $this->get_url('site','rankingEditView')?>', {id:id,mid:mid,imgFlag:1}, function (d)
+                {
+                    if (d.code == 200) {
+                        layer.open({
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['730px', '330px'], //宽高
+                            content: d.msg
+                        })
+                    } else {
+                        layer.alert(d.msg, {icon: 0});
+                    }
+                });
+            }
+        }
+
+        function delTop(obj)
+        {
+        	return false;
+            var mid = "<?php echo $this->mid;?>";
+            var id = $(obj).attr('uiId');
+            var imgFlag = $(obj).parent('div').find('img').attr('imgFlag');
+            var order = $(obj).attr('order');
+            var $_this = $(obj);
+            $.ajax
+            ({
+                type:"get",
+                url:"/version/site/delRanking/mid/"+mid+'/id/'+id,
+                success:function(data)
+                {
+                    if(data == '200'){
+                        if(imgFlag){
+                            $_this.parent().children('img').attr('src','../../file/3.png')
+                        }else{
+                            $_this.parent().children('span').eq(2).remove();
+                            $_this.parent().append("<img src='../../file/3.png'  onclick='addTop(this)' style='width:200px;height:60px;' order='"+order+"'>");
+                        }
+                    }
+                    window.location.reload();
+                },
+                error:function()
+                {
+                    alert('删除失败，请再试一次。');
+                }
+            })
+
+        }
+
+        function addNews(obj)
+        {
+        	return false;
+            var gid = "<?php echo $_GET['nid']?>";
+            var mid = "<?php echo $this->mid?>";
+            var order = $('.newsCenter').eq(0).children('ul').children('li').length;
+            var imgFlag = 1;
+            var news = 'news';
+            $.getJSON('<?php echo $this->get_url('top','rankingAddView')?>', {gid: gid,mid:mid,imgFlag:imgFlag,order:order,position:news}, function (d)
+            {
+                if (d.code == 200) {
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['730px', '556px'], //宽高
+                        content: d.msg
+                    })
+                } else {
+                    layer.alert(d.msg, {icon: 0});
+                }
+            });
+        }
+
+        function checkTwo(twoId)
+        {
+            $('.heightLight').parent('ul').slideDown(100).children('li');
+            $('.heightLight').parent('ul').attr('src','../../../file/button/folder_true.png');
+        }
+        $('a').css('text-decoration','none');
+function add(obj)
+        {
+        	return false;
+            var mid = "<?php echo $_GET['mid']?>";
+            var nid="<?php echo $_GET['nid']?>";
+            var screenGuideId = $('.guideFlag').attr('guideId');
+            var order = $(obj).parent('div').attr('order');
+
+            if($(obj).parent().is('div')){
+                var width = $(obj).parent('div').attr('size-w');
+                var height = $(obj).parent('div').attr('size-h');
+                var x = $(obj).parent('div').attr('x');
+                var y = $(obj).parent('div').attr('y');
+                var order = $(obj).parent('div').attr('order');
+                window.open('/version/station/new/mid/'+mid+'/nid/'+nid+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/order/'+order);
+            }else if($(obj).parent().parent().is('ul')){
+                var width = $(obj).parent().parent().parent().parent().parent().attr('size-w');
+                var height = $(obj).parent().parent().parent().parent().parent().attr('size-h');
+                var x = $(obj).parent().parent().parent().parent().parent().attr('x');
+                var y = $(obj).parent().parent().parent().parent().parent().attr('y');
+                var order = $(obj).parent().parent().parent().parent().parent().attr('order');
+                var id = $(obj).attr('id');
+		window.open('/version/station/updateContent/mid/'+mid+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/order/'+order+'/id/'+id+'/nid/'+nid);
+            }else if($(obj).parent().is('li')){
+                var width = $(obj).parent().parent('div').attr('size-w');
+                var height = $(obj).parent().parent('div').attr('size-h');
+                var x = $(obj).parent().parent('div').attr('x');
+                var y = $(obj).parent().parent('div').attr('y');
+                var order = $(obj).parent().parent('div').attr('order');
+                var id = $(obj).attr('id');
+                window.open('/version/station/updateContent/mid/'+mid+'/width/'+width+'/height/'+height+'/x/'+x+'/y/'+y+'/order/'+order+'/id/'+id+'/nid/'+nid);
+            }
+
+        }
+>>>>>>> 598d9642259e7d4fcc799923d3f752f971efe128
 //显示内容
         function showData()
         {   
@@ -1737,6 +2654,7 @@ function add(obj)
                     slider = $(str).bxSlider();
                     slider.startAuto();
                 }
+<<<<<<< HEAD
             }
             $('.bx-controls').hide();
         }
@@ -1799,3 +2717,13 @@ function add(obj)
     });
 </script>
 >>>>>>> 7e1584426825d6020e882eabeb3db96d000211ec
+=======
+            }
+            $('.bx-controls').hide();
+        }
+
+        showData();
+    </script>
+
+
+>>>>>>> 598d9642259e7d4fcc799923d3f752f971efe128
