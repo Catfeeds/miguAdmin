@@ -1344,40 +1344,39 @@ class HTML
     public static function getTemplate($templateId)
     {
 	 	if($templateId <= 11){
-        $html = "<style>
-    .m-1{ position:relative; background:#666666;   width:125px;  height:52.5px;  border:1px solid #ccc;  border-radius: 8px;  margin-bottom: 10px;  float:left;  }
-    .m-1-2{  position:relative;background:#666666;  width:125px;  height:115px;  margin-bottom: 20px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
-    .m-1-3{  position:relative;background:#666666;  width:128px;  height:182.5px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
-    .m-2-3{  position:relative;background:#666666;  width:280px;  height:182.5px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
-    .m-2-6{  position:relative;background:#666666;  width:280px;  height:390px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
-    .m-2-4{  position:relative;background:#666666;  width:280px;  height:250px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
-    .m-3-4{  position:relative;background:#666666;  width:420px;  height:250px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
-    .m-2-2{  position:relative;background:#666666;  width:280px;  height:115px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
-    .m-4-4{  position:relative; width:580px;  height:250px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
-    .parent-1{ position:relative; width:125px;  height:390px;  float:left;  margin-right: 20px;  }
-    .parent-1-2{ position:relative; width:280px;  height:390px;  float:left;  margin-right: 20px;  }
-    .parent-1-3{ position:relative; width:420px;  height:390px;  float:left;  margin-right: 20px;  }
-    .parent-1-4{ position:relative; width:580px;  height:390px;  float:left;  margin-right: 20px;  }
-    .fill-1-3{  width:19px;  height:182.5px;  float: left;  }
-    .fill-1-2{  width:19px;  height:115.5px;  float: left;  }
-    .fill-1-4{  width:280px;  height:20px;  float:left  }
-    .fill-1-5{  width:580px;  height:20px;  float:left;  }
-    .fill-1-6{  width:15px;  height:115.5px;  float: left;  }
-    .clickImg-1-1{  width:125px;  height:52.5px;  border:1px solid #ccc;  text-align: center;  }
-    .clickImg-1-2{  width:125px;  height:115px;  text-align: center;  }
-    .clickImg-1-3{  width:128px;  height:182.5px;  text-align: center;  }
-    .clickImg-2-3{  width:280px;  height:182.5px;  text-align: center;  }
-    .clickImg-2-6{  width:280px;  height:390px;  text-align: center;  }
-    .clickImg-2-4{  width:280px;  height:250px;  text-align: center;  }
-    .clickImg-3-4{  width:420px;  height:250px;  text-align: center;  }
-    .clickImg-2-2{  width:280px;  height:115px;  text-align: center;  }
-    .clickImg-4-4{  width:580px;  height:250px;  text-align: center;  }
-    .half-1{   width:60px;height:52px;border:1px solid #ccc;border-radius: 8px;float:left;margin-top:3px;}
-    .clickImg-half-1{  width:60px;height:52px;text-align: center;}
-    .m-1-1{background:#666666; position:relative; width:125px; height:52.5px; border:1px solid #ccc; border-radius:8px; float:left;}  	
-                </style>" ;
-
-    switch($templateId)
+            $html = "<style>
+        .m-1{ position:relative; background:#666666;   width:125px;  height:52.5px;  border:1px solid #ccc;  border-radius: 8px;  margin-bottom: 10px;  float:left;  }
+        .m-1-2{  position:relative;background:#666666;  width:125px;  height:115px;  margin-bottom: 20px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
+        .m-1-3{  position:relative;background:#666666;  width:128px;  height:182.5px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
+        .m-2-3{  position:relative;background:#666666;  width:280px;  height:182.5px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
+        .m-2-6{  position:relative;background:#666666;  width:280px;  height:390px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
+        .m-2-4{  position:relative;background:#666666;  width:280px;  height:250px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
+        .m-3-4{  position:relative;background:#666666;  width:420px;  height:250px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
+        .m-2-2{  position:relative;background:#666666;  width:280px;  height:115px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
+        .m-4-4{  position:relative; width:580px;  height:250px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
+        .parent-1{ position:relative; width:125px;  height:390px;  float:left;  margin-right: 20px;  }
+        .parent-1-2{ position:relative; width:280px;  height:390px;  float:left;  margin-right: 20px;  }
+        .parent-1-3{ position:relative; width:420px;  height:390px;  float:left;  margin-right: 20px;  }
+        .parent-1-4{ position:relative; width:580px;  height:390px;  float:left;  margin-right: 20px;  }
+        .fill-1-3{  width:19px;  height:182.5px;  float: left;  }
+        .fill-1-2{  width:19px;  height:115.5px;  float: left;  }
+        .fill-1-4{  width:280px;  height:20px;  float:left  }
+        .fill-1-5{  width:580px;  height:20px;  float:left;  }
+        .fill-1-6{  width:15px;  height:115.5px;  float: left;  }
+        .clickImg-1-1{  width:125px;  height:52.5px;  border:1px solid #ccc;  text-align: center;  }
+        .clickImg-1-2{  width:125px;  height:115px;  text-align: center;  }
+        .clickImg-1-3{  width:128px;  height:182.5px;  text-align: center;  }
+        .clickImg-2-3{  width:280px;  height:182.5px;  text-align: center;  }
+        .clickImg-2-6{  width:280px;  height:390px;  text-align: center;  }
+        .clickImg-2-4{  width:280px;  height:250px;  text-align: center;  }
+        .clickImg-3-4{  width:420px;  height:250px;  text-align: center;  }
+        .clickImg-2-2{  width:280px;  height:115px;  text-align: center;  }
+        .clickImg-4-4{  width:580px;  height:250px;  text-align: center;  }
+        .half-1{   width:60px;height:52px;border:1px solid #ccc;border-radius: 8px;float:left;margin-top:3px;}
+        .clickImg-half-1{  width:60px;height:52px;text-align: center;}
+        .m-1-1{background:#666666; position:relative; width:125px; height:52.5px; border:1px solid #ccc; border-radius:8px; float:left;}  	
+                    </style>" ;
+            switch($templateId)
     {
         case 1 :
             $html .= '<div class="templateParent" style="height: 450px;width:2280px;overflow-y: scroll;overflow-x: scroll;float: left;">
@@ -2255,43 +2254,39 @@ class HTML
             ';
             break;
     }
-}else{
-	$html = "";
-	$id = $templateId - 11;
-	$sql = "select t1.colw,t1.roww,t1.cellspacing,t1.cols as allw,t1.rows as allh,t2.*  from yd_ver_template t1 left join yd_ver_template_detail t2 on t1.id = t2.tem_id where t1.id = $id";
-	$res = SQLManager::queryAll($sql);
-	
-	$width = ($res[0]['allw']*$res[0]['colw'] + ($res[0]['allw']-1)*$res[0]['cellspacing'])/2 + 50;
-	$height = ($res[0]['allh']*$res[0]['roww'] + ($res[0]['allh']-1)*$res[0]['cellspacing'])/2 + 50;
+        }else{
+            $html = "";
+            $id = $templateId - 11;
+            $sql = "select t1.colw,t1.roww,t1.cellspacing,t1.cols as allw,t1.rows as allh,t2.*  from yd_ver_template t1 left join yd_ver_template_detail t2 on t1.id = t2.tem_id where t1.id = $id";
+            $res = SQLManager::queryAll($sql);
 
-	$html = '<div class="templateParent" style="position:relative;height: '.$height.'px;width:'.$width.'px;overflow-y: scroll;overflow-x: scroll;float: left;"><div>';
-	if(!empty($res)){
-	foreach ($res as $key => $value) {
-		$order = $value['id'] + 147;
-		$width1 = $value['width']/2;
-		$height1 = $value['height']/2;
-		//$position_x=preg_match("/\d+/",$value['x'],$match);
-		//var_dump($match);die;
-		$x = $value['x']/2;
-		$y = $value['y']/2;
-		/*$html .= '<div class="order-'.$order.'" style="border:1px solid #ccc;  border-radius: 8px;position:absolute;top:'.$y.'px;left:'.$x.'px;margin-left:5px;margin-top:5px;background:#ccc;width:'.$width1.'px;height:'.$height1.'px;" size-w="'.$value['colw'].'" size-h="'.$value['roww'].'" x="'.$value['x'].'" y="'.$value['y'].'" order="'.$order.'">
-                    <img class="clickImg-'.$value['colw'].'-'.$value['roww'].'" style="width:'.$width1.'px;height:'.$height1.'px;" src="/file/3.png" style="position:relative;z-index:9999" alt="" onclick="add(this)"/>
-                    <img style="position:absolute;top:50%;left:50%;margin-left:-15px;margin-top:-15px;width:30px;height:30px;border-radius:10px;" class="plus_button" src="/file/u1892.png">
-                </div>';*/
-		 $html .= '<div class="order-'.$order.'" style="border:1px solid #ccc;  border-radius: 8px;position:absolute;top:'.$y.'px;left:'.$x.'px;margin-left:5px;
-margin-top:5px;background:#ccc;width:'.$width1.'px;height:'.$height1.'px;" size-w="'.$value['width'].'" size-h="'.$value['height'].'" x="'.$value['x'].'" y="'.$value['y'].'" order="'.$order.'">
-                    <img class="clickImg-'.$value['width'].'-'.$value['height'].'" style="width:'.$width1.'px;height:'.$height1.'px;" src="/file/3.png" style="position
-:relative;z-index:9999" alt="" onclick="add(this)"/>
-                    <img style="position:absolute;top:50%;left:50%;margin-left:-15px;margin-top:-15px;width:30px;height:30px;border-radius:10px;" class="plus_button" 
-src="/file/u1892.png">
-                </div>';
-	}
-	$html .= "</div></div>";
-	}
-}
+            $width = ($res[0]['allw']*$res[0]['colw'] + ($res[0]['allw']-1)*$res[0]['cellspacing'])/2 + 50;
+            $height = ($res[0]['allh']*$res[0]['roww'] + ($res[0]['allh']-1)*$res[0]['cellspacing'])/2 + 50;
 
+            $html = '<div class="templateParent" style="position:relative;height: '.$height.'px;width:'.$width.'px;overflow-y: scroll;overflow-x: scroll;float: left;"><div>';
+            if(!empty($res)){
+                foreach ($res as $key => $value) {
+                    $order = $value['id'] + 147;
+                    $width1 = $value['width']/2;
+                    $height1 = $value['height']/2;
+                    //$position_x=preg_match("/\d+/",$value['x'],$match);
+                    //var_dump($match);die;
+                    $x = intval($value['x'])/2;
+                    $y = intval($value['y'])/2;
+                    /*$html .= '<div class="order-'.$order.'" style="border:1px solid #ccc;  border-radius: 8px;position:absolute;top:'.$y.'px;left:'.$x.'px;margin-left:5px;margin-top:5px;background:#ccc;width:'.$width1.'px;height:'.$height1.'px;" size-w="'.$value['colw'].'" size-h="'.$value['roww'].'" x="'.$value['x'].'" y="'.$value['y'].'" order="'.$order.'">
+                                <img class="clickImg-'.$value['colw'].'-'.$value['roww'].'" style="width:'.$width1.'px;height:'.$height1.'px;" src="/file/3.png" style="position:relative;z-index:9999" alt="" onclick="add(this)"/>
+                                <img style="position:absolute;top:50%;left:50%;margin-left:-15px;margin-top:-15px;width:30px;height:30px;border-radius:10px;" class="plus_button" src="/file/u1892.png">
+                            </div>';*/
+                     $html .= '<div class="order-'.$order.'" style="border:1px solid #ccc;  border-radius: 8px;position:absolute;top:'.$y.'px;left:'.$x.'px;margin-left:5px;margin-top:5px;background:#ccc;width:'.$width1.'px;height:'.$height1.'px;" size-w="'.$value['width'].'" size-h="'.$value['height'].'" x="'.$value['x'].'" y="'.$value['y'].'" order="'.$order.'">
+                                <img class="clickImg-'.$value['width'].'-'.$value['height'].'" style="width:'.$width1.'px;height:'.$height1.'px;" src="/file/3.png" style="position:relative;z-index:9999" alt="" onclick="add(this)"/>
+                                <img style="position:absolute;top:50%;left:50%;margin-left:-15px;margin-top:-15px;width:30px;height:30px;border-radius:10px;" class="plus_button" 
+            src="/file/u1892.png">
+                            </div>';
+                }
+                $html .= "</div></div>";
+	        }
+        }
         return $html;
-
     }
 
 //河南
