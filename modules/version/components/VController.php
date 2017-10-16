@@ -86,15 +86,39 @@ class VController extends Controller{
         $sql = "select w.stationId from yd_ver_work w inner join yd_ver_worker k on k.workid=w.id and k.uid=$uid and w.flag=2";
 		}
 	    $user = SQLManager::queryAll($sql);
-	
+
         if(!empty($user)){
-            $list = VerGuideManager::String($user);
+            if($flag == 6){
+                $tmp_list = array();
+                foreach ($user as $k=>$v){
+                    $tmp = VerStation::model()->findByPk($v['stationId']);
+                    $tmp_list[] = $this->getStationList($tmp->attributes['name']);
+                }
+                var_dump($tmp_list);die;
+                /*foreach ($tmp_list as $k=>$v){
+                    $a[] = $v['']
+                }*/
+                $list = explode(',',$tmp_list['id']);
+            }else{
+                $list = VerGuideManager::String($user);
+            }
+
 			
             return VerSitelist::model()->findAll("id in ($list)");
         }else{
             $list= array();
             return $list;
         }
+    }
+
+    public function getStationList($name){
+        $sql = "select id from yd_ver_sitelist where name='$name'";
+        $list = SQLManager::queryRow($sql);
+        $sql_list = "select id from yd_ver_sitelist where pid='{$list['id']}' and name='栏目'";
+        $tmp = SQLManager::queryRow($sql_list);
+        $sqls = "select id from yd_ver_sitelist where pid='{$tmp['id']}'";
+        $res = SQLManager::queryAll($sqls);
+        return $res;
     }
 
 

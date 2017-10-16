@@ -707,22 +707,7 @@ if($_SESSION['auth']=='1'){
 <script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
     <script>
 
-    var mid = <?php echo $this->mid;?>;
-    function getauth(sitelist_id)
-    {
-        var auth = '';
-        $.ajax
-        ({
-            type:'get',
-            async:false,
-            url:'/version/screen/mid/'+mid+'/sitelist_id/'+sitelist_id,
-            success:function(data)
-            {
-                auth = JSON.parse(data);
-            }
-        });
-        return auth;
-    }
+
 
     $('.t1').click(function(){
     	var topid = "<?php echo !empty($_GET['topid'])?$_GET['topid']:""; ?>"
@@ -1097,9 +1082,9 @@ if($_SESSION['auth']=='1'){
 
 //            var sitelist_id = $(this).attr('gid');
             var gid = $(this).attr('gid');
-            var auth = getauth(gid);
-//        	if(<?php //echo $estatus ?>//){
-        	if( parseInt(auth.estatus)){
+
+        	if(<?php echo $estatus ?>){
+//        	if( parseInt(auth.estatus)){
         		layer.alert("权限不足 无法操作！");return false;
         	}  
 
