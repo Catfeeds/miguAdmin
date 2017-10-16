@@ -1665,6 +1665,39 @@ $list = SQLManager::execute($sql);
         }
         echo json_encode($newArr);
     }
+
+    public function actionCheckTopicAuth()
+    {
+        $sitelist_id = !empty($_GET['sitelist_id'])?$_GET['sitelist_id']:"0";
+
+        $sql = "SELECT t1.type,	t1.workid,t1.uid FROM yd_ver_worker t1 JOIN yd_ver_work t2 ON t1.workid = t2.id and t2.stationId = '$stationid' and t2.flag = 6 WHERE t1.uid = '{$_SESSION['userid']}'";
+        $res['status'][] = 1;
+        $res['status'][] = 2;
+        $ss = SQLManager::queryAll($sql);
+        $estatus = 1;
+        $submit = 1;
+        $show = 1;
+        foreach ($ss as $key => $value) {
+            if($value['type'] == 1  ){
+                $estatus =0;
+            }else if($value['type']  == 2 ){
+                $submit =0;
+            }else if($value['type']  == 3 ){
+                //    $show =0;
+            }
+        }
+
+        if($_SESSION['auth']=='1'){
+            $estatus = 0;
+            $submit = 0;
+        }
+
+        $auth = array();
+        $auth['estatus'] = $estatus;
+        $auth['submit'] = $submit;
+        $auth['show'] = $show;
+        echo json_encode($auth);
+    }
 }
 
 
