@@ -93,7 +93,7 @@ class VController extends Controller{
 //                var_dump($user);die;
                 foreach ($user as $k=>$v){
                     $tmp = VerStation::model()->findByPk($v['stationId']);
-                    var_dump($tmp);die;
+                    var_dump($tmp->attributes['name']);die;
                     $tmp_list[] = $this->getStationList($tmp->attributes['name']);
                 }
                 var_dump($tmp_list);die;
