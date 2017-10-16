@@ -90,6 +90,7 @@ class VController extends Controller{
         if(!empty($user)){
             if($flag == 6){
                 $tmp_list = array();
+                var_dump($user);die;
                 foreach ($user as $k=>$v){
                     $tmp = VerStation::model()->findByPk($v['stationId']);
                     $tmp_list[] = $this->getStationList($tmp->attributes['name']);
