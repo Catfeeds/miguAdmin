@@ -1669,7 +1669,30 @@ $list = SQLManager::execute($sql);
     public function actionCheckTopicAuth()
     {
         $sitelist_id = !empty($_GET['sitelist_id'])?$_GET['sitelist_id']:"0";
+        $a = VerSitelist::model()->find(
+            array(
+                'select'=>'id,pid,name,type',
+                'condition'=>'id=:id',
+                'params'=>array(':id'=>$sitelist_id),
+            )
+        );
 
+        for($i = 0 ;$i<3;$i++){
+            if($a->attributes['pid'] != '0' && $a->attributes['type'] != '0'){
+                $a = VerSitelist::model()->find(
+                    array(
+                        'select'=>'id,pid,name,type',
+                        'condition'=>'pid=:pid',
+                        'params'=>array(':pid'=>$a->attributes['pid']),
+                    )
+                );
+            }else{
+                break;
+            }
+        }
+
+        $station_name = $a->attributes['name'];
+        $stationid = VerStation::model()->find("name='$station_name'");
         $sql = "SELECT t1.type,	t1.workid,t1.uid FROM yd_ver_worker t1 JOIN yd_ver_work t2 ON t1.workid = t2.id and t2.stationId = '$stationid' and t2.flag = 6 WHERE t1.uid = '{$_SESSION['userid']}'";
         $res['status'][] = 1;
         $res['status'][] = 2;
