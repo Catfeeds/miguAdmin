@@ -2257,8 +2257,8 @@ class HTML
         }else{
             $html = "";
 //            var_dump($templateId);die;
-            $id = $templateId;
-            //$id = $templateId - 11;
+//            $id = $templateId;
+            $id = intval($templateId) - 11;
             $sql = "select t1.colw,t1.roww,t1.cellspacing,t1.cols as allw,t1.rows as allh,t2.*  from yd_ver_template t1 left join yd_ver_template_detail t2 on t1.id = t2.tem_id where t1.id = $id";
             $res = SQLManager::queryAll($sql);
 
