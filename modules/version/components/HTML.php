@@ -2274,8 +2274,8 @@ class HTML
                     $height1 = $value['height']/2;
                     //$position_x=preg_match("/\d+/",$value['x'],$match);
                     //var_dump($match);die;
-                    $x = intval($value['x'])/2;
-                    $y = intval($value['y'])/2;
+                    $x = $value['x']/2;
+                    $y = $value['y']/2;
                     /*$html .= '<div class="order-'.$order.'" style="border:1px solid #ccc;  border-radius: 8px;position:absolute;top:'.$y.'px;left:'.$x.'px;margin-left:5px;margin-top:5px;background:#ccc;width:'.$width1.'px;height:'.$height1.'px;" size-w="'.$value['colw'].'" size-h="'.$value['roww'].'" x="'.$value['x'].'" y="'.$value['y'].'" order="'.$order.'">
                                 <img class="clickImg-'.$value['colw'].'-'.$value['roww'].'" style="width:'.$width1.'px;height:'.$height1.'px;" src="/file/3.png" style="position:relative;z-index:9999" alt="" onclick="add(this)"/>
                                 <img style="position:absolute;top:50%;left:50%;margin-left:-15px;margin-top:-15px;width:30px;height:30px;border-radius:10px;" class="plus_button" src="/file/u1892.png">
