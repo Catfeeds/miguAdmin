@@ -1677,8 +1677,8 @@ $list = SQLManager::execute($sql);
             )
         );
 
-        for($i = 0 ;$i<3;$i++){
-            if($a->attributes['pid'] != '0' && $a->attributes['type'] != '0'){
+        for($i = 0 ;$i<4;$i++){
+            if($a->attributes['pid'] != '0'){
                 $a = VerSitelist::model()->find(
                     array(
                         'select'=>'id,pid,name,type',
