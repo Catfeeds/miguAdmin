@@ -372,13 +372,14 @@ if($_SESSION['auth']=='1'){
         //        $nav = $this->getVersitelist();
         if($_SESSION['auth']=='1'){
             $nav = $this->getVersitelist();
+            var_dump($nav);die;
         }else{
             $uid = $_SESSION['userid'];
 	
             $nav = $this->getSitelist($uid,6);
         }
 	
-        $admin = $this->getMvAdmin();
+//        $admin = $this->getMvAdmin();
         $admin = $this->getMvAdmin();
         $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
         $adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
