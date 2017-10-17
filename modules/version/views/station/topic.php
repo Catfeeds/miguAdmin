@@ -1163,16 +1163,15 @@ if (!empty($html)) {
         $('.modules a').click(function(){
             var gid = '<?php echo !empty($_REQUEST['nid']) ? $_REQUEST['nid'] :''?>';
             var auth = getauth(gid);
-        if(parseInt(auth.estatus)){
-            layer.alert("权限不足 无法操作！");return false;
-        	}var x = getstatus()
-        		   if(x == 500){
-
-                       layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300)
-        	{
+            console.log(auth);
+            if(parseInt(auth.estatus)){
+                layer.alert("权限不足 无法操作！");return false;
+        	}
+        	var x = getstatus();
+            if(x == 500){
+                layer.alert("审核中！请勿编辑");return false;
+        	}else if(x == 300){
                 layer.alert("请发布数据之后再进行编辑");return false;
-        		
         	}  
             var auth = "<?php echo $_SESSION['auth']?>";
             var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
