@@ -9,32 +9,57 @@ if (!empty($html)) {
 }
 
 $stationid = !empty($_GET['topid'])?$_GET['topid']:"";
-$sql = "SELECT
-	t1.type,
-	t1.workid,
-	t1.uid
-FROM
-	yd_ver_worker t1
- JOIN yd_ver_work t2 ON t1.workid = t2.id and t2.stationId = '$stationid' and t2.flag = 6
-WHERE
-	t1.uid = '{$_SESSION['userid']}'";
+$a = VerSitelist::model()->find(
+    array(
+        'select'=>'id,pid,name,type',
+        'condition'=>'id=:id',
+        'params'=>array(':id'=>$sitelist_id),
+    )
+);
+$station_name = $a->attributes['name'];
+if($a->attributes['pid'] != 0 ){
+    $b = VerSitelist::model()->find(
+        array(
+            'select'=>'id,pid,name,type',
+            'condition'=>'id=:id',
+            'params'=>array(':id'=>$a->attributes['pid']),
+        )
+    );
+    $station_name = $b->attributes['name'];
+    if($b->attributes['pid'] != 0 ){
+        $c = VerSitelist::model()->find(
+            array(
+                'select'=>'id,pid,name,type',
+                'condition'=>'id=:id',
+                'params'=>array(':id'=>$b->attributes['pid']),
+            )
+        );
+        $station_name = $c->attributes['name'];
+    }
+}
 
+$stationid = VerStation::model()->find("name='$station_name'");
+$stationid = $stationid->attributes['id'];
+$sql = "SELECT t1.type,	t1.workid,t1.uid FROM yd_ver_worker t1 JOIN yd_ver_work t2 ON t1.workid = t2.id and t2.stationId = '$stationid' and t2.flag = 6 WHERE t1.uid = '{$_SESSION['userid']}'";
+$res['status'][] = 1;
+$res['status'][] = 2;
 $ss = SQLManager::queryAll($sql);
-
 $estatus = 1;
 $submit = 1;
+$show = 1;
 foreach ($ss as $key => $value) {
-	if($value['type'] == 1){
-		$estatus = 0;
-	}
-	if($value['type'] == 2) {
-		$submit = 0;
-	}
+    if($value['type'] == 1  ){
+        $estatus =0;
+    }else if($value['type']  == 2 ){
+        $submit =0;
+    }else if($value['type']  == 3 ){
+        //    $show =0;
+    }
 }
 
 if($_SESSION['auth']=='1'){
-	$estatus = 0;
-	$submit = 0;
+    $estatus = 0;
+    $submit = 0;
 }
 ?>
 
@@ -1056,7 +1081,7 @@ if($_SESSION['auth']=='1'){
         $('.addyiji').click(function(){
             var gid = $(this).attr('gid');
             var auth = getauth(gid);
-            alert(parseInt(auth.estatus));return false;
+//            alert(parseInt(auth.estatus));return false;
         	if(parseInt(auth.estatus)){
         		layer.alert("权限不足 无法操作！");return false;
         	}
