@@ -90,7 +90,7 @@ class VController extends Controller{
         if(!empty($user)){
             if($flag == 6){
                 $tmp_list = array();
-                var_dump($user);die;
+//                var_dump($user);die;
                 foreach ($user as $k=>$v){
                     $tmp = VerStation::model()->findByPk($v['stationId']);
 //                    var_dump($tmp->attributes['name']);die;
@@ -101,7 +101,7 @@ class VController extends Controller{
                     $a[] = $v['']
                 }*/
 //                $list = explode(',',$tmp_list['id']);
-                $list = VerGuideManager::String($user);
+                $list = VerGuideManager::String($tmp_list);
             }else{
                 $list = VerGuideManager::String($user);
             }
@@ -117,7 +117,7 @@ class VController extends Controller{
     public function getStationList($name){
         $sql = "select id from yd_ver_sitelist where name='$name'";
         $list = SQLManager::queryRow($sql);
-        $sql_list = "select id from yd_ver_sitelist where pid='{$list['id']}' and name='栏目'";
+        $sql_list = "select id from yd_ver_sitelist where pid='{$list['id']}'";
         $tmp = SQLManager::queryRow($sql_list);
         $sqls = "select id from yd_ver_sitelist where pid='{$tmp['id']}'";
         $res = SQLManager::queryAll($sqls);
