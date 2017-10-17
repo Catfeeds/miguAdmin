@@ -97,10 +97,11 @@ class VController extends Controller{
                     $tmp_list[] = $this->getStationList($name);
 //                    var_dump($tmp_list);die;
                 }
-                var_dump($tmp_list);die;
-                /*foreach ($tmp_list as $k=>$v){
-                    $a[] = $v['']
-                }*/
+//                var_dump($tmp_list);die;
+                foreach ($tmp_list as $k=>$v){
+                    $a[] = $v['id'];
+                }
+                var_dump($a);die;
                 $list = explode(',',$tmp_list['id']);
 //                $list = VerGuideManager::String($tmp_list);
             }else{
