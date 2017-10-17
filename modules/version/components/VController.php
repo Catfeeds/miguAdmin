@@ -99,10 +99,12 @@ class VController extends Controller{
                 }
 //                var_dump($tmp_list);die;
                 foreach ($tmp_list as $k=>$v){
-                    var_dump($v);die;
+                    foreach ($v as $val){
+                        $a[] = $val['id'];
+                    }
 //                    $a[] = $v[$k]['id'];
                 }
-//                var_dump($a);die;
+                var_dump($a);die;
                 $list = explode(',',$tmp_list['id']);
 //                $list = VerGuideManager::String($tmp_list);
             }else{
