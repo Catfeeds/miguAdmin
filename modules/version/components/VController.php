@@ -132,8 +132,8 @@ class VController extends Controller{
         foreach ($tmp as $k=>$v){
             $ids[] = $v['id'];
         }
-
         $tmp_ids = implode(',',$ids);
+        var_dump($tmp_ids);die;
         $sql_list = "select id from yd_ver_sitelist where pid in '($tmp_ids)' and type=2";
         $tmp = SQLManager::queryAll($sql_list);
         foreach ($tmp as $k=>$v){
