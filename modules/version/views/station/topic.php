@@ -1111,34 +1111,35 @@ if (!empty($html)) {
             })
         })
         $('.edit').click(function(){
-		   var id = $(this).attr('des');
-		   var auth = getauth(id);
-		   console.log(auth);
-        if(parseInt(auth.estatus)){
-            layer.alert("权限不足 无法操作！");return false;
-                }
-                 var x;
-                 $.ajax
-        ({
-            type:'get',
-            async: false,
-            url:"/version/station/getReviewStatus?mid=<?php echo $_GET['mid']; ?>&nid=" + id,
-            success:function(data)
-            {
-                x = data;
+		    var id = $(this).attr('des');
+		    var auth = getauth(id);
+		    console.log(auth);
+            if(parseInt(auth.estatus)){
+                layer.alert("权限不足 无法操作！");return false;
             }
-        })
+            var x;
+            $.ajax
+            ({
+                type:'get',
+                async: false,
+                url:"/version/station/getReviewStatus?mid=<?php echo $_GET['mid']; ?>&nid=" + id,
+                success:function(data)
+                {
+                    x = data;
+                }
+            })
 
-        	   if(x == 500){
+        	if(x == 500){
 
                    layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300)
-        	{
+        	}else if(x == 300) {
                 layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
             var auth = "<?php echo $_SESSION['auth']?>";
             var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
+            console.log(auth);
+            console.log(flag);
             if(auth=='1' || flag=='1'){
 
             }else{
