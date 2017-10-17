@@ -8,62 +8,7 @@ if (!empty($html)) {
         $html = str_replace("131px", "95px", $html);
 }
 
-$sitelist_id = !empty($_GET['topid'])?$_GET['topid']:"";
-if(!empty($sitelist_id)) {
 
-
-    $a = VerSitelist::model()->find(
-        array(
-            'select' => 'id,pid,name,type',
-            'condition' => 'id=:id',
-            'params' => array(':id' => $sitelist_id),
-        )
-    );
-    $station_name = $a->attributes['name'];
-    if ($a->attributes['pid'] != 0) {
-        $b = VerSitelist::model()->find(
-            array(
-                'select' => 'id,pid,name,type',
-                'condition' => 'id=:id',
-                'params' => array(':id' => $a->attributes['pid']),
-            )
-        );
-        $station_name = $b->attributes['name'];
-        if ($b->attributes['pid'] != 0) {
-            $c = VerSitelist::model()->find(
-                array(
-                    'select' => 'id,pid,name,type',
-                    'condition' => 'id=:id',
-                    'params' => array(':id' => $b->attributes['pid']),
-                )
-            );
-            $station_name = $c->attributes['name'];
-        }
-    }
-
-    $stationid = VerStation::model()->find("name='$station_name'");
-    $stationid = $stationid->attributes['id'];
-    $sql = "SELECT t1.type,	t1.workid,t1.uid FROM yd_ver_worker t1 JOIN yd_ver_work t2 ON t1.workid = t2.id and t2.stationId = '$stationid' and t2.flag = 6 WHERE t1.uid = '{$_SESSION['userid']}'";
-    $res['status'][] = 1;
-    $res['status'][] = 2;
-    $ss = SQLManager::queryAll($sql);
-    $estatus = 1;
-    $submit = 1;
-    $show = 1;
-    foreach ($ss as $key => $value) {
-        if ($value['type'] == 1) {
-            $estatus = 0;
-        } else if ($value['type'] == 2) {
-            $submit = 0;
-        } else if ($value['type'] == 3) {
-            //    $show =0;
-        }
-    }
-}
-if($_SESSION['auth']=='1'){
-    $estatus = 0;
-    $submit = 0;
-}
 ?>
 
 <style>
@@ -736,16 +681,20 @@ if($_SESSION['auth']=='1'){
  	
  	
  	 if($('.review').val() == '提交审核'){
- 	if(<?php echo $estatus ?>){
-                        alert("权限不足 无法操作！");return false;
+         var id = <?php echo $_GET['nid']; ?>;
+         var auth = getauth(id);
+ 	if(parseInt(auth.estatus)){
+                        layer.alert("权限不足 无法操作！");return false;
                 }
 	 	$.post('/version/station/doReview?mid=<?php echo $_GET['mid']; ?>&nid=<?php echo $_GET['nid']; ?>',function(d){
 //            console.log(d);return false;
         window.location.reload()
         },'json')
  	 }else if($('.review').val() == '发布'){
-		if(<?php echo $submit?>){
-                        alert("权限不足 无法操作！");return false;
+         var id = <?php echo $_GET['nid']; ?>;
+         var auth = getauth(id);
+		if(parseInt(auth.submit)){
+                        layer.alert("权限不足 无法操作！");return false;
                 }
  	 	$.post('/version/station/doSubmit?mid=<?php echo $_GET['mid']; ?>&nid=<?php echo $_GET['nid']; ?>',function(d){
 //            console.log(d);return false;
@@ -786,12 +735,13 @@ if($_SESSION['auth']=='1'){
         })
 		return d;
 
-     }   
-     
-     
+     }
 
 
-        if(<?php echo $estatus ?>){
+
+        var id = <?php echo !empty($_GET['nid'])?$_GET['nid']:'0'; ?>;
+        var auth = getauth(id);
+        if(parseInt(auth.estatus)){
         		$('.topicBgEdit').css('display','none');
         	}
         	
@@ -1062,11 +1012,13 @@ if($_SESSION['auth']=='1'){
          }*/
 
         $('.adderji').click(function(){
-        	if(<?php echo $estatus ?>){
+            var gid = $(this).attr('gid');
+            var auth = getauth(gid);
+        	if(parseInt(auth.estatus)){
         		layer.alert("权限不足 无法操作！");return false;
         	}
           
-            var gid = $(this).attr('gid');
+
             $.getJSON('<?php echo $this->get_url('station','topadd')?>', {gid: gid}, function (d) {
                 if (d.code == 200) {
                     layer.open({
@@ -1207,7 +1159,9 @@ if($_SESSION['auth']=='1'){
         })
 
         $('.modules a').click(function(){
-        if(<?php echo $estatus ?>){
+            var gid = '<?php echo !empty($_REQUEST['nid']) ? $_REQUEST['nid'] :''?>';
+            var auth = getauth(gid);
+        if(parseInt(auth.estatus)){
             layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         		   if(x == 500){
@@ -1258,7 +1212,9 @@ if($_SESSION['auth']=='1'){
         });
 
         $('.del').click(function(){
-        	if(<?php echo $estatus ?>){
+            var id = $(this).attr('dss');
+            var auth = getauth(id);
+        	if(parseInt(auth.estatus)){
                 layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         		   if(x == 500){
@@ -1284,7 +1240,9 @@ if($_SESSION['auth']=='1'){
         })
 
         $('.guide').click(function(){
-        	if(<?php echo $estatus ?>){
+            var id = $(this).attr('gid');
+            var auth = getauth(id);
+            if(parseInt(auth.estatus)){
                 layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         	   if(x == 500){
@@ -1318,7 +1276,9 @@ if($_SESSION['auth']=='1'){
         })
 
         $('.add_topic').click(function(){
-        	if(<?php echo $estatus ?>){
+            var id = "<?php echo $_REQUEST['nid'];?>";
+            var auth = getauth(id);
+        	if(parseInt(auth.estatus)){
                 layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         		   if(x == 500){
@@ -1389,7 +1349,10 @@ if($_SESSION['auth']=='1'){
 
         function addTop(obj)
         {
-        	if(<?php echo $estatus ?>){
+            var gid = "<?php echo $_GET['nid']?>";
+
+            var auth = getauth(gid);
+            if(parseInt(auth.estatus)){
                 layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         	
@@ -1471,7 +1434,9 @@ if($_SESSION['auth']=='1'){
 
         function editTop(obj)
         {
-                        if(<?php echo $estatus ?>){
+            var id = $(obj).attr('uiId');
+            var auth = getauth(id);
+            if(parseInt(auth.estatus)){
                             layer.alert("权限不足 无法操作！");return false;
                 } var x = getstatus()
            if(x == 500){
@@ -1537,7 +1502,9 @@ if($_SESSION['auth']=='1'){
             }
         }
 		function onsub(){
-			if(<?php echo $estatus ?>){
+            var id = <?php echo $_REQUEST['nid'];?>
+            var auth = getauth(id);
+			if(parseInt(auth.estatus)){
                 layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         		   if(x == 500){
@@ -1551,7 +1518,9 @@ if($_SESSION['auth']=='1'){
 		}
         function delTop(obj)
         {
-        	if(<?php echo $estatus ?>){
+            var id = $(obj).attr('uiId');
+            var auth = getauth(id);
+            if(parseInt(auth.estatus)){
                 layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()
         	   if(x == 500){
@@ -1593,7 +1562,9 @@ if($_SESSION['auth']=='1'){
 
         function addNews(obj)
         {
-        	if(<?php echo $estatus ?>){
+            var gid = "<?php echo $_GET['nid']?>";
+            var auth = getauth(gid);
+            if(parseInt(auth.estatus)){
                 layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus() 
         	  if(x == 500){
@@ -1632,8 +1603,10 @@ if($_SESSION['auth']=='1'){
         $('a').css('text-decoration','none');
 function add(obj)
         {
-        	
-        	if(<?php echo $estatus ?>){
+
+            var gid = "<?php echo $_GET['nid']?>";
+            var auth = getauth(gid);
+            if(parseInt(auth.estatus)){
                 layer.alert("权限不足 无法操作！");return false;
         	}var x = getstatus()  
         	 if(x == 500){
