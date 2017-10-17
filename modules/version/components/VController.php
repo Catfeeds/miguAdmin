@@ -113,7 +113,7 @@ class VController extends Controller{
                 $list = VerGuideManager::String($user);
             }
 
-			
+			var_dump(VerSitelist::model()->findAll("id in ($list)"));die;
             return VerSitelist::model()->findAll("id in ($list)");
         }else{
             $list= array();
