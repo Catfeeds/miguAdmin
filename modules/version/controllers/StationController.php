@@ -575,7 +575,7 @@ $list = SQLManager::execute($sql);
             }else{
                 $result = Common::getUser($username,$flag);
             }
-
+            var_dump($result);die;
             //$result  = Common::getUser($username,$flag);
             if(!empty($_REQUEST['nid'])){
                 $gid = $_REQUEST['nid'];
