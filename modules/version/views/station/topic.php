@@ -674,7 +674,7 @@ if($_SESSION['auth']=='1'){
             ({
                 type:'get',
                 async:false,
-                url:'/version/screen/CheckTopicAuth/mid/'+mid+'/sitelist_id/'+sitelist_id,
+                url:'/version/station/CheckTopicAuth/mid/'+mid+'/sitelist_id/'+sitelist_id,
                 success:function(data)
                 {
                     auth = JSON.parse(data);
