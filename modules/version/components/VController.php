@@ -126,9 +126,9 @@ class VController extends Controller{
         $list = SQLManager::queryRow($sql);
         $sql_list = "select id from yd_ver_sitelist where pid='{$list['id']}' and name='专题'";
         $tmp = SQLManager::queryRow($sql_list);
-        $sqls = "select id from yd_ver_sitelist where pid='{$tmp['id']}'";
-        $res = SQLManager::queryAll($sqls);
-        return $res;
+//        $sqls = "select id from yd_ver_sitelist where pid='{$tmp['id']}'";
+//        $res = SQLManager::queryAll($sqls);
+        return $tmp;
     }
 
 
