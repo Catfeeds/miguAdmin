@@ -105,7 +105,7 @@ class VController extends Controller{
                     }
 //                    $a[] = $v[$k]['id'];
                 }
-//                var_dump($a);die;
+                var_dump($a);die;
                 $list = explode(',',$a);
 //                $list = VerGuideManager::String($a);
 //                var_dump($list);die;
