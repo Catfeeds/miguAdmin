@@ -693,7 +693,7 @@ $list = SQLManager::execute($sql);
          public function actionTopic1(){
         try{
             $username=$_SESSION['nickname'];
-            $flag= '2';
+            $flag= '6';
             if(!empty($_REQUEST['type'])){
                 $result = Common::getWork($_REQUEST['type'],$_REQUEST['nid']);
             }else{
@@ -807,7 +807,7 @@ $list = SQLManager::execute($sql);
  public function actionTopic2(){
         try{
             $username=$_SESSION['nickname'];
-            $flag= '2';
+            $flag= '6';
             if(!empty($_REQUEST['type'])){
                 $result = Common::getWork($_REQUEST['type'],$_REQUEST['nid']);
             }else{
