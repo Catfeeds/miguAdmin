@@ -99,7 +99,7 @@ class VController extends Controller{
                 }
 //                var_dump($tmp_list);die;
                 foreach ($tmp_list as $k=>$v){
-                    $a[] = $v['id'];
+                    $a[] = $v[$k]['id'];
                 }
                 var_dump($a);die;
                 $list = explode(',',$tmp_list['id']);
