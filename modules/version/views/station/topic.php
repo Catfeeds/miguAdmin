@@ -1137,6 +1137,7 @@ if (!empty($html)) {
         		
         	}  
             var auth = "<?php echo $_SESSION['auth']?>";
+            <?php var_dump($res);?>
             var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
             console.log(auth);
             console.log(flag);
