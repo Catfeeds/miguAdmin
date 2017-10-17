@@ -8,7 +8,7 @@ if (!empty($html)) {
         $html = str_replace("131px", "95px", $html);
 }
 
-$stationid = !empty($_GET['topid'])?$_GET['topid']:"";
+$sitelist_id = !empty($_GET['topid'])?$_GET['topid']:"";
 $a = VerSitelist::model()->find(
     array(
         'select'=>'id,pid,name,type',
