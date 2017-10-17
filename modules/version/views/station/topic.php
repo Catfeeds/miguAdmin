@@ -377,7 +377,7 @@ if($_SESSION['auth']=='1'){
             $uid = $_SESSION['userid'];
 	
             $nav = $this->getSitelist($uid,6);
-            var_dump($nav);die;
+//            var_dump($nav);die;
         }
 	
 //        $admin = $this->getMvAdmin();
