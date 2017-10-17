@@ -90,32 +90,23 @@ class VController extends Controller{
         if(!empty($user)){
             if($flag == 6){
                 $tmp_list = array();
-//                var_dump($user);die;
                 foreach ($user as $k=>$v){
                     $tmp = VerStation::model()->findByPk($v['stationId']);
                     $name = $tmp->attributes['name'];
                     $tmp_list[] = $this->getAuthSiteList($name);
-//                    var_dump($tmp_list);die;
                 }
-//                var_dump($tmp_list);die;
                 $a = array();
                 foreach ($tmp_list as $k=>$v){
                     foreach ($v as $val){
                         $a[] = $val;
                     }
-//                    $a[] = $v[$k]['id'];
                 }
-//                var_dump($a);die;
                 $list = implode(',',$a);
-//                $list = VerGuideManager::String($a);
-//                var_dump($list);die;
                 return VerSitelist::model()->findAll("id in ($list)");
             }else{
                 $list = VerGuideManager::String($user);
                 return VerSitelist::model()->findAll("id in ($list)");
             }
-
-//			var_dump(VerSitelist::model()->findAll("id in ($list)"));die;
 
         }else{
             $list= array();
