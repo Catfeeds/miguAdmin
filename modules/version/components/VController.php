@@ -94,8 +94,8 @@ class VController extends Controller{
                 foreach ($user as $k=>$v){
                     $tmp = VerStation::model()->findByPk($v['stationId']);
                     $name = $tmp->attributes['name'];
-                    $tmp_list[] = $this->getStationList($name);
-//                    var_dump($tmp_list);die;
+                    $tmp_list[] = $this->getAuthSiteList($name);
+                    var_dump($tmp_list);die;
                 }
 //                var_dump($tmp_list);die;
                 $a = array();
@@ -121,14 +121,30 @@ class VController extends Controller{
         }
     }
 
-    public function getStationList($name){
-        $sql = "select id from yd_ver_sitelist where name='$name'";
+    public function getAuthSiteList($name)
+    {
+        $sql = "select id from yd_ver_sitelist where name='$name' and pid = '0' ";
         $list = SQLManager::queryRow($sql);
-        $sql_list = "select id from yd_ver_sitelist where pid='{$list['id']}' and name='专题'";
-        $tmp = SQLManager::queryRow($sql_list);
-//        $sqls = "select id from yd_ver_sitelist where pid='{$tmp['id']}'";
-//        $res = SQLManager::queryAll($sqls);
-        return $tmp;
+        $ids[] = $list['id'];
+        $sql_list = "select id from yd_ver_sitelist where pid='{$list['id']}' and type=1";
+        $tmp = SQLManager::queryAll($sql_list);
+        foreach ($tmp as $k=>$v){
+            $ids[] = $v['id'];
+        }
+        $tmp_ids = explode(',',$ids);
+        $sql_list = "select id from yd_ver_sitelist where pid in '($tmp_ids)' and type=2";
+        $tmp = SQLManager::queryAll($sql_list);
+        foreach ($tmp as $k=>$v){
+            $ids[] = $v['id'];
+        }
+        $tmp_ids = explode(',',$ids);
+        $sql_list = "select id from yd_ver_sitelist where pid in '($tmp_ids)' and type=3";
+        $tmp = SQLManager::queryAll($sql_list);
+        foreach ($tmp as $k=>$v){
+            $ids[] = $v['id'];
+        }
+
+        return $ids;
     }
 
 
