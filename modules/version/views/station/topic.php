@@ -1056,8 +1056,6 @@ if($_SESSION['auth']=='1'){
         $('.addyiji').click(function(){
             var gid = $(this).attr('gid');
             var auth = getauth(gid);
-            alert(parseInt(auth.estatus));return false;
-//        	if(<?php //echo $estatus ?>//){
         	if(parseInt(auth.estatus)){
         		layer.alert("权限不足 无法操作！");return false;
         	}
@@ -1081,27 +1079,26 @@ if($_SESSION['auth']=='1'){
         }
 
         $('.dele').click(function(){
-        	   var id = $(this).attr('des');
-        if(<?php echo $estatus ?>){
-                        alert("权限不足 无法操作！");return false;
-                }
-                 var x;
-                 $.ajax
-        ({
-            type:'get',
-            async: false,
-            url:"/version/station/getReviewStatus?mid=<?php echo $_GET['mid']; ?>&nid=" + id,
-            success:function(data)
-            {
-                x = data;
+            var id = $(this).attr('des');
+            var auth = getauth(id);
+            if(parseInt(auth.estatus)){
+                    layer.alert("权限不足 无法操作！");return false;
             }
-        })
+             var x;
+             $.ajax
+                ({
+                    type:'get',
+                    async: false,
+                    url:"/version/station/getReviewStatus?mid=<?php echo $_GET['mid']; ?>&nid=" + id,
+                    success:function(data)
+                    {
+                        x = data;
+                    }
+                })
 
-        		   if(x == 500){
-
-                       layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300)
-        	{
+            if(x == 500){
+                layer.alert("审核中！请勿编辑");return false;
+        	}else if(x == 300) {
                 layer.alert("请发布数据之后再进行编辑");return false;
         		
         	}  
@@ -1134,7 +1131,8 @@ if($_SESSION['auth']=='1'){
         })
         $('.edit').click(function(){
 		   var id = $(this).attr('des');
-        if(<?php echo $estatus ?>){
+		   var auth = getauth(id);
+        if(parseInt(auth.estatus)){
             layer.alert("权限不足 无法操作！");return false;
                 }
                  var x;
