@@ -161,6 +161,9 @@ class Common
            $sql="select pid,name from yd_ver_sitelist where id=$gid";
            $list = SQLManager::queryRow($sql);
            $gid=!empty($list['pid'])?$list['pid']:"0";
+           $sql="select pid,name from yd_ver_sitelist where id=$gid";
+           $list = SQLManager::queryRow($sql);
+           $gid=!empty($list['pid'])?$list['pid']:"0";
            $gid = VerStation::model()->find("name='{$list['name']}'");
            $gid = $gid->attributes['id'];
         }
