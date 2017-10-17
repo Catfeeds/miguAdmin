@@ -1056,6 +1056,7 @@ if($_SESSION['auth']=='1'){
         $('.addyiji').click(function(){
             var gid = $(this).attr('gid');
             var auth = getauth(gid);
+            alert(auth);return false;
 //        	if(<?php //echo $estatus ?>//){
         	if(parseInt(auth.estatus)){
         		layer.alert("权限不足 无法操作！");return false;
