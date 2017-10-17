@@ -1686,6 +1686,7 @@ $list = SQLManager::execute($sql);
                         'params'=>array(':pid'=>$a->attributes['pid']),
                     )
                 );
+                var_dump($a->attributes['name']);
             }else{
                 break;
             }
