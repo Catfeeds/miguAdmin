@@ -183,6 +183,7 @@ class Common
 
         $stationid = VerStation::model()->find("name='$station_name'");
         $gid = $stationid->attributes['id'];
+        var_dump($gid);die;
         }else{
            $sql="select pid from yd_ver_sitelist where id=$nid";
            
