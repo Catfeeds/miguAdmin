@@ -80,7 +80,7 @@ class VController extends Controller{
     public function getSitelist($uid,$flag){
         //$sql="select workud from yd_ver_worker where uid=$uid group by stationId";
         if(!empty($flag)){
-        $sql = "select w.stationId from yd_ver_work w inner join yd_ver_worker k on k.workid=w.id and k.uid=$uid and w.flag=6";
+        $sql = "select w.stationId from yd_ver_work w inner join yd_ver_worker k on k.workid=w.id and k.uid=$uid and w.flag=6 group by w.stationId";
         	
         }else{
         $sql = "select w.stationId from yd_ver_work w inner join yd_ver_worker k on k.workid=w.id and k.uid=$uid and w.flag=2";
@@ -90,7 +90,7 @@ class VController extends Controller{
         if(!empty($user)){
             if($flag == 6){
                 $tmp_list = array();
-//                var_dump($user);die;
+                var_dump($user);die;
                 foreach ($user as $k=>$v){
                     $tmp = VerStation::model()->findByPk($v['stationId']);
 //                    var_dump($tmp->attributes['name']);die;
