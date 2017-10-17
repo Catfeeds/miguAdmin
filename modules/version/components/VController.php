@@ -105,8 +105,8 @@ class VController extends Controller{
                     }
 //                    $a[] = $v[$k]['id'];
                 }
-                var_dump($a);die;
-                $list = explode(',',$a);
+//                var_dump($a);die;
+                $list = implode(',',$a);
 //                $list = VerGuideManager::String($a);
 //                var_dump($list);die;
                 return VerSitelist::model()->findAll("id in ($list)");
