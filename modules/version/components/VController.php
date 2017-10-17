@@ -96,7 +96,7 @@ class VController extends Controller{
 //                    var_dump($tmp->attributes['name']);die;
                     $tmp_list[] = $this->getStationList($tmp->attributes['name']);
                 }
-//                var_dump($tmp_list);die;
+                var_dump($tmp_list);die;
                 /*foreach ($tmp_list as $k=>$v){
                     $a[] = $v['']
                 }*/
