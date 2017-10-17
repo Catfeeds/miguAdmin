@@ -1695,6 +1695,16 @@ $list = SQLManager::execute($sql);
                     )
                 );
                 $station_name = $c->attributes['name'];
+                if($c->attributes['pid'] != 0 ){
+                    $d = VerSitelist::model()->find(
+                        array(
+                            'select'=>'id,pid,name,type',
+                            'condition'=>'id=:id',
+                            'params'=>array(':id'=>$c->attributes['pid']),
+                        )
+                    );
+                    $station_name = $d->attributes['name'];
+                }
             }
         }
 
