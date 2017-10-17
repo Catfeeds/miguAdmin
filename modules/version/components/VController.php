@@ -101,8 +101,8 @@ class VController extends Controller{
                 /*foreach ($tmp_list as $k=>$v){
                     $a[] = $v['']
                 }*/
-//                $list = explode(',',$tmp_list['id']);
-                $list = VerGuideManager::String($tmp_list);
+                $list = explode(',',$tmp_list['id']);
+//                $list = VerGuideManager::String($tmp_list);
             }else{
                 $list = VerGuideManager::String($user);
             }
