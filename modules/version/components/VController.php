@@ -125,12 +125,14 @@ class VController extends Controller{
     {
         $sql = "select id from yd_ver_sitelist where name='$name' and pid = '0' ";
         $list = SQLManager::queryRow($sql);
+        $ids = array();
         $ids[] = $list['id'];
         $sql_list = "select id from yd_ver_sitelist where pid='{$list['id']}' and type=1";
         $tmp = SQLManager::queryAll($sql_list);
         foreach ($tmp as $k=>$v){
             $ids[] = $v['id'];
         }
+        var_dump($ids);die;
         $tmp_ids = implode(',',$ids);
         $sql_list = "select id from yd_ver_sitelist where pid in '($tmp_ids)' and type=2";
         $tmp = SQLManager::queryAll($sql_list);
