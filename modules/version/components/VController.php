@@ -101,12 +101,12 @@ class VController extends Controller{
                 $a = array();
                 foreach ($tmp_list as $k=>$v){
                     foreach ($v as $val){
-                        $a[] = $val['id'];
+                        $a[] = $val;
                     }
 //                    $a[] = $v[$k]['id'];
                 }
 //                var_dump($a);die;
-                $list = explode(',',$tmp_list['id']);
+                $list = explode(',',$a);
 //                $list = VerGuideManager::String($a);
 //                var_dump($list);die;
                 return VerSitelist::model()->findAll("id in ($list)");
