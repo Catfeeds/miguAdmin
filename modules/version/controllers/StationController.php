@@ -1692,6 +1692,7 @@ $list = SQLManager::execute($sql);
         }
 
         $station_name = $a->attributes['name'];
+        var_dump($station_name);die;
         $stationid = VerStation::model()->find("name='$station_name'");
         $sql = "SELECT t1.type,	t1.workid,t1.uid FROM yd_ver_worker t1 JOIN yd_ver_work t2 ON t1.workid = t2.id and t2.stationId = '$stationid' and t2.flag = 6 WHERE t1.uid = '{$_SESSION['userid']}'";
         $res['status'][] = 1;
