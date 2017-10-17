@@ -1035,7 +1035,7 @@ if($_SESSION['auth']=='1'){
 
         $('.adderji').click(function(){
         	if(<?php echo $estatus ?>){
-        		alert("权限不足 无法操作！");return false;
+        		layer.alert("权限不足 无法操作！");return false;
         	}
           
             var gid = $(this).attr('gid');
@@ -1056,6 +1056,7 @@ if($_SESSION['auth']=='1'){
         $('.addyiji').click(function(){
             var gid = $(this).attr('gid');
             var auth = getauth(gid);
+            alert(parseInt(auth.estatus));return false;
         	if(parseInt(auth.estatus)){
         		layer.alert("权限不足 无法操作！");return false;
         	}
