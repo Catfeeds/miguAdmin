@@ -148,6 +148,8 @@ class Common
            $sql="select pid from yd_ver_sitelist where id=$gid";
            $list = SQLManager::queryRow($sql);
            $gid=!empty($list['pid'])?$list['pid']:"0";
+            $list = SQLManager::queryRow($sql);
+            $gid=!empty($list['pid'])?$list['pid']:"0";
         }else{
            $sql="select pid from yd_ver_sitelist where id=$nid";
            
