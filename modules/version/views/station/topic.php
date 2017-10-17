@@ -1502,7 +1502,7 @@ if (!empty($html)) {
             }
         }
 		function onsub(){
-            var id = <?php echo $_REQUEST['nid'];?>
+            var id = <?php echo $_REQUEST['nid'];?>;
             var auth = getauth(id);
 			if(parseInt(auth.estatus)){
                 layer.alert("权限不足 无法操作！");return false;
