@@ -1163,7 +1163,7 @@ if (!empty($html)) {
         $('.modules a').click(function(){
             var gid = '<?php echo !empty($_REQUEST['nid']) ? $_REQUEST['nid'] :''?>';
             var auth = getauth(gid);
-            console.log(auth);
+//            console.log(auth);
             if(parseInt(auth.estatus)){
                 layer.alert("权限不足 无法操作！");return false;
         	}
@@ -1175,8 +1175,8 @@ if (!empty($html)) {
         	}  
             var auth = "<?php echo $_SESSION['auth']?>";
             var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
-            console.log(auth);
-            console.log(flag);
+//            console.log(auth);
+//            console.log(flag);
             if(auth=='1' || flag=='1'){
 
             }else{
