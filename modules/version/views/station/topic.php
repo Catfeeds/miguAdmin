@@ -1113,6 +1113,7 @@ if (!empty($html)) {
         $('.edit').click(function(){
 		   var id = $(this).attr('des');
 		   var auth = getauth(id);
+		   console.log(auth);
         if(parseInt(auth.estatus)){
             layer.alert("权限不足 无法操作！");return false;
                 }
