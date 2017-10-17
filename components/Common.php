@@ -142,14 +142,47 @@ class Common
 
     public static function getWork($type,$nid){
 	if($type=='2'){
-           $sql="select pid from yd_ver_sitelist where id=$nid";
-           $list = SQLManager::queryRow($sql);
-           $gid= !empty($list['pid'])?$list['pid']:"0";
-           $sql="select pid from yd_ver_sitelist where id=$gid";
-           $list = SQLManager::queryRow($sql);
-           $gid=!empty($list['pid'])?$list['pid']:"0";
-            $list = SQLManager::queryRow($sql);
-            $gid=!empty($list['pid'])?$list['pid']:"0";
+        $a = VerSitelist::model()->find(
+            array(
+                'select'=>'id,pid,name,type',
+                'condition'=>'id=:id',
+                'params'=>array(':id'=>$nid),
+            )
+        );
+        $station_name = $a->attributes['name'];
+        if($a->attributes['pid'] != 0 ){
+            $b = VerSitelist::model()->find(
+                array(
+                    'select'=>'id,pid,name,type',
+                    'condition'=>'id=:id',
+                    'params'=>array(':id'=>$a->attributes['pid']),
+                )
+            );
+            $station_name = $b->attributes['name'];
+            if($b->attributes['pid'] != 0 ){
+                $c = VerSitelist::model()->find(
+                    array(
+                        'select'=>'id,pid,name,type',
+                        'condition'=>'id=:id',
+                        'params'=>array(':id'=>$b->attributes['pid']),
+                    )
+                );
+                $station_name = $c->attributes['name'];
+                if($c->attributes['pid'] != 0 ){
+                    $d = VerSitelist::model()->find(
+                        array(
+                            'select'=>'id,pid,name,type',
+                            'condition'=>'id=:id',
+                            'params'=>array(':id'=>$c->attributes['pid']),
+                        )
+                    );
+                    $station_name = $d->attributes['name'];
+                }
+            }
+        }
+
+        $stationid = VerStation::model()->find("name='$station_name'");
+        $gid = $stationid->attributes['id'];
         }else{
            $sql="select pid from yd_ver_sitelist where id=$nid";
            
