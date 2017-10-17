@@ -118,7 +118,7 @@ class VController extends Controller{
     public function getStationList($name){
         $sql = "select id from yd_ver_sitelist where name='$name'";
         $list = SQLManager::queryRow($sql);
-        $sql_list = "select id from yd_ver_sitelist where pid='{$list['id']}'";
+        $sql_list = "select id from yd_ver_sitelist where pid='{$list['id']}' and name='专题'";
         $tmp = SQLManager::queryRow($sql_list);
         $sqls = "select id from yd_ver_sitelist where pid='{$tmp['id']}'";
         $res = SQLManager::queryAll($sqls);
