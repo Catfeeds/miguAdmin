@@ -1676,24 +1676,31 @@ $list = SQLManager::execute($sql);
                 'params'=>array(':id'=>$sitelist_id),
             )
         );
-
-        for($i = 0 ;$i<4;$i++){
-            if($a->attributes['pid'] != '0'){
-                $a = VerSitelist::model()->find(
+        $station_name = $a->attributes['name'];
+        if($a->attributes['pid'] != 0 ){
+            $b = VerSitelist::model()->find(
+                array(
+                    'select'=>'id,pid,name,type',
+                    'condition'=>'id=:id',
+                    'params'=>array(':id'=>$a->attributes['pid']),
+                )
+            );
+            $station_name = $b->attributes['name'];
+            if($b->attributes['pid'] != 0 ){
+                $c = VerSitelist::model()->find(
                     array(
                         'select'=>'id,pid,name,type',
-                        'condition'=>'pid=:pid',
-                        'params'=>array(':pid'=>$a->attributes['pid']),
+                        'condition'=>'id=:id',
+                        'params'=>array(':id'=>$b->attributes['pid']),
                     )
                 );
-                var_dump($a->attributes['name']);
-                var_dump($a->attributes['pid']);
-            }else{
-                break;
+                $station_name = $c->attributes['name'];
             }
         }
 
-        $station_name = $a->attributes['name'];
+
+
+//        $station_name = $a->attributes['name'];
         var_dump($station_name);die;
         $stationid = VerStation::model()->find("name='$station_name'");
         $sql = "SELECT t1.type,	t1.workid,t1.uid FROM yd_ver_worker t1 JOIN yd_ver_work t2 ON t1.workid = t2.id and t2.stationId = '$stationid' and t2.flag = 6 WHERE t1.uid = '{$_SESSION['userid']}'";
