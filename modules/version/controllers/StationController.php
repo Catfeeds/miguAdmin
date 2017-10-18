@@ -545,17 +545,19 @@ $list = SQLManager::execute($sql);
             }
         }
     }
+
     public function actionDel(){
         $id = $_REQUEST['id'];
         $list = VerStation::model()->findByPk($id);
         if(!empty($list)){
             $name = $list->attributes['name'];
-            $tmp = VerSitelist::model()->find("name='$name'");
+            $tmp = VerSitelist::model()->find("name='$name' and pid=0 ");
             $sid = $tmp->attributes['id'];
-            Yii::app()->db->createCommand()->delete('{{ver_sitelist}}', "pid=$sid");
+            //Yii::app()->db->createCommand()->delete('{{ver_sitelist}}', "pid=$sid");
             $result = VerSitelist::model()->deleteByPk($sid);
-
+            $result = VerSitelist::model()->deleteAllByAttributes(array('pid'=>$sid));
         }
+       // die;
         $res = VerStation::model()->deleteByPk($id);
         if($res){
             echo json_encode(array('code'=>200));
