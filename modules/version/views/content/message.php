@@ -1,6 +1,6 @@
 <script charset="utf-8" type="text/javascript" src="/js/jdate/jquery.datetimepicker.js"></script>
 <link rel="stylesheet" href="/js/jdate/jquery.datetimepicker.css" />
-<form method="post" onsubmit="return check()" action="" enctype="multipart/form-data">
+<form action="" method="post" enctype="multipart/form-data" onsubmit="return check">
 <?php
 $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
 $adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
@@ -194,29 +194,27 @@ padding:5px 10px;
     });
 
     function check(){
-	var G = {};
+        var G = {};
         var first = $('input[name=firstTime]').val();
-        if(empty(first)){
+        if (empty(first)) {
             layer.alert("请填写有效期！")
             return false;
         }
         var timeend = $('input[name=endTime]').val();
-        if(empty(timeend)){
+        if (empty(timeend)) {
             layer.alert("请填写有效期！")
             return false;
         }
-	var stationId=$("#gid").val();//选中的站点
+        var stationId=$("#gid").val();//选中的站点
         if(empty(stationId)){
             layer.alert("请选择站点");
             return false;
         }
-	G.stationId=stationId;
+        G.stationId=stationId;
         G.firstTime=first;
         G.endTime=timeend;
-	//console.log(G);return false;
         $.post('/version/content/message.html?mid=<?php echo $_REQUEST['mid']?>',G,function(d){
-	//console.log(d);return false;
-            if(d.message== '321'){
+            if(d== 321){
                 alert("添加失败");
                 return false;
             }

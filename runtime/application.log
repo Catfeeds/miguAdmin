@@ -7399,3 +7399,93 @@ Stack trace:
 REQUEST_URI=/images/admin_logo.png
 HTTP_REFERER=http://localhost/css/admin.css
 ---
+2017/10/12 08:45:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in F:\wamp\www\html\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\wamp\www\html\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 F:\wamp\www\html\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 F:\wamp\www\html\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://localhost/css/admin.css
+---
+2017/10/12 08:48:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in F:\wamp\www\html\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\wamp\www\html\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 F:\wamp\www\html\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 F:\wamp\www\html\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+HTTP_REFERER=http://127.0.0.1/version/default/login.html?mid=-1
+---
+2017/10/12 08:49:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in F:\wamp\www\html\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\wamp\www\html\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 F:\wamp\www\html\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 F:\wamp\www\html\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://127.0.0.1/css/admin.css
+---
+2017/10/12 08:59:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in F:\wamp\www\html\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\wamp\www\html\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 F:\wamp\www\html\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 F:\wamp\www\html\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://localhost/css/admin.css
+---
+2017/10/12 09:34:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in F:\wamp\www\html\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\wamp\www\html\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 F:\wamp\www\html\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 F:\wamp\www\html\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://localhost/css/admin.css
+---
+2017/10/12 09:34:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in F:\wamp\www\html\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\wamp\www\html\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 F:\wamp\www\html\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 F:\wamp\www\html\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://localhost/css/admin.css
+---
+2017/10/12 10:07:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in F:\wamp\www\html\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\wamp\www\html\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 F:\wamp\www\html\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 F:\wamp\www\html\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://localhost/css/admin.css
+---
+2017/10/17 01:18:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in F:\wamp\www\html\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\wamp\www\html\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 F:\wamp\www\html\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 F:\wamp\www\html\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+HTTP_REFERER=http://localhost/version/default/login.html?mid=-1
+---
+2017/10/17 01:19:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in F:\wamp\www\html\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\wamp\www\html\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 F:\wamp\www\html\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 F:\wamp\www\html\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://localhost/css/admin.css
+---
+2017/10/17 02:53:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/admin_logo.png".' in F:\wamp\www\html\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\wamp\www\html\framework\web\CWebApplication.php(141): CWebApplication->runController('images/admin_lo...')
+#1 F:\wamp\www\html\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 F:\wamp\www\html\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/admin_logo.png
+HTTP_REFERER=http://localhost/css/admin.css
+---
