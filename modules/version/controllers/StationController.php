@@ -548,6 +548,7 @@ $list = SQLManager::execute($sql);
 
     public function actionDel(){
         $id = $_REQUEST['id'];
+        $pid = 0;
         $list = VerStation::model()->findByPk($id);
         if(!empty($list)){
             $name = $list->attributes['name'];
@@ -558,9 +559,10 @@ $list = SQLManager::execute($sql);
                     'params'=>array(':name'=>$name),
                 ));
             $sid = $tmp->attributes['id'];
+            $pid = $sid;
+            $this->delSiteListData($pid);
             //Yii::app()->db->createCommand()->delete('{{ver_sitelist}}', "pid=$sid");
-            $result = VerSitelist::model()->deleteByPk($sid);
-            $result = VerSitelist::model()->deleteAllByAttributes(array('pid'=>$sid));
+
         }
         $res = VerStation::model()->deleteByPk($id);
         if($res){
@@ -568,6 +570,13 @@ $list = SQLManager::execute($sql);
         }else{
             echo json_encode(array('code'=>404));
         }
+    }
+
+
+    public function delSiteListData($id)
+    {
+        $result = VerSitelist::model()->deleteByPk($id);
+        $result = VerSitelist::model()->deleteAllByAttributes(array('pid'=>$id));
     }
 
 
