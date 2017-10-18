@@ -557,7 +557,6 @@ $list = SQLManager::execute($sql);
             $result = VerSitelist::model()->deleteByPk($sid);
             $result = VerSitelist::model()->deleteAllByAttributes(array('pid'=>$sid));
         }
-       // die;
         $res = VerStation::model()->deleteByPk($id);
         if($res){
             echo json_encode(array('code'=>200));
