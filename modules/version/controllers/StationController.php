@@ -551,7 +551,12 @@ $list = SQLManager::execute($sql);
         $list = VerStation::model()->findByPk($id);
         if(!empty($list)){
             $name = $list->attributes['name'];
-            $tmp = VerSitelist::model()->find("name='$name' and pid='0' ");
+            $tmp = VerSitelist::model()->find(
+                array(
+                    'select'=>'id,name,pid',
+                    'condition'=>'name=:name and type=0',
+                    'params'=>array(':name'=>$name),
+                ));
             $sid = $tmp->attributes['id'];
             //Yii::app()->db->createCommand()->delete('{{ver_sitelist}}', "pid=$sid");
             $result = VerSitelist::model()->deleteByPk($sid);
