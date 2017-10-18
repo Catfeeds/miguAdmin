@@ -91,7 +91,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     <span>省份</span>
     <select id="pro">
 	<?php foreach($Pro as $v):?>
-        <option value="<?php echo $v['provinceCode']?>"><?php echo $v['provinceName'];?></option>
+        <option <?php if(!empty($_REQUEST['province'])){if($_REQUEST['province']==$v['provinceCode']){echo 'selected=selected';}}?> value="<?php echo $v['provinceCode']?>"><?php echo $v['provinceName'];?></option>
         <?php endforeach;?>
     </select>
     <span>牌照方：</span>
