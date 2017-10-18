@@ -151,8 +151,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
             </select>
          <?php }else{ ?>
-                <select id="gid" name="gid" class = "form-input w200" >
-                        <option>请选择</option>
+                <select id="gid" name="gid" class = "form-input w200" onchange="getcity()">
+                        <option value="0">请选择</option>
                         <?php foreach($st as $k => $v){ ?>
                                 <option value = "<?php echo $v['id']; ?>" ><?php echo $v['name']; ?></option>
                         <?php } ?>
@@ -253,6 +253,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             $(".time").hide();
         }
     }
+	show();
 
     $('#upload_file_false').uploadify
     ({

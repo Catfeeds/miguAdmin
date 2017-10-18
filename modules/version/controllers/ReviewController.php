@@ -625,7 +625,10 @@ class ReviewController extends VController
                     $new_workInfo = $this->newGetWorkInfo($v);
                     $sign = $new_workInfo[0]['type'];
                     $maxWork = $new_workInfo[0]['maxLength'];
-                    if($flag=='1'){
+                    if($list->flag == $maxWork && $list->flag  == '1'){
+                        $list->flag = 100;
+                        $delFlag='2';
+                    }else if($flag=='1'){
                         $this->addlog($list);
                         if($list->flag=='1') {
                             $sign++;

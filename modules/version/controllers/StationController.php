@@ -568,14 +568,14 @@ $list = SQLManager::execute($sql);
     public function actionTopic(){
         try{
             $username=$_SESSION['nickname'];
-            $flag= '2';
+            $flag= '6';
 
             if(!empty($_REQUEST['type'])){
                 $result = Common::getWork($_REQUEST['type'],$_REQUEST['nid']);
             }else{
                 $result = Common::getUser($username,$flag);
             }
-
+//            var_dump($result);die;
             //$result  = Common::getUser($username,$flag);
             if(!empty($_REQUEST['nid'])){
                 $gid = $_REQUEST['nid'];
@@ -693,7 +693,7 @@ $list = SQLManager::execute($sql);
          public function actionTopic1(){
         try{
             $username=$_SESSION['nickname'];
-            $flag= '2';
+            $flag= '6';
             if(!empty($_REQUEST['type'])){
                 $result = Common::getWork($_REQUEST['type'],$_REQUEST['nid']);
             }else{
@@ -807,7 +807,7 @@ $list = SQLManager::execute($sql);
  public function actionTopic2(){
         try{
             $username=$_SESSION['nickname'];
-            $flag= '2';
+            $flag= '6';
             if(!empty($_REQUEST['type'])){
                 $result = Common::getWork($_REQUEST['type'],$_REQUEST['nid']);
             }else{
@@ -1664,6 +1664,79 @@ $list = SQLManager::execute($sql);
             $newArr[]=array("name"=>$pArray[$m]['provinceName']."-".$cArray[$m]['cityName'],"Code"=>$pArray[$m]['provinceCode']."-".$cArray[$m]['cityCode']);
         }
         echo json_encode($newArr);
+    }
+
+    public function actionCheckTopicAuth()
+    {
+        $sitelist_id = !empty($_GET['sitelist_id'])?$_GET['sitelist_id']:"0";
+        $a = VerSitelist::model()->find(
+            array(
+                'select'=>'id,pid,name,type',
+                'condition'=>'id=:id',
+                'params'=>array(':id'=>$sitelist_id),
+            )
+        );
+        $station_name = $a->attributes['name'];
+        if($a->attributes['pid'] != 0 ){
+            $b = VerSitelist::model()->find(
+                array(
+                    'select'=>'id,pid,name,type',
+                    'condition'=>'id=:id',
+                    'params'=>array(':id'=>$a->attributes['pid']),
+                )
+            );
+            $station_name = $b->attributes['name'];
+            if($b->attributes['pid'] != 0 ){
+                $c = VerSitelist::model()->find(
+                    array(
+                        'select'=>'id,pid,name,type',
+                        'condition'=>'id=:id',
+                        'params'=>array(':id'=>$b->attributes['pid']),
+                    )
+                );
+                $station_name = $c->attributes['name'];
+                if($c->attributes['pid'] != 0 ){
+                    $d = VerSitelist::model()->find(
+                        array(
+                            'select'=>'id,pid,name,type',
+                            'condition'=>'id=:id',
+                            'params'=>array(':id'=>$c->attributes['pid']),
+                        )
+                    );
+                    $station_name = $d->attributes['name'];
+                }
+            }
+        }
+
+        $stationid = VerStation::model()->find("name='$station_name'");
+        $stationid = $stationid->attributes['id'];
+        $sql = "SELECT t1.type,	t1.workid,t1.uid FROM yd_ver_worker t1 JOIN yd_ver_work t2 ON t1.workid = t2.id and t2.stationId = '$stationid' and t2.flag = 6 WHERE t1.uid = '{$_SESSION['userid']}'";
+        $res['status'][] = 1;
+        $res['status'][] = 2;
+        $ss = SQLManager::queryAll($sql);
+        $estatus = 1;
+        $submit = 1;
+        $show = 1;
+        foreach ($ss as $key => $value) {
+            if($value['type'] == 1  ){
+                $estatus =0;
+            }else if($value['type']  == 2 ){
+                $submit =0;
+            }else if($value['type']  == 3 ){
+                //    $show =0;
+            }
+        }
+
+        if($_SESSION['auth']=='1'){
+            $estatus = 0;
+            $submit = 0;
+        }
+
+        $auth = array();
+        $auth['estatus'] = $estatus;
+        $auth['submit'] = $submit;
+        $auth['show'] = $show;
+        echo json_encode($auth);
     }
 }
 

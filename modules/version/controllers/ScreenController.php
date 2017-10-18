@@ -565,13 +565,13 @@ class ScreenController extends VController
             $result = VerScreenContentCopy::model()->findAll("screenGuideid=$guideid");
         }
         $res = 0;
-        //var_dump($result);die;
+       // var_dump($result);die;
         foreach($result as $k=>$v){
 	        $flag = $v->attributes['flag'];
             if($flag=='1' || $flag=='6' || $flag=='5' || $flag=='10' || $flag=='20' || $flag=='30' || $flag=='40' || $flag=='50'){
 
                 $res = VerScreenContentCopy::model()->updateAll(array('delFlag'=>1,'addTime'=>time()), "delFlag in (0,1,2,3,4,5) and flag in (1,6) and screenGuideid = " . $v->attributes['screenGuideid']);
-//                var_dump($res);
+                //var_dump($res);die;
             }
         }
 

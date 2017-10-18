@@ -6,16 +6,20 @@ if (!empty($html)) {
 
         $html = str_replace($matches[0][0], "", $html);
         $html = str_replace("131px", "95px", $html);
+		
+		
+		$b = "/<a[\s\S]*?<\/a>/";
+		preg_match_all($b, $html, $matches);
+		foreach ($matches[0] as $key => $value) {
+			$html = str_replace($matches[0][$key], "", $html);
+		}
+
 }
-
-
+$res['status'][] = 1;
+$res['status'][] =2;
 ?>
-
-<style>
-.t1:hover,.t2:hover,.t3:hover{
-	cursor:pointer;
-}
-.layui-layer-dialog{
+  <style>
+        .layui-layer-dialog{
 	min-width:340px;
 }
 .layui-layer-dialog .layui-layer-content{
@@ -45,7 +49,7 @@ if (!empty($html)) {
 	background: url("/file/u1971.png") no-repeat;
 	border-radius: 2px;
 }
-.mt10 {
+                        .mt10 {
                                 margin-left: 10px;
                         }
                         .menus {
@@ -165,148 +169,185 @@ if (!empty($html)) {
                         .menus ul {
                                 font-family: 宋体;
                         }
-    /*a{font-size: 12px;font-family: "microsoft yahei";font-weight: bold;}*/
-    .ui-a{position: relative;}
-    .ui-b{position: relative;}
-    .ui-a a{position: absolute;top:0;left:0;background-color:#898989;padding:5px 10px;font-size: 12px;font-family: "microsoft yahei";font-weight: bold;color:white}
-    .ui-a a img{position: absolute;top:0;left:0;background-color:#898989;}/*padding:5px 10px;*/
-    .mt6{margin-top:10px;}
-    .ui-b a{position: absolute;top:0;left:0;background-color:#898989;padding:5px 10px;}
-    .mt6{margin-top:10px; float:left;}
-    .mt7{margin-top:10px; float:left;}
-    .cc{margin-left: 10px;}
-    #overlay{width:1300px;height:700px;position:absolute;z-index: 2}
-    .page{
-        width:800px;
-    }
-    a{text-decoration:none}
-    .status_back{
-        display:none;
-    }
-    .yiji{
-        width: 90px;
-        height: 25px;
-        background: inherit;
-        background-color: rgba(201, 201, 201, 1);
-        box-sizing: border-box;
-        border-width: 1px;
-        border-style: solid;
-        border-color: rgba(161, 161, 161, 1);
-        border-radius: 2px;
-        -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
-        -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
-        color: #333333;
-    }
-    .erji{
-        width: 90px;
-        height: 25px;
-        background: inherit;
-        background-color: rgba(242, 242, 242, 1);
-        box-sizing: border-box;
-        border-width: 1px;
-        border-style: solid;
-        border-color: rgba(228, 228, 228, 1);
-        border-radius: 2px;
-        -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
-        -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);
-        color: #333333;
-    }
-    .edit{
-        border-width: 0px;
-        /*position: absolute;
-        left: 0px;
-        top: 0px;*/
-        width: 20px;
-        height: 20px;
-        margin-top:4px;
-    }
-    .dele{
-        border-width: 0px;
-        /*position: absolute;
-        left: 0px;
-        top: 0px;*/
-        width: 20px;
-        height: 20px;
-        margin-top:4px;
-    }
-    .menubox {
-        padding-left:8px;
-        padding-right:8px;
-        margin-right: 15px;
-        width:270px;
-        min-height: 845px;
-        float: left;
-        overflow: hidden;
-        background: #f7fbfc;
-        border-bottom: 1px solid #c2d1d8;
-        border-right: 1px solid #c2d1d8;
-        -webkit-box-shadow: 1px 1px 0 0 #fff;
-        box-shadow: 1px 1px 0 0 #fff;
-    }
-    .menubox ul li {
-        border-bottom: 0px solid #d9e4ea;
-    }
+                        /*a{font-size: 12px;font-family: "microsoft yahei";font-weight: bold;}*/
+                        .ui-a {
+                                position: relative;
+                        }
+                        .ui-b {
+                                position: relative;
+                        }
+                        .ui-a a {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background-color: #898989;
+                                padding: 5px 10px;
+                                font-size: 12px;
+                                font-family: "microsoft yahei";
+                                font-weight: bold;
+                                color: white
+                        }
+                        .ui-a a img {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background-color: #898989;
+                        }/*padding:5px 10px;*/
+                        .mt6 {
+                                margin-top: 10px;
+                        }
+                        .ui-b a {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background-color: #898989;
+                                padding: 5px 10px;
+                        }
+                        .mt6 {
+                                margin-top: 10px;
+                                float: left;
+                        }
+                        .mt7 {
+                                margin-top: 10px;
+                                float: left;
+                        }
+                        .cc {
+                                margin-left: 10px;
+                        }
+                        #overlay {
+                                width: 1300px;
+                                height: 700px;
+                                position: absolute;
+                                z-index: 2
+                        }
+                        #menubox {
+                                width: 200px;
+                                padding-top: 15px;
+                        }
+                        .yiji {
+                                /*background:#43adff;
+                                 width:200px;
+                                 height:80px;*/
+                                border-width: 0px;
+                                /*position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 84px;
+                                height: 27px;
+                                background: inherit;
+                                background-color: rgba(22, 155, 213, 1);
+                                border: none;
+                                border-radius: 5px;
+                                -moz-box-shadow: none;
+                                -webkit-box-shadow: none;
+                                box-shadow: none;
+                        }
+                        .erji {
+                                border-width: 0px;
+                                /* position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 86px;
+                                height: 27px;
+                                background: inherit;
+                                background-color: rgba(72, 187, 236, 1);
+                                border: none;
+                                border-radius: 5px;
+                                -moz-box-shadow: none;
+                                -webkit-box-shadow: none;
+                                box-shadow: none;
+                        }
+                        .edit {
+                                border-width: 0px;
+                                /*position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 20px;
+                                height: 20px;y
+                                }
+                                .dele{
+                                border-width: 0px;
+                                /*position: absolute;
+                                 left: 0px;
+                                 top: 0px;*/
+                                width: 20px;
+                                height: 20px;
+                        }
+                        #menubox {
+                                padding-left: 8px;
+                                padding-right: 8px;
+                                z
+                                margin-right: 15px;
+                                width: 270px;
+                                min-height: 845px;
+                                float: left;
+                                overflow: hidden;
+                                background: #f7fbfc;
+                                border-bottom: 1px solid #c2d1d8;
+                                border-right: 1px solid #c2d1d8;
+                                -webkit-box-shadow: 1px 1px 0 0 #fff;
+                                box-shadow: 1px 1px 0 0 #fff;
+                        }
+                        .menubox ul li {
+                                border-bottom: 0px solid #d9e4ea;
+                        }
 
-    .menubox ul li span {
-        display: block;
-    }
-
-    .active{
-        display:block;
-    }
-    .edit{
-        display:block;
-        float:right;
-    }
-    .dele{
-        display:block;
-        float:right;
-    }
-    .jiaoFlag{
-        font-size:14px;
-    }
-    /*.down{
-        background:#red;
-    }*/
-    .selected{
-        /*background:#ccc;*/
-    }
-    .one{width:24px;height:23px;}
-    .two{width:24px;height:23px;}
-    .stationName{position: relative;}
-    .menu ul li ul li{height:30px;line-height: 30px;font-size: 14px;}
-    .yijiName {
-        font-size: 15px;
-        height: 27px;
-        line-height: 30px;
-    }
-    .mr10 {
-        margin-right: 10px;
-    }
-    .topicTop{padding:10px 0px;}
-    .topicBg{position: relative;}
-    .topicBgEdit{
-        /*width:200px;*/
-        height:20px;
-        /*border:1px solid #ccc;*/
-        position: absolute;
-       top: 45px;
+                        .menubox ul li span {
+                                display: block;
+                        }
+                        .active {
+                                display: block;
+                        }
+                        .edit {
+                                display: block;
+                                float: right;
+                        }
+                        .dele {
+                                display: block;
+                                float: right;
+                        }
+                        .jiaoFlag {
+                                font-size: 14px;
+                        }
+                        .mr10 {
+                                margin-right: 10px;
+                        }
+                        .stationName {
+                                position: relative;
+                        }
+                        .one {
+                                width: 24px;
+                                height: 23px;
+                        }
+                        .two {
+                                width: 24px;
+                                height: 23px;
+                        }
+                        .topicTop {
+                                padding: 10px 0px;
+                        }
+                        .topicBg {
+                                position: relative;
+                        }
+                        .topicBgEdit {
+                                /*width:200px;*/
+                                height: 20px;
+                                /*border:1px solid #ccc;*/
+                                position: absolute;
+                                top: 45px;
                                 left: 90px;
-        text-align: center;
-        line-height: 20px;
-        color: black;
-
-    }
-.uploadify-button {
+                                text-align: center;
+                                line-height: 20px;
+                                color: black;
+                        }
+                        .uploadify-button {
                                 border-radius: 8px;
                         }
                         .swfupload {
                                 top: 0px;
                                 left: 0px;
                         }
-.m-1{ position:relative; background:#666666;   width:125px;  height:52.5px;  border:1px solid #ccc;  border-radius: 8px;  margin-bottom: 10px;  float:left;  }
+	.m-1{ position:relative; background:#666666;   width:125px;  height:52.5px;  border:1px solid #ccc;  border-radius: 8px;  margin-bottom: 10px;  float:left;  }
 .m-1-2{  position:relative;background:#666666;  width:160px;  height:115px;  margin-bottom: 20px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
 .m-1-3{  position:relative;background:#666666;  width:128px;  height:182.5px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
 .m-2-3{  position:relative;background:#666666;  width:280px;  height:152.5px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  margin-bottom: 20px;  }
@@ -345,15 +386,13 @@ if (!empty($html)) {
         //        $nav = $this->getVersitelist();
         if($_SESSION['auth']=='1'){
             $nav = $this->getVersitelist();
-//            var_dump($nav);die;
         }else{
             $uid = $_SESSION['userid'];
 	
             $nav = $this->getSitelist($uid,6);
-//            var_dump($nav);die;
         }
 	
-//        $admin = $this->getMvAdmin();
+        $admin = $this->getMvAdmin();
         $admin = $this->getMvAdmin();
         $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
         $adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
@@ -371,110 +410,116 @@ if (!empty($html)) {
 		$_GET['three'] = !empty($_GET['three'])?$_GET['three']:'';
         ?>
         <div class="admin_left">
-            <div class="menubox">
-                <ul id="J_navlist">
-                    <?php
-                    if(!empty($nav)){
-                        $a = -1;
-                        foreach($nav as $key=>$value){
-                            if($value->pid == 0 && $value->type==0 && $value->protype==1){
-                                $a++;
-                                ?>
-                                <li class="<?php echo !empty($_GET['nid']) && $_GET['nid'] == $value['id']?'thismenu':''?> stationName">
-                                    <span><img src="../../../file/button/station_true.png" onclick="one(this)" class="one" ><a><?php echo $value['name']?></a></span></li>
-                                <ul>
-                                    <?php
-                                    $data = VerSiteListManager::getList($value['id']);
-									
-                                    if(!empty($data)){
-                                        foreach($data as $k=>$v){
-                                            if($v['name']=='专题'){
-                                                ?>
-                                                <li class="menu">
-                                                    <!--<span>&nbsp;&nbsp;<?php //echo $v['name']?></span>-->
-                                                    <!--&nbsp;&nbsp;&nbsp;&nbsp;--><a gid="<?php echo $v['id']?>" class="guide yiji addYiJi" style="text-decoration: none;">添加一级</a>
-                                                    <ul>
-                                                        <?php
-                                                        $list = VerSiteListManager::getList($v['id']);
-													
-                                                        if(!empty($list)){
-                                                            $b=-1;
-                                                            foreach($list as $key=>$val){
-                                                                $b++;
-                                                                ?>
-                                                                <li >
-                                                                                    <span class="test">&nbsp;&nbsp;&nbsp;&nbsp;
-<img src="../../../file/button/folder_true.png" onclick="two(this)" class="two" >
-                                                                                        <a class="yijiName"><?php echo $val['name']?></a>&nbsp;&nbsp;
-
-                                                                                        <!--                                                                                        <input type="button" des="--><?php //echo $val['id']?><!--" class="dele" value="删">&nbsp;&nbsp;-->
-                                                                                        <img src="../../file/button/del.png" title="删除" des="<?php echo $val['id'];?>" class="dele" style="visibility:hidden;">
-                                                                                        <!--                                                                                        <input type="button" des="--><?php //echo $val['id']?><!--" class="edit" value="编">-->
-                                                                                        <img src="../../file/button/edit.png" title="编辑" des="<?php echo $val['id']?>" class="edit" style="visibility:hidden;">
-                                                                                        <span style="display: block;float: right;margin-right: 20px;margin-top:5px;"><?php echo $val['id'];?></span>
-</span>
-
-                                                                    <ul>
-                                                                        <?php
-                                                                        $tmp = VerSiteListManager::getList($val['id']);
-                                                                        if(!empty($tmp)) {
-                                                                            $c = -1;
-                                                                            foreach($tmp as $l){
-                                                                                $c++;
-                                                                                ?>
-
-                                                                                <li class="test2">
-                                                                                    <a href="<?php echo $l['url'] == '#'?'#':Yii::app()->createUrl($l['url'],array('topid'=>$v['pid'],'mid'=>$_GET['mid'],'nid'=>$l['id'],'type'=>$l['type'],'top'=>$value['name'],'par'=>$val['name'],'son'=>$l['name'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">
-                                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                        <?php //echo $l['id']?>
-                                                                                        <?php echo $l['name']?>
-                                                                                    </a>
-                                                                                    &nbsp;&nbsp;
-                                                                                    <!--<input type="button" des="<?php //echo $l['id']?>" class="dele" value="删">&nbsp;&nbsp;-->
-                                                                                    <!--<input type="button" des="<?php //echo $l['id']?>" class="edit" value="编">-->
-                                                                                    <img src="../../file/button/del.png" title="删除" des="<?php echo $l['id'];?>" class="dele" style="visibility:hidden;">
-                                                                                    <img src="../../file/button/edit.png" title="编辑" des="<?php echo $l['id'];?>" class="edit" style="visibility:hidden;">
-                                                                                    <span style="display: block;float: right;margin-right: 20px;"><?php echo $l['id'];?></span>
-                                                                                </li>
-                                                                                <?php
-                                                                            }
-                                                                            ?>
-
-                                                                            <?php
-                                                                        }?>
-                                                                    </ul>
-
-                                                                </li>
-                                                                <!--<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a gid="<?php //echo $val['id']?>" class="guide erji">添加二级</a></li>-->
-                                                                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img gid="<?php echo $val['id']?>" class="adderji" title="添加二级" src="../../file/button/add_garden.png" style="float:right;"></li>
-                                                                <?php
-                                                            }
-
-                                                        }
-                                                        ?>
-
-                                                    </ul>
-                                                    </span>
-                                                </li>
-                                                <?php
-                                            }
-
-                                        }
-                                    }
-                                    ?>
-
-                                </ul>
+        <div id="menubox">
+            <ul id="J_navlist">
+                <?php
+                //print_r($nav);
+                if(!empty($nav)){
+                    $a = -1;
+                    foreach($nav as $v){
+                        if($v->pid == 0 && $v->type==1 && $v->protype==0 && $v->name=='专题'){
+                            $a++;
+                            ?>
+                            <li class="<?php echo !empty($_GET['nid']) && $_GET['nid'] == $v['id']?'thismenu':''?>">
+                            <span>
                                 <?php
-                            }
-                        }
-                    }
+                                    $data = VerSiteListManager::getList($v['id']);
+                                    if(!empty($data)){?>
+                                        <li class="menu stationName">
+                                            <!--一级名称 -->
+                                            <span style="position: relative">
+                                                <img id="pic1" src="../../../file/button/station_true.png" onclick="one(this)" class="one" >
+                                                <div style="display: inline;position: absolute;top :0px;font-size:18px;"><?php echo $v['name'].$v['id']?></div>
+                                            </span>
+                                            <a gid="<?php echo $v['id']?>" class="guide yiji">添加一级</a>
+                                            <ul >
+                                                <?php
+                                                    $b=-1;
+                                                    foreach($data as $val){
+
+                                                        ?>
+                                                           <li>
+                                                               <span>
+                                <?php
+                                    $tmp = VerSiteListManager::getList($val['id']);
+                                    if(1){
+                                        $b++;
+                                        ?>
+                                        <li class="menus">
+                                            <span style="position: relative" class='test active'>
+                                                <img src="../../../file/button/folder_true.png" onclick="two(this)" class="two" >
+                                               <div style="display: inline;position: absolute;top:5px;"><?php echo $val['name']; ?></div>
+                                                <img src="../../file/button/del.png" title="删除" des="<?php echo $val['id']; ?>" class="dele" style="visibility:hidden;">
+                                                <!--                                                                                        <input type="button" des="--><?php //echo $val['id'] ?><!--" class="edit" value="编">-->
+                                                                                        <img src="../../file/button/edit.png" title="编辑" des="<?php echo $val['id']?>" class="edit" style="visibility:hidden;">
+                                                                                        <span style="display: block;float: right;margin-right: 20px;"><?php echo $val['id']; ?></span>
+                                            </span>
+                                            <ul>
+                                                <?php
+                                                $c = -1;
+                                                    foreach($tmp as $l){
+                                                        $c++;?>
+                                                           <li class="test2">
+                                                               <a href="<?php echo $l['url'] == '#'?'#':Yii::app()->createUrl($l['url'],array('mid'=>$_GET['mid'],'nid'=>$l['id'],'epg'=>$l['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">&nbsp;&nbsp;&nbsp;<?php echo $l['name']; ?> </a>
+
+                                                               <img src="../../file/button/del.png" title="删除" des="<?php echo $l['id']; ?>" class="dele" style="visibility:hidden;">
+                                                               <img src="../../file/button/edit.png" title="编辑" des="<?php echo $l['id']?>" class="edit" style="visibility:hidden;">
+                                                               <span style="display: block;float: right;margin-right: 20px;"><?php echo $l['id']; ?></span>
+                                                           </li>
+                                                    <?php } ?>
+                                            </ul>
+                                        </li>
+                                    <?php }else{ ?>
+                                        <li>
+                                            <a href="<?php echo $val['url'] == '#'?'#':Yii::app()->createUrl($val['url'],array('mid'=>$_GET['mid'],'nid'=>$val['id'],'epg'=>$val['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $val['name']?></a>&nbsp;&nbsp;
+                                            <img src="../../file/button/del.png" title="删除" des="<?php echo $val['id']; ?>" class="dele" style="visibility:hidden;">
+                                            <!--                                                                                        <input type="button" des="--><?php //echo $val['id'] ?><!--" class="edit" value="编">-->
+                                            <img src="../../file/button/edit.png" title="编辑" des="<?php echo $val['id']?>" class="edit" style="visibility:hidden;">
+                                            <span style="display: block;float: right;margin-right: 20px;"><?php echo $val['id']; ?></span>
+                                        </li>
+                                   <?php } ?>
+                                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <img gid="<?php echo $val['id']?>" class="adderji" title="添加二级" src="../../file/button/add_garden.png" style="float:right;">
+<!--                                    <a gid="--><?php //echo $val['id'] ?><!--" class="guide erji">添加二级</a>-->
+                            </span>
+
+                                                           </li>
+                                                    <?php } ?>
+                                            </ul>
+                                        </li>
+                                    <?php }else{ ?>
+                                        <li>
+                                            <a href="<?php echo $v['url'] == '#'?'#':Yii::app()->createUrl($v['url'],array('mid'=>$_GET['mid'],'nid'=>$v['id'],'epg'=>$v['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>"><?php echo $v['id']?><?php echo $v['name']?></a>
+                                        </li>
+                                   <?php } ?>
+                            </span>
+                        </li>
+                        <?php }
+                                                        }
+                                                        }else{
                     ?>
-                </ul>
-                <script type="text/javascript" >
-                    navList(12);
-                </script>
-            </div>
+                    <li class="">
+                        <span><a href="#" style="color:;">待添加<em></em></a></span>
+                        <div class="submenu none" style="">
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                            <a href="#">待添加</a>
+                        </div>
+                    </li>
+                <?php } ?>
+            </ul>
+            <script type="text/javascript" language="javascript">
+                                navList(12);
+            </script>
         </div>
+    </div>
     </div>
     <div class="mt10" style="float:left;">
         <div style='margin-bottom:10px;'>
@@ -485,22 +530,14 @@ if (!empty($html)) {
             <span><?php if(!empty($_GET['son'])){echo $_GET['son'];}?></span>
         </div>
         <div>
-        	<div class="t1" style="background: rgb(226, 238, 251);line-height:40px;text-align:center;border:1px solid #ccc;border-right:none;border-bottom:none;width:100px;height:40px;float: left">编辑</div>
+        	<div class="t1" style="line-height:40px;text-align:center;border:1px solid #ccc;border-right:none;border-bottom:none;width:100px;height:40px;float: left">编辑</div>
         	<div class="t2" style="line-height:40px;text-align:center;border:1px solid #ccc;border-right:none;border-bottom:none;width:100px;height:40px;float: left">待发布</div>
-        	<div class="t3" style="line-height:40px;text-align:center;border:1px solid #ccc;border-bottom:none;width:100px;height:40px;float: left">现网</div>
+        	<div class="t3" style="background: rgb(226, 238, 251);line-height:40px;text-align:center;border:1px solid #ccc;border-bottom:none;width:100px;height:40px;float: left">现网</div>
         	<br/>
                 <table cellspacing="0" cellpadding="10" class="mtable center" width="800px">
                 
            <tr <?php echo !empty($bkimg->attributes['url']) || !empty($bkimg->attributes['id'])?"style='display:none;'":"style='display:block;'"?>><td colspan="2" style="text-align: left;padding-left: 15px;height:30px;">
-            <input type="button" class="btn" value="引用专题" style='display:none;'>
-            <?php
-//            $res['status'] = ['1','2'];
-            if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
-                ?>
-                <input type="button" class="btn add_topic" value="新建专题" <?php echo !empty($bkimg->attributes['url'])?"style='display:none;'":"style='display:block;'"?> >
-                <?php
-            }
-            ?>
+   
         </div>
 
         <?php
@@ -508,20 +545,19 @@ if (!empty($html)) {
         if(!empty($bkimg->attributes['type'])){
         ?>
 
-        <form onsubmit="return onsub();" action="" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data">
                  </td></tr>
                   <tr><td colspan="2" style="text-align: left;padding-left: 15px;height:30px;">
             <input type="hidden" value="<?php echo $_REQUEST['nid']?>" name="gid">
             <input type="hidden" name="url" value="" class="upImg">
             <div class="topicTop">
                 <span>专题模板：</span>
-                <select name="type" class="form-input w100" id="type">
-                    <option value="0">请选择</option>
-                    <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='1'){echo "selected=selected"; } ?>  value="1" >海报专题</option>
-                    <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='2'){echo "selected=selected"; } ?>  value="2" >排行榜专题</option>
- <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='4'){echo "selected=selected"; } ?>  value="4" >河南专题</option>
-                </select>
-                <span><input class="btn module" type="submit" value="保存修改"></span>
+               <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';
+               if($type=='1'){echo "海报专题"; }
+			   else  if($type=='2'){echo "排行榜专题"; }
+			   else  if($type=='4'){echo "河南专题"; }
+                  ?>
+                <span></span>
             </div>
 
            </td></tr>  <tr style = "height:152px;background:#F0FDFF ">
@@ -529,11 +565,7 @@ if (!empty($html)) {
                     <td style="text-align: left;padding-left: 15px;">
             <div class="topicBg" id="main">
                 <img src="<?php echo !empty($bkimg->attributes['url'])?$bkimg->attributes['url']:'/file/5.png'?>" alt="" class="topicBgImg bg" width="216px" height="127px">
-                
-      
-                <div class="up-main topicBgEdit" >
-                    <input type="file" name="url" id="upload_file_true" placeholder="选择图片" value="">
-                </div>
+               
             </div>
 </td>
                          <tr style = "height:275px;background:#E2EEFB ">
@@ -551,7 +583,6 @@ if (!empty($html)) {
                     <?php
                     if(!empty($topList)){
                         //var_dump($list);die;
-		
                         foreach ($topList['list'] as $k=>$v) {
                             //var_dump($v[0]['id']);die;
                             ?>
@@ -630,34 +661,13 @@ if (!empty($html)) {
    </td>
 
                 </tr>
-            </table><input type="button" class="btn review" value="提交审核" />
-            
-            
-            
+            </table>
                 </div>
     </div>
 <script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
     <script>
-
-        var mid = <?php echo $this->mid;?>;
-        function getauth(sitelist_id)
-        {
-            var auth = '';
-            $.ajax
-            ({
-                type:'get',
-                async:false,
-                url:'/version/station/CheckTopicAuth/mid/'+mid+'/sitelist_id/'+sitelist_id,
-                success:function(data)
-                {
-                    auth = JSON.parse(data);
-                }
-            });
-            return auth;
-        }
-    
     $('.t1').click(function(){
-    	var topid = "<?php echo !empty($_GET['topid'])?$_GET['topid']:""; ?>"
+    	    	var topid = "<?php echo !empty($_GET['topid'])?$_GET['topid']:""; ?>"
 	var mid = "<?php echo $_GET['mid']; ?>"
 	var nid = "<?php echo $_GET['nid']; ?>"
 	var type = "<?php echo $_GET['type']; ?>"
@@ -673,89 +683,10 @@ if (!empty($html)) {
 	var adminLeftTwo = "<?php echo $_GET['adminLeftTwo']; ?>"
 	var adminLeftOneName = "<?php echo $_GET['adminLeftOneName']; ?>"
 	var adminLeftTwoName = "<?php echo $_GET['adminLeftTwoName']; ?>"
-	window.location.href="/version/station/topic.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
+	window.location.href="/version/site/topic.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
                
 	
 })
- $('.review').click(function(){
- 	
- 	
- 	 if($('.review').val() == '提交审核'){
-         var id = <?php echo $_GET['nid']; ?>;
-         var auth = getauth(id);
- 	if(parseInt(auth.estatus)){
-                        layer.alert("权限不足 无法操作！");return false;
-                }
-	 	$.post('/version/station/doReview?mid=<?php echo $_GET['mid']; ?>&nid=<?php echo $_GET['nid']; ?>',function(d){
-//            console.log(d);return false;
-        window.location.reload()
-        },'json')
- 	 }else if($('.review').val() == '发布'){
-         var id = <?php echo $_GET['nid']; ?>;
-         var auth = getauth(id);
-		if(parseInt(auth.submit)){
-                        layer.alert("权限不足 无法操作！");return false;
-                }
- 	 	$.post('/version/station/doSubmit?mid=<?php echo $_GET['mid']; ?>&nid=<?php echo $_GET['nid']; ?>',function(d){
-//            console.log(d);return false;
-        window.location.reload()
-        },'json')
- 	 
- 	 }
- 	
-	
- })
-
-		$.post('/version/station/getReviewStatus?mid=<?php echo $_GET['mid']; ?>&nid=<?php echo $_GET['nid']; ?>',function(d){
-//            console.log(d);return false;
-			if(d=='500'){
-				$('.review').val("审核中")
-				
-			}else if(d=='300'){
-				$('.review').val("发布")
-				
-			}else{
-				$('.review').val("提交审核")
-				
-			
-			}
-        },'json')
-     function getstatus(){
-     	var d = null;
-     	
-        $.ajax
-        ({
-            type:'get',
-            async: false,
-            url:"/version/station/getReviewStatus?mid=<?php echo $_GET['mid']; ?>&nid=<?php echo $_GET['nid']; ?>",
-            success:function(data)
-            {
-                d = data;
-            }
-        })
-		return d;
-
-     }
-
-
-
-        var id = <?php echo !empty($_GET['nid'])?$_GET['nid']:'0'; ?>;
-        var auth = getauth(id);
-        if(parseInt(auth.estatus)){
-        		$('.topicBgEdit').css('display','none');
-        	}
-        	
-        var x = getstatus()	
-      	  if(x == 500){
- 
-        		$('.topicBgEdit').css('display','none');
-        	}else if(x == 300)
-        	{
-        		$('.topicBgEdit').css('display','none');
-        		
-        	}
-        
-        
     $('.t2').click(function(){
     	    	var topid = "<?php echo !empty($_GET['topid'])?$_GET['topid']:""; ?>"
 	var mid = "<?php echo $_GET['mid']; ?>"
@@ -773,7 +704,7 @@ if (!empty($html)) {
 	var adminLeftTwo = "<?php echo $_GET['adminLeftTwo']; ?>"
 	var adminLeftOneName = "<?php echo $_GET['adminLeftOneName']; ?>"
 	var adminLeftTwoName = "<?php echo $_GET['adminLeftTwoName']; ?>"
-	window.location.href="/version/station/topic1.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
+	window.location.href="/version/site/topic1.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
                
 	
 })
@@ -794,7 +725,7 @@ if (!empty($html)) {
 	var adminLeftTwo = "<?php echo $_GET['adminLeftTwo']; ?>"
 	var adminLeftOneName = "<?php echo $_GET['adminLeftOneName']; ?>"
 	var adminLeftTwoName = "<?php echo $_GET['adminLeftTwoName']; ?>"
-	window.location.href="/version/station/topic2.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
+	window.location.href="/version/site/topic2.html?topid="+topid+"&mid="+mid+"&nid="+nid+"&type="+type+"&top="+top+"&par="+par+"&son="+son+"&one="+one+"&two="+two+"&three="+three+"&leftNavFlag="+leftNavFlag+"&adminLeftNavFlag="+adminLeftNavFlag+"&adminLeftOne="+adminLeftOne+"&adminLeftTwo="+adminLeftTwo+"&adminLeftOneName="+adminLeftOneName+"&adminLeftTwoName="+adminLeftTwoName
                
 	
 })
@@ -840,8 +771,7 @@ if (!empty($html)) {
                 }
             },
             'onUploadStart' :function(file)
-            {	
-            	
+            {
                 start = layer.load(0, {icon: 16,shade: [0.3,'#000']});
             },
             'onUploadSuccess' : function(file, data, response)
@@ -1013,12 +943,6 @@ if (!empty($html)) {
 
         $('.adderji').click(function(){
             var gid = $(this).attr('gid');
-            var auth = getauth(gid);
-        	if(parseInt(auth.estatus)){
-        		layer.alert("权限不足 无法操作！");return false;
-        	}
-          
-
             $.getJSON('<?php echo $this->get_url('station','topadd')?>', {gid: gid}, function (d) {
                 if (d.code == 200) {
                     layer.open({
@@ -1035,12 +959,6 @@ if (!empty($html)) {
 
         $('.addyiji').click(function(){
             var gid = $(this).attr('gid');
-            var auth = getauth(gid);
-//            alert(parseInt(auth.estatus));return false;
-        	if(parseInt(auth.estatus)){
-        		layer.alert("权限不足 无法操作！");return false;
-        	}
-
             $.getJSON('<?php echo $this->get_url('station','topadd')?>', {gid: gid}, function (d) {
                 if (d.code == 200) {
                     layer.open({
@@ -1060,29 +978,6 @@ if (!empty($html)) {
         }
 
         $('.dele').click(function(){
-            var id = $(this).attr('des');
-            var auth = getauth(id);
-            if(parseInt(auth.estatus)){
-                    layer.alert("权限不足 无法操作！");return false;
-            }
-             var x;
-             $.ajax
-                ({
-                    type:'get',
-                    async: false,
-                    url:"/version/station/getReviewStatus?mid=<?php echo $_GET['mid']; ?>&nid=" + id,
-                    success:function(data)
-                    {
-                        x = data;
-                    }
-                })
-
-            if(x == 500){
-                layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300) {
-                layer.alert("请发布数据之后再进行编辑");return false;
-        		
-        	}  
             var auth = "<?php echo $_SESSION['auth']?>";
             var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
             if(auth=='1' || flag=='1'){
@@ -1097,7 +992,7 @@ if (!empty($html)) {
             }, function(){
                 $.post("<?php echo $this->get_url('site','delsite')?>",{id:id},function(d){
                     if(d.code==200){
-                        layer.alert(d.msg);
+                        alert(d.msg);
                         //location.reload();
                         var adminLeftOne = "<?php echo $adminLeftOne;?>";
                         var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
@@ -1105,41 +1000,14 @@ if (!empty($html)) {
                         var adminLeftTwoName = "<?php echo $adminLeftTwoName;?>";
                         window.location.href="/version/station/topic.html?mid=-1&nid=39"+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
                     }else{
-                        layer.alert(d.msg)
+                        alert(d.msg)
                     }
                 },'json')
             })
         })
         $('.edit').click(function(){
-		    var id = $(this).attr('des');
-		    var auth = getauth(id);
-//		    console.log(auth);
-            if(parseInt(auth.estatus)){
-                layer.alert("权限不足 无法操作！");return false;
-            }
-            var x;
-            $.ajax
-            ({
-                type:'get',
-                async: false,
-                url:"/version/station/getReviewStatus?mid=<?php echo $_GET['mid']; ?>&nid=" + id,
-                success:function(data)
-                {
-                    x = data;
-                }
-            })
-
-        	if(x == 500){
-
-                   layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300) {
-                layer.alert("请发布数据之后再进行编辑");return false;
-        		
-        	}  
             var auth = "<?php echo $_SESSION['auth']?>";
             var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
-//            console.log(auth);
-//            console.log(flag);
             if(auth=='1' || flag=='1'){
 
             }else{
@@ -1161,22 +1029,8 @@ if (!empty($html)) {
         })
 
         $('.modules a').click(function(){
-            var gid = '<?php echo !empty($_REQUEST['nid']) ? $_REQUEST['nid'] :''?>';
-            var auth = getauth(gid);
-//            console.log(auth);
-            if(parseInt(auth.estatus)){
-                layer.alert("权限不足 无法操作！");return false;
-        	}
-        	var x = getstatus();
-            if(x == 500){
-                layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300){
-                layer.alert("请发布数据之后再进行编辑");return false;
-        	}  
             var auth = "<?php echo $_SESSION['auth']?>";
             var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
-//            console.log(auth);
-//            console.log(flag);
             if(auth=='1' || flag=='1'){
 
             }else{
@@ -1215,25 +1069,12 @@ if (!empty($html)) {
         });
 
         $('.del').click(function(){
-            var id = $(this).attr('dss');
-            var auth = getauth(id);
-        	if(parseInt(auth.estatus)){
-                layer.alert("权限不足 无法操作！");return false;
-        	}var x = getstatus()
-        		   if(x == 500){
-
-                       layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300)
-        	{
-                layer.alert("请发布数据之后再进行编辑");return false;
-        		
-        	}  
             var G = {};
             G.id = $(this).attr('dss');
             if(confirm('你确定删除此条内容吗？')){
                 $.getJSON('<?php echo $this->get_url('site','del')?>',G,function(d){
                     if(d.code==200){
-                        layer.alert(d.msg);
+                       alert(d.msg);
                        location.reload();
                     }else{
                        layer.alert(d.msg,{icon:0});
@@ -1243,19 +1084,6 @@ if (!empty($html)) {
         })
 
         $('.guide').click(function(){
-            var id = $(this).attr('gid');
-            var auth = getauth(id);
-            if(parseInt(auth.estatus)){
-                layer.alert("权限不足 无法操作！");return false;
-        	}var x = getstatus()
-        	   if(x == 500){
-
-                   layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300)
-        	{
-                layer.alert("请发布数据之后再进行编辑");return false;
-        		
-        	}  
             var auth = "<?php echo $_SESSION['auth']?>";
             var flag = "<?php if(in_array('1',$res['status'])){echo 1;}?>";
             if(auth=='1' || flag=='1'){
@@ -1279,22 +1107,9 @@ if (!empty($html)) {
         })
 
         $('.add_topic').click(function(){
-            var id = "<?php echo $_REQUEST['nid'];?>";
-            var auth = getauth(id);
-        	if(parseInt(auth.estatus)){
-                layer.alert("权限不足 无法操作！");return false;
-        	}var x = getstatus()
-        		   if(x == 500){
-
-                       layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300)
-        	{
-                layer.alert("请发布数据之后再进行编辑");return false;
-        		
-        	}  
             if($('.bg').length>0){
                 if($('.bg').val().length>1){
-                    layer.alert('您已经新建过专题了！');
+                    alert('您已经新建过专题了！');
                     return false;
                 }
             }
@@ -1342,7 +1157,7 @@ if (!empty($html)) {
                              '<li class="lit" >'+
 
                             '<img src="/file/3.png" style="position:relative;z-index:9999" alt="" onclick="addTop(this)" order="'+order+'" position="'+position+'">'+
-                                                        '<img style="position:absolute;top:10px;left:60px;width:30px;height:30px;border-radius:10px;" src="/file/u1892.png">'+
+                                                        '<img style="position:absolute;top:30px;left:60px;width:30px;height:30px;border-radius:10px;" src="/file/u1892.png">'+
                         '</li>'
                     );
                 }
@@ -1352,22 +1167,7 @@ if (!empty($html)) {
 
         function addTop(obj)
         {
-            var gid = "<?php echo $_GET['nid']?>";
-
-            var auth = getauth(gid);
-            if(parseInt(auth.estatus)){
-                layer.alert("权限不足 无法操作！");return false;
-        	}var x = getstatus()
-        	
-        	
-        		   if(x == 500){
-
-                       layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300)
-        	{
-                layer.alert("请发布数据之后再进行编辑");return false;
-        		
-        	}  
+        	return false;
             var gid = "<?php echo $_GET['nid']?>";
             var mid = "<?php echo $this->mid?>";
             var order = $(obj).attr('order');
@@ -1437,21 +1237,7 @@ if (!empty($html)) {
 
         function editTop(obj)
         {
-            var id = $(obj).attr('uiId');
-            var auth = getauth(id);
-            if(parseInt(auth.estatus)){
-                            layer.alert("权限不足 无法操作！");return false;
-                } var x = getstatus()
-           if(x == 500){
-
-               layer.alert("审核中！请勿编辑");return false;
-                }else if(x == 300)
-                {
-                    layer.alert("请发布数据之后再进行编辑");return false;
-
-                }
-	
-         
+        	return false;
             var mid = "<?php echo $this->mid;?>";
             var id = $(obj).attr('uiId');
             var imgFlag = $(obj).parent('div').find('img').attr('imgFlag');
@@ -1504,36 +1290,10 @@ if (!empty($html)) {
                 });
             }
         }
-		function onsub(){
-            var id = <?php echo $_REQUEST['nid'];?>;
-            var auth = getauth(id);
-			if(parseInt(auth.estatus)){
-                layer.alert("权限不足 无法操作！");return false;
-        	}var x = getstatus()
-        		   if(x == 500){
 
-                       layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300)
-        	{
-                layer.alert("请发布数据之后再进行编辑");return false;
-        		
-        	}  
-		}
         function delTop(obj)
         {
-            var id = $(obj).attr('uiId');
-            var auth = getauth(id);
-            if(parseInt(auth.estatus)){
-                layer.alert("权限不足 无法操作！");return false;
-        	}var x = getstatus()
-        	   if(x == 500){
-
-                   layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300)
-        	{
-                layer.alert("请发布数据之后再进行编辑");return false;
-        		
-        	}  
+        	return false;
             var mid = "<?php echo $this->mid;?>";
             var id = $(obj).attr('uiId');
             var imgFlag = $(obj).parent('div').find('img').attr('imgFlag');
@@ -1557,7 +1317,7 @@ if (!empty($html)) {
                 },
                 error:function()
                 {
-                    layer.alert('删除失败，请再试一次。');
+                    alert('删除失败，请再试一次。');
                 }
             })
 
@@ -1565,19 +1325,7 @@ if (!empty($html)) {
 
         function addNews(obj)
         {
-            var gid = "<?php echo $_GET['nid']?>";
-            var auth = getauth(gid);
-            if(parseInt(auth.estatus)){
-                layer.alert("权限不足 无法操作！");return false;
-        	}var x = getstatus() 
-        	  if(x == 500){
-
-                  layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300)
-        	{
-                layer.alert("请发布数据之后再进行编辑");return false;
-        		
-        	}  
+        	return false;
             var gid = "<?php echo $_GET['nid']?>";
             var mid = "<?php echo $this->mid?>";
             var order = $('.newsCenter').eq(0).children('ul').children('li').length;
@@ -1606,20 +1354,7 @@ if (!empty($html)) {
         $('a').css('text-decoration','none');
 function add(obj)
         {
-
-            var gid = "<?php echo $_GET['nid']?>";
-            var auth = getauth(gid);
-            if(parseInt(auth.estatus)){
-                layer.alert("权限不足 无法操作！");return false;
-        	}var x = getstatus()  
-        	 if(x == 500){
-
-                 layer.alert("审核中！请勿编辑");return false;
-        	}else if(x == 300)
-        	{
-                layer.alert("请发布数据之后再进行编辑");return false;
-        		
-        	}  
+        	return false;
             var mid = "<?php echo $_GET['mid']?>";
             var nid="<?php echo $_GET['nid']?>";
             var screenGuideId = $('.guideFlag').attr('guideId');

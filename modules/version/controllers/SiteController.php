@@ -343,6 +343,7 @@ class SiteController extends VController
     }
 public function actionTopic2(){
         try{
+	
             if(!empty($_REQUEST['nid'])){
                 $gid = $_REQUEST['nid'];
             }else{

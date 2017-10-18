@@ -68,21 +68,23 @@
     </tr>
                 <?php }
             }else if($_REQUEST['flag'] == '2' || $_REQUEST['flag'] == '6'){
-		$tmp=array();
+		        $tmp=array();
                 $work_sql = "select stationId from yd_ver_work where flag=".$_REQUEST['flag'];
                 $work_res = SQLManager::queryAll($work_sql);
                 foreach ($work_res as $a=>$b){
                     $tmp[] = $b['stationId'];
                 }
+                $arr = implode(',',$tmp);
 		//var_dump($tmp);die;
-		if(!empty($tmp)){
+		/*if(!empty($tmp)){
                 $arr = implode(',',$tmp);
                 $sql="select id,name from yd_ver_sitelist where pid=0 and type=0 and id not in($arr)";
 		}else{
                 $sql="select id,name from yd_ver_sitelist where pid=0 and type=0 ";
-		}
-		  $res=SQLManager::queryAll($sql);
-                  if(!empty($res)){
+		}*/
+                $sql = "select id,name from yd_ver_station where id not in ($arr)";
+		        $res=SQLManager::queryAll($sql);
+                if(!empty($res)){
                        ?>
         <tr>
             <td>选择站点</td>
@@ -233,7 +235,7 @@
     /*$(document).on('click','.add',function(){
         fu = $(this).parent().attr('id');
         var p = 1;
-        $.getJSON("<?php echo $this->get_url('station','ajaxlist')?>",{page:p},function(d){
+        $.getJSON("<?php //echo $this->get_url('station','ajaxlist')?>",{page:p},function(d){
             if(d.code==200){
                 $('.content').empty();
                 var list = d.list;

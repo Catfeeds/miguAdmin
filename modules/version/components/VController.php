@@ -80,21 +80,67 @@ class VController extends Controller{
     public function getSitelist($uid,$flag){
         //$sql="select workud from yd_ver_worker where uid=$uid group by stationId";
         if(!empty($flag)){
-        $sql = "select w.stationId from yd_ver_work w inner join yd_ver_worker k on k.workid=w.id and k.uid=$uid and w.flag=6";
+        $sql = "select w.stationId from yd_ver_work w inner join yd_ver_worker k on k.workid=w.id and k.uid=$uid and w.flag=6 group by w.stationId";
         	
         }else{
         $sql = "select w.stationId from yd_ver_work w inner join yd_ver_worker k on k.workid=w.id and k.uid=$uid and w.flag=2";
 		}
 	    $user = SQLManager::queryAll($sql);
-	
+
         if(!empty($user)){
-            $list = VerGuideManager::String($user);
-			
-            return VerSitelist::model()->findAll("id in ($list)");
+            if($flag == 6){
+                $tmp_list = array();
+                foreach ($user as $k=>$v){
+                    $tmp = VerStation::model()->findByPk($v['stationId']);
+                    $name = $tmp->attributes['name'];
+                    $tmp_list[] = $this->getAuthSiteList($name);
+                }
+                $a = array();
+                foreach ($tmp_list as $k=>$v){
+                    foreach ($v as $val){
+                        $a[] = $val;
+                    }
+                }
+                $list = implode(',',$a);
+                return VerSitelist::model()->findAll("id in ($list)");
+            }else{
+                $list = VerGuideManager::String($user);
+                return VerSitelist::model()->findAll("id in ($list)");
+            }
+
         }else{
             $list= array();
             return $list;
         }
+    }
+
+    public function getAuthSiteList($name)
+    {
+        $sql = "select id from yd_ver_sitelist where name='$name' and pid = '0' ";
+        $list = SQLManager::queryRow($sql);
+        $ids = array();
+        $ids[] = $list['id'];
+        $sql_list = "select id from yd_ver_sitelist where pid='{$list['id']}' and type=1";
+        $tmp = SQLManager::queryAll($sql_list);
+        foreach ($tmp as $k=>$v){
+            $ids[] = $v['id'];
+        }
+        $tmp_ids = implode(',',$ids);
+
+        $sql_list = "select id from yd_ver_sitelist where pid in ($tmp_ids) and type=2";
+        $tmp = SQLManager::queryAll($sql_list);
+        foreach ($tmp as $k=>$v){
+            $ids[] = $v['id'];
+        }
+
+        $tmp_ids = implode(',',$ids);
+        $sql_list = "select id from yd_ver_sitelist where pid in ($tmp_ids) and type=3";
+        $tmp = SQLManager::queryAll($sql_list);
+        foreach ($tmp as $k=>$v){
+            $ids[] = $v['id'];
+        }
+
+        return $ids;
     }
 
 

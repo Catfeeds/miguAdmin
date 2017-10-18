@@ -148,6 +148,7 @@ class Common
            $sql="select pid from yd_ver_sitelist where id=$gid";
            $list = SQLManager::queryRow($sql);
            $gid=!empty($list['pid'])?$list['pid']:"0";
+
         }else{
            $sql="select pid from yd_ver_sitelist where id=$nid";
            
@@ -157,9 +158,14 @@ class Common
            $sql="select pid from yd_ver_sitelist where id=$gid";
            $list = SQLManager::queryRow($sql);
            $gid=!empty($list['pid'])?$list['pid']:"0";
-           $sql="select pid from yd_ver_sitelist where id=$gid";
+           $sql="select pid,name from yd_ver_sitelist where id=$gid";
            $list = SQLManager::queryRow($sql);
            $gid=!empty($list['pid'])?$list['pid']:"0";
+           $sql="select pid,name from yd_ver_sitelist where id=$gid";
+           $list = SQLManager::queryRow($sql);
+           $gid=!empty($list['pid'])?$list['pid']:"0";
+           $gid = VerStation::model()->find("name='{$list['name']}'");
+           $gid = $gid->attributes['id'];
         }
         $uid = $_SESSION['userid'];
         $sql = "select w.cp,k.type from yd_ver_work w inner join yd_ver_worker k on k.workid=w.id and w.stationId=$gid and k.uid=$uid";

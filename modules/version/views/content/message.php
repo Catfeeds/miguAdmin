@@ -1,6 +1,6 @@
 <script charset="utf-8" type="text/javascript" src="/js/jdate/jquery.datetimepicker.js"></script>
 <link rel="stylesheet" href="/js/jdate/jquery.datetimepicker.css" />
-<form action="" method="post" enctype="multipart/form-data">
+<form method="post" onsubmit="return check()" action="" enctype="multipart/form-data">
 <?php
 $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
 $adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
@@ -193,7 +193,8 @@ padding:5px 10px;
         formatDate: 'Y-m-d',
     });
 
-    $('.save').click(function(){
+    function check(){
+	var G = {};
         var first = $('input[name=firstTime]').val();
         if(empty(first)){
             layer.alert("请填写有效期！")
@@ -204,7 +205,24 @@ padding:5px 10px;
             layer.alert("请填写有效期！")
             return false;
         }
-    })
+	var stationId=$("#gid").val();//选中的站点
+        if(empty(stationId)){
+            layer.alert("请选择站点");
+            return false;
+        }
+	G.stationId=stationId;
+        G.firstTime=first;
+        G.endTime=timeend;
+	//console.log(G);return false;
+        $.post('/version/content/message.html?mid=<?php echo $_REQUEST['mid']?>',G,function(d){
+	//console.log(d);return false;
+            if(d.message== '321'){
+                alert("添加失败");
+                return false;
+            }
+            return true;
+        },'json')
+    }
 
     $(function(){
         aa();

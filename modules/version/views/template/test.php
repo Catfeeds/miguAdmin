@@ -16,7 +16,9 @@
     	height:20px;
     	width:30px;
     }
-    td{text-align:center}
+    td{text-align:center;background-color: #9a9797;color: white;}
+.cannotselect{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-khtml-user-select:none;user-select:none;}
+td.selected{background-color:#0094ff;color:#fff}
 </style>
 
 <?php
@@ -36,7 +38,8 @@
 <input type="hidden" value="-1" name="mid">
 <input type="submit" class="btn" value="生成模板" />
 </form>
-<table id="template_table" cellspacing="<?php echo $cellspacing/2;?>" style="width:<?php echo ($max_line*$width)/2+(($max_line-1)*$cellspacing)/2;?>px;padding-left:45px" background="http://117.144.248.58:8082/file/1507791890767920.jpg">
+<div style="background:url(/file/1508223135911204.jpg) no-repeat;width:1920px;padding-left:45px;min-height:394px">
+<table id="template_table" cellspacing="<?php echo $cellspacing/2;?>" style="width:<?php echo ($max_line*$width)/2+(($max_line-1)*$cellspacing)/2;?>px;">
 
     <?php
         for($a = 0 ; $a<$max_column ; $a++){
@@ -47,13 +50,14 @@
                 $style_x = ($width/2)."px";
                 $style_y = ($height/2)."px";
 			
-                echo "<td style='width:$style_x;height:$style_y;border:1px solid #ccc;border-radius: 8px;'>".$x."x".$y."</td>";
+                echo "<td style='width:$style_x;height:$style_y;border:1px solid #9e9d9d;border-radius: 8px'>".$x."x".$y."</td>";
             }
             echo "</tr>";
         }
     ?>
 
 </table>
+</div>
 <form action="" method="post" id="form1" enctype="multipart/form-data">
 模板名称：<input id="name" name="name" type="text" class="form-input w150" /><br/>
 上传缩略图：<input id="pic" type="file" class="form-input w400" value="" name="url"> <br/>
@@ -68,7 +72,7 @@
 </form>
 <script>
     //需要的样式
-    document.write('<style>.cannotselect{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-khtml-user-select:none;user-select:none;}td.selected{background:#0094ff;color:#fff}</style>');
+    //document.write('<style>.cannotselect{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-khtml-user-select:none;user-select:none;}td.selected{background:#0094ff;color:#fff}</style>');
 
 
     //jQuery表格单元格合并插件，功能和excel单元格合并功能一样，并且可以保留合并后的所有单元格内容到第一个单元格中
@@ -163,8 +167,8 @@
 			firstTD.html("<p style='display:none'>"+text+"</p>");
 		    //显示宽高
 		    firstTD.append("宽高："+width+"x"+height);
-		    var total_h=52.5*(MMRC.endRowIndex - MMRC.startRowIndex+1)+(MMRC.endRowIndex - MMRC.startRowIndex)*10;
-		    var total_w=125*(MMRC.endCellIndex - MMRC.startCellIndex + 1)+(MMRC.endCellIndex - MMRC.startCellIndex)*10;
+		    var total_h=<?php echo $height/2;?>*(MMRC.endRowIndex - MMRC.startRowIndex+1)+(MMRC.endRowIndex - MMRC.startRowIndex)*<?php echo $cellspacing/2;?>;
+		    var total_w=<?php echo $width/2;?>*(MMRC.endCellIndex - MMRC.startCellIndex + 1)+(MMRC.endCellIndex - MMRC.startCellIndex)*<?php echo $cellspacing/2;?>;
 		    firstTD.height(total_h);
 		    firstTD.width(total_w);
                     //更新合并的第一个单元格的缓存rc数据为所跨列和行

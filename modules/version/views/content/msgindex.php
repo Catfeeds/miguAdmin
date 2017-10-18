@@ -95,7 +95,13 @@
         <option value="0">请选择</option>
         <?php
         $defaultId = !empty($_GET['stationId'])?$_GET['stationId']:'0';
-        $sql = "select id,name from yd_ver_station";
+        if($_SESSION['auth'] == 1){
+            $sql = "select id,name from yd_ver_station";
+        }else{
+            $uid = $_SESSION['userid'];
+            $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 4  left join yd_ver_worker as c on c.workid=b.id where c.type = 1 and  c.uid=$uid group
+ by a.id";
+        }
         $ress = SQLManager::queryAll($sql);
         if(!empty($ress)){
             foreach ($ress as $k=>$v){
