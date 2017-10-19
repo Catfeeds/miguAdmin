@@ -265,10 +265,10 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             }, function(){
             $.getJSON('<?php echo $this->get_url('station','del')?>',{id:id,mid:mid},function(d){
                 if(d.code==200){
-                    alert('删除成功!')
+                    layer.alert('删除成功!')
                     location.reload();
                 }else{
-                    alert('删除失败!')
+                    layer.alert('删除失败!')
                 }
             })
         })

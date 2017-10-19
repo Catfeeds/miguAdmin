@@ -545,15 +545,23 @@ $list = SQLManager::execute($sql);
             }
         }
     }
+
     public function actionDel(){
         $id = $_REQUEST['id'];
+//        $pid = 0;
         $list = VerStation::model()->findByPk($id);
         if(!empty($list)){
             $name = $list->attributes['name'];
-            $tmp = VerSitelist::model()->find("name='$name'");
+            $tmp = VerSitelist::model()->find(
+                array(
+                    'select'=>'id,name,pid',
+                    'condition'=>'name=:name and type=0',
+                    'params'=>array(':name'=>$name),
+                ));
             $sid = $tmp->attributes['id'];
-            Yii::app()->db->createCommand()->delete('{{ver_sitelist}}', "pid=$sid");
-            $result = VerSitelist::model()->deleteByPk($sid);
+//            $pid = $sid;
+            $this->delSiteListData($sid);
+            //Yii::app()->db->createCommand()->delete('{{ver_sitelist}}', "pid=$sid");
 
         }
         $res = VerStation::model()->deleteByPk($id);
@@ -562,6 +570,14 @@ $list = SQLManager::execute($sql);
         }else{
             echo json_encode(array('code'=>404));
         }
+    }
+
+
+    public function delSiteListData($id)
+    {
+        $result = VerSitelist::model()->deleteAllByAttributes(array('pid'=>$id));
+        $result = VerSitelist::model()->deleteByPk($id);
+
     }
 
 

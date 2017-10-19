@@ -83,6 +83,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         background: #f0fdff;
     }
     .inputDivTwo a{float:left;}
+.cc{color:#ccc}
 </style>
 <?php
     $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
@@ -230,7 +231,24 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 		    </td>
                     <td><img src="<?php echo $l->thum?>" width="150px" height="86px"></td>
                     <!--<td><img src="<?php echo $l->pic?>" width="214px" height="123px"></td>-->
-		    <td><?php if(!empty($l->startTime)){echo date("Y-m-d",$l->startTime);}else{echo "-";}?>~<?php if(!empty($l->endTime)){echo date("Y-m-d",$l->endTime);}else{echo "-";}?></td>
+		   <td 
+			<?php 
+				if(!empty($l->startTime)&&!empty($l->endTime)&&$l->endTime<strtotime(date('Ymd',time()))){
+					echo "class='cc'>".date("Y-m-d",$l->startTime);
+				}elseif(!empty($l->startTime)){
+					echo ">".date("Y-m-d",$l->startTime);
+				}else{
+					echo ">-";
+				}
+			?>~
+			<?php 
+				if(!empty($l->endTime)){
+					echo date("Y-m-d",$l->endTime);
+				}else{
+					echo "-";
+				}
+			?>
+			</td>
                     <td>
                         <?php
                         switch($l->flag){
@@ -369,5 +387,6 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 	//console.log(type);return false;
         window.location.href="/version/wallpaper/index?mid="+mid+"&nid="+nid+"&title="+title+"&gid="+gid+"&type="+type+"&province="+province+"&city="+city+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
     })
+	$(".cc").siblings("td").addClass("cc");
 </script>
 

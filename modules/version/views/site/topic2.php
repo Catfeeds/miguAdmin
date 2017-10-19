@@ -447,19 +447,19 @@ $res['status'][] =2;
                                         ?>
                                         <li class="menus">
                                             <span style="position: relative" class='test active'>
-                                                <img src="../../../file/button/folder_true.png" onclick="two(this)" class="two" >
+                                                <img src="../../../file/button/folder_false.png" onclick="two(this)" class="two" >
                                                <div style="display: inline;position: absolute;top:5px;"><?php echo $val['name']; ?></div>
                                                 <img src="../../file/button/del.png" title="删除" des="<?php echo $val['id']; ?>" class="dele" style="visibility:hidden;">
                                                 <!--                                                                                        <input type="button" des="--><?php //echo $val['id'] ?><!--" class="edit" value="编">-->
                                                                                         <img src="../../file/button/edit.png" title="编辑" des="<?php echo $val['id']?>" class="edit" style="visibility:hidden;">
                                                                                         <span style="display: block;float: right;margin-right: 20px;"><?php echo $val['id']; ?></span>
                                             </span>
-                                            <ul>
+                                            <ul style="display:none;">
                                                 <?php
                                                 $c = -1;
                                                     foreach($tmp as $l){
                                                         $c++;?>
-                                                           <li class="test2">
+                                                           <li class="test2 <?php if($_GET['nid'] == $l['id']){echo 'light';}?>" style="<?php if($_GET['nid'] == $l['id']){ echo "background: rgb(163, 186, 213)"; } ?>">
                                                                <a href="<?php echo $l['url'] == '#'?'#':Yii::app()->createUrl($l['url'],array('mid'=>$_GET['mid'],'nid'=>$l['id'],'epg'=>$l['name'],'pro'=>$admin['nickname'],'one'=>$a,'two'=>$b,'three'=>$c,'leftNavFlag'=>'1','adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">&nbsp;&nbsp;&nbsp;<?php echo $l['name']; ?> </a>
 
                                                                <img src="../../file/button/del.png" title="删除" des="<?php echo $l['id']; ?>" class="dele" style="visibility:hidden;">
@@ -1157,7 +1157,7 @@ $res['status'][] =2;
                              '<li class="lit" >'+
 
                             '<img src="/file/3.png" style="position:relative;z-index:9999" alt="" onclick="addTop(this)" order="'+order+'" position="'+position+'">'+
-                                                        '<img style="position:absolute;top:30px;left:60px;width:30px;height:30px;border-radius:10px;" src="/file/u1892.png">'+
+                                                        '<img style="position:absolute;top:10px;left:60px;width:30px;height:30px;border-radius:10px;" src="/file/u1892.png">'+
                         '</li>'
                     );
                 }
@@ -1350,6 +1350,7 @@ $res['status'][] =2;
         {
             $('.heightLight').parent('ul').slideDown(100).children('li');
             $('.heightLight').parent('ul').attr('src','../../../file/button/folder_true.png');
+		$('.light').parent('ul').show();
         }
         $('a').css('text-decoration','none');
 function add(obj)
