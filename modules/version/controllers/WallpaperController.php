@@ -33,7 +33,7 @@ class WallpaperController extends VController{
             $page = 10;
             $data = $this->getPageInfo($page);
             $criteria = new CDbCriteria();
-            $criteria->select = '*';
+            $criteria->select = '*';	
             if(!empty($res['stationId']) || $_SESSION['auth']=='1'){
                 if(!empty($res['stationId']) && $_SESSION['auth']=='1'){
 			 $criteria->addCondition("gid=".$res['stationId'][0]);
@@ -61,13 +61,14 @@ class WallpaperController extends VController{
                         $city=$_REQUEST['title'];
                         $criteria->addCondition("title like '%$city%'");
                     }
-
+		
 		}
             }else{
 		
                 $criteria->addCondition("flag=7");
             }
             $count = VerWall::model()->count($criteria);
+		$criteria->addCondition("flag<7");
             $criteria->offset = $data['start'];
             $criteria->limit = $data['limit'];
             $criteria->order = 'addTime desc';
@@ -87,6 +88,7 @@ class WallpaperController extends VController{
 		if(!empty($res['stationId']) || $_SESSION['auth']=='1'){
                 if(!empty($res['stationId']) && $_SESSION['auth']=='1'){
              
+			$criteria->addCondition(" flag>0");
 		    $criteria->addCondition("gid=".$res['stationId'][0]);
                 }else{
                     /*if(!empty($gid)){
@@ -116,10 +118,12 @@ class WallpaperController extends VController{
 		    if(!empty($_REQUEST['city'])){
 			$criteria->addCondition(" city like '%{$_REQUEST['city']}%'");
 		    }
+		 
                 }
             }else{
                 $criteria->addCondition("flag=7");
             }
+		$criteria->addCondition("flag<7");
             $criteria->order = 'addTime desc';
             $list = VerWall::model()->findAll($criteria);
             $url = $this->createUrl($this->action->id);
