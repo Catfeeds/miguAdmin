@@ -512,6 +512,7 @@ class ReviewController extends VController
                 $allbtn=$_REQUEST['allbtn'];
                 if($allbtn=='已通过'){
                      $sql="select p.*,g.title as gtitle,s.name,c.username,b.add_time from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and b.review_flag='1' inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
+                     $sql = "select a.add_time,b.* from yd_ver_review_record as a left join yd_ver_screen_content_copy on a.bind_id=b.id and a.review_flag='1' and a.type=3 left join yd_ver_admin as c on a.user_id=c.id ";
                       
                 }else if($allbtn=='已驳回'){
                      $sql="select p.*,g.title as gtitle,s.name,c.username,b.add_time from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and b.review_flag='2' inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
@@ -532,7 +533,7 @@ class ReviewController extends VController
                 $sql_where .= " and p.cp='{$_REQUEST['cp']}'";
             }
 
-            $sql_order = " order by b.add_time desc ";
+            $sql_order = " order by yd_ver_review_record.add_time desc ";
             $sql = $sql . $sql_where . $sql_order;
             $list = SQLManager::queryAll($sql);
 //            print_r($sql);
