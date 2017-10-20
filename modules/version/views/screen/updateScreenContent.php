@@ -358,10 +358,13 @@
     <tr>
         <td align="center" colspan="4" class="button">
             <!--            <input type="button" value="选择媒资" class="btn meizi">-->
-            <input style="width:100px;height:30px;padding:0px" type="button" value="为此推荐位添加轮播图" class="btn addBanner">
             <input style="width:100px;height:30px;padding:0px" type="button" value="保存信息" class="btn save">
-            <input style="width:100px;height:30px;padding:0px" type="button" value="删除此条数据" class="btn del">
             <input style="width:100px;height:30px;padding:0px" type="button" value="取消" class="gray" >
+            <input style="width:100px;height:30px;padding:0px" type="button" value="删除此条数据" class="btn del">
+            <input style="width:100px;height:30px;padding:0px" type="button" value="为此推荐位添加轮播图" class="btn addBanner">
+
+
+
 
         </td>
     </tr>
