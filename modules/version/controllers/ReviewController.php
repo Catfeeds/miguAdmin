@@ -470,7 +470,7 @@ class ReviewController extends VController
             foreach ($workInfo as $k=>$v){
                 $stationId[] = $v['stationId'];
             }
-	    $tmp_stationId=join(",",$stationId);
+	        $tmp_stationId=join(",",$stationId);
             //$tmp_stationId = explode(',',$stationId);
 //            $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id=$stationId ";
             $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id in ($tmp_stationId) ";
@@ -613,6 +613,13 @@ class ReviewController extends VController
     {
         $workInfo = Common::getWorkInfo();
         //var_dump($workInfo);die;
+        $review_flag = $_REQUEST['flag'];   //通过
+        if($review_flag == 1){
+            $review_message = '通过';
+        }else{
+            $review_message = '驳回';
+        }
+
         if(!empty($workInfo)){
 //            $maxWork = $workInfo[0]['maxLength'];
             $flag = $_REQUEST['flag'];
@@ -628,23 +635,30 @@ class ReviewController extends VController
                     if($list->flag == $maxWork && $list->flag  == '1'){
                         $list->flag = 100;
                         $delFlag='2';
+                        $review_times=1;
                     }else if($flag=='1'){
                         $this->addlog($list);
                         if($list->flag=='1') {
                             $sign++;
                             $list->flag = 10*$sign;
 			                $delFlag='1';
+                            $review_times = $sign;
                         }else if($list->flag < $maxWork*10){
                             $sign++;
                             $list->flag = 10*$sign;
                             $delFlag='1';
+                            $review_times = $sign;
                         }else if($list->flag >= $maxWork*10){
                             $list->flag = 100;
                             $delFlag='2';
+                            $review_times = $maxWork;
                         }else{
                             $list->flag='5';
 			                $delFlag='2';
+                            $review_times = 5;
                         }
+
+
                     }else{
 			            if($list->pic == '/file/3.png'){
                             $id = $_REQUEST['id'];
@@ -664,9 +678,14 @@ class ReviewController extends VController
                         $this->nolog($list);
                         $list->flag='7';
                         $delFlag='0';
+                        $review_times = 1;
                     }
                     $list->delFlag=$delFlag;
                     $list->save();
+
+                    $bind_id = $v;  //yd_ver_screen_content_copy表主键
+                    $review_type = 3;   //EPG屏幕数据
+                    $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
                     //$result = VerScreenContentCopy::model()->updateAll(array('delFlag'=>$delFlag),'id=:id',array(':id'=>$v));
 //                $result = VerScreenContentCopy::model()->updateAll(array('delFlag'=>$delFlag),'screenGuideid=:screenGuideid',array(':screenGuideid'=>$screenGuideid));
                 }
@@ -713,6 +732,14 @@ class ReviewController extends VController
                         $list->delFlag='0';
                     }
                     $list->save();
+
+                    //$review_flag = 1;   //通过
+                    $review_times = 1;
+                    //$review_message = '通过';
+                    $bind_id = $v;  //yd_ver_screen_content_copy表主键
+                    $review_type = 3;   //EPG屏幕数据
+                    $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
                     //$result = VerScreenContentCopy::model()->updateAll(array('delFlag'=>$delFlag),'screenGuideid=:screenGuideid',array(':screenGuideid'=>$screenGuideid));
                 }
             }

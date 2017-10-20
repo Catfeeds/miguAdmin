@@ -84,9 +84,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         </select>
         <span >审核状态:</span><select onchange="access_btnChange()" style="width:70px;height:20px;"  class="form-input w100" id="allbtn">
             <option  value="请选择"  >请选择</option>
-            <option  value="待审核"  >待审核</option>
-            <option  value="已通过"  >已通过</option>
-            <option  value="已驳回"  >已驳回</option>
+            <option <?php if(!empty($_REQUEST['allbtn']) && $_REQUEST['allbtn'] == '待审核'){echo 'selected=selected';}?> value="待审核"  >待审核</option>
+            <option <?php if(!empty($_REQUEST['allbtn']) && $_REQUEST['allbtn'] == '已通过'){echo 'selected=selected';}?> value="已通过"  >已通过</option>
+            <option <?php if(!empty($_REQUEST['allbtn']) && $_REQUEST['allbtn'] =='已驳回'){echo 'selected=selected';}?> value="已驳回"  >已驳回</option>
         </select>
         <input style="width:50px;height:20px;margin-left: 5px;font-size: 14px;" class="btn btn1 btn-gray audit_search search " type="button" value="查询" name="" >
         <!--<input type="button" style='width:30px;height:20px;float:right;margin-right: 10px;' class="btn page_btn" value="go">
@@ -129,6 +129,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         $copyGuides[] = $val->attributes['pasteGuideId'];
                     }
                 }
+                //var_dump($v);die;
                 ?>
                 <tr class="tr_list">
                     <td><input type="checkbox" name="id" value="<?php echo $v['id']?>"  <?php if(in_array($v['screenGuideid'],$copyGuides)){echo "disabled=disabled";}?> screenGuidid="<?=$v['screenGuideid']?>" onclick="checkQuote(this)" ></td>

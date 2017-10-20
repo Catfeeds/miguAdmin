@@ -544,6 +544,15 @@ class ScreenController extends VController
                     $res->sid = $content->attributes['id'];
                 }
             }
+
+            $review_flag = 4;   //提交审核
+            $review_times = 1;
+            $review_message = '发布';
+            $bind_id = $content->attributes['id'];
+            $review_type = 3;   //EPG屏幕数据
+            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
+
 	//else if($v->flag=='5'){
         //        $result = VerScreenContent::model()->deleteByPk($v->attributes['sid']);
         //        $res->flag = '8';
@@ -572,6 +581,13 @@ class ScreenController extends VController
 
                 $res = VerScreenContentCopy::model()->updateAll(array('delFlag'=>1,'addTime'=>time()), "delFlag in (0,1,2,3,4,5) and flag in (1,6) and screenGuideid = " . $v->attributes['screenGuideid']);
                 //var_dump($res);die;
+
+                $review_flag = 3;   //提交审核
+                $review_times = 1;
+                $review_message = '提审';
+                $bind_id = $v->attributes['id'];
+                $review_type = 3;   //EPG屏幕数据
+                $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
             }
         }
 
