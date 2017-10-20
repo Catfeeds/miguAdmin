@@ -533,7 +533,7 @@ class ReviewController extends VController
             }
 
             $sql_order = " order by b.add_time desc ";
-            $sql = $sql . $sql_where;
+            $sql = $sql . $sql_where . $sql_order;
             $list = SQLManager::queryAll($sql);
 //            print_r($sql);
 //            var_dump($list);die;
