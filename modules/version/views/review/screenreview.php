@@ -64,23 +64,22 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             }
                 $stationRes = SQLManager::queryAll($sql);
                 if(!empty($stationRes)){
-                    foreach($stationRes as $k=>$v){
-                        echo "<option value='".$v['id']."'>".$v['name']."</option>";
-                    }
-
+                    foreach($stationRes as $k=>$v){?>
+                        <option <?php if(!empty($_REQUEST['stationId']) && $_REQUEST['stationId'] == $v['id']){echo 'selected=selected';}?> value='<?php echo $v['id'];?>"'><?php echo $v['name'];?></option>"
+                    <?php }
                 }
 
             ?>
         </select>
         <span >牌照方:</span><select style="width:70px;height:20px;"  class="form-input w100" id="cp">
             <option  value=""  >请选择</option>
-            <option  value="642001"  >华数</option>
-            <option  value="BESTVOTT"  >百视通</option>
-            <option  value="ICNTV"  >未来电视</option>
-            <option  value="youpeng"  >南传</option>
-            <option  value="HNBB"  >芒果</option>
-            <option  value="CIBN"  >国广</option>
-            <option  value="YGYH"  >银河</option>
+            <option  <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == '642001'){echo 'selected=selected';}?> value="642001"  >华数</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'BESTVOTT'){echo 'selected=selected';}?> value="BESTVOTT"  >百视通</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'ICNTV'){echo 'selected=selected';}?> value="ICNTV"  >未来电视</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'youpeng'){echo 'selected=selected';}?> value="youpeng"  >南传</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'HNBB'){echo 'selected=selected';}?> value="HNBB"  >芒果</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'CIBN'){echo 'selected=selected';}?> value="CIBN"  >国广</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'YGYH'){echo 'selected=selected';}?> value="YGYH"  >银河</option>
         </select>
         <span >审核状态:</span><select onchange="access_btnChange()" style="width:70px;height:20px;"  class="form-input w100" id="allbtn">
             <option  value="请选择"  >请选择</option>
