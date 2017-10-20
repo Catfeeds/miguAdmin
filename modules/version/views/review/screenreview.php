@@ -106,6 +106,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     <table width="100%" cellspacing="0" cellpadding="10" class="mtable center media">
         <tr>
             <th></th>
+            <th>提审人</th>
             <th>提审时间</th>
             <th>站点</th>
             <th>屏幕名称</th>
@@ -129,10 +130,11 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         $copyGuides[] = $val->attributes['pasteGuideId'];
                     }
                 }
-                var_dump($v);die;
+//                var_dump($v);die;
                 ?>
                 <tr class="tr_list">
                     <td><input type="checkbox" name="id" value="<?php echo $v['id']?>"  <?php if(in_array($v['screenGuideid'],$copyGuides)){echo "disabled=disabled";}?> screenGuidid="<?=$v['screenGuideid']?>" onclick="checkQuote(this)" ></td>
+                    <td><?php echo $v['username'];?></td>
                     <td><?php echo date("Y-m-d h:i:s",$v['addTime'])?></td>
                     <td><?php echo $v['name']?></td>
                     <td><?php echo $v['gtitle']?></td>
