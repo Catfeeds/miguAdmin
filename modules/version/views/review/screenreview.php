@@ -129,7 +129,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         $copyGuides[] = $val->attributes['pasteGuideId'];
                     }
                 }
-                //var_dump($v);die;
+                var_dump($v);die;
                 ?>
                 <tr class="tr_list">
                     <td><input type="checkbox" name="id" value="<?php echo $v['id']?>"  <?php if(in_array($v['screenGuideid'],$copyGuides)){echo "disabled=disabled";}?> screenGuidid="<?=$v['screenGuideid']?>" onclick="checkQuote(this)" ></td>

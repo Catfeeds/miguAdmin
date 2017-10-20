@@ -473,7 +473,7 @@ class ReviewController extends VController
 	        $tmp_stationId=join(",",$stationId);
             //$tmp_stationId = explode(',',$stationId);
 //            $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id=$stationId ";
-            $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id in ($tmp_stationId) ";
+            $sql_top = "select a.*,g.title as gtitle,s.name,d.username from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid left join yd_ver_review_record as c on a.id=c.bind_id left join yd_ver_admin as d on c.user_id=d.id where b.id in ($tmp_stationId) ";
             $sql_where = " where  1=1";
             if(!empty($_REQUEST['title'])){
                 $sql_where .= " and a.title='%{$_REQUEST['title']}%'";
@@ -519,7 +519,7 @@ class ReviewController extends VController
          		    $sql="select p.*,g.title as gtitle,s.name from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag=1 and p.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station s on s.id=g.gid";
                 }
             }else{
-         		$sql="select p.*,g.title as gtitle,s.name from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag=1 and p.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station s on s.id=g.gid";
+         		$sql="select p.*,g.title as gtitle,s.name,c.username from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag=1 and p.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id ";
             }
             $sql_where = " where  1=1";
             if(!empty($_REQUEST['stationId'])){
