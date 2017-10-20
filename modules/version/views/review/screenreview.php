@@ -59,13 +59,12 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 $sql = "select id,name from yd_ver_station";
             }else{
                 $uid = $_SESSION['userid'];
-                $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 3 left join yd_ver_worker as c on c.workid=b.id where c.type = 1 and  c.uid=$uid group
- by a.id";
+                $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 3 left join yd_ver_worker as c on c.workid=b.id where c.type = 1 and  c.uid=$uid group by a.id";
             }
                 $stationRes = SQLManager::queryAll($sql);
                 if(!empty($stationRes)){
                     foreach($stationRes as $k=>$v){?>
-                        <option <?php if(!empty($_REQUEST['stationId']) && $_REQUEST['stationId'] == $v['id']){echo 'selected=selected';}?> value='<?php echo $v['id'];?>"'><?php echo $v['name'];?></option>
+                        <option <?php if(!empty($_REQUEST['stationId']) && $_REQUEST['stationId'] == $v['id']){echo 'selected=selected';}?> value='<?php echo $v['id'];?>'><?php echo $v['name'];?></option>
                     <?php }
                 }
 
