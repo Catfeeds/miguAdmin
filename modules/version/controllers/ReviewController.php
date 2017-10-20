@@ -511,12 +511,12 @@ class ReviewController extends VController
             if(!empty($_REQUEST['allbtn'])){
                 $allbtn=$_REQUEST['allbtn'];
                 if($allbtn=='已通过'){
-                     $sql="select p.*,g.title as gtitle,s.name from yd_ver_screen_content_log p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag='1' inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
+                     $sql="select p.*,g.title as gtitle,s.name,c.username from yd_ver_screen_content_log p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag='1' inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
                       
                 }else if($allbtn=='已驳回'){
-                     $sql="select p.*,g.title as gtitle,s.name from yd_ver_screen_content_log p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag='2' inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
+                     $sql="select p.*,g.title as gtitle,s.name,c.username from yd_ver_screen_content_log p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag='2' inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
                 }else{
-         		    $sql="select p.*,g.title as gtitle,s.name from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag=1 and p.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
+         		    $sql="select p.*,g.title as gtitle,s.name,c.username from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag=1 and p.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
                 }
             }else{
          		$sql="select p.*,g.title as gtitle,s.name,c.username from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag=1 and p.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id ";
