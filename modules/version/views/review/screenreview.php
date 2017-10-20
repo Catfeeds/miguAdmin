@@ -65,7 +65,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 $stationRes = SQLManager::queryAll($sql);
                 if(!empty($stationRes)){
                     foreach($stationRes as $k=>$v){?>
-                        <option <?php if(!empty($_REQUEST['stationId']) && $_REQUEST['stationId'] == $v['id']){echo 'selected=selected';}?> value='<?php echo $v['id'];?>"'><?php echo $v['name'];?></option>"
+                        <option <?php if(!empty($_REQUEST['stationId']) && $_REQUEST['stationId'] == $v['id']){echo 'selected=selected';}?> value='<?php echo $v['id'];?>"'><?php echo $v['name'];?></option>
                     <?php }
                 }
 
