@@ -387,11 +387,18 @@ if(!empty($templateList)){
 
     $('.updateGuide').click(function()
     {
-       if(wTypeFlag != 2){
+       var auth = "<?php echo $_SESSION['auth']?>";
+       if(auth == '1'){
+           layer.alert('你现在还没有编辑屏幕的权限');
+           return false;
+       }else{
+           window.open("/version/screen/updateGuideView/mid/<?php echo $this->mid;?>/nid/<?php echo $_GET['nid']?>"+fixedUrl);
+       }
+       /*if(wTypeFlag != 2){
            layer.alert('你现在还没有编辑屏幕的权限');
             return false;
-        }
-       window.open("/version/screen/updateGuideView/mid/<?php echo $this->mid;?>/nid/<?php echo $_GET['nid']?>"+fixedUrl);
+        }*/
+
     });
 
 
