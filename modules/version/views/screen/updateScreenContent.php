@@ -328,7 +328,7 @@
             </div>
         </td>
 
-
+</table>
     <tr>
         <td align="center" colspan="4" class="button">
             <!--            <input type="button" value="选择媒资" class="btn meizi">-->
@@ -338,7 +338,7 @@
             <input style="width:100px;height:30px;padding:0px" type="button" value="为此推荐位添加轮播图" class="btn addBanner">
         </td>
     </tr>
-</table>
+
 
 <table style="width:900px;" class="mtable mt10" cellpadding="10" cellspacing="0">
     <tr>
