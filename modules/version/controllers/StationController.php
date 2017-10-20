@@ -24,8 +24,9 @@ class StationController extends VController
             $sql_where .= " and province like '%{$_REQUEST['province']}%'";
         }
         $sql_select = "select * from yd_ver_station";
+        $sql_order = " order by id asc ";
         $sql_limit = " limit $page,30";
-        $sql = $sql_select . $sql_where . $sql_limit;
+        $sql = $sql_select . $sql_where . $sql_order . $sql_limit;
         //var_dump($sql);die;
         $list= array();
         $res = SQLManager::queryAll($sql);

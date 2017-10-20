@@ -74,7 +74,11 @@ class VController extends Controller{
         return false;
     }
     public function getVersitelist(){
-        return VerSitelist::model()->findAll();
+        return VerSitelist::model()->findAll(
+            array(
+                'select'=>'*',
+                'order'=>'id asc',
+            ));
     }
 
     public function getSitelist($uid,$flag){
@@ -102,10 +106,10 @@ class VController extends Controller{
                     }
                 }
                 $list = implode(',',$a);
-                return VerSitelist::model()->findAll("id in ($list)");
+                return VerSitelist::model()->findAll("id in ($list) order by id asc ");
             }else{
                 $list = VerGuideManager::String($user);
-                return VerSitelist::model()->findAll("id in ($list)");
+                return VerSitelist::model()->findAll("id in ($list) order by id asc");
             }
 
         }else{
