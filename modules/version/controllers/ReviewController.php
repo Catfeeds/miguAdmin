@@ -522,7 +522,7 @@ class ReviewController extends VController
                     //$sql = "select a.add_time,b.*,c.username,d.title as gtitle,e.name from yd_ver_review_record as a inner join yd_ver_screen_content_copy as b on a.bind_id=b.id and a.review_flag='3' and a.type=3 inner join yd_ver_admin as c on a.user_id=c.id inner join yd_ver_screen_guide as d on b.screenGuideid=d.id inner join yd_ver_station as e on e.id=d.gid ";
                 }
             }else{
-         		$sql="select p.*,g.title as gtitle,s.name,c.username,b.add_time from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and p.delFlag=1 and p.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id ";
+         		$sql="select b.*,d.title as gtitle,e.name,c.username,a.add_time from yd_ver_screen_content_copy b inner join yd_ver_screen_guide d on b.screenGuideid=d.id and b.delFlag=1 and b.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station e on e.id=d.gid inner join yd_ver_review_record as a on b.id=a.bind_id inner join yd_ver_admin as c on a.user_id=c.id ";
             }
             $sql_where = " where  1=1";
             if(!empty($_REQUEST['stationId'])){
