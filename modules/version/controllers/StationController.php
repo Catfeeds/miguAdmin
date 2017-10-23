@@ -294,7 +294,7 @@ class StationController extends VController
             }
         }else if($type_res->attributes['type'] == '4'){
             $review_type = 6;   //yd_special_topic河南专题
-            $res = SpecialTopicCopy::model()->findAll("gid = $nid AND flag = 7");
+            $res = SpecialTopicCopy::model()->findAll("sid = $nid AND flag = 7");
             if(!empty($res)){
                 foreach ($res as $k=>$v){
                     $bind_id = $v->attributes['id'];
