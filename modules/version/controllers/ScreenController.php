@@ -931,6 +931,16 @@ class ScreenController extends VController
      * 测试文件权限
      * */
 
+    /*
+     * yd_ver_review_record表type字段及对应bind_id对应表主键
+     * 1->消息->yd_ver_message
+     * 2->壁纸->yd_ver_wall
+     * 3->epg屏幕->yd_ver_screen_content_copy
+     * 4->专题背景图->yd_ver_bkimg
+     * 5->yd_ver_ui专题->yd_ver_ui
+     * 6->yd_special_topic河南专题->yd_special_topic
+     *
+     * */
 }
 
 

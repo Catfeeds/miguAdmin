@@ -966,44 +966,55 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
         $this->render('msgreview',array('list'=>$list,'page'=>$pagination,'res'=>$res));
 
     }
+
     public function actionTopicallaccess(){
     	$ids = $_REQUEST['ids'];
-    	 $ids = substr($ids, 0,strlen($ids)-1);
-		$sql ="SELECT
-	t1.id,t1.flag,t3.type
-FROM
-	yd_ver_topic_review t1
-LEFT JOIN yd_ver_sitelist t2 ON t1.stationid = t2.`name` and t2.pid = 0
-LEFT JOIN yd_ver_work t3 on t2.id = t3.stationId and t3.flag = 6
+    	$ids = substr($ids, 0,strlen($ids)-1);
+		$sql ="SELECT t1.id,t1.flag,t3.type FROM yd_ver_topic_review t1 LEFT JOIN yd_ver_sitelist t2 ON t1.stationid = t2.`name` and t2.pid = 0 LEFT JOIN yd_ver_work t3 on t2.id = t3.stationId and t3.flag = 6 WHERE t1.id IN ($ids)";
 
-WHERE
-	t1.id IN ($ids)";
-
-	
-	
-	
-	
-	
-	$res = SQLManager::queryAll($sql);
-	if(!empty($res)){
-		foreach ($res as $key => $value) {
+	    $res = SQLManager::queryAll($sql);
+	    if(!empty($res)){
+		    foreach ($res as $key => $value) {
 			
-			if($value['flag'] == $value['type'] || $_SESSION['auth']=='1'){
-				$sql = "UPDATE yd_ver_topic_review set flag = 6 where id = {$value['id']}";
-				$res = SQLManager::execute($sql);
-			}else if($value['flag'] < $value['type']){
-				$flag = $value['flag'] + 1;
-				$sql = "UPDATE yd_ver_topic_review set flag = $flag where id = {$value['id']}";
-				$res = SQLManager::execute($sql);
-			}
-		}
-	}
+			    if($value['flag'] == $value['type'] || $_SESSION['auth']=='1'){
+				    $sql = "UPDATE yd_ver_topic_review set flag = 6 where id = {$value['id']}";
+				    $res = SQLManager::execute($sql);
+                    $review_times = 1;//几审
+			    }else if($value['flag'] < $value['type']){
+				    $flag = $value['flag'] + 1;
+                    $review_times = $flag;//几审
+                    $sql = "UPDATE yd_ver_topic_review set flag = $flag where id = {$value['id']}";
+				    $res = SQLManager::execute($sql);
+			    }else{
+                    $review_times = 1;//几审
+                }
+
+                $type_res = VerTopicReview::model()->findByPk($value['id']);
+                if($type_res->attributes['type'] == 'bkimg'){
+                    $review_type = 4;   //专题背景图
+                }else if($type_res->attributes['type'] == 'specialtopic'){
+                    $review_type = 5;   //yd_ver_ui专题
+                }else if($type_res->attributes['type'] == 'verui'){
+                    $review_type = 6;   //yd_special_topic河南专题
+                }else{
+                    $review_type = 5;   //yd_ver_ui专题
+                }
+                $review_flag = 1;   //通过
+                $review_message = '通过';
+                $bind_id = $type_res->attributes['topic_id'];
+                $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+		    }
+
+
+	    }
+
+
 	
     }
 	
-	  public function actionTopicnotaccess(){
+    public function actionTopicnotaccess(){
     	$ids = $_REQUEST['ids'];
-    	 $ids = substr($ids, 0,strlen($ids)-1);
+        $ids = substr($ids, 0,strlen($ids)-1);
 		$sql ="UPDATE yd_ver_topic_review set flag = 0 WHERE id IN ($ids)";
 		$res = SQLManager::execute($sql);
 		$sql1 = "SELECT * from yd_ver_topic_review where id IN ($ids) and type <> 'bkimg' and uptype = '3'";
@@ -1019,7 +1030,28 @@ WHERE
 				}
 			}
 		}
+
+		$tmp_res = VerTopicReview::model()->findAll("id in ($ids)");
+		if(!empty($tmp_res)){
+		    foreach ($tmp_res as $k=>$v){
+                if($v->attributes['type'] == 'bkimg'){
+                    $review_type = 4;   //专题背景图
+                }else if($v->attributes['type'] == 'specialtopic'){
+                    $review_type = 5;   //yd_ver_ui专题
+                }else if($v->attributes['type'] == 'verui'){
+                    $review_type = 6;   //yd_special_topic河南专题
+                }else{
+                    $review_type = 5;   //yd_ver_ui专题
+                }
+                $review_times = 1;
+                $review_flag = 2;   //驳回
+                $review_message = '驳回';
+                $bind_id = $v->attributes['topic_id'];
+                $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+            }
+        }
     }
+
   public function actionTopicReview()
     {
         $username=$_SESSION['nickname'];

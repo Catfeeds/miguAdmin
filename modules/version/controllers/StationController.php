@@ -53,267 +53,258 @@ class StationController extends VController
         //var_dump($list);die;
         $this->render('index',array('list'=>$list,"Pro"=>$Pro));
     }
-public function actionGetReviewStatus($nid){
-        $sql = "SELECT id FROM yd_ver_topic_review where gid = $nid and flag in (1,2,3,4,5)";
-        $res = SQLManager::queryAll($sql);
-        $sql1 = "SELECT id FROM yd_ver_topic_review where gid = $nid and flag in (6)";
-        $res1 = SQLManager::queryAll($sql1);
 
-        if(!empty($res)){
-                echo '500';
-                return '500';
-        }else if(!empty($res1)){
-                echo '300';
-                return '300';
-        }else{
-                echo '200';
-                return '200';
-        }
+    public function actionGetReviewStatus($nid){
+            $sql = "SELECT id FROM yd_ver_topic_review where gid = $nid and flag in (1,2,3,4,5)";
+            $res = SQLManager::queryAll($sql);
+            $sql1 = "SELECT id FROM yd_ver_topic_review where gid = $nid and flag in (6)";
+            $res1 = SQLManager::queryAll($sql1);
 
-}
-        public function actionGetStationId($nid){
-                $sql = "SELECT * from yd_ver_sitelist where id = $nid";
-                $res = SQLManager::queryAll($sql);
-                if(!empty($res)){
-                        while($res['0']['pid'] <> 0){
-                        $nid = $res[0]['pid'];
-                        $sql = "SELECT * from yd_ver_sitelist where id = $nid";
-                        $res = SQLManager::queryAll($sql);
+            if(!empty($res)){
+                    echo '500';
+                    return '500';
+            }else if(!empty($res1)){
+                    echo '300';
+                    return '300';
+            }else{
+                    echo '200';
+                    return '200';
+            }
 
+    }
+
+    public function actionGetStationId($nid){
+            $sql = "SELECT * from yd_ver_sitelist where id = $nid";
+            $res = SQLManager::queryAll($sql);
+            if(!empty($res)){
+                    while($res['0']['pid'] <> 0){
+                    $nid = $res[0]['pid'];
+                    $sql = "SELECT * from yd_ver_sitelist where id = $nid";
+                    $res = SQLManager::queryAll($sql);
+
+                    }
+            }
+            if(!empty($res[0]['name'])){
+                    return $res[0]['name'];
+            }else{
+                    return "";
+            }
+    }
+
+    public function actionDoSubmit(){
+
+        $nid = $_GET['nid'];
+
+        $reviewstatus = $this->actionGetReviewStatus($nid);
+        if($reviewstatus == '300'){
+            $sql = "SELECT * from yd_ver_topic_review where gid = $nid and flag = 6";
+            $res =SQLManager::queryAll($sql);
+            foreach($res as $key=>$value){
+
+                if($value['type'] == 'bkimg'){
+
+                    $content1 = VerBkimgCopy::model()->findByPk($value['topic_id']);
+                    $content1->flag = 0;
+                    $content1->save();
+
+                    $res1 = VerBkimg::model()->findByPk($value['topic_id']);
+                    if(!empty($res1)){
+
+                        $res1->url = $content1->attributes['url'];
+                        $res1->type = $content1->attributes['type'];
+                        $res1->save();
+                    }else{
+                        $res1 = new VerBkimg();
+                        $res1->id = $content1->attributes['id'];
+                        $res1->url = $content1->attributes['url'];
+                        $res1->type = $content1->attributes['type'];
+                        $res1->status = $content1->attributes['status'];
+                        $res1->delFlag = $content1->attributes['delFlag'];
+                        $res1->gid = $content1->attributes['gid'];
+                        $res1->save();
+                    }
+
+                    $review_type = 4;
+                    $review_times = 1;
+                    $review_flag = 4;   //驳回
+                    $review_message = '发布';
+                    $bind_id = $res1->attributes['id'];
+                    $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
+                }else if($value['type'] == 'verui'){
+
+                    if($value['uptype'] == '3'){
+                        VerUiCopy::model()->deleteByPk($value['topic_id']);
+                        VerUi::model()->deleteByPk($value['topic_id']);
+                    }else{
+                        $content2 = VerUiCopy::model()->findByPk($value['topic_id']);
+                        $res2 = VerUi::model()->findByPk($value['topic_id']);
+                        if(!empty($res2)){
+                            $res2->title = $content2->attributes['title'];
+                            $res2->tType = $content2->attributes['tType'];
+                            $res2->param = $content2->attributes['param'];
+                            $res2->action = $content2->attributes['action'];
+                            $res2->pic = $content2->attributes['pic'];
+                            $res2->cp = $content2->attributes['cp'];
+                            $res2->addTime = $content2->attributes['addTime'];
+                            $res2->upTime = $content2->attributes['upTime'];
+                            $res2->position = $content2->attributes['position'];
+                            $res2->delFlag = $content2->attributes['delFlag'];
+                            $res2->vid = $content2->attributes['vid'];
+                            $res2->gid = $content2->attributes['gid'];
+                            $res2->type = $content2->attributes['type'];
+                            $res2->uType = $content2->attributes['uType'];
+                            $res2->scort = $content2->attributes['scort'];
+                            $res2->save();
+                        }else{
+                            $res2 = new VerUi();
+                            $res2->id = $content2->attributes['id'];
+                            $res2->title = $content2->attributes['title'];
+                            $res2->tType = $content2->attributes['tType'];
+                            $res2->param = $content2->attributes['param'];
+                            $res2->action = $content2->attributes['action'];
+                            $res2->pic = $content2->attributes['pic'];
+                            $res2->cp = $content2->attributes['cp'];
+                            $res2->addTime = $content2->attributes['addTime'];
+                            $res2->upTime = $content2->attributes['upTime'];
+                            $res2->position = $content2->attributes['position'];
+                            $res2->delFlag = $content2->attributes['delFlag'];
+                            $res2->vid = $content2->attributes['vid'];
+                            $res2->gid = $content2->attributes['gid'];
+                            $res2->type = $content2->attributes['type'];
+                            $res2->uType = $content2->attributes['uType'];
+                            $res2->scort = $content2->attributes['scort'];
+                            $res2->save();
                         }
+                        $content2->flag = 0;
+                        $content2->save();
+
+                        $review_type = 5;
+                        $review_times = 1;
+                        $review_flag = 4;   //驳回
+                        $review_message = '发布';
+                        $bind_id = $res2->attributes['id'];
+                        $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
+                    }
+
+
+
+                }else if($value['type'] == 'specialtopic'){
+                    if($value['uptype'] == '3'){
+                        SpecialTopicCopy::model()->deleteByPk($value['topic_id']);
+                        SpecialTopic::model()->deleteByPk($value['topic_id']);
+                    }else{
+                        $content = SpecialTopicCopy::model()->findByPk($value['topic_id']);
+                        $res = SpecialTopic::model()->findByPk($value['topic_id']);
+
+                        if(!empty($res)){
+                            $res->title = $content->attributes['title'];
+                            $res->type = $content->attributes['type'];
+                            $res->tType = $content->attributes['tType'];
+                            $res->uType = $content->attributes['uType'];
+                            $res->action = $content->attributes['action'];
+                            $res->param = $content->attributes['param'];
+                            $res->cid = $content->attributes['cid'];
+                            $res->x = $content->attributes['x'];
+                            $res->y = $content->attributes['y'];
+                            $res->width = $content->attributes['width'];
+                            $res->height = $content->attributes['height'];
+                            $res->order = $content->attributes['order'];
+                            $res->videoUrl = $content->attributes['videoUrl'];
+                            $res->sid = $content->attributes['sid'];
+                            $res->picSrc = $content->attributes['picSrc'];
+                            $res->save();
+                        }else{
+                            $res = new SpecialTopic();
+                            $res->id = $content->attributes['id'];
+                            $res->title = $content->attributes['title'];
+                            $res->type = $content->attributes['type'];
+                            $res->tType = $content->attributes['tType'];
+                            $res->uType = $content->attributes['uType'];
+                            $res->action = $content->attributes['action'];
+                            $res->param = $content->attributes['param'];
+                            $res->cid = $content->attributes['cid'];
+                            $res->x = $content->attributes['x'];
+                            $res->y = $content->attributes['y'];
+                            $res->width = $content->attributes['width'];
+                            $res->height = $content->attributes['height'];
+                            $res->order = $content->attributes['order'];
+                            $res->videoUrl = $content->attributes['videoUrl'];
+                            $res->sid = $content->attributes['sid'];
+                            $res->picSrc = $content->attributes['picSrc'];
+                            $res->save();
+                        }
+                        $content->flag = 0;
+                        $content->save();
+
+                        $review_type = 6;
+                        $review_times = 1;
+                        $review_flag = 4;   //驳回
+                        $review_message = '发布';
+                        $bind_id = $res->attributes['id'];
+                        $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+                    }
                 }
-                if(!empty($res[0]['name'])){
-                        return $res[0]['name'];
-                }else{
-                        return "";
+            }
+            $flag = 7;
+            $sql = "UPDATE yd_ver_topic_review set flag =  $flag  where gid = $nid";
+            $res = SQLManager::execute($sql);
+            $flag = 0;
+            $sql = "UPDATE yd_ver_bkimg_copy set flag =  $flag  where gid = $nid";
+            $res = SQLManager::execute($sql);
+
+        }
+    }
+
+    public function actionDoReview(){
+        $nid = $_GET['nid'];
+
+        $reviewstatus = $this->actionGetReviewStatus($nid);
+        $stationId = $this->actionGetStationId($nid);
+        if($reviewstatus == '200'){
+            $sql = "INSERT yd_ver_topic_review(type,topic_id,title,uptype,tType,action,param,pic,uptime,uType,vid,videUrl,flag,stationid,gid) ( SELECT 'bkimg' as type,id as topic_id,'' as title,type as uptype,'' as tType,'' as action,'' as param,url as pic,unix_timestamp() as uptime,'' as uType,'' as vid,'' as videoUrl,1 as flag,'$stationId' as stationid,$nid as gid FROM yd_ver_bkimg_copy WHERE gid = $nid AND flag = 7) UNION ALL ( SELECT 'specialtopic' as type,id as topic_id,title as title,type as uptype,tType as tType,action as action,param as param,picSrc as pic,unix_timestamp() as uptime,uType as uType,cid as vid,videoUrl as videoUrl,1 as flag,'$stationId' as stationid,$nid as gid FROM yd_special_topic_copy WHERE sid = $nid AND flag = 7 ) UNION ALL (SELECT 'verui' as type,id as topic_id,title as title,type as uptype,tType as tType,action as action,param as param,pic as pic,unix_timestamp() as uptime,uType as uType,vid as vid,'' as videoUrl,1 as flag,'$stationId' as stationid,$nid as gid FROM yd_ver_ui_copy WHERE gid = $nid AND flag = 7)";
+            $list = SQLManager::execute($sql);
+        }
+        $this->topicReviewRecord($nid,3);
+    }
+
+    public function topicReviewRecord($nid,$review_flag)
+    {
+        $type_res = VerBkimgCopy::model()->find("gid=$nid AND flag = 7");
+        $review_times = 1;
+        //$review_flag = 3;   //提审
+        $review_message = '提审';
+        if(!empty($type_res)){
+            $review_type = 4;   //专题背景图
+            $bind_id = $type_res->attributes['id'];
+            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+        }else{
+            $type_res = VerBkimg::model()->find("gid=$nid");
+        }
+
+        if($type_res->attributes['type'] == '1' || $type_res->attributes['type'] == '2'){
+            $review_type = 5;   //yd_ver_ui专题
+            $res = VerUiCopy::model()->findAll("gid = $nid AND flag = 7");
+            if(!empty($res)){
+                foreach ($res as $k=>$v){
+                    $bind_id = $v->attributes['id'];
+                    $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
                 }
+            }
+        }else if($type_res->attributes['type'] == '4'){
+            $review_type = 6;   //yd_special_topic河南专题
+            $res = SpecialTopicCopy::model()->findAll("gid = $nid AND flag = 7");
+            if(!empty($res)){
+                foreach ($res as $k=>$v){
+                    $bind_id = $v->attributes['id'];
+                    $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+                }
+            }
         }
-public function actionDoSubmit(){
 
-	$nid = $_GET['nid'];
-	
-	$reviewstatus = $this->actionGetReviewStatus($nid);
-	if($reviewstatus == '300'){
-		$sql = "SELECT * from yd_ver_topic_review where gid = $nid and flag = 6";			
-		$res =SQLManager::queryAll($sql);
-		foreach($res as $key=>$value){
-	
-		if($value['type'] == 'bkimg'){
+    }
 
-			$content1 = VerBkimgCopy::model()->findByPk($value['topic_id']);
-			$content1->flag = 0;
-			 $content1->save();
-
-			$res1 = VerBkimg::model()->findByPk($value['topic_id']);
-			 if(!empty($res1)){
-			
-			 	$res1->url = $content1->attributes['url'];
-				$res1->type = $content1->attributes['type'];
-			 	$res1->save();
-			 }else{
-			 	$res1 = new VerBkimg();
-			 	$res1->id = $content1->attributes['id'];
-			 	$res1->url = $content1->attributes['url'];
-				$res1->type = $content1->attributes['type'];
-				$res1->status = $content1->attributes['status'];
-			 	$res1->delFlag = $content1->attributes['delFlag'];
-				$res1->gid = $content1->attributes['gid'];
-				$res1->save();
-			 }
-			 
-			 
-		}else if($value['type'] == 'verui'){
-	
-			if($value['uptype'] == '3'){
-				VerUiCopy::model()->deleteByPk($value['topic_id']);
-				VerUi::model()->deleteByPk($value['topic_id']);
-			}else{
-			
-				$content2 = VerUiCopy::model()->findByPk($value['topic_id']);
-			$res2 = VerUi::model()->findByPk($value['topic_id']);
-			
-			
-			 if(!empty($res2)){
-						
-		
-				$res2->title = $content2->attributes['title'];
-			 	$res2->tType = $content2->attributes['tType'];
-				$res2->param = $content2->attributes['param'];
-				$res2->action = $content2->attributes['action'];
-			 	$res2->pic = $content2->attributes['pic'];
-				$res2->cp = $content2->attributes['cp'];
-			 	$res2->addTime = $content2->attributes['addTime'];
-				$res2->upTime = $content2->attributes['upTime'];
-				$res2->position = $content2->attributes['position'];
-			 	$res2->delFlag = $content2->attributes['delFlag'];
-				$res2->vid = $content2->attributes['vid'];
-				$res2->gid = $content2->attributes['gid'];
-			 	$res2->type = $content2->attributes['type'];
-				$res2->uType = $content2->attributes['uType'];
-			 	$res2->scort = $content2->attributes['scort'];
-			 	$res2->save();
-			 }else{
-		
-			 	$res2 = new VerUi();
-			 	$res2->id = $content2->attributes['id'];
-			 	$res2->title = $content2->attributes['title'];
-			 	$res2->tType = $content2->attributes['tType'];
-				$res2->param = $content2->attributes['param'];
-				$res2->action = $content2->attributes['action'];
-			 	$res2->pic = $content2->attributes['pic'];
-				$res2->cp = $content2->attributes['cp'];
-			 	$res2->addTime = $content2->attributes['addTime'];
-				$res2->upTime = $content2->attributes['upTime'];
-				$res2->position = $content2->attributes['position'];
-			 	$res2->delFlag = $content2->attributes['delFlag'];
-				$res2->vid = $content2->attributes['vid'];
-				$res2->gid = $content2->attributes['gid'];
-			 	$res2->type = $content2->attributes['type'];
-				$res2->uType = $content2->attributes['uType'];
-			 	$res2->scort = $content2->attributes['scort'];
-			 	$res2->save();
-			 }
-			  $content2->flag = 0;
-			 $content2->save();
-				
-			}
-			
-			
-			
-		}else if($value['type'] == 'specialtopic'){
-		if($value['uptype'] == '3'){
-				SpecialTopicCopy::model()->deleteByPk($value['topic_id']);
-				SpecialTopic::model()->deleteByPk($value['topic_id']);
-			}else{
-			$content = SpecialTopicCopy::model()->findByPk($value['topic_id']);
-			$res = SpecialTopic::model()->findByPk($value['topic_id']);
-		
-			 if(!empty($res)){
-				$res->title = $content->attributes['title'];
-			 	$res->type = $content->attributes['type'];
-				$res->tType = $content->attributes['tType'];
-				$res->uType = $content->attributes['uType'];
-			 	$res->action = $content->attributes['action'];
-				$res->param = $content->attributes['param'];
-			 	$res->cid = $content->attributes['cid'];
-				$res->x = $content->attributes['x'];
-				$res->y = $content->attributes['y'];
-			 	$res->width = $content->attributes['width'];
-				$res->height = $content->attributes['height'];
-				$res->order = $content->attributes['order'];
-			 	$res->videoUrl = $content->attributes['videoUrl'];
-				$res->sid = $content->attributes['sid'];
-			 	$res->picSrc = $content->attributes['picSrc'];
-			 	$res->save();
-			 }else{
-			 	$res = new SpecialTopic();
-			 	$res->id = $content->attributes['id'];
-			 	$res->title = $content->attributes['title'];
-			 	$res->type = $content->attributes['type'];
-				$res->tType = $content->attributes['tType'];
-				$res->uType = $content->attributes['uType'];
-			 	$res->action = $content->attributes['action'];
-				$res->param = $content->attributes['param'];
-			 	$res->cid = $content->attributes['cid'];
-				$res->x = $content->attributes['x'];
-				$res->y = $content->attributes['y'];
-			 	$res->width = $content->attributes['width'];
-				$res->height = $content->attributes['height'];
-				$res->order = $content->attributes['order'];
-			 	$res->videoUrl = $content->attributes['videoUrl'];
-				$res->sid = $content->attributes['sid'];
-			 	$res->picSrc = $content->attributes['picSrc'];
-			 	$res->save();
-			 }
-			  $content->flag = 0;
-			 $content->save();
-			 }	}}
-
-		$flag = 7;
-		$sql = "UPDATE yd_ver_topic_review set flag =  $flag  where gid = $nid";
-		$res = SQLManager::execute($sql);	
-	$flag = 0;
-		$sql = "UPDATE yd_ver_bkimg_copy set flag =  $flag  where gid = $nid";
-		$res = SQLManager::execute($sql);	
-		
-		}
-}
-
-        public function actionDoReview(){
-                $nid = $_GET['nid'];
-
-                $reviewstatus = $this->actionGetReviewStatus($nid);
-                $stationId = $this->actionGetStationId($nid);
-                if($reviewstatus == '200'){
-                $sql = "INSERT yd_ver_topic_review(type,topic_id,title,uptype,tType,action,param,pic,uptime,uType,vid,videUrl,flag,stationid,gid)
-(SELECT
-        'bkimg' as type,
-        id as topic_id,
-        '' as title,
-        type as uptype,
-        '' as tType,
-  '' as action,
-        '' as param,
-        url as pic,
-        unix_timestamp() as uptime,
-        '' as uType,
-        '' as vid,
-        '' as videoUrl,
-        1 as flag,
-        '$stationId' as stationid,
-        $nid as gid
-FROM
-        yd_ver_bkimg_copy
-WHERE
-        gid = $nid
-AND flag = 7)
-UNION ALL
-(SELECT
-        'specialtopic' as type,
-        id as topic_id,
-        title as title,
-        type as uptype,
-        tType as tType,
-  action as action,
-        param as param,
-        picSrc as pic,
-        unix_timestamp() as uptime,
-        uType as uType,
-        cid as vid,
-        videoUrl as videoUrl,
-        1 as flag,
-        '$stationId' as stationid,
-        $nid as gid
-FROM
-        yd_special_topic_copy
-WHERE
-        sid = $nid
-AND flag = 7)
-UNION ALL
-(SELECT
-        'verui' as type,
-        id as topic_id,
-        title as title,
-        type as uptype,
-        tType as tType,
-  action as action,
-        param as param,
-        pic as pic,
-        unix_timestamp() as uptime,
-        uType as uType,
-        vid as vid,
-        '' as videoUrl,
-        1 as flag,
-        '$stationId' as stationid,
-        $nid as gid
-FROM
-        yd_ver_ui_copy
-WHERE
-        gid = $nid
-AND flag = 7)";
-$list = SQLManager::execute($sql);
-}
-        }
     public function actionAdd()
     {
         $province = Province::model()->findAll("provinceCode not in(40,41,42,43,44) order by provinceCode asc");

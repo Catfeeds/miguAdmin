@@ -1,15 +1,16 @@
 <?php
 
 /**
- * This is the model class for table "{{ver_bkimg}}".
+ * This is the model class for table "{{ver_bkimg_copy}}".
  *
- * The followings are the available columns in table '{{ver_bkimg}}':
+ * The followings are the available columns in table '{{ver_bkimg_copy}}':
  * @property integer $id
  * @property string $url
  * @property integer $status
  * @property string $type
  * @property string $delFlag
  * @property string $gid
+ * @property integer $flag
  */
 class VerBkimgCopy extends CActiveRecord
 {
@@ -29,14 +30,14 @@ class VerBkimgCopy extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('status', 'numerical', 'integerOnly'=>true),
+			array('status, flag', 'numerical', 'integerOnly'=>true),
 			array('url', 'length', 'max'=>200),
 			array('type', 'length', 'max'=>30),
 			array('delFlag', 'length', 'max'=>10),
 			array('gid', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, url, status, type, delFlag, gid,flag', 'safe', 'on'=>'search'),
+			array('id, url, status, type, delFlag, gid, flag', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,8 +59,8 @@ class VerBkimgCopy extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'url' => 'Url',
-			'status' => 'Status',
+			'url' => '地址',
+			'status' => '状态 1.正常  2.隐藏  3.删除',
 			'type' => 'Type',
 			'delFlag' => 'Del Flag',
 			'gid' => 'Gid',
@@ -91,7 +92,8 @@ class VerBkimgCopy extends CActiveRecord
 		$criteria->compare('type',$this->type,true);
 		$criteria->compare('delFlag',$this->delFlag,true);
 		$criteria->compare('gid',$this->gid,true);
-		$criteria->compare('flag',$this->flag,true);
+		$criteria->compare('flag',$this->flag);
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -101,12 +103,10 @@ class VerBkimgCopy extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return VerBkimg the static model class
+	 * @return VerBkimgCopy the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
 }
-
-
