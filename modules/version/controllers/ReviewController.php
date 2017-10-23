@@ -992,9 +992,9 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
                 $type_res = VerTopicReview::model()->findByPk($value['id']);
                 if($type_res->attributes['type'] == 'bkimg'){
                     $review_type = 4;   //专题背景图
-                }else if($type_res->attributes['type'] == 'specialtopic'){
-                    $review_type = 5;   //yd_ver_ui专题
                 }else if($type_res->attributes['type'] == 'verui'){
+                    $review_type = 5;   //yd_ver_ui专题
+                }else if($type_res->attributes['type'] == 'specialtopic'){
                     $review_type = 6;   //yd_special_topic河南专题
                 }else{
                     $review_type = 5;   //yd_ver_ui专题
@@ -1036,9 +1036,9 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 		    foreach ($tmp_res as $k=>$v){
                 if($v->attributes['type'] == 'bkimg'){
                     $review_type = 4;   //专题背景图
-                }else if($v->attributes['type'] == 'specialtopic'){
-                    $review_type = 5;   //yd_ver_ui专题
                 }else if($v->attributes['type'] == 'verui'){
+                    $review_type = 5;   //yd_ver_ui专题
+                }else if($v->attributes['type'] == 'specialtopic'){
                     $review_type = 6;   //yd_special_topic河南专题
                 }else{
                     $review_type = 5;   //yd_ver_ui专题
