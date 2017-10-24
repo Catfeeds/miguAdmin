@@ -535,7 +535,7 @@ class ReviewController extends VController
                 $sql_where .= " and b.cp='{$_REQUEST['cp']}'";
             }
 
-            $sql_order = " order by a.add_time desc ";
+            $sql_order = " group by b.id order by a.add_time desc ";
             $sql = $sql . $sql_where . $sql_order;
             $list = SQLManager::queryAll($sql);
 //            print_r($sql);
