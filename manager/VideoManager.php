@@ -769,4 +769,37 @@ $sql_where .=" or (a.flag = 0";
 	$res['list'] = SQLManager::queryAll($list);
         return $res;
     }
+
+    public static function getMaterialReview($data,$list){
+        $res = array();
+
+        $sql_count = 'select count(a.id)';
+        $sql_select = 'select a.*,b.name';
+        //$sql_from = " from yd_ver_upload as a left join yd_ver_station as b on a.stationId=b.id LEFT JOIN yd_ver_work c ON b.id = c.stationId and c.flag = 8 and a.flag=1";
+        $sql_from = " from yd_ver_upload as a left join yd_ver_station as b on a.stationId=b.id";
+        //$sql_join = " left join yd_ver_message_reject as d on a.id=d.vid";
+	$sql_join="";
+        $sql_order = ' group by a.id order by a.time desc';
+        $sql_limit = ' limit '.$data['start'].','.$data['limit'];
+
+        if(empty($list['type']) || $list['type'] == 1){
+            $sql_where =" where a.flag in (1,2,3,4,5)";
+        }else if($list['type'] == 2){
+            $sql_where =" where a.flag = 6";
+        }else{
+            $sql_where =" where a.flag = 0";
+        }
+
+        if(!empty($list['stationId'])){
+            $sql_where .=" and a.stationId in (".$list['stationId'].")";
+        }
+
+        $count = $sql_count . $sql_from;
+        $whereCount = $sql_count . $sql_from. $sql_where;
+        $list = $sql_select . $sql_from . $sql_join . $sql_where . $sql_order . $sql_limit;
+        $res['alwaysCount'] = Yii::app()->db->createCommand($count)->queryScalar();
+        $res['count'] = Yii::app()->db->createCommand($whereCount)->queryScalar();
+        $res['list'] = SQLManager::queryAll($list);
+        return $res;
+    }
 }

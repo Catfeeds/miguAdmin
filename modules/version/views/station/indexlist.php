@@ -111,7 +111,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <li>消息</li>
         <li>壁纸</li>
         <li>站点专题</li>
-    
+	<li>素材</li>    
     </ul>
     <form action="" method="" style="border-left:1px solid #999;border-right:1px solid #999;">
         <div  class="inputDiv">
@@ -202,7 +202,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <li class="forth"></li>
             <li class="fifth"></li>
             <li class="ninth"></li>
-            <li class="seventh"></li>
+            <!--<li class="seventh"></li>-->
+            <li class="eighth"></li>
         </ul>
     </form>
     <script>
@@ -252,6 +253,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             $('#options').children().eq(5).addClass('current_options');
         }else if(flag=='7'){
             $('#options').children().eq(6).addClass('current_options');
+        }else if(flag=='8'){
+            $('#options').children().eq(7).addClass('current_options');
         }
     })
 
@@ -282,7 +285,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         }
         else if(current_options=='通用专题'){
             var flag=7;
-        }
+        }else if(current_options=='素材'){
+	    var flag=8;
+	}
         var mid=<?php echo $_REQUEST['mid']?>;
         window.location.href="/version/station/workadd?mid="+mid+"&flag="+flag+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;;
     })
@@ -323,6 +328,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         }
         else if(current_options=='通用专题'){
             var flag=7;
+        }else if(current_options=='素材'){
+            var flag=8;
         }
         //ajax(flag);
         var cp = $('#cp').val();
@@ -353,6 +360,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 $('.fifth').empty();
                 $('.ninth').empty();
                 $('.seventh').empty();
+		$('.eighth').empty();
                 list = data.list;
                 var li = '<table class="mtable" cellpadding="10" cellspacing="0" width="100%"><tr><th>时间</th><th>任务名称</th><th>牌照方</th><th>流模式</th><th>相关用户</th><th>操作</th></tr>';
                 $.each(list, function(index, array) { //遍历返回json
@@ -382,8 +390,12 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     $('.fifth').append(li);
                 }else if(flag==6){
                     $('.ninth').append(li);
-                }else if(flag==7){
+                }
+		else if(flag==7){
                     $('.seventh').append(li);
+                }
+		else if(flag==8){
+                    $('.eighth').append(li);
                 }
             }
         })

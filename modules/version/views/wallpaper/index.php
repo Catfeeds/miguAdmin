@@ -84,6 +84,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     }
     .inputDivTwo a{float:left;}
 .cc{color:#ccc}
+.cc img{opacity:0.5}
 </style>
 <?php
     $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
