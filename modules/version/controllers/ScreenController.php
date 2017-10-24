@@ -239,7 +239,11 @@ class ScreenController extends VController
             $this->redirect($this->getPreUrl());
         }
         $data = $_POST;
-        $this->ChangeQuoteScreenContent($data,1);
+        $quote_res = $this->getQuoteInfo($data['screenGuideId']);
+        if($quote_res){
+            $this->ChangeQuoteScreenContent($data,1);
+        }
+
         $res = VerScreenContentManager::updateData($data);
         if($res>0){
             $this->die_json(array('code'=>200));
@@ -836,10 +840,12 @@ class ScreenController extends VController
         if(empty($quote_res)){
             return;
         }
+//        var_dump($quote_res);die;
         foreach ($quote_res as $k=>$v){
-            $screenGuideid = $v['pasteGuideId'];
+            $screenGuideid = $v->attributes['pasteGuideId'];
             $model = VerScreenContentCopy::model()->find("`screenGuideid`=$screenGuideid and `order`=$order");
-            if($flag ==1){
+//            var_dump($model);die;
+            if($flag ==1 && !empty($model)){
                 $data['id'] = $model->attributes['id'];
                 $data['screenGuideId'] = $model->attributes['screenGuideid'];
                 VerScreenContentManager::updateData($data);

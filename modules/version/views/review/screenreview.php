@@ -128,6 +128,10 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         $copyGuides[] = $val->attributes['pasteGuideId'];
                     }
                 }
+                if($v['pic'] == '/file/3.png'){
+                    $tmp_pic = VerScreenContent::model()->find("id={$v['sid']}");
+                    $v['pic'] = $tmp_pic->attributes['pic'];
+                }
 //                var_dump($v);die;
                 ?>
                 <tr class="tr_list">
