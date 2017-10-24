@@ -154,7 +154,7 @@ class MessageController extends VController
 			$reject->vid  = $_REQUEST['gid'];
 			$reject->save();
 			$this->rejectlog($_REQUEST['gid'],2);
-			$resulst = VerMessage::model()->updateAll(array('flag'=>0),'id=:id',array(':id'=>$_REQUEST['gid']));
+			$resulst = VerMessage::model()->updateAll(array('flag'=>0,'delFlag'=>'0'),'id=:id',array(':id'=>$_REQUEST['gid']));
 		}else{
 			$arr = explode(' ',trim($_REQUEST['gid']));
 			foreach($arr as $k=>$v){
@@ -183,7 +183,7 @@ class MessageController extends VController
 				$reject->vid  = $v;
 				$reject->save();
 				$this->rejectlog($v,2);
-				$resulst = VerMessage::model()->updateAll(array('flag'=>0),'id=:id',array(':id'=>$v));
+				$resulst = VerMessage::model()->updateAll(array('flag'=>0,'delFlag'=>'0'),'id=:id',array(':id'=>$v));
 			}
 		}
 	}

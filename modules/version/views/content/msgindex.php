@@ -157,48 +157,59 @@ if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
 		}
 	}
            if(!empty($list)){
-               foreach($list as $l){?>
-                    <tr>
-                        <input type="hidden" name="id" value="<?php echo $l['id']?>">
-                        <td><?php echo $l['id']?></td>
-                        <td><?php echo $l['title']?></td>
-                        <td><div style="width:300px;word-wrap:break-word;"><?php echo $l['info']?></div></td>
-                        <td><?php echo $l['name']?></td>
-                        <td><?php
-                                if($l['flag']=='0'){
-                                    echo '未通过';
-                                }else if($l['flag']=='6'){
-                                    echo '通过';
-                                }else{
-                                    echo '审核中';
-                                }
+               foreach($list as $h=>$l){
+                   if($l['flag'] == '6' && $l['delFlag'] == '1'){
 
-                            ?></td>
-                        <td><?php
-                             if(!empty($l['firstTime'])){
-                                echo date("Y-m-d",$l['firstTime']);
-                             }?>---<?php if(!empty($l['endTime'])){
-                                   echo date("Y-m-d",$l['endTime']);
-                                     }?></td>
-                        <td>
-                            <?php
+                   }else {
+                       ?>
+                       <tr>
+                           <input type="hidden" name="id" value="<?php echo $l['id'] ?>">
+                           <td><?php echo $l['id'] ?></td>
+                           <td><?php echo $l['title'] ?></td>
+                           <td>
+                               <div style="width:300px;word-wrap:break-word;"><?php echo $l['info'] ?></div>
+                           </td>
+                           <td><?php echo $l['name'] ?></td>
+                           <td><?php
+                               if ($l['flag'] == '0') {
+                                   echo '未通过';
+                               } else if ($l['flag'] == '6' && $l['delFlag'] == '0') {
+                                   echo '通过';
+                               } else if ($l['delFlag'] == '1') {
+                                   echo '删除消息审核中';
+                               } else {
+                                   echo '审核中';
+                               }
+
+                               ?></td>
+                           <td><?php
+                               if (!empty($l['firstTime'])) {
+                                   echo date("Y-m-d", $l['firstTime']);
+                               } ?>---<?php if (!empty($l['endTime'])) {
+                                   echo date("Y-m-d", $l['endTime']);
+                               } ?></td>
+                           <td>
+                               <?php
 
 
-                               if((in_array('1',$res['status']) || $_SESSION['auth']=='1') && (in_array($l['gid'],$gid) || $_SESSION['auth']=='1')){
-                                  if($l['flag']=='0'){
-                                  ?>
-                            <a href="<?php echo $this->get_url('content','message',array('id'=>$l['id'],'adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">编辑</a><a class="review">提交审核</a>&nbsp;<a class="del">删除</a>
-                                <?php
-                                  }else if($l['flag']=='6'){
-                                  ?>
-                            <a href="<?php echo $this->get_url('content','message',array('id'=>$l['id'],'adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>">编辑</a>&nbsp;<a class="del">删除</a>
-                                  <?php
-                                  }
-                                }
-                            ?>
-                        </td>
-                    </tr>
-                    <?php
+                               if ((in_array('1', $res['status']) || $_SESSION['auth'] == '1') && (in_array($l['gid'], $gid) || $_SESSION['auth'] == '1')) {
+                                   if ($l['flag'] == '0') {
+                                       ?>
+                                       <a href="<?php echo $this->get_url('content', 'message', array('id' => $l['id'], 'adminLeftNavFlag' => 1, 'adminLeftOne' => $adminLeftOne, 'adminLeftTwo' => $adminLeftTwo, 'adminLeftOneName' => $adminLeftOneName, 'adminLeftTwoName' => $adminLeftTwoName)) ?>">编辑</a>
+                                       <a class="review">提交审核</a>&nbsp;<a class="del">删除</a>
+                                       <?php
+                                   } else if ($l['flag'] == '6') {
+                                       ?>
+                                       <a href="<?php echo $this->get_url('content', 'message', array('id' => $l['id'], 'adminLeftNavFlag' => 1, 'adminLeftOne' => $adminLeftOne, 'adminLeftTwo' => $adminLeftTwo, 'adminLeftOneName' => $adminLeftOneName, 'adminLeftTwoName' => $adminLeftTwoName)) ?>">编辑</a>&nbsp;
+                                       <a class="del">删除</a>
+                                       <?php
+                                   }
+                               }
+                               ?>
+                           </td>
+                       </tr>
+                       <?php
+                   }
                 }
             }
             ?>
@@ -209,16 +220,16 @@ if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
 <script>
     $('.del').click(function(){
         var id = $(this).parent().parent().children('input').val();
-        layer.confirm("确定删除此条消息？", {
+        layer.confirm("确定删除此条消息并提审？", {
         	title:"消息提示",
             btn: ['删除','取消'] //按钮
             }, function(){
             $.post("<?php echo $this->get_url('content','msgdel')?>",{id:id},function(d){
                 if(d.code==200){
-                    alert(d.msg);
+                    layer.alert(d.msg);
                     location.reload();
                 }else{
-                    alert(d.msg)
+                    layer.alert(d.msg)
                 }
             },'json')
         })

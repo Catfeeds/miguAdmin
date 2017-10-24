@@ -19,8 +19,9 @@
  * @property string $cp
  * @property string $gid
  * @property string $uType
- * @property string $flag
- * @property string $workid
+ * @property integer $flag
+ * @property integer $workid
+ * @property integer $delFlag
  */
 class VerMessage extends CActiveRecord
 {
@@ -41,16 +42,16 @@ class VerMessage extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('type, info', 'required'),
-			array('vid, flag', 'length', 'max'=>30),
+			array('flag, workid, delFlag', 'numerical', 'integerOnly'=>true),
+			array('vid', 'length', 'max'=>30),
 			array('type, gid, uType', 'length', 'max'=>20),
 			array('param, action, url', 'length', 'max'=>300),
 			array('cTime', 'length', 'max'=>11),
 			array('pic, firstTime, endTime, title', 'length', 'max'=>255),
 			array('cp', 'length', 'max'=>2),
-			array('workid', 'length', 'max'=>25),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, vid, type, param, action, url, info, cTime, pic, firstTime, endTime, title, cp, gid, uType, flag, workid', 'safe', 'on'=>'search'),
+			array('id, vid, type, param, action, url, info, cTime, pic, firstTime, endTime, title, cp, gid, uType, flag, workid, delFlag', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -88,6 +89,7 @@ class VerMessage extends CActiveRecord
 			'uType' => 'U Type',
 			'flag' => 'Flag',
 			'workid' => 'Workid',
+			'delFlag' => '删除标识 delFlag=1并且flag=6删除成功',
 		);
 	}
 
@@ -124,8 +126,9 @@ class VerMessage extends CActiveRecord
 		$criteria->compare('cp',$this->cp,true);
 		$criteria->compare('gid',$this->gid,true);
 		$criteria->compare('uType',$this->uType,true);
-		$criteria->compare('flag',$this->flag,true);
-		$criteria->compare('workid',$this->workid,true);
+		$criteria->compare('flag',$this->flag);
+		$criteria->compare('workid',$this->workid);
+		$criteria->compare('delFlag',$this->delFlag);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -143,4 +146,3 @@ class VerMessage extends CActiveRecord
 		return parent::model($className);
 	}
 }
-
