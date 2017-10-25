@@ -51,7 +51,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     <div class="inputDiv">
 
         <span style="float:left;font-size:14px;">&nbsp;&nbsp;&nbsp;站点</span>
-        <select name="type" id="gid" class="form-input w100">
+        <select name="type" id="gid" class="form-input w200">
             <option value="0">请选择</option>
             <?php
             if($_SESSION['auth'] == 1){
@@ -64,7 +64,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             ?>
             <?php if(!empty($result)):?>
                 <?php foreach($result as $v):?>
-                    <option value="<?php echo $v['id']?>" <?php if(!empty($_REQUEST['gid'])){echo "selected=selected";}?>><?php echo $v['name']?></option>
+                    <option value="<?php echo $v['id']?>" <?php if(!empty($_REQUEST['gid'])&&$_REQUEST['gid']==$v['id']){echo "selected=selected";}?>><?php echo $v['name']?></option>
                 <?php endforeach;?>
             <?php endif;?>
         </select>
@@ -120,7 +120,20 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                 ?>
                             </td>
                             <td><?php echo date("Y-m-d H:i:s",$v['time']);?></td>
-                            <td><a href="<?php echo $v['url'];?>" target="_blank">查看</a>&nbsp;<a href="javascript:;" class="pass" gid="<?php echo $v['id'];?>">通过</a>&nbsp;<a href="javascript:;" class="reject" gid="<?php echo $v['id'];?>">驳回</a></td>
+			    <td>
+                                <?php $type=isset($_REQUEST['type'])?$_REQUEST['type']:1;?>
+                                <?php if($type==1):?>
+                                    <a href="<?php echo $v['url'];?>" target="_blank">查看</a>&nbsp;
+                                    <a href="javascript:;" class="pass" gid="<?php echo $v['id'];?>">通过</a>&nbsp;
+                                    <a href="javascript:;" class="reject" gid="<?php echo $v['id'];?>">驳回</a>
+                                <?php elseif($type==2):?>
+                                    <a href="<?php echo $v['url'];?>" target="_blank">查看</a>&nbsp;
+                                <?php else:?>
+                                    <a href="<?php echo $v['url'];?>" target="_blank">查看</a>&nbsp;
+                                    <a href="javascript:;" class="pass" gid="<?php echo $v['id'];?>">通过</a>&nbsp;
+                                    <a href="javascript:;" class="reject" gid="<?php echo $v['id'];?>">驳回</a>
+                                <?php endif;?>
+                            </td>
                         </tr>
                     <?php endforeach;?>
                 <?php else:?>
@@ -133,6 +146,19 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     </form>
 </div>
 <script>
+    var adminLeftOne = "<?php echo $adminLeftOne;?>";
+    var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
+    var adminLeftOneName = "<?php echo $adminLeftOneName;?>";
+    var adminLeftTwoName = "<?php echo $adminLeftTwoName;?>";
+    var one = "<?php echo !empty($_GET['one'])?$_GET['one']:'0';?>";
+    var two = "<?php echo !empty($_GET['two'])?$_GET['two']:'0';?>";
+    var three = "<?php echo !empty($_GET['three'])?$_GET['three']:'0';?>";
+    var siteName = "<?php echo !empty($_GET['siteName'])?$_GET['siteName']:''; ?>";
+    var son = "<?php echo !empty($_GET['son'])?$_GET['son']:''; ?>";
+    var topName = "<?php echo !empty($_GET['top'])?$_GET['top']:''; ?>";
+    var leftNavFlag  = "<?php echo !empty($_GET['leftNavFlag'])?$_GET['leftNavFlag']:'0'; ?>";
+    var adminLeftNavFlag  = "<?php echo !empty($_GET['adminLeftNavFlag'])?$_GET['adminLeftNavFlag']:'0'; ?>";
+    var fixedUrl = '/adminLeftOne/'+adminLeftOne+'/adminLeftTwo/'+adminLeftTwo+'/adminLeftOneName/'+adminLeftOneName+'/adminLeftTwoName/'+adminLeftTwoName+'/adminLeftNavFlag/'+adminLeftNavFlag+'/one/'+one+'/two/'+two+'/three/'+three+'/siteName/'+siteName+'/son/'+son+'/top/'+topName+'/leftNavFlag/'+leftNavFlag;
     $('.btnall').click(function(){//全选
         $(".center :checkbox").prop("checked", true);
     });
@@ -185,11 +211,11 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         },'json');
     })
 
-    $('.btn_search').click(function(){
+    $('.audit_search').click(function(){
         var gid=$("#gid").val();
         var type=$("#type").val();
         var nid = "<?php echo $_GET['nid']?>";
-        var headerUrl = "/version/review/material.html?mid=<?php echo $this->mid;?>&type="+type+"&nid="+nid;
+        var headerUrl = "/version/review/material/gid/"+gid+"/mid/<?php echo $this->mid;?>/type/"+type+"/nid/"+nid+fixedUrl;
         window.location.href=headerUrl;
     })
 </script>

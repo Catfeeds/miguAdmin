@@ -1301,6 +1301,9 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
         if(!empty($_REQUEST['type'])){
             $list['type']=$_REQUEST['type'];
         }
+	if(!empty($_REQUEST['gid'])){
+            $list['stationId'] = $_REQUEST['gid'];
+        }
         $data = $this->getPageInfo($page);
 
         $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 8 left join  yd_ver_review_work as c on c.workid=b.id  where c.uid=$uid  group by a.id";
@@ -1331,6 +1334,10 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
     }
 
     public function actionMaterAccess(){
+	$sql="select r.* from yd_ver_review_work as r left join yd_ver_work as w on r.workid=w.id where w.flag=8";//查找几个审核人员
+        $result=SQLManager::queryAll($sql);
+	//var_dump($result);
+die;
         $id=$_REQUEST['id'];
         $sql="update yd_ver_upload set flag=6 where id in({$id})";
         $res=SQLManager::execute($sql);
