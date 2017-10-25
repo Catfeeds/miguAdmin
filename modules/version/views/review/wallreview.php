@@ -101,6 +101,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <tr>
                     <th>编号</th>
                     <th>提审人</th>
+                    <th>提审动作</th>
                     <th>提交审核时间</th>
                     <th>站点</th>
 			<th>省份</th>
@@ -129,9 +130,22 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				}else{
 					echo "";
 				}*/
-                                  echo  $l['user'];
+                                    $tmp_sql = "select c.username from yd_ver_review_record as a INNER JOIN yd_ver_wall as b on a.bind_id=b.id INNER JOIN yd_ver_admin as c on a.user_id=c.id WHERE b.id={$l['id']} group by b.id";
+                                    $tmp_res = SQLManager::queryRow($tmp_sql);
+                                  echo  $tmp_res['username'];
                                 ?>
 			    </td>
+                            <td>
+                                <?php
+
+                                if($l['delFlag'] == '1'){
+                                    echo '删除数据';
+                                }else{
+                                    echo '编辑或添加';
+                                }
+                                ?>
+
+                            </td>
                             <td><?php if(!empty($l['addTime'])){echo date('Y-m-d H:i',$l['addTime']);}?></td>
                             <td><?php echo $l['name'];?></td>
 				<td>

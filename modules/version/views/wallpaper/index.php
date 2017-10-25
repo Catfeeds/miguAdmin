@@ -194,7 +194,11 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         }
         if(!empty($list)){
 
-            foreach($list as $l){?>
+            foreach($list as $l){
+                if($l->flag == '6' && $l->delFlag == '1'){
+
+                }else {
+                ?>
                 <tr id="<?php echo $l->id;?>">
                     <input type="hidden" name="id" value="<?php echo $l->id?>">
 		    <td><?php echo $l->id?></td>
@@ -252,7 +256,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 			</td>
                     <td>
                         <?php
-                        switch($l->flag){
+                        /*switch($l->flag){
                             case '0':echo '未通过';break;
                             case '1':
                             case '2':
@@ -261,6 +265,15 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             case '5':
                                 echo '审核中';break;
                             case '6':echo '已通过';break;
+                        }*/
+                        if ($l->flag == '0') {
+                            echo '未通过';
+                        } else if ($l->flag == '6' && $l->delFlag == '0') {
+                            echo '通过';
+                        } else if ($l->delFlag == '1') {
+                            echo '删除壁纸审核中';
+                        } else {
+                            echo '审核中';
                         }
                         ?>
                     </td>
@@ -286,6 +299,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     </td>
                 </tr>
                 <?php
+                }
             }
         }else{?>
             <tr>
@@ -314,19 +328,22 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         var k = $(this);
         var v = $(k).attr('gid');
         if(empty(v)) return false;
-        layer.confirm("你确定删除该壁纸吗？", {
+        layer.confirm("你确定删除该壁纸并提交审核吗？", {
         	title:"消息提示",
             btn: ['删除','取消'] //按钮
             }, function(){
             $.post('/version/wallpaper/del?mid=<?php echo $_GET['mid']?>',{id:v},function(d){
                 if(d.code == 200){
-                    $(k).parent().parent().remove();
                     layer.alert(d.msg,{icon:1});
+                    location.reload();
+//                    $(k).parent().parent().remove();
+
 
                 }else{
                     layer.alert(d.msg,{icon:0});
                 }
             },'json');
+            location.reload();
             $("#"+v).remove();
         })
     });

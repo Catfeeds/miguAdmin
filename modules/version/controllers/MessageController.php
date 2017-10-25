@@ -144,7 +144,7 @@ class MessageController extends VController
 
             $review_flag = 2;   //驳回
             $review_times = $tmp->attributes['flag'];
-            $review_message = $message;
+            $review_message = '驳回理由：'.$message;
             $bind_id = $_REQUEST['gid'];
             $review_type = 1;   //消息
             $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
@@ -173,7 +173,7 @@ class MessageController extends VController
 
                 $review_flag = 2;   //驳回
                 $review_times = $tmp->attributes['flag'];
-                $review_message = $message;
+                $review_message = '驳回理由：'.$message;
                 $bind_id = $v;
                 $review_type = 1;   //消息
                 $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
