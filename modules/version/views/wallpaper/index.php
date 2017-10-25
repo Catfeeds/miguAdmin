@@ -267,7 +267,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         } else if ($l->flag == '6' && $l->delFlag == '0') {
                             echo '通过';
                         } else if ($l->delFlag == '1') {
-                            echo '删除消息审核中';
+                            echo '删除壁纸审核中';
                         } else {
                             echo '审核中';
                         }
@@ -329,8 +329,10 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             }, function(){
             $.post('/version/wallpaper/del?mid=<?php echo $_GET['mid']?>',{id:v},function(d){
                 if(d.code == 200){
-                    $(k).parent().parent().remove();
                     layer.alert(d.msg,{icon:1});
+                    location.reload();
+//                    $(k).parent().parent().remove();
+
 
                 }else{
                     layer.alert(d.msg,{icon:0});
