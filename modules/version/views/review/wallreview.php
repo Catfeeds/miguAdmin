@@ -130,7 +130,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				}else{
 					echo "";
 				}*/
-                                  echo  $l['user'];
+                                    $tmp_sql = "select c.username from yd_ver_review_record as a INNER JOIN yd_ver_wall as b on a.bind_id=b.id INNER JOIN yd_ver_admin as c on a.user_id=c.id WHERE b.id={$l['id']} group by b.id";
+                                    $tmp_res = SQLManager::queryRow($tmp_sql);
+                                  echo  $tmp_res['username'];
                                 ?>
 			    </td>
                             <td>
