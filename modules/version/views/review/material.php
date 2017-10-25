@@ -49,21 +49,35 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 </div>
 <div>
     <div class="inputDiv">
+
         <span style="float:left;font-size:14px;">&nbsp;&nbsp;&nbsp;站点</span>
+        <select name="type" id="gid" class="form-input w100">
+            <option value="0">请选择</option>
+            <?php
+            if($_SESSION['auth'] == 1){
+                $sql = "select id,name from yd_ver_station";
+            }else{
+                $uid = $_SESSION['userid'];
+                $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 8  left join yd_ver_worker as c on c.workid=b.id where c.type = 1 and  c.uid=$uid group by a.id";
+            }
+            $result = SQLManager::queryAll($sql);
+            ?>
+            <?php if(!empty($result)):?>
+                <?php foreach($result as $v):?>
+                    <option value="<?php echo $v['id']?>" <?php if(!empty($_REQUEST['gid'])){echo "selected=selected";}?>><?php echo $v['name']?></option>
+                <?php endforeach;?>
+            <?php endif;?>
+        </select>
+
+	    <span style="float:left;font-size:14px;">&nbsp;&nbsp;&nbsp;审核状态:</span>
         <select name="type" id="type" class="form-input w100">
-            <option value="0">请选择</option>
-<!--            --><?php //foreach($station as $v):?>
-<!--                <option value="--><?php //echo $v['id'];?><!--">--><?php //echo $v['name'];?><!--</option>-->
-<!--            --><?php //endforeach;?>
+            <option value="1" <?php if(!empty($_REQUEST['type']) && $_REQUEST['type'] == '1'){ echo "selected=selected";}?>>未审核</option>
+            <option value="2" <?php if(!empty($_REQUEST['type']) && $_REQUEST['type'] == '2'){ echo "selected=selected";}?>>已通过</option>
+            <option value="3" <?php if(!empty($_REQUEST['type']) && $_REQUEST['type'] == '3'){ echo "selected=selected";}?>>已驳回</option>
         </select>
-	<span style="float:left;font-size:14px;">&nbsp;&nbsp;&nbsp;审核状态:</span>
-	<select name="type" id="type" class="form-input w100">
-            <option value="0">请选择</option>
-            <option value="0">待审核</option>
-            <option value="0">未通过</option>
-            <option value="6">已通过</option>
-        </select>
-	<input style="width:50px;height:20px;margin-left: 5px;font-size: 14px;" class="btn btn1 btn-gray audit_search search " type="button" value="查询" name="">
+
+	    <input style="width:50px;height:20px;margin-left: 5px;font-size: 14px;" class="btn btn1 btn-gray audit_search search " type="button" value="查询" name="">
+
         <?php //echo $page;?>
 
     </div>
@@ -169,5 +183,13 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 	$.post("/version/review/materreject?mid=<?php echo $this->mid?>",{id:id},function(data){
             location.reload();
         },'json');
+    })
+
+    $('.btn_search').click(function(){
+        var gid=$("#gid").val();
+        var type=$("#type").val();
+        var nid = "<?php echo $_GET['nid']?>";
+        var headerUrl = "/version/review/material.html?mid=<?php echo $this->mid;?>&type="+type+"&nid="+nid;
+        window.location.href=headerUrl;
     })
 </script>
