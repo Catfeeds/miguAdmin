@@ -338,6 +338,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     layer.alert(d.msg,{icon:0});
                 }
             },'json');
+            location.reload();
             $("#"+v).remove();
         })
     });
