@@ -20,6 +20,7 @@
  * @property string $startTime
  * @property string $endTime
  * @property string $pic_time
+ * @property integer $delFlag
  */
 class VerWall extends CActiveRecord
 {
@@ -40,7 +41,7 @@ class VerWall extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, pic, thum', 'required'),
-			array('addTime, gid, flag, workid, type', 'numerical', 'integerOnly'=>true),
+			array('addTime, gid, flag, workid, type, delFlag', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>50),
 			array('pic, thum', 'length', 'max'=>200),
 			array('province, city', 'length', 'max'=>100),
@@ -48,7 +49,7 @@ class VerWall extends CActiveRecord
 			array('startTime, endTime, pic_time', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, pic, thum, province, city, addTime, userGroup, epgCode, gid, flag, workid, type, startTime, endTime, pic_time', 'safe', 'on'=>'search'),
+			array('id, title, pic, thum, province, city, addTime, userGroup, epgCode, gid, flag, workid, type, startTime, endTime, pic_time, delFlag', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -85,6 +86,7 @@ class VerWall extends CActiveRecord
 			'startTime' => 'Start Time',
 			'endTime' => 'End Time',
 			'pic_time' => '图片修改时间',
+			'delFlag' => '删除标识 delFlag=1并且flag=6删除成功',
 		);
 	}
 
@@ -122,6 +124,7 @@ class VerWall extends CActiveRecord
 		$criteria->compare('startTime',$this->startTime,true);
 		$criteria->compare('endTime',$this->endTime,true);
 		$criteria->compare('pic_time',$this->pic_time,true);
+		$criteria->compare('delFlag',$this->delFlag);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -139,4 +142,3 @@ class VerWall extends CActiveRecord
 		return parent::model($className);
 	}
 }
-

@@ -101,6 +101,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <tr>
                     <th>编号</th>
                     <th>提审人</th>
+                    <th>提审动作</th>
                     <th>提交审核时间</th>
                     <th>站点</th>
 			<th>省份</th>
@@ -132,6 +133,17 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                   echo  $l['user'];
                                 ?>
 			    </td>
+                            <td>
+                                <?php
+
+                                if($l['delFlag'] == '1'){
+                                    echo '删除数据';
+                                }else{
+                                    echo '编辑或添加';
+                                }
+                                ?>
+
+                            </td>
                             <td><?php if(!empty($l['addTime'])){echo date('Y-m-d H:i',$l['addTime']);}?></td>
                             <td><?php echo $l['name'];?></td>
 				<td>

@@ -397,13 +397,26 @@ class WallpaperController extends VController{
 
     public function actionDel(){
         if(empty($_POST['id'])) $this->die_json(array('code'=>404,'msg'=>'参数不能为空'));
-        $del = VerWall::model()->deleteByPk($_POST['id']);
-        if(!$del){
-            $this->die_json(array('code'=>404,'msg'=>'删除失败'));
+        //$del = VerWall::model()->deleteByPk($_POST['id']);
+
+        $review_flag = 3;   //提交审核
+        $review_times = 1;
+        $review_message = '删除数据提审';
+        $bind_id = $_REQUEST['id'];
+        $review_type = 2;   //壁纸
+        $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
+        $username = $_SESSION['nickname'];
+        $flag=5;
+        $workid = Common::EditWorkid($username,$flag);
+        $result = VerWall::model()->updateAll(array('flag'=>1,'delFlag'=>'1','workid'=>$workid,'cTime'=>time()),'id=:id',array(':id'=>$_REQUEST['id']));
+
+        if(!$result){
+            $this->die_json(array('code'=>404,'msg'=>'删除数据提审失败'));
         }
       //  $title = count($del) > 1 ? '' : $del[0]['name'];
         //$this->RecordOperatingLog(MSG::MYSQL_EDIT_DEL,$del,'权限组',$title);
-        $this->die_json(array('code'=>404,'msg'=>'删除成功'));
+        $this->die_json(array('code'=>404,'msg'=>'删除数据提审成功'));
     }
 
     public function actionGetcity(){
@@ -564,7 +577,7 @@ class WallpaperController extends VController{
 
             $review_flag = 2;   //驳回
             $review_times = $tmp->attributes['flag'];
-            $review_message = $message;
+            $review_message = '驳回理由：'.$message;
             $bind_id = $_REQUEST['gid'];
             $review_type = 2;   //壁纸
             $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
@@ -573,7 +586,7 @@ class WallpaperController extends VController{
             $reject->vid  = $_REQUEST['gid'];
             $reject->save();
             $this->rejectlog($_REQUEST['gid'],2);
-            $resulst = VerWall::model()->updateAll(array('flag'=>0),'id=:id',array(':id'=>$_REQUEST['gid']));
+            $resulst = VerWall::model()->updateAll(array('flag'=>0,'delFlag'=>'0'),'id=:id',array(':id'=>$_REQUEST['gid']));
         }else{
             $arr = explode(' ',trim($_REQUEST['gid']));
             foreach($arr as $k=>$v){
@@ -596,13 +609,13 @@ class WallpaperController extends VController{
 
                 $review_flag = 2;   //驳回
                 $review_times = $tmp->attributes['flag'];
-                $review_message = $message;
+                $review_message = '驳回理由：'.$message;
                 $bind_id = $v;
                 $review_type = 2;   //壁纸
                 $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
 
                 $this->rejectlog($v,2);
-                $resulst = VerWall::model()->updateAll(array('flag'=>0),'id=:id',array(':id'=>$v));
+                $resulst = VerWall::model()->updateAll(array('flag'=>0,'delFlag'=>'0'),'id=:id',array(':id'=>$v));
             }
         }
     }
