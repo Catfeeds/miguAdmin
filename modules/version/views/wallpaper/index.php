@@ -194,7 +194,11 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         }
         if(!empty($list)){
 
-            foreach($list as $l){?>
+            foreach($list as $l){
+                if($l->flag == '6' && $l->delFlag == '1'){
+
+                }else {
+                ?>
                 <tr id="<?php echo $l->id;?>">
                     <input type="hidden" name="id" value="<?php echo $l->id?>">
 		    <td><?php echo $l->id?></td>
@@ -295,6 +299,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     </td>
                 </tr>
                 <?php
+                }
             }
         }else{?>
             <tr>
