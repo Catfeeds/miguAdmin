@@ -59,34 +59,32 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 $sql = "select id,name from yd_ver_station";
             }else{
                 $uid = $_SESSION['userid'];
-                $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 3 left join yd_ver_worker as c on c.workid=b.id where c.type = 1 and  c.uid=$uid group
- by a.id";
+                $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 3 left join yd_ver_worker as c on c.workid=b.id where c.type = 1 and  c.uid=$uid group by a.id";
             }
                 $stationRes = SQLManager::queryAll($sql);
                 if(!empty($stationRes)){
-                    foreach($stationRes as $k=>$v){
-                        echo "<option value='".$v['id']."'>".$v['name']."</option>";
-                    }
-
+                    foreach($stationRes as $k=>$v){?>
+                        <option <?php if(!empty($_REQUEST['stationId']) && $_REQUEST['stationId'] == $v['id']){echo 'selected=selected';}?> value='<?php echo $v['id'];?>'><?php echo $v['name'];?></option>
+                    <?php }
                 }
 
             ?>
         </select>
         <span >牌照方:</span><select style="width:70px;height:20px;"  class="form-input w100" id="cp">
             <option  value=""  >请选择</option>
-            <option  value="642001"  >华数</option>
-            <option  value="BESTVOTT"  >百视通</option>
-            <option  value="ICNTV"  >未来电视</option>
-            <option  value="youpeng"  >南传</option>
-            <option  value="HNBB"  >芒果</option>
-            <option  value="CIBN"  >国广</option>
-            <option  value="YGYH"  >银河</option>
+            <option  <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == '642001'){echo 'selected=selected';}?> value="642001"  >华数</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'BESTVOTT'){echo 'selected=selected';}?> value="BESTVOTT"  >百视通</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'ICNTV'){echo 'selected=selected';}?> value="ICNTV"  >未来电视</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'youpeng'){echo 'selected=selected';}?> value="youpeng"  >南传</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'HNBB'){echo 'selected=selected';}?> value="HNBB"  >芒果</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'CIBN'){echo 'selected=selected';}?> value="CIBN"  >国广</option>
+            <option <?php if(!empty($_REQUEST['cp']) && $_REQUEST['cp'] == 'YGYH'){echo 'selected=selected';}?> value="YGYH"  >银河</option>
         </select>
         <span >审核状态:</span><select onchange="access_btnChange()" style="width:70px;height:20px;"  class="form-input w100" id="allbtn">
             <option  value="请选择"  >请选择</option>
-            <option  value="待审核"  >待审核</option>
-            <option  value="已通过"  >已通过</option>
-            <option  value="已驳回"  >已驳回</option>
+            <option <?php if(!empty($_REQUEST['allbtn']) && $_REQUEST['allbtn'] == '待审核'){echo 'selected=selected';}?> value="待审核"  >待审核</option>
+            <option <?php if(!empty($_REQUEST['allbtn']) && $_REQUEST['allbtn'] == '已通过'){echo 'selected=selected';}?> value="已通过"  >已通过</option>
+            <option <?php if(!empty($_REQUEST['allbtn']) && $_REQUEST['allbtn'] =='已驳回'){echo 'selected=selected';}?> value="已驳回"  >已驳回</option>
         </select>
         <input style="width:50px;height:20px;margin-left: 5px;font-size: 14px;" class="btn btn1 btn-gray audit_search search " type="button" value="查询" name="" >
         <!--<input type="button" style='width:30px;height:20px;float:right;margin-right: 10px;' class="btn page_btn" value="go">
@@ -106,6 +104,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     <table width="100%" cellspacing="0" cellpadding="10" class="mtable center media">
         <tr>
             <th></th>
+            <th>提审人</th>
             <th>提审时间</th>
             <th>站点</th>
             <th>屏幕名称</th>
@@ -129,10 +128,16 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         $copyGuides[] = $val->attributes['pasteGuideId'];
                     }
                 }
+                if($v['pic'] == '/file/3.png'){
+                    $tmp_pic = VerScreenContent::model()->find("id={$v['sid']}");
+                    $v['pic'] = $tmp_pic->attributes['pic'];
+                }
+//                var_dump($v);die;
                 ?>
                 <tr class="tr_list">
                     <td><input type="checkbox" name="id" value="<?php echo $v['id']?>"  <?php if(in_array($v['screenGuideid'],$copyGuides)){echo "disabled=disabled";}?> screenGuidid="<?=$v['screenGuideid']?>" onclick="checkQuote(this)" ></td>
-                    <td><?php echo date("Y-m-d h:i:s",$v['addTime'])?></td>
+                    <td><?php echo $v['username'];?></td>
+                    <td><?php echo date("Y-m-d h:i:s",$v['add_time'])?></td>
                     <td><?php echo $v['name']?></td>
                     <td><?php echo $v['gtitle']?></td>
                     <td><?php echo $v['x']?>×<?php echo $v['y']?>;<br><?php echo $v['width']?>×<?php echo $v['height']?></td>

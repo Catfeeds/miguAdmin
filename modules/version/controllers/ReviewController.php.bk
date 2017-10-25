@@ -535,7 +535,7 @@ class ReviewController extends VController
                 $sql_where .= " and b.cp='{$_REQUEST['cp']}'";
             }
 
-            $sql_order = " group by b.id order by a.add_time desc ";
+            $sql_order = " order by a.add_time desc ";
             $sql = $sql . $sql_where . $sql_order;
             $list = SQLManager::queryAll($sql);
 //            print_r($sql);
@@ -966,55 +966,44 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
         $this->render('msgreview',array('list'=>$list,'page'=>$pagination,'res'=>$res));
 
     }
-
     public function actionTopicallaccess(){
     	$ids = $_REQUEST['ids'];
-    	$ids = substr($ids, 0,strlen($ids)-1);
-		$sql ="SELECT t1.id,t1.flag,t3.type FROM yd_ver_topic_review t1 LEFT JOIN yd_ver_sitelist t2 ON t1.stationid = t2.`name` and t2.pid = 0 LEFT JOIN yd_ver_work t3 on t2.id = t3.stationId and t3.flag = 6 WHERE t1.id IN ($ids)";
+    	 $ids = substr($ids, 0,strlen($ids)-1);
+		$sql ="SELECT
+	t1.id,t1.flag,t3.type
+FROM
+	yd_ver_topic_review t1
+LEFT JOIN yd_ver_sitelist t2 ON t1.stationid = t2.`name` and t2.pid = 0
+LEFT JOIN yd_ver_work t3 on t2.id = t3.stationId and t3.flag = 6
 
-	    $res = SQLManager::queryAll($sql);
-	    if(!empty($res)){
-		    foreach ($res as $key => $value) {
+WHERE
+	t1.id IN ($ids)";
+
+	
+	
+	
+	
+	
+	$res = SQLManager::queryAll($sql);
+	if(!empty($res)){
+		foreach ($res as $key => $value) {
 			
-			    if($value['flag'] == $value['type'] || $_SESSION['auth']=='1'){
-				    $sql = "UPDATE yd_ver_topic_review set flag = 6 where id = {$value['id']}";
-				    $res = SQLManager::execute($sql);
-                    $review_times = 1;//几审
-			    }else if($value['flag'] < $value['type']){
-				    $flag = $value['flag'] + 1;
-                    $review_times = $flag;//几审
-                    $sql = "UPDATE yd_ver_topic_review set flag = $flag where id = {$value['id']}";
-				    $res = SQLManager::execute($sql);
-			    }else{
-                    $review_times = 1;//几审
-                }
-
-                $type_res = VerTopicReview::model()->findByPk($value['id']);
-                if($type_res->attributes['type'] == 'bkimg'){
-                    $review_type = 4;   //专题背景图
-                }else if($type_res->attributes['type'] == 'verui'){
-                    $review_type = 5;   //yd_ver_ui专题
-                }else if($type_res->attributes['type'] == 'specialtopic'){
-                    $review_type = 6;   //yd_special_topic河南专题
-                }else{
-                    $review_type = 5;   //yd_ver_ui专题
-                }
-                $review_flag = 1;   //通过
-                $review_message = '通过';
-                $bind_id = $type_res->attributes['topic_id'];
-                $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
-		    }
-
-
-	    }
-
-
+			if($value['flag'] == $value['type'] || $_SESSION['auth']=='1'){
+				$sql = "UPDATE yd_ver_topic_review set flag = 6 where id = {$value['id']}";
+				$res = SQLManager::execute($sql);
+			}else if($value['flag'] < $value['type']){
+				$flag = $value['flag'] + 1;
+				$sql = "UPDATE yd_ver_topic_review set flag = $flag where id = {$value['id']}";
+				$res = SQLManager::execute($sql);
+			}
+		}
+	}
 	
     }
 	
-    public function actionTopicnotaccess(){
+	  public function actionTopicnotaccess(){
     	$ids = $_REQUEST['ids'];
-        $ids = substr($ids, 0,strlen($ids)-1);
+    	 $ids = substr($ids, 0,strlen($ids)-1);
 		$sql ="UPDATE yd_ver_topic_review set flag = 0 WHERE id IN ($ids)";
 		$res = SQLManager::execute($sql);
 		$sql1 = "SELECT * from yd_ver_topic_review where id IN ($ids) and type <> 'bkimg' and uptype = '3'";
@@ -1030,28 +1019,7 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 				}
 			}
 		}
-
-		$tmp_res = VerTopicReview::model()->findAll("id in ($ids)");
-		if(!empty($tmp_res)){
-		    foreach ($tmp_res as $k=>$v){
-                if($v->attributes['type'] == 'bkimg'){
-                    $review_type = 4;   //专题背景图
-                }else if($v->attributes['type'] == 'verui'){
-                    $review_type = 5;   //yd_ver_ui专题
-                }else if($v->attributes['type'] == 'specialtopic'){
-                    $review_type = 6;   //yd_special_topic河南专题
-                }else{
-                    $review_type = 5;   //yd_ver_ui专题
-                }
-                $review_times = 1;
-                $review_flag = 2;   //驳回
-                $review_message = '驳回';
-                $bind_id = $v->attributes['topic_id'];
-                $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
-            }
-        }
     }
-
   public function actionTopicReview()
     {
         $username=$_SESSION['nickname'];
@@ -1093,15 +1061,12 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 							
 			}
 			$list['stationId'] = substr($stationId,0,strlen($stationId)-1);
-			
         }
-
 	$uid = $_SESSION['userid'];
 	$sitelist = array();
             $sql = "select a.* from yd_ver_sitelist as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 6 left join  yd_ver_review_work as
  c on c.workid=b.id  where c.uid=$uid  group by a.id";
 	$st = SQLManager::QueryAll($sql);
-
 	if(!empty($st)){
 
 		foreach($st as $key=>$value){
@@ -1286,70 +1251,6 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
             $stuList = json_decode(CJSON::encode($res),true);
         }
         echo json_encode($stuList);
-    }
-
-    public function actionMaterial(){
-        //$tmp="select u.*,s.name as name from yd_ver_upload as u left join yd_ver_station as s on u.stationId=s.id and u.flag=0";
-        //$model=SQLManager::queryAll($tmp);
-
-        $flag=8;
-        $username=$_SESSION['nickname'];
-        $uid = $_SESSION['userid'];
-        $res  = Common::getUser($username,$flag);
-        $page=20;
-        $list = array();
-        if(!empty($_REQUEST['type'])){
-            $list['type']=$_REQUEST['type'];
-        }
-        $data = $this->getPageInfo($page);
-
-        $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 8 left join  yd_ver_review_work as c on c.workid=b.id  where c.uid=$uid  group by a.id";
-        $st = SQLManager::QueryAll($sql);
-
-        if(!empty($st) && $_SESSION['auth'] <> 1){
-            $list['gid'] = $st;
-        }
-        $list['cp']=$res['cp'];
-        $list['review']=$res['review'];
-        if($_SESSION['auth']==1){
-            $list['workid'] ='';
-        }
-
-        $tmp=VideoManager::getMaterialReview($data,$list);
-
-        $url = $this->createUrl($this->action->id);
-        $pagination = $this->renderPagination($url,$tmp['count'],$page,$data['currentPage'],$tmp['alwaysCount']);
-        $list = array();
-        if(!empty($res['review']) || $_SESSION['auth']=='1'){
-            $list = $tmp['list'];
-        }else{
-            if(in_array('3',$res['status'])){
-                $list=$tmp['list'];
-            }
-        }
-        $this->render('material',array('list'=>$list,'page'=>$pagination,'res'=>$res));
-    }
-
-    public function actionMaterAccess(){
-        $id=$_REQUEST['id'];
-        $sql="update yd_ver_upload set flag=6 where id in({$id})";
-        $res=SQLManager::execute($sql);
-        if($res>0){
-            echo json_encode(array("code"=>200));
-        }else{
-            echo json_encode(array("code"=>500));
-        }
-    }
-
-    public function  actionMaterReject(){
-        $id=$_REQUEST['id'];
-        $sql="update yd_ver_upload set flag=0 where id in({$id})";
-        $res=SQLManager::execute($sql);
-        if($res>0){
-            echo json_encode(array("code"=>200));
-        }else{
-            echo json_encode(array("code"=>500));
-        }
     }
 }
 

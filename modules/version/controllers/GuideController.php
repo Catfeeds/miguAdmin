@@ -272,6 +272,20 @@ class GuideController extends VController{
 	}
 
     public function actionContent(){
+		$username=$_SESSION['nickname'];
+		$uid=$_SESSION['userid'];
+		$flag= 8;
+		$res  = Common::getUser($username,$flag);
+		$sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = {$flag} left join yd_ver_worker as c on c.workid=b.id where c.uid=$uid group by a.id";
+		$st = SQLManager::QueryAll($sql);
+		$list=array();
+		$str='';
+		if(!empty($st) && $_SESSION['auth'] <> 1){
+			foreach($st as $k=>$v){
+				$str .= ",'". $v['id']."'";
+			}
+			$list['uid']=substr($str,1,strlen($str)-1);
+		}
                 $page = 100;
 		$data = $this->getPageInfo($page);
                 $url = $this->createUrl($this->action->id);
@@ -287,11 +301,20 @@ class GuideController extends VController{
                 $sql = $sql_select . $sql_where . $sql_limit;
                 $content=SQLManager::queryAll($sql);
                 $tmp['count'] = VerUpload::model()->count();
-		//$pagination = $this->renderPagination($url,$tmp['count'],$page,$data['currentPage']);
 		$pagination = $this->renderPagination($url,count($content),$page,$data['currentPage'],$tmp['count']);
-		//$content = VerUpload::model()->findAll("1=1 order by id desc");
-		///var_dump($content);die;
-		$this->render('content',array('list'=>$content,'page'=>$pagination));
+		$this->render('content',array('list'=>$content,'page'=>$pagination,'res'=>$res));
+	}
+
+	public function actionReview(){
+		$id=$_REQUEST['id'];
+		$time=time();
+		$sql="update yd_ver_upload set flag=1,time={$time} where id={$id}";
+		$res=SQLManager::execute($sql);
+		if($res>0){
+			echo json_encode(array("code"=>200));
+		}else{
+			echo json_encode(array("code"=>500));
+		}
 	}
 
 	public function actionUploads(){

@@ -618,13 +618,29 @@ class ContentController extends VController
 		//}
 		$this->render('msgindex',array('list'=>$test,'page'=>$pagination,'res'=>$res));
 	}
-        public function actionMsgDel(){
+
+    public function actionMsgDel(){
 		$id = $_REQUEST['id'];
-		$res = VerMessage::model()->deleteByPk($id);
-		if($res){
-			echo json_encode(array('code'=>200,'msg'=>'删除成功'));
+		//$res = VerMessage::model()->deleteByPk($id);
+		//$res = VerMessage::model()->updateByPk($id,'delFlag',array('delFlag'=>1));
+        $username = $_SESSION['nickname'];
+        $flag=4;
+
+        $review_flag = 3;   //提交审核
+        $review_times = 1;
+        $review_message = '删除消息提审';
+        $bind_id = $_REQUEST['id'];
+        $review_type = 1;   //消息
+        $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
+        $workid = Common::EditWorkid($username,$flag);
+
+        $result = VerMessage::model()->updateAll(array('flag'=>1,'workid'=>$workid,'cTime'=>time(),'delFlag'=>1),'id=:id',array(':id'=>$_REQUEST['id']));
+
+		if($result){
+			echo json_encode(array('code'=>200,'msg'=>'删除消息提审成功'));
 		}else{
-			echo json_encode(array('code'=>404,'msg'=>'删除失败'));
+			echo json_encode(array('code'=>404,'msg'=>'删除消息提审失败'));
 		}
 	}
         public function actionAllSubmit(){

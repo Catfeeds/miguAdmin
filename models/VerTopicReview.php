@@ -1,36 +1,36 @@
 <?php
 
 /**
- * This is the model class for table "{{ver_message}}".
+ * This is the model class for table "{{ver_topic_review}}".
  *
- * The followings are the available columns in table '{{ver_message}}':
+ * The followings are the available columns in table '{{ver_topic_review}}':
  * @property string $id
- * @property string $vid
  * @property string $type
- * @property string $param
- * @property string $action
- * @property string $url
- * @property string $info
- * @property string $cTime
- * @property string $pic
- * @property string $firstTime
- * @property string $endTime
+ * @property integer $topic_id
  * @property string $title
- * @property string $cp
- * @property string $gid
+ * @property string $uptype
+ * @property string $tType
+ * @property string $action
+ * @property string $param
+ * @property string $pic
+ * @property string $uptime
+ * @property string $reviewtime
+ * @property string $message
  * @property string $uType
- * @property integer $flag
- * @property integer $workid
- * @property integer $delFlag
+ * @property string $vid
+ * @property string $flag
+ * @property string $videUrl
+ * @property integer $gid
+ * @property string $stationid
  */
-class VerMessage extends CActiveRecord
+class VerTopicReview extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{ver_message}}';
+		return '{{ver_topic_review}}';
 	}
 
 	/**
@@ -41,17 +41,11 @@ class VerMessage extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('type, info', 'required'),
-			array('flag, workid, delFlag', 'numerical', 'integerOnly'=>true),
-			array('vid', 'length', 'max'=>30),
-			array('type, gid, uType', 'length', 'max'=>20),
-			array('param, action, url', 'length', 'max'=>300),
-			array('cTime', 'length', 'max'=>11),
-			array('pic, firstTime, endTime, title', 'length', 'max'=>255),
-			array('cp', 'length', 'max'=>2),
+			array('topic_id, gid', 'numerical', 'integerOnly'=>true),
+			array('type, title, uptype, tType, action, param, pic, uptime, reviewtime, message, uType, vid, flag, videUrl, stationid', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, vid, type, param, action, url, info, cTime, pic, firstTime, endTime, title, cp, gid, uType, flag, workid, delFlag', 'safe', 'on'=>'search'),
+			array('id, type, topic_id, title, uptype, tType, action, param, pic, uptime, reviewtime, message, uType, vid, flag, videUrl, gid, stationid', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,23 +67,23 @@ class VerMessage extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'vid' => 'Vid',
 			'type' => 'Type',
-			'param' => 'Param',
-			'action' => 'Action',
-			'url' => 'Url',
-			'info' => '信息',
-			'cTime' => '添加时间',
-			'pic' => 'Pic',
-			'firstTime' => 'First Time',
-			'endTime' => 'End Time',
+			'topic_id' => 'Topic',
 			'title' => 'Title',
-			'cp' => '牌照方',
-			'gid' => 'Gid',
+			'uptype' => 'Uptype',
+			'tType' => 'T Type',
+			'action' => 'Action',
+			'param' => 'Param',
+			'pic' => 'Pic',
+			'uptime' => 'Uptime',
+			'reviewtime' => 'Reviewtime',
+			'message' => 'Message',
 			'uType' => 'U Type',
+			'vid' => 'Vid',
 			'flag' => 'Flag',
-			'workid' => 'Workid',
-			'delFlag' => '删除标识 delFlag=1并且flag=6删除成功',
+			'videUrl' => 'Vide Url',
+			'gid' => 'Gid',
+			'stationid' => 'Stationid',
 		);
 	}
 
@@ -112,23 +106,23 @@ class VerMessage extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('vid',$this->vid,true);
 		$criteria->compare('type',$this->type,true);
-		$criteria->compare('param',$this->param,true);
-		$criteria->compare('action',$this->action,true);
-		$criteria->compare('url',$this->url,true);
-		$criteria->compare('info',$this->info,true);
-		$criteria->compare('cTime',$this->cTime,true);
-		$criteria->compare('pic',$this->pic,true);
-		$criteria->compare('firstTime',$this->firstTime,true);
-		$criteria->compare('endTime',$this->endTime,true);
+		$criteria->compare('topic_id',$this->topic_id);
 		$criteria->compare('title',$this->title,true);
-		$criteria->compare('cp',$this->cp,true);
-		$criteria->compare('gid',$this->gid,true);
+		$criteria->compare('uptype',$this->uptype,true);
+		$criteria->compare('tType',$this->tType,true);
+		$criteria->compare('action',$this->action,true);
+		$criteria->compare('param',$this->param,true);
+		$criteria->compare('pic',$this->pic,true);
+		$criteria->compare('uptime',$this->uptime,true);
+		$criteria->compare('reviewtime',$this->reviewtime,true);
+		$criteria->compare('message',$this->message,true);
 		$criteria->compare('uType',$this->uType,true);
-		$criteria->compare('flag',$this->flag);
-		$criteria->compare('workid',$this->workid);
-		$criteria->compare('delFlag',$this->delFlag);
+		$criteria->compare('vid',$this->vid,true);
+		$criteria->compare('flag',$this->flag,true);
+		$criteria->compare('videUrl',$this->videUrl,true);
+		$criteria->compare('gid',$this->gid);
+		$criteria->compare('stationid',$this->stationid,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -139,7 +133,7 @@ class VerMessage extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return VerMessage the static model class
+	 * @return VerTopicReview the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -239,7 +239,11 @@ class ScreenController extends VController
             $this->redirect($this->getPreUrl());
         }
         $data = $_POST;
-        $this->ChangeQuoteScreenContent($data,1);
+        $quote_res = $this->getQuoteInfo($data['screenGuideId']);
+        if($quote_res){
+            $this->ChangeQuoteScreenContent($data,1);
+        }
+
         $res = VerScreenContentManager::updateData($data);
         if($res>0){
             $this->die_json(array('code'=>200));
@@ -544,6 +548,15 @@ class ScreenController extends VController
                     $res->sid = $content->attributes['id'];
                 }
             }
+
+            $review_flag = 4;   //提交审核
+            $review_times = 1;
+            $review_message = '发布';
+            $bind_id = $content->attributes['id'];
+            $review_type = 3;   //EPG屏幕数据
+            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+
+
 	//else if($v->flag=='5'){
         //        $result = VerScreenContent::model()->deleteByPk($v->attributes['sid']);
         //        $res->flag = '8';
@@ -565,13 +578,22 @@ class ScreenController extends VController
             $result = VerScreenContentCopy::model()->findAll("screenGuideid=$guideid");
         }
         $res = 0;
-       // var_dump($result);die;
+//        echo '<pre>';
+//        var_dump($result);die;
         foreach($result as $k=>$v){
 	        $flag = $v->attributes['flag'];
+//	        var_dump($flag);
             if($flag=='1' || $flag=='6' || $flag=='5' || $flag=='10' || $flag=='20' || $flag=='30' || $flag=='40' || $flag=='50'){
 
                 $res = VerScreenContentCopy::model()->updateAll(array('delFlag'=>1,'addTime'=>time()), "delFlag in (0,1,2,3,4,5) and flag in (1,6) and screenGuideid = " . $v->attributes['screenGuideid']);
-                //var_dump($res);die;
+//                var_dump($res);//die;
+
+                $review_flag = 3;   //提交审核
+                $review_times = 1;
+                $review_message = '提审';
+                $bind_id = $v->attributes['id'];
+                $review_type = 3;   //EPG屏幕数据
+                $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
             }
         }
 
@@ -820,10 +842,12 @@ class ScreenController extends VController
         if(empty($quote_res)){
             return;
         }
+//        var_dump($quote_res);die;
         foreach ($quote_res as $k=>$v){
-            $screenGuideid = $v['pasteGuideId'];
+            $screenGuideid = $v->attributes['pasteGuideId'];
             $model = VerScreenContentCopy::model()->find("`screenGuideid`=$screenGuideid and `order`=$order");
-            if($flag ==1){
+//            var_dump($model);die;
+            if($flag ==1 && !empty($model)){
                 $data['id'] = $model->attributes['id'];
                 $data['screenGuideId'] = $model->attributes['screenGuideid'];
                 VerScreenContentManager::updateData($data);
@@ -839,7 +863,7 @@ class ScreenController extends VController
         $ids = array();
         $screenGuideids = array();
         foreach ($quote_res as $k=>$v){
-            $screenGuideid = $v['pasteGuideId'];
+            $screenGuideid = $v->attributes['pasteGuideId'];
             $res = VerScreenContentCopy::model()->findAll(
                 array(
                     "select"=>"id,`order`,screenGuideid,pic",
@@ -915,6 +939,16 @@ class ScreenController extends VController
      * 测试文件权限
      * */
 
+    /*
+     * yd_ver_review_record表type字段及对应bind_id对应表主键
+     * 1->消息->yd_ver_message
+     * 2->壁纸->yd_ver_wall
+     * 3->epg屏幕->yd_ver_screen_content_copy
+     * 4->专题背景图->yd_ver_bkimg
+     * 5->yd_ver_ui专题->yd_ver_ui
+     * 6->yd_special_topic河南专题->yd_special_topic
+     *
+     * */
 }
 
 

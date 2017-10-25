@@ -132,6 +132,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <th>站点</th>
             <th>名称</th>
             <th>Url</th>
+            <th>状态</th>
             <th>操作</th>
         </tr>
         <?php
@@ -143,7 +144,27 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td><?php echo $v['name'];?></td>
                     <td><?php echo $v['title'];?></td>
                     <td><?php echo $v['url'];?></td>
-                    <td><a href="#" class="del">删除</a></td>
+		    <td>
+			<?php 
+				if($v['flag']==0){
+					echo "未通过";
+				}elseif($v['flag']==6){
+					echo "已通过";
+				}else{
+					echo '审核中';
+				}
+			?>
+			</td>
+                    <td>
+			<?php 
+				if($v['flag']==0){//未通过
+					echo '<a href="javascript:;" class="review">提交审核</a> <a href="javascript:;" class="del">删除</a></td>';
+				}elseif($v['flag']==6){
+					echo '<a href="javascript:;" class="del">删除</a>';	
+				}else{//审核中
+					echo '<a href="javascript:;">删除</a></td>';
+				}
+			?> 
                 </tr>
                 <?php
             }
@@ -209,7 +230,12 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
 
     })
-
+    $('.review').click(function(){
+        var id = $(this).parent().parent().children('input').val();
+        $.post("/version/guide/review.html?mid=1&nid=9",{id:id},function(d){
+            if(d.code==200){
+                location.reload();
+            }
+        },'json')
+    })
 </script>
-
-
