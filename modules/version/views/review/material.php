@@ -99,12 +99,11 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <th>url</th>
                     <th>审核</th>
                     <th>提交审核时间</th>
-                    <th>操作</th>
                 </tr>
                 <?php if(!empty($list)):?>
                     <?php foreach($list as $v):?>
                         <tr>
-                            <td><input type="checkbox" name="id" value="<?php echo $v['id']?>"></td>
+                            <td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>"></td>
                             <td><?php echo $v['name'];?></td>
                             <td><?php echo $v['title'];?></td>
                             <td><?php echo $v['url'];?></td>
@@ -120,20 +119,6 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                 ?>
                             </td>
                             <td><?php echo date("Y-m-d H:i:s",$v['time']);?></td>
-			    <td>
-                                <?php $type=isset($_REQUEST['type'])?$_REQUEST['type']:1;?>
-                                <?php if($type==1):?>
-                                    <a href="<?php echo $v['url'];?>" target="_blank">查看</a>&nbsp;
-                                    <a href="javascript:;" class="pass" gid="<?php echo $v['id'];?>">通过</a>&nbsp;
-                                    <a href="javascript:;" class="reject" gid="<?php echo $v['id'];?>">驳回</a>
-                                <?php elseif($type==2):?>
-                                    <a href="<?php echo $v['url'];?>" target="_blank">查看</a>&nbsp;
-                                <?php else:?>
-                                    <a href="<?php echo $v['url'];?>" target="_blank">查看</a>&nbsp;
-                                    <a href="javascript:;" class="pass" gid="<?php echo $v['id'];?>">通过</a>&nbsp;
-                                    <a href="javascript:;" class="reject" gid="<?php echo $v['id'];?>">驳回</a>
-                                <?php endif;?>
-                            </td>
                         </tr>
                     <?php endforeach;?>
                 <?php else:?>
@@ -169,16 +154,25 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
     $('.sub_btn').click(function(){//批量通过
         var arr=[];
+	var gid=[];
+	var workid=[];
         $("input[name='id']:checked").each(function(i) {
-            arr[i] = $(this).val();
+            gid[i]=$(this).attr("gid");
+            arr[i]=$(this).val();
+            workid[i]=$(this).attr("workid");
         });
         if(arr.length==0){
             layer.alert("未选中，无法提交",{icon:2});
             return false;
         }
+	//console.log(arr,gid);return false;
         var ids=arr.join(",");//获取选中的id
-	$.post("/version/review/materaccess?mid=<?php echo $this->mid?>",{id:ids},function(data){
-            location.reload();
+	$.post("/version/review/materaccess?mid=<?php echo $this->mid?>",{id:ids,gid:gid,workid:workid},function(data){
+            if(data.code==200){
+                location.reload();
+            }else{
+                layer.alert("切换用户试一试",{icon:2})
+            }
         },'json');
     })
 
@@ -200,7 +194,11 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     $(".pass").click(function(){//通过
         var id=$(this).attr("gid");
 	$.post("/version/review/materaccess?mid=<?php echo $this->mid?>",{id:id},function(data){
-            location.reload();
+            if(data.code==200){
+                location.reload();
+            }else{
+                layer.alert("切换用户试一试",{icon:2})
+            }
         },'json');
     })
 

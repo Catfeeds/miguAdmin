@@ -1334,13 +1334,41 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
     }
 
     public function actionMaterAccess(){
-	$sql="select r.* from yd_ver_review_work as r left join yd_ver_work as w on r.workid=w.id where w.flag=8";//查找几个审核人员
-        $result=SQLManager::queryAll($sql);
-	//var_dump($result);
-die;
-        $id=$_REQUEST['id'];
-        $sql="update yd_ver_upload set flag=6 where id in({$id})";
-        $res=SQLManager::execute($sql);
+	$id=$_REQUEST['id'];//提交审核的对应id
+	$gid=$_REQUEST['gid'];
+	$workid=$_REQUEST['workid'];
+        $username=$_SESSION['nickname'];
+        $flag=8;//素材
+	$user = VerAdmin::model()->find("nickname='$username'");
+	for($j=0;$j<count($gid);$j++){
+            $sql = "select w.type from yd_ver_work w inner join yd_ver_review_work k on w.id=k.workid and k.uid='{$user->attributes['id']}' and w.flag=$flag and w.stationId=$gid[$j]";
+            $result = SQLManager::queryRow($sql);
+	    //var_dump($result);die;
+            if($_SESSION['auth']==1||empty($result)){//admin或零审核
+                $sql="update yd_ver_upload set flag=6 where id in({$id})";
+                $res=SQLManager::execute($sql);
+            }else{
+                $tmp=explode(",",$id);
+                for($i=0;$i<count($tmp);$i++){
+                    $res=VerUpload::model()->findByPk($tmp[$i]);
+                    $sign=$res->flag;//素材当前的flag
+                    //$stationId=$res->stationId;
+                    $auth=VerReviewWork::model()->findByAttributes(array("type"=>$sign,"uid"=>$_SESSION['userid'],"workid"=>$workid[$j]));
+		    //var_dump($sign,$result,$_SESSION['userid'],$auth->uid);die;
+                    if(empty($auth->uid)){//当前用户是否有权限过审
+                        $res=0;
+                        break;
+                    }elseif($result['type']==$sign){
+                        $sign=6;
+                        $sql="update yd_ver_upload set flag=$sign where id=$tmp[$i]";
+                    }else{
+                        $sign+=1;
+                        $sql="update yd_ver_upload set flag=$sign where id=$tmp[$i]";
+                    }
+                    $res=SQLManager::execute($sql);
+                }
+            }
+        }
         if($res>0){
             echo json_encode(array("code"=>200));
         }else{

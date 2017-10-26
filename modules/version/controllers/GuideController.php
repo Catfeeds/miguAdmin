@@ -290,7 +290,7 @@ class GuideController extends VController{
 		$data = $this->getPageInfo($page);
                 $url = $this->createUrl($this->action->id);
                 $sql_select="select a.*,b.name from yd_ver_upload as a left join yd_ver_station as b on a.stationId=b.id ";
-                $sql_where = " where 1=1 ";
+                $sql_where = " where a.flag<7 ";
                 if(!empty($_REQUEST['title'])){
  			$sql_where .=" and a.title like '%{$_REQUEST['title']}%'";
                 }
@@ -385,8 +385,9 @@ class GuideController extends VController{
 
 	public function actionDelete(){
 		$id = $_REQUEST['id'];
-		$del = VerUpload::model()->deleteByPk($id);
-		if($del){
+		$sql="update yd_ver_upload set flag=7 where id={$id}";
+		$count=SQLManager::execute($sql);
+		if($count>0){
 			echo json_encode(array('code'=>'200','msg'=>'删除成功'));
 		}else{
 			echo json_encode(array('code'=>'404','msg'=>'删除失败'));
