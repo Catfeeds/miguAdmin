@@ -121,7 +121,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 <!--                            <td>--><?//=$l['user'];?><!--</td>-->
                             <td>
                                 <?php
-                                    $tmp_sql = "select b.username from yd_ver_review_record as a inner join yd_ver_admin as b on a.user_id=b.id inner join yd_ver_message as c on a.bind_id=c.id where a.type=1 and a.bind_id={$l['id']} and a.user_id={$_SESSION['userid']} order by a.add_time limit 1";
+                                    $tmp_sql = "select b.username from yd_ver_review_record as a inner join yd_ver_admin as b on a.user_id=b.id inner join yd_ver_message as c on a.bind_id=c.id where a.type=1 and a.bind_id={$l['id']} order by a.add_time desc limit 1";
                                     $tmp_res = SQLManager::queryRow($tmp_sql);
                                     if(!empty($tmp_res)){
                                         echo $tmp_res['username'];
