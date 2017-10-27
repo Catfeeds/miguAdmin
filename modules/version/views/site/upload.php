@@ -140,7 +140,7 @@
         <td align="right" valign="top">图片预览：</td>
         <td>
             <div class="test00 up-main" id="main-upload">
-                <span>请上传宽为</span>
+                <span>请上传宽高为250x355的图片</span>
                 <?php
                 if(!empty($html)){
         $a = "/<style[\s\S]*?<\/style>/";
