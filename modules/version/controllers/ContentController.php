@@ -240,6 +240,7 @@ class ContentController extends VController
 				}else{
 					$sql="select id from yd_ver_message where gid=$stationId and  AND ((endTime>={$end} and startTime<={$start}) or (startTime<={$end} and startTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
 				}
+				echo $sql;die;
 				$res=SQLManager::queryRow($sql);
 				if(!empty($res)){
 					echo 321;die;
