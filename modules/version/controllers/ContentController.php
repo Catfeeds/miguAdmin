@@ -226,61 +226,58 @@ class ContentController extends VController
 
 	public function actionMessage(){
 		//try{
-                        if(empty($_REQUEST['id'])){
+			if(empty($_REQUEST['id'])){
 				$message = new VerMessage();
 			}else{
 				$message = VerMessage::model()->findByPk($_REQUEST['id']);
 			}
 			if(!empty($_POST)){
-				$adminLeftOneName = !empty($_POST['adminLeftOneName'])?$_POST['adminLeftOneName']:'';
+				$stationId=$_REQUEST['stationId'];
+				$start = !empty($_REQUEST['firstTime'])?strtotime($_REQUEST['firstTime']):'';
+				$end= !empty($_REQUEST['endTime'])?strtotime($_REQUEST['endTime']):'';
+				if(isset($_REQUEST['id'])){
+					$sql="select id from yd_ver_message where gid=$stationId and id<>{$_REQUEST['id']} AND ((endTime>={$end} and startTime<={$start}) or (startTime<={$end} and startTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
+				}else{
+					$sql="select id from yd_ver_message where gid=$stationId and  AND ((endTime>={$end} and startTime<={$start}) or (startTime<={$end} and startTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
+				}
+				$res=SQLManager::queryRow($sql);
+				if(!empty($res)){
+					echo 321;die;
+				}else{
+					$adminLeftOneName = !empty($_POST['adminLeftOneName'])?$_POST['adminLeftOneName']:'';
 					$adminLeftTwoName = !empty($_POST['epg'])?$_GET['epg']:$_POST['adminLeftTwoName'];
 					$adminLeftOne = !empty($_POST['adminLeftOne'])?$_POST['adminLeftOne']:'';
 					$adminLeftTwo = !empty($_POST['adminLeftTwo'])?$_POST['adminLeftTwo']:'';
-				//var_dump($_POST);die;
-				$stationId=$_REQUEST['gid'];
-				$start = !empty($_REQUEST['firstTime'])?strtotime($_REQUEST['firstTime']):'';
-				$end= !empty($_REQUEST['endTime'])?strtotime($_REQUEST['endTime'])+86399:'';
-				if(!empty($_REQUEST['id'])){
-				$sql="select id from yd_ver_message where gid=$stationId and id<>{$_REQUEST['id']} AND ((endTime>={$end} and firstTime<={$start}) or (firstTime<={$end} and firstTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
-				}else{
-				$sql="select id from yd_ver_message where gid=$stationId AND ((endTime>={$end} and firstTime<={$start}) or (firstTime<={$end} and firstTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
-				}
-				$res=SQLManager::queryRow($sql);
-				//var_dump($res);die;
-				if(!empty($res)){
-					$this->PopMsg("同站点存在相同时间的消息");
+					$message->action = !empty($_POST['action'])?$_POST['action']:'';
+					$message->title = !empty($_POST['title'])?$_POST['title']:'';
+					$message->param = !empty($_POST['param'])?$_POST['param']:'';
+					$message->vid = !empty($_POST['upvid'])?$_POST['upvid']:'';
+					$message->gid = !empty($_POST['gid'])?$_POST['gid']:'1';
+					$message->url = !empty($_POST['url'])?$_POST['url']:'';
+					$message->type = !empty($_POST['type'])?$_POST['type']:'';
+					$message->uType = !empty($_POST['uType'])?$_POST['uType']:'';
+					$message->info = !empty($_POST['info'])?$_POST['info']:'';
+					$firstTime = !empty($_POST['firstTime'])?$_POST['firstTime']:'';
+					$message->firstTime = strtotime($firstTime);
+					$endTime = !empty($_POST['endTime'])?$_POST['endTime']:'';
+					$message->endTime = strtotime($endTime);
+					$message->cTime = time();
+					$message->flag = '0';
+					$message->cp = !empty($_POST['cp'])?$_POST['cp']:'';
+					if(!$message->save()){
+						var_dump($message->getErrors());
+						LogWriter::logModelSaveError($message,__METHOD__,$message->attributes);
+						throw new ExceptionEx('入库失败');
+					}
+					$this->PopMsg('保存成功');
+					//$this->redirect($this->get_url('content','msgindex'));
 					$this->redirect($this->get_url('content','msgindex',array('adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName)));
-					die;
-				}else{
-				$message->action = !empty($_POST['action'])?$_POST['action']:'';
-				$message->title = !empty($_POST['title'])?$_POST['title']:'';
-				$message->param = !empty($_POST['param'])?$_POST['param']:'';
-				$message->vid = !empty($_POST['upvid'])?$_POST['upvid']:'';
-				$message->gid = !empty($_POST['gid'])?$_POST['gid']:'1';
-				$message->url = !empty($_POST['url'])?$_POST['url']:'';
-				$message->type = !empty($_POST['type'])?$_POST['type']:'';
-				$message->uType = !empty($_POST['uType'])?$_POST['uType']:'';
-				$message->info = !empty($_POST['info'])?$_POST['info']:'';
-				$firstTime = !empty($_POST['firstTime'])?$_POST['firstTime']:'';
-				$message->firstTime = strtotime($firstTime);
-				$endTime = !empty($_POST['endTime'])?$_POST['endTime']:'';
-				$message->endTime = strtotime($endTime)+86399;
-                                $message->cTime = time();
-                                $message->flag = '0';
-				$message->cp = !empty($_POST['cp'])?$_POST['cp']:'';
-                                if(!$message->save()){
-					var_dump($message->getErrors());
-					LogWriter::logModelSaveError($message,__METHOD__,$message->attributes);
-					throw new ExceptionEx('入库失败');
 				}
-				$this->PopMsg('保存成功');
-				//$this->redirect($this->get_url('content','msgindex'));
-				$this->redirect($this->get_url('content','msgindex',array('adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName)));
-			}}
+			}
 		//}catch (ExceptionEx $ex){
-		//	$this->PopMsg($ex->getMessage());
+			//$this->PopMsg($ex->getMessage());
 		//}catch (Exception $e){
-		//	$this->log($e->getMessage());
+			//$this->log($e->getMessage());
 		//}
 		$this->render('message',array('message'=>$message));
 	}

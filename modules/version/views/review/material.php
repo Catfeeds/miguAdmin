@@ -49,21 +49,35 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 </div>
 <div>
     <div class="inputDiv">
+
         <span style="float:left;font-size:14px;">&nbsp;&nbsp;&nbsp;站点</span>
+        <select name="type" id="gid" class="form-input w200">
+            <option value="0">请选择</option>
+            <?php
+            if($_SESSION['auth'] == 1){
+                $sql = "select id,name from yd_ver_station";
+            }else{
+                $uid = $_SESSION['userid'];
+                $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 8  left join yd_ver_worker as c on c.workid=b.id where c.type = 1 and  c.uid=$uid group by a.id";
+            }
+            $result = SQLManager::queryAll($sql);
+            ?>
+            <?php if(!empty($result)):?>
+                <?php foreach($result as $v):?>
+                    <option value="<?php echo $v['id']?>" <?php if(!empty($_REQUEST['gid'])&&$_REQUEST['gid']==$v['id']){echo "selected=selected";}?>><?php echo $v['name']?></option>
+                <?php endforeach;?>
+            <?php endif;?>
+        </select>
+
+	    <span style="float:left;font-size:14px;">&nbsp;&nbsp;&nbsp;审核状态:</span>
         <select name="type" id="type" class="form-input w100">
-            <option value="0">请选择</option>
-<!--            --><?php //foreach($station as $v):?>
-<!--                <option value="--><?php //echo $v['id'];?><!--">--><?php //echo $v['name'];?><!--</option>-->
-<!--            --><?php //endforeach;?>
+            <option value="1" <?php if(!empty($_REQUEST['type']) && $_REQUEST['type'] == '1'){ echo "selected=selected";}?>>未审核</option>
+            <option value="2" <?php if(!empty($_REQUEST['type']) && $_REQUEST['type'] == '2'){ echo "selected=selected";}?>>已通过</option>
+            <option value="3" <?php if(!empty($_REQUEST['type']) && $_REQUEST['type'] == '3'){ echo "selected=selected";}?>>已驳回</option>
         </select>
-	<span style="float:left;font-size:14px;">&nbsp;&nbsp;&nbsp;审核状态:</span>
-	<select name="type" id="type" class="form-input w100">
-            <option value="0">请选择</option>
-            <option value="0">待审核</option>
-            <option value="0">未通过</option>
-            <option value="6">已通过</option>
-        </select>
-	<input style="width:50px;height:20px;margin-left: 5px;font-size: 14px;" class="btn btn1 btn-gray audit_search search " type="button" value="查询" name="">
+
+	    <input style="width:50px;height:20px;margin-left: 5px;font-size: 14px;" class="btn btn1 btn-gray audit_search search " type="button" value="查询" name="">
+
         <?php //echo $page;?>
 
     </div>
@@ -85,12 +99,11 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <th>url</th>
                     <th>审核</th>
                     <th>提交审核时间</th>
-                    <th>操作</th>
                 </tr>
                 <?php if(!empty($list)):?>
                     <?php foreach($list as $v):?>
                         <tr>
-                            <td><input type="checkbox" name="id" value="<?php echo $v['id']?>"></td>
+                            <td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>"></td>
                             <td><?php echo $v['name'];?></td>
                             <td><?php echo $v['title'];?></td>
                             <td><?php echo $v['url'];?></td>
@@ -106,7 +119,6 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                 ?>
                             </td>
                             <td><?php echo date("Y-m-d H:i:s",$v['time']);?></td>
-                            <td><a href="<?php echo $v['url'];?>" target="_blank">查看</a>&nbsp;<a href="javascript:;" class="pass" gid="<?php echo $v['id'];?>">通过</a>&nbsp;<a href="javascript:;" class="reject" gid="<?php echo $v['id'];?>">驳回</a></td>
                         </tr>
                     <?php endforeach;?>
                 <?php else:?>
@@ -119,6 +131,19 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     </form>
 </div>
 <script>
+    var adminLeftOne = "<?php echo $adminLeftOne;?>";
+    var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
+    var adminLeftOneName = "<?php echo $adminLeftOneName;?>";
+    var adminLeftTwoName = "<?php echo $adminLeftTwoName;?>";
+    var one = "<?php echo !empty($_GET['one'])?$_GET['one']:'0';?>";
+    var two = "<?php echo !empty($_GET['two'])?$_GET['two']:'0';?>";
+    var three = "<?php echo !empty($_GET['three'])?$_GET['three']:'0';?>";
+    var siteName = "<?php echo !empty($_GET['siteName'])?$_GET['siteName']:''; ?>";
+    var son = "<?php echo !empty($_GET['son'])?$_GET['son']:''; ?>";
+    var topName = "<?php echo !empty($_GET['top'])?$_GET['top']:''; ?>";
+    var leftNavFlag  = "<?php echo !empty($_GET['leftNavFlag'])?$_GET['leftNavFlag']:'0'; ?>";
+    var adminLeftNavFlag  = "<?php echo !empty($_GET['adminLeftNavFlag'])?$_GET['adminLeftNavFlag']:'0'; ?>";
+    var fixedUrl = '/adminLeftOne/'+adminLeftOne+'/adminLeftTwo/'+adminLeftTwo+'/adminLeftOneName/'+adminLeftOneName+'/adminLeftTwoName/'+adminLeftTwoName+'/adminLeftNavFlag/'+adminLeftNavFlag+'/one/'+one+'/two/'+two+'/three/'+three+'/siteName/'+siteName+'/son/'+son+'/top/'+topName+'/leftNavFlag/'+leftNavFlag;
     $('.btnall').click(function(){//全选
         $(".center :checkbox").prop("checked", true);
     });
@@ -129,16 +154,25 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
     $('.sub_btn').click(function(){//批量通过
         var arr=[];
+	var gid=[];
+	var workid=[];
         $("input[name='id']:checked").each(function(i) {
-            arr[i] = $(this).val();
+            gid[i]=$(this).attr("gid");
+            arr[i]=$(this).val();
+            workid[i]=$(this).attr("workid");
         });
         if(arr.length==0){
             layer.alert("未选中，无法提交",{icon:2});
             return false;
         }
+	//console.log(arr,gid);return false;
         var ids=arr.join(",");//获取选中的id
-	$.post("/version/review/materaccess?mid=<?php echo $this->mid?>",{id:ids},function(data){
-            location.reload();
+	$.post("/version/review/materaccess?mid=<?php echo $this->mid?>",{id:ids,gid:gid,workid:workid},function(data){
+            if(data.code==200){
+                location.reload();
+            }else{
+                layer.alert("切换用户试一试",{icon:2})
+            }
         },'json');
     })
 
@@ -160,7 +194,11 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     $(".pass").click(function(){//通过
         var id=$(this).attr("gid");
 	$.post("/version/review/materaccess?mid=<?php echo $this->mid?>",{id:id},function(data){
-            location.reload();
+            if(data.code==200){
+                location.reload();
+            }else{
+                layer.alert("切换用户试一试",{icon:2})
+            }
         },'json');
     })
 
@@ -169,5 +207,13 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 	$.post("/version/review/materreject?mid=<?php echo $this->mid?>",{id:id},function(data){
             location.reload();
         },'json');
+    })
+
+    $('.audit_search').click(function(){
+        var gid=$("#gid").val();
+        var type=$("#type").val();
+        var nid = "<?php echo $_GET['nid']?>";
+        var headerUrl = "/version/review/material/gid/"+gid+"/mid/<?php echo $this->mid;?>/type/"+type+"/nid/"+nid+fixedUrl;
+        window.location.href=headerUrl;
     })
 </script>

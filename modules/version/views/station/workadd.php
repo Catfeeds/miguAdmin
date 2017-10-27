@@ -130,6 +130,31 @@
                 </select>
             </td>
     </tr>
+	<?php
+                   }
+             }elseif($_REQUEST['flag']==8){
+                $work_sql = "select stationId from yd_ver_work where flag=".$_REQUEST['flag'];
+                $work_res = SQLManager::queryAll($work_sql);
+                foreach ($work_res as $a=>$b){
+                    $tmp[] = $b['stationId'];
+                }
+                $arr = implode(',',$tmp);
+                $sql = "select id,name from yd_ver_station where id not in ($arr)";
+                $res = SQLManager::queryAll($sql);
+                if (!empty($res)) {?>
+                    <tr>
+                        <td>选择站点</td>
+                        <td>
+                            <select name="station" id="station" class="form-input w300">
+                                <option value="0">--请选择--</option>
+                                <?php
+                                foreach ($res as $k => $v) {
+                                    ?>
+                                    <option value="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
 
                 <?php
                    }

@@ -123,7 +123,25 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 </select>
             </td>
     </tr>
-
+	<?php
+                   }
+             }elseif($work->flag==8) {
+                $sql = "select id,name from yd_ver_station";
+                $res = SQLManager::queryAll($sql);
+                if (!empty($res)) {?>
+                    <tr>
+                        <td>选择站点</td>
+                        <td>
+                            <select name="station" id="station" class="form-input w300">
+                                <option value="0">--请选择--</option>
+                                <?php
+                                foreach ($res as $k => $v) {
+                                    ?>
+                                    <option value="<?php echo $v['id']; ?>" <?php if($v['id']==$work->attributes['stationId']){echo 'selected=selected';}?>><?php echo $v['name']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                    </tr>
                 <?php
                    }
              }
