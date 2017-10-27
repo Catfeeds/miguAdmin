@@ -95,11 +95,17 @@ class VController extends Controller{
             if($flag == 6){
                 $tmp_list = array();
                 foreach ($user as $k=>$v){
-                    $tmp = VerStation::model()->findByPk($v['stationId']);
-                    if(!empty($tmp)){
-                        $name = $tmp->attributes['name'];
-                        $tmp_list[] = $this->getAuthSiteList($name);
+                    if($v['stationId'] == 7){
+                        $tmp_list[] = $this->getAuthSiteList('专题');
+                    }else{
+                        $tmp = VerStation::model()->findByPk($v['stationId']);
+                        if(!empty($tmp)){
+                            $name = $tmp->attributes['name'];
+                            $tmp_list[] = $this->getAuthSiteList($name);
+                        }
                     }
+
+
 
                 }
                 $a = array();
