@@ -118,7 +118,17 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         <tr>
                             <input type="hidden" name='id' value="<?php echo $l['id']?>">
                             <td><input type="checkbox" class="checkbox" name="id" value="<?php echo $l['id']?>"></td>
-                            <td><?=$l['user'];?></td>
+<!--                            <td>--><?//=$l['user'];?><!--</td>-->
+                            <td>
+                                <?php
+                                    $tmp_sql = "select b.username from yd_ver_review_record as a inner join yd_ver_admin as b on a.user_id=b.id inner join yd_ver_message as c on a.bind_id=c.id where a.type=1 and a.bind_id={$l['id']}";
+                                    $tmp_res = SQLManager::queryRow($tmp_sql);
+                                    if(!empty($tmp_res)){
+                                        echo $tmp_res['username'];
+                                    }
+                                ?>
+
+                            </td>
                             <td>
                                 <?php
 
