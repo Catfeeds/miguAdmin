@@ -97,16 +97,18 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
                 <tr>
                 	<th></th>
+                    <th>提审人</th>
+                    <th>提交审核时间时间</th>
                     <th>修改类型</th>
                     <th>站点</th>
-		   <th>专题名称</th>
+		            <th>专题名称</th>
                     <th>标题</th>
                     <th>缩略图</th>
                     <th>类型</th>
                     <th>推荐内容</th>
                     <th>action/页面类型</th>
                     <th>param/vid</th>
-                    <th>提交审核时间时间</th>
+
                     
                 </tr>
                 <?php
@@ -115,6 +117,24 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 	?>
                 	<tr>
                 		 <td><input type="checkbox" name="id" value="<?php echo $vv['id']?>"></td>
+                        <td>
+                            <?php
+                                $username = '';
+                                if($vv['type'] == 'bkimg'){
+                                    $record_type = 4;
+                                }else if($vv['type'] == 'verui'){
+                                    $record_type = 5;
+                                }else{
+                                    $record_type = 5;
+                                }
+
+                                $tmp_sql = "select b.username from yd_ver_review_record as a left join yd_ver_admin as b on a.user_id=b.id where a.type=$record_type and a.bind_id={$vv['id']}";
+                                $tmp_res = SQLManager::queryRow($tmp_sql);
+                                echo $tmp_res['username'];
+                            ?>
+
+                        </td>
+                        <td><?php echo date("Y-m-d H:i:s",$vv['uptime']); ?></td>
                <td><?php if($vv['type'] == 'bkimg'){ echo '背景图修改';}else if($vv['type'] == 'verui'){ echo '普通站点修改';}else if($vv['type'] == 'specialtopic'){ echo '河南站点修改';} ?></td>
                <td><?php echo $vv['stationid']; ?></td>
 		<td><?php echo $vv['topname'].">".$vv['name']; ?></td>
@@ -237,7 +257,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				}?>
               	 </div> </td>
               	 
-              	 <td><?php echo date("Y-m-d H:i:s",$vv['uptime']); ?></td>
+
               	 
                </tr>
                 <?php } }else{?>
