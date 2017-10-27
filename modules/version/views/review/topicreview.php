@@ -125,7 +125,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                 }else if($vv['type'] == 'verui'){
                                     $record_type = 5;
                                 }else{
-                                    $record_type = 5;
+                                    $record_type = 6;
                                 }
 
                                 $tmp_sql = "select b.username from yd_ver_review_record as a left join yd_ver_admin as b on a.user_id=b.id where a.type=$record_type and a.bind_id={$vv['id']}";
