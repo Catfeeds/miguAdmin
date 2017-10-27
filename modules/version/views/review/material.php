@@ -178,15 +178,19 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
     $(".allreject").click(function(){//批量驳回
         var arr=[];
+	var gid=[];
+        var workid=[];
         $("input[name='id']:checked").each(function(i) {
-            arr[i] = $(this).val();
+            gid[i]=$(this).attr("gid");
+            arr[i]=$(this).val();
+            workid[i]=$(this).attr("workid");
         });
         if(arr.length==0){
             layer.alert("未选中，无法提交",{icon:2});
             return false;
         }
         var ids=arr.join(",");//获取选中的id
-	$.post("/version/review/materreject?mid=<?php echo $this->mid?>",{id:ids},function(data){
+	$.post("/version/review/materreject?mid=<?php echo $this->mid?>",{id:ids,gid:gid,workid:workid},function(data){
             location.reload();
         },'json');
     })

@@ -1378,8 +1378,33 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 
     public function  actionMaterReject(){
         $id=$_REQUEST['id'];
-        $sql="update yd_ver_upload set flag=0 where id in({$id})";
-        $res=SQLManager::execute($sql);
+	$gid=$_REQUEST['gid'];
+        //如当前2审状态，则除了2审用户，其他用户不能驳回
+        $username=$_SESSION['nickname'];
+        $flag=8;
+        $user = VerAdmin::model()->find("nickname='$username'");
+        for($j=0;$j<count($gid);$j++){
+            $sql = "select w.type from yd_ver_work w inner join yd_ver_review_work k on w.id=k.workid and k.uid='{$user->attributes['id']}' and w.flag=$flag and w.stationId=$gid[$j]";
+            $tmp = SQLManager::queryRow($sql);
+            if($_SESSION['auth']==1||empty($result)){//admin或零审核
+                $sql="update yd_ver_upload set flag=0 where id in({$id})";
+                $res=SQLManager::execute($sql);
+            }else{
+                $tmp=explode(",",$id);
+                for($i=0;$i<count($tmp);$i++){
+                    $res=VerUpload::model()->findByPk($tmp[$i]);
+                    $sign=$res->flag;//素材当前的flag
+                    $auth=VerReviewWork::model()->findByAttributes(array("type"=>$sign,"uid"=>$_SESSION['userid'],"workid"=>$gid[$j]));
+                    if(empty($auth->uid)){//当前用户是否有权限过审
+                        $res=0;
+                        break;
+                    }elseif($result['type']==$sign){
+                        $sql="update yd_ver_upload set flag=0 where id=$tmp[$i]";
+                    }
+                    $res=SQLManager::execute($sql);
+                }
+            }
+        }
         if($res>0){
             echo json_encode(array("code"=>200));
         }else{
