@@ -34,7 +34,26 @@
         </tr>
     </table>
 </form>
+<?php
+$adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
+$adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:'';
+$adminLeftOne = !empty($_GET['adminLeftOne'])?$_GET['adminLeftOne']:'';
+$adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
+?>
 <script>
+    var adminLeftOne = "<?php echo $adminLeftOne;?>";
+    var adminLeftTwo = "<?php echo $adminLeftTwo;?>";
+    var adminLeftOneName = "<?php echo $adminLeftOneName;?>";
+    var adminLeftTwoName = "<?php echo $adminLeftTwoName;?>";
+    var one = "<?php echo !empty($_GET['one'])?$_GET['one']:'0';?>";
+    var two = "<?php echo !empty($_GET['two'])?$_GET['two']:'0';?>";
+    var three = "<?php echo !empty($_GET['three'])?$_GET['three']:'0';?>";
+    var siteName = "<?php echo !empty($_GET['siteName'])?$_GET['siteName']:''; ?>";
+    var son = "<?php echo !empty($_GET['son'])?$_GET['son']:''; ?>";
+    var topName = "<?php echo !empty($_GET['top'])?$_GET['top']:''; ?>";
+    var leftNavFlag  = "<?php echo !empty($_GET['leftNavFlag'])?$_GET['leftNavFlag']:'0'; ?>";
+    var adminLeftNavFlag  = "<?php echo !empty($_GET['adminLeftNavFlag'])?$_GET['adminLeftNavFlag']:'0'; ?>";
+    var fixedUrl = '/adminLeftOne/'+adminLeftOne+'/adminLeftTwo/'+adminLeftTwo+'/adminLeftOneName/'+adminLeftOneName+'/adminLeftTwoName/'+adminLeftTwoName+'/adminLeftNavFlag/'+adminLeftNavFlag+'/one/'+one+'/two/'+two+'/three/'+three+'/siteName/'+siteName+'/son/'+son+'/top/'+topName+'/leftNavFlag/'+leftNavFlag;
     $(function(){
         aa();
     })
@@ -59,7 +78,11 @@
             return false;
         }
         $.post("<?php echo $this->get_url('station','topsave')?>",G,function(d){
-            location.reload();
+            var json=eval('('+d+')');
+	    var nid=json.id;
+	    //console.log(nid);
+	    window.location.href=top.location.href+"&newid="+nid;
+            //location.reload();
         })
         return false;
     })

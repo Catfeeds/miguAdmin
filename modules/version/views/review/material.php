@@ -97,16 +97,18 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <th>站点</th>
                     <th>名称</th>
                     <th>url</th>
+		    <th>审核请求</th>
                     <th>审核</th>
                     <th>提交审核时间</th>
                 </tr>
                 <?php if(!empty($list)):?>
                     <?php foreach($list as $v):?>
                         <tr>
-                            <td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>"></td>
+                            <td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>" rid="<?php echo $v['reason'];?>"></td>
                             <td><?php echo $v['name'];?></td>
                             <td><?php echo $v['title'];?></td>
                             <td><?php echo $v['url'];?></td>
+			    <td><?php if($v['reason']==1){echo '请求通过';}elseif($v['reason']==2){echo '请求删除';}?></td>
                             <td>
                                 <?php
                                     if($v['flag']==0){
@@ -156,10 +158,12 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         var arr=[];
 	var gid=[];
 	var workid=[];
+	var rid=[];
         $("input[name='id']:checked").each(function(i) {
             gid[i]=$(this).attr("gid");
             arr[i]=$(this).val();
             workid[i]=$(this).attr("workid");
+            rid[i]=$(this).attr("rid");
         });
         if(arr.length==0){
             layer.alert("未选中，无法提交",{icon:2});
@@ -167,7 +171,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         }
 	//console.log(arr,gid);return false;
         var ids=arr.join(",");//获取选中的id
-	$.post("/version/review/materaccess?mid=<?php echo $this->mid?>",{id:ids,gid:gid,workid:workid},function(data){
+	$.post("/version/review/materaccess?mid=<?php echo $this->mid?>",{id:ids,gid:gid,workid:workid,rid:rid},function(data){
             if(data.code==200){
                 location.reload();
             }else{
@@ -180,17 +184,19 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         var arr=[];
 	var gid=[];
         var workid=[];
+	var rid=[];
         $("input[name='id']:checked").each(function(i) {
             gid[i]=$(this).attr("gid");
             arr[i]=$(this).val();
             workid[i]=$(this).attr("workid");
+	    rid[i]=$(this).attr("rid");
         });
         if(arr.length==0){
             layer.alert("未选中，无法提交",{icon:2});
             return false;
         }
         var ids=arr.join(",");//获取选中的id
-	$.post("/version/review/materreject?mid=<?php echo $this->mid?>",{id:ids,gid:gid,workid:workid},function(data){
+	$.post("/version/review/materreject?mid=<?php echo $this->mid?>",{id:ids,gid:gid,workid:workid,rid:rid},function(data){
             location.reload();
         },'json');
     })

@@ -473,7 +473,7 @@ class ReviewController extends VController
 	        $tmp_stationId=join(",",$stationId);
             //$tmp_stationId = explode(',',$stationId);
 //            $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id=$stationId ";
-            $sql_top = "select a.*,g.title as gtitle,s.name,d.username from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid left join yd_ver_review_record as c on a.id=c.bind_id left join yd_ver_admin as d on c.user_id=d.id where b.id in ($tmp_stationId) ";
+            $sql_top = "select a.*,g.title as gtitle,s.name,d.username,c.add_time from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid left join yd_ver_review_record as c on a.id=c.bind_id left join yd_ver_admin as d on c.user_id=d.id where b.id in ($tmp_stationId) and c.type=3 ";
             $sql_where = " where  1=1";
             if(!empty($_REQUEST['title'])){
                 $sql_where .= " and a.title='%{$_REQUEST['title']}%'";
@@ -1337,6 +1337,8 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 	$id=$_REQUEST['id'];//提交审核的对应id
 	$gid=$_REQUEST['gid'];
 	$workid=$_REQUEST['workid'];
+	$rid=$_REQUEST['rid'];
+	//var_dump($rid);die;
         $username=$_SESSION['nickname'];
         $flag=8;//素材
 	$user = VerAdmin::model()->find("nickname='$username'");
@@ -1345,8 +1347,29 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
             $result = SQLManager::queryRow($sql);
 	    //var_dump($result);die;
             if($_SESSION['auth']==1||empty($result)){//admin或零审核
-                $sql="update yd_ver_upload set flag=6 where id in({$id})";
-                $res=SQLManager::execute($sql);
+		$tmp=explode(",",$id);
+                for($m=0;$m<count($tmp);$m++){
+                    $res=VerUpload::model()->findByPk($tmp[$m]);
+                    $sign=$res->flag;//素材当前的flag
+                    if($rid[$j]==1){
+                        $review_flag = 1;   //审核通过
+                        $review_times =$sign ;
+                        $review_message = '通过';
+                        $bind_id = $_REQUEST['gid'];
+                        $review_type = 8;   //素材
+                        $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+                        $sql="update yd_ver_upload set flag=6 where id=$id[$j]";
+                    }elseif($rid[$j]==2){
+                        $review_flag = 1;   //审核通过
+                        $review_times = $sign;
+                        $review_message = '删除请求已通过';
+                        $bind_id = $_REQUEST['gid'];
+                        $review_type = 8;   //素材
+                        $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+                        $sql="update yd_ver_upload set flag=7 where id=$id[$j]";//删除请求已通过
+                    }
+                    $res=SQLManager::execute($sql);
+                }
             }else{
                 $tmp=explode(",",$id);
                 for($i=0;$i<count($tmp);$i++){
@@ -1359,8 +1382,25 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
                         $res=0;
                         break;
                     }elseif($result['type']==$sign){
-                        $sign=6;
-                        $sql="update yd_ver_upload set flag=$sign where id=$tmp[$i]";
+			if($rid[$j]==1){
+			    $review_flag = 1;   //审核通过
+                            $review_times = $sign;
+                            $review_message = '通过';
+                            $bind_id = $tmp[$i];
+                            $review_type = 8;   //素材
+                            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+                            $sign=6;
+                            $sql="update yd_ver_upload set flag=$sign where id=$tmp[$i]";
+                        }else{
+			    $review_flag = 1;   //审核通过
+                            $review_times = $sign;
+                            $review_message = '删除请求已通过';
+                            $bind_id = $tmp[$i];
+                            $review_type = 8;   //素材
+                            $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
+                            $sign=7;
+                            $sql="update yd_ver_upload set flag=$sign where id=$tmp[$i]";
+                        }
                     }else{
                         $sign+=1;
                         $sql="update yd_ver_upload set flag=$sign where id=$tmp[$i]";
@@ -1386,7 +1426,7 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
         for($j=0;$j<count($gid);$j++){
             $sql = "select w.type from yd_ver_work w inner join yd_ver_review_work k on w.id=k.workid and k.uid='{$user->attributes['id']}' and w.flag=$flag and w.stationId=$gid[$j]";
             $tmp = SQLManager::queryRow($sql);
-            if($_SESSION['auth']==1||empty($result)){//admin或零审核
+            if($_SESSION['auth']==1||empty($tmp)){//admin或零审核
                 $sql="update yd_ver_upload set flag=0 where id in({$id})";
                 $res=SQLManager::execute($sql);
             }else{
@@ -1398,7 +1438,13 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
                     if(empty($auth->uid)){//当前用户是否有权限过审
                         $res=0;
                         break;
-                    }elseif($result['type']==$sign){
+                    }elseif($tmp['type']==$sign){
+			$review_flag = 2;   //驳回
+                        $review_times =$sign;
+                        $review_message = '请求已被驳回';
+                        $bind_id = $tmp[$i];
+                        $review_type = 8;
+                        $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
                         $sql="update yd_ver_upload set flag=0 where id=$tmp[$i]";
                     }
                     $res=SQLManager::execute($sql);

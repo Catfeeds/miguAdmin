@@ -308,8 +308,14 @@ class GuideController extends VController{
 	public function actionReview(){
 		$id=$_REQUEST['id'];
 		$time=time();
-		$sql="update yd_ver_upload set flag=1,time={$time} where id={$id}";
+		$sql="update yd_ver_upload set flag=1,time={$time},reason=1 where id={$id}";
 		$res=SQLManager::execute($sql);
+		$review_flag = 3;   //提交审核
+		$review_times = 1;
+		$review_message = '提审';
+		$bind_id = $id;
+		$review_type = 8;   //素材
+		$this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
 		if($res>0){
 			echo json_encode(array("code"=>200));
 		}else{
@@ -385,12 +391,19 @@ class GuideController extends VController{
 
 	public function actionDelete(){
 		$id = $_REQUEST['id'];
-		$sql="update yd_ver_upload set flag=7 where id={$id}";
+		$time=time();
+		$sql="update yd_ver_upload set flag=1,reason=2,time=$time where id={$id}";
 		$count=SQLManager::execute($sql);
+		$review_flag = 3;   //提交审核
+		$review_times = 1;
+		$review_message = '删除数据提审';
+		$bind_id = $_REQUEST['id'];
+		$review_type = 8;
+		$this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
 		if($count>0){
-			echo json_encode(array('code'=>'200','msg'=>'删除成功'));
+			echo json_encode(array('code'=>'200','msg'=>'已提交审核'));
 		}else{
-			echo json_encode(array('code'=>'404','msg'=>'删除失败'));
+			echo json_encode(array('code'=>'404','msg'=>'提交审核失败'));
 		}
 	}
 

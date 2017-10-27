@@ -343,7 +343,7 @@ if (!empty($html)) {
     <div class="topic_search">
 <!--        <span>输入专题id</span>-->
         <input placeholder="输入专题id点击搜索" type="number" name="topic_search" id="topic_search" style="width:220px;height:20px;padding:0px;margin-left:10px;">
-        <input style="width:50px;height:20px;padding:0px" type="button" value="搜索" class="btn topic_search_save">
+        <input style="width:50px;height:20px;padding:0px" type="button" onclick="search()" value="搜索" class="btn topic_search_save">
     </div>
     <div class="left">
         <?php
@@ -643,8 +643,24 @@ if (!empty($html)) {
     </div>
 <script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
     <script>
+	var newid=<?php echo isset($_REQUEST['newid'])?$_REQUEST['newid']:0;?>;
+	if(newid>0){
+		addsearch(newid);
+	}
+	function addsearch(id){
+	   var search_id=id;
+	   var my_href = '';
+           for(var i  = 0 ; i<$('.topic_id').length ; i++){
+               if(search_id == $('.topic_id').eq(i).text()){
+                    my_href = $('.topic_id').eq(i).parent().children('a').attr('href');
+               }
+           }
 
-        $('.topic_search_save').click(function()
+           if(!empty(my_href)){
+               window.location.href = my_href;
+           }
+	}
+        $('.topic_sear').click(function()
         {
            var search_id = $('#topic_search').val();
            var my_href = '';
@@ -660,6 +676,22 @@ if (!empty($html)) {
                layer.alert('没有找到您输入的专题id');
            }
         });
+
+	function search(){
+	   var search_id = $('#topic_search').val();
+           var my_href = '';
+           for(var i  = 0 ; i<$('.topic_id').length ; i++){
+               if(search_id == $('.topic_id').eq(i).text()){
+                    my_href = $('.topic_id').eq(i).parent().children('a').attr('href');
+               }
+           }
+
+           if(!empty(my_href)){
+               window.location.href = my_href;
+           }else{
+               layer.alert('没有找到您输入的专题id');
+           }
+	}
 
         var mid = <?php echo $this->mid;?>;
         function getauth(sitelist_id)
