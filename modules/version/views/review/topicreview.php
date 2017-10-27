@@ -127,8 +127,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                 }else{
                                     $record_type = 6;
                                 }
-
-                                $tmp_sql = "select b.username from yd_ver_review_record as a left join yd_ver_admin as b on a.user_id=b.id where a.type=$record_type and a.bind_id={$vv['id']}";
+                                $topic_id_res = VerTopicReview::model()->findByPk($vv['id']);
+                                $topic_id = $topic_id_res->attributes['topic_id'];
+                                $tmp_sql = "select b.username from yd_ver_review_record as a left join yd_ver_admin as b on a.user_id=b.id where a.type=$record_type and a.bind_id=$topic_id";
                                 $tmp_res = SQLManager::queryRow($tmp_sql);
                                 echo $tmp_res['username'];
                             ?>
