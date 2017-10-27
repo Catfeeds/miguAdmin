@@ -10,7 +10,7 @@ class VerSiteListManager extends VerSitelist{
 
     public static function getList($id){
         $res = array();
-        $sql = "select * from yd_ver_sitelist where pid=$id";
+        $sql = "select * from yd_ver_sitelist where pid=$id order by id asc";
         //$sql = "select * from yd_wx_guide where pid=42";
         $res = SQLManager::queryAll($sql);
         //var_dump($list);die;
