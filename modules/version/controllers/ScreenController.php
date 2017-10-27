@@ -947,7 +947,7 @@ class ScreenController extends VController
      * 4->专题背景图->yd_ver_bkimg
      * 5->yd_ver_ui专题->yd_ver_ui
      * 6->yd_special_topic河南专题->yd_special_topic
-     *
+     * 7->素材->yd_ver_upload
      * */
 }
 
