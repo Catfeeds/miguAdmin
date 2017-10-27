@@ -145,7 +145,7 @@ padding:5px 10px;
     </tr>
     <tr>
         <td align="center" colspan="2">
-            <input style="width:80px;height:30px;padding:0px" type="submit" value="保存信息" class="btn save">
+            <input style="width:80px;height:30px;padding:0px" type="button" value="保存信息" class="btn save">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input style="width:80px;height:30px;padding:0px" type="button" value="取消" class="gray" onclick="window.location.href='<?php echo $this->get_url('content','msgindex',array('adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>'">
         </td>
@@ -193,19 +193,21 @@ padding:5px 10px;
         formatDate: 'Y-m-d',
     });
 
-    function check(){
+//    function check(){
+    $('.save').click(function(){
         var G = {};
         var first = $('input[name=firstTime]').val();
         if (empty(first)) {
-            layer.alert("请填写有效期！")
+            layer.alert("请填写有效期！");
             return false;
         }
         var timeend = $('input[name=endTime]').val();
         if (empty(timeend)) {
-            layer.alert("请填写有效期！")
+            layer.alert("请填写有效期！");
             return false;
         }
         var stationId=$("#gid").val();//选中的站点
+//        alert(stationId);return false;
         if(empty(stationId)){
             layer.alert("请选择站点");
             return false;
@@ -215,12 +217,14 @@ padding:5px 10px;
         G.endTime=timeend;
         $.post('/version/content/message.html?mid=<?php echo $_REQUEST['mid']?>',G,function(d){
             if(d== 321){
-                alert("添加失败");
+                layer.alert("添加失败");
                 return false;
             }
             return true;
         },'json')
-    }
+    })
+
+//    }
 
     $(function(){
         aa();
