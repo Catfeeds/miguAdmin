@@ -96,8 +96,11 @@ class VController extends Controller{
                 $tmp_list = array();
                 foreach ($user as $k=>$v){
                     $tmp = VerStation::model()->findByPk($v['stationId']);
-                    $name = $tmp->attributes['name'];
-                    $tmp_list[] = $this->getAuthSiteList($name);
+                    if(!empty($tmp)){
+                        $name = $tmp->attributes['name'];
+                        $tmp_list[] = $this->getAuthSiteList($name);
+                    }
+
                 }
                 $a = array();
                 foreach ($tmp_list as $k=>$v){
