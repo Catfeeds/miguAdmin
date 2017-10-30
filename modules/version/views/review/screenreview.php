@@ -105,6 +105,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <tr>
             <th></th>
             <th>提审人</th>
+            <th>提审动作</th>
             <th>提审时间</th>
             <th>站点</th>
             <th>屏幕名称</th>
@@ -137,6 +138,15 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <tr class="tr_list">
                     <td><input type="checkbox" name="id" value="<?php echo $v['id']?>"  <?php if(in_array($v['screenGuideid'],$copyGuides)){echo "disabled=disabled";}?> screenGuidid="<?=$v['screenGuideid']?>" onclick="checkQuote(this)" ></td>
                     <td><?php echo $v['username'];?></td>
+                    <td><?php
+                            if($v['pic'] == '/file/3.png'){
+                                echo '删除提审';
+                            }else{
+                                echo '编辑或添加';
+                            }
+
+                        ?>
+                    </td>
                     <td><?php echo date("Y-m-d h:i:s",$v['add_time'])?></td>
                     <td><?php echo $v['name']?></td>
                     <td><?php echo $v['gtitle']?></td>
