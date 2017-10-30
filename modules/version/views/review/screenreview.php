@@ -157,8 +157,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td><?php echo $v['uType']?></td>
                     <td><?php echo $v['cid']?></td>
                     <td><?php echo $v['cp']?></td>
-                    <td><?php echo $v['action']?></td>
-                    <td><?php echo $v['param']?></td>
+                    <td><div style="width:200px;word-wrap:break-word;"><?php echo $v['action']?></div></td>
+                    <td><div style="width:200px;word-wrap:break-word;"><?php echo $v['param']?></div></td>
                 </tr>
                 <?php
             }
