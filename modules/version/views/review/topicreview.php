@@ -526,6 +526,12 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         });
     }
 
+    $('.page_btn').click(function(){
+        var num = $('input[name=pagenum]').val();
+        var test = window.location.href;
+        window.location.href=test+"&page="+num;
+    });
+
     function getLocalTime(nS) {
         return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
     }

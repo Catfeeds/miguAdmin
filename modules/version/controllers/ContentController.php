@@ -232,18 +232,19 @@ class ContentController extends VController
 				$message = VerMessage::model()->findByPk($_REQUEST['id']);
 			}
 			if(!empty($_POST)){
-				$stationId=$_REQUEST['stationId'];
+				//var_dump($_POST);die;
+				$stationId=$_REQUEST['gid'];
 				$start = !empty($_REQUEST['firstTime'])?strtotime($_REQUEST['firstTime']):'';
 				$end= !empty($_REQUEST['endTime'])?strtotime($_REQUEST['endTime']):'';
-				if(isset($_REQUEST['id'])){
-					$sql="select id from yd_ver_message where gid=$stationId and id<>{$_REQUEST['id']} AND ((endTime>={$end} and startTime<={$start}) or (startTime<={$end} and startTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
+				if(!empty($_REQUEST['id'])){
+					$sql="select id from yd_ver_message where gid=$stationId and id<>{$_REQUEST['id']} AND ((endTime>={$end} and firstTime<={$start}) or (firstTime<={$end} and firstTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
 				}else{
-					$sql="select id from yd_ver_message where gid=$stationId and  AND ((endTime>={$end} and startTime<={$start}) or (startTime<={$end} and startTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
+					$sql="select id from yd_ver_message where gid=$stationId AND ((endTime>={$end} and firstTime<={$start}) or (firstTime<={$end} and firstTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
 				}
-				echo $sql;die;
+				//echo $sql;die;
 				$res=SQLManager::queryRow($sql);
 				if(!empty($res)){
-					echo 321;die;
+					$this->PopMsg('已存在相同时间内同站点的消息');
 				}else{
 					$adminLeftOneName = !empty($_POST['adminLeftOneName'])?$_POST['adminLeftOneName']:'';
 					$adminLeftTwoName = !empty($_POST['epg'])?$_GET['epg']:$_POST['adminLeftTwoName'];

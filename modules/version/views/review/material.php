@@ -94,33 +94,35 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
                 <tr>
                     <th></th>
+                    <th>提审时间</th>
+                    <th>提审人</th>
+		    <th>提审动作</th>
                     <th>站点</th>
-                    <th>名称</th>
+                    <th>标题</th>
                     <th>url</th>
-		    <th>审核请求</th>
                     <th>审核</th>
-                    <th>提交审核时间</th>
                 </tr>
                 <?php if(!empty($list)):?>
                     <?php foreach($list as $v):?>
                         <tr>
                             <td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>" rid="<?php echo $v['reason'];?>"></td>
+                            <td><?php echo date("Y-m-d H:i:s",$v['time']);?></td>
+                            <td><?php echo $v['uname']?></td>
+			    <td><?php if($v['reason']==1){echo '请求通过';}elseif($v['reason']==2){echo '请求删除';}?></td>
                             <td><?php echo $v['name'];?></td>
                             <td><?php echo $v['title'];?></td>
                             <td><?php echo $v['url'];?></td>
-			    <td><?php if($v['reason']==1){echo '请求通过';}elseif($v['reason']==2){echo '请求删除';}?></td>
                             <td>
                                 <?php
                                     if($v['flag']==0){
                                         echo "未通过";
-                                    }elseif($v['flag']==6){
+                                    }elseif($v['flag']==6||$v['flag']==7){
                                         echo "已通过";
                                     }else{
                                         echo "审核中";
                                     }
                                 ?>
                             </td>
-                            <td><?php echo date("Y-m-d H:i:s",$v['time']);?></td>
                         </tr>
                     <?php endforeach;?>
                 <?php else:?>

@@ -25,7 +25,8 @@ class MessageManager extends Message{
         $sql_count = 'select count(m.id)';
         $sql_select = 'select m.*,s.name';
         $sql_from = ' from yd_ver_message m inner join yd_ver_station s';
-        $sql_order = ' order by cTime desc';
+        //$sql_order = ' order by cTime desc';
+        $sql_order = ' order by id desc';
         $sql_limit = ' limit '.$data['start'].','.$data['limit'];
         $sql_where = ' on m.gid=s.id ';
         if(!empty($list['title'])){

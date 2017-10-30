@@ -99,10 +99,10 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <div class="fenlei">
             <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
                 <tr>
-                    <th>编号</th>
+                    <th></th>
+                    <th>提审时间</th>
                     <th>提审人</th>
                     <th>提审动作</th>
-                    <th>提交审核时间</th>
                     <th>站点</th>
 			<th>省份</th>
                     <th>市</th>
@@ -110,9 +110,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 			<th>类型</th>
                     <th>缩略图</th>
                     <th>壁纸</th>
+		    <th>有效期</th>
                     <th>审核</th>
-
-			<th>有效期</th>
 <!--                    <th>操作</th>-->
                 </tr>
                 <?php
@@ -121,6 +120,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         <tr>
                             <input type="hidden" name='id' value="<?php echo $l['id']?>">
                             <td><input type="checkbox" class="checkbox" name="id" value="<?php echo $l['id']?>"></td>
+                            <td><?php if(!empty($tmp_res['add_time'])){echo date('Y-m-d H:i',$tmp_res['add_time']);}?></td>
                             <td>
 				<?php
                                     /*$uid=$l['gid'];
@@ -146,7 +146,6 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                 ?>
 
                             </td>
-                            <td><?php if(!empty($tmp_res['add_time'])){echo date('Y-m-d H:i',$tmp_res['add_time']);}?></td>
                             <td><?php echo $l['name'];?></td>
 				<td>
 				<?php
@@ -180,10 +179,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				<td><?php if($l['type']==1){echo "强制壁纸";}else{echo "普通壁纸";}?></td>
                             <td><img src="<?php echo $l['thum']?>" width="150px" height="86px"></td>
                             <td><img src="<?php echo $l['pic']?>" width="214px" height="123px"></td>
-                            <td><?php echo $l['flag']?></td>
-
 				<td><?php if(!empty($l['startTime'])){echo date("Y-m-d",$l['startTime']);}else{echo "";}?>~<?php if(!empty($l['endTime'])){echo date("Y-m-d",$l['endTime']);}else{echo "";}?></td>
 <!--                            <td>-->
+				<td><?php echo $l['flag']?></td>
                                 <?php
                                 //if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
                                     //echo "<a href='javascript:void(0)' gid='{$l['id']}' class='review'>通过</a>&nbsp;";

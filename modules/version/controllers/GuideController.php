@@ -308,7 +308,7 @@ class GuideController extends VController{
 	public function actionReview(){
 		$id=$_REQUEST['id'];
 		$time=time();
-		$sql="update yd_ver_upload set flag=1,time={$time},reason=1 where id={$id}";
+		$sql="update yd_ver_upload set `flag`=1,`time`={$time},`reason`=1,`uname`={$_SESSION['nickname']} where id={$id}";
 		$res=SQLManager::execute($sql);
 		$review_flag = 3;   //提交审核
 		$review_times = 1;
@@ -392,7 +392,7 @@ class GuideController extends VController{
 	public function actionDelete(){
 		$id = $_REQUEST['id'];
 		$time=time();
-		$sql="update yd_ver_upload set flag=1,reason=2,time=$time where id={$id}";
+		$sql="update yd_ver_upload set `flag`=1,`reason`=2,`time`=$time ,`uname`={$_SESSION['nickname']} where id={$id}";
 		$count=SQLManager::execute($sql);
 		$review_flag = 3;   //提交审核
 		$review_times = 1;

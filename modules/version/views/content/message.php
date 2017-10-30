@@ -1,6 +1,6 @@
 <script charset="utf-8" type="text/javascript" src="/js/jdate/jquery.datetimepicker.js"></script>
 <link rel="stylesheet" href="/js/jdate/jquery.datetimepicker.css" />
-<form action="" method="post" enctype="multipart/form-data" onsubmit="return check">
+<form action="" method="post" enctype="multipart/form-data" onsubmit="return check();">
 <?php
 $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
 $adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
@@ -145,7 +145,7 @@ padding:5px 10px;
     </tr>
     <tr>
         <td align="center" colspan="2">
-            <input style="width:80px;height:30px;padding:0px" type="button" value="保存信息" class="btn save">
+            <input style="width:80px;height:30px;padding:0px" type="submit" value="保存信息" class="btn save">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input style="width:80px;height:30px;padding:0px" type="button" value="取消" class="gray" onclick="window.location.href='<?php echo $this->get_url('content','msgindex',array('adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>'">
         </td>
@@ -193,8 +193,8 @@ padding:5px 10px;
         formatDate: 'Y-m-d',
     });
 
-//    function check(){
-    $('.save').click(function(){
+   function check(){
+   // $('.save').click(function(){
         var G = {};
         var first = $('input[name=firstTime]').val();
         if (empty(first)) {
@@ -207,7 +207,6 @@ padding:5px 10px;
             return false;
         }
         var stationId=$("#gid").val();//选中的站点
-//        alert(stationId);return false;
         if(empty(stationId)){
             layer.alert("请选择站点");
             return false;
@@ -215,6 +214,7 @@ padding:5px 10px;
         G.stationId=stationId;
         G.firstTime=first;
         G.endTime=timeend;
+	//console.log(G);return false;
         $.post('/version/content/message.html?mid=<?php echo $_REQUEST['mid']?>',G,function(d){
             if(d== 321){
                 layer.alert("添加失败");
@@ -222,9 +222,9 @@ padding:5px 10px;
             }
             return true;
         },'json')
-    })
+    //})
 
-//    }
+    }
 
     $(function(){
         aa();

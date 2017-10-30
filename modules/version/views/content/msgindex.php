@@ -76,6 +76,7 @@
      table td{
         word-break: keep-all;
     }
+.cc{color:#ccc}
 </style>
 <?php
     $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
@@ -182,9 +183,11 @@ if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
                                }
 
                                ?></td>
-                           <td><?php
-                               if (!empty($l['firstTime'])) {
-                                   echo date("Y-m-d", $l['firstTime']);
+                           <td<?php
+				if(!empty($l['firstTime'])&&!empty($l['endTime'])&&$l['endTime']<strtotime(date('Ymd',time()))){
+					echo " class ='cc'>".date("Y-m-d",$l['firstTime']);
+				}elseif (!empty($l['firstTime'])) {
+                                   echo ">".date("Y-m-d", $l['firstTime']);
                                } ?>---<?php if (!empty($l['endTime'])) {
                                    echo date("Y-m-d", $l['endTime']);
                                } ?></td>
@@ -265,5 +268,6 @@ if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
             }
         },'json')
     })
+	$(".cc").siblings("td").addClass("cc");
 </script>
 

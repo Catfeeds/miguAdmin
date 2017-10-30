@@ -98,18 +98,18 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <div class="fenlei">
             <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
                 <tr>
-                    <th>编号</th>
+                    <th></th>
+                    <th>提审时间</th>
                     <th>提审人</th>
                     <th>提审动作</th>
-                    <th>提交审核时间</th>
-                    <th>推荐内容</th>
-		            <th>站点</th>
+                    <th>站点</th>
                     <th>标题</th>
-		            <th>页面类型/action</th>
-		            <th>vid/param</th>
                     <th>显示内容</th>
-		            <th>审核</th>
-
+                    <th>有效期</th>
+                    <th>推荐内容</th>
+		    <th>页面类型/action</th>
+		    <th>vid/param</th>
+		    <th>审核</th>
                 </tr>
                 <?php
 	
@@ -118,7 +118,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         <tr>
                             <input type="hidden" name='id' value="<?php echo $l['id']?>">
                             <td><input type="checkbox" class="checkbox" name="id" value="<?php echo $l['id']?>"></td>
-<!--                            <td>--><?//=$l['user'];?><!--</td>-->
+                            <td><?php if(!empty($l['cTime'])){echo date('Y-m-d H:i',$l['cTime']);}?></td>
                             <td>
                                 <?php
                                     $tmp_sql = "select b.username from yd_ver_review_record as a inner join yd_ver_admin as b on a.user_id=b.id inner join yd_ver_message as c on a.bind_id=c.id where a.type=1 and a.bind_id={$l['id']} order by a.add_time desc limit 1";
@@ -142,8 +142,10 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                     echo "<a href='javascript:void(0)' gid='{$l['id']}' class='reject'>驳回</a>";
                                 }?>
                             </td>
-
-                            <td><?php if(!empty($l['cTime'])){echo date('Y-m-d H:i',$l['cTime']);}?></td>
+			    <td><?php echo $l['name'];?></td>
+                            <td><?php echo $l['title']?></td>
+			   <td><div style="width:200px;word-wrap:break-word;"><?php echo $l['info']?></div></td> 
+			   <td>有效期</td>
                             <td>
                             <?php
 				switch ( $l['type']){
@@ -167,12 +169,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				}
   			     ?>
 			    </td>
-
-			    <td><?php
-                                echo $l['name'];
-                                ?></td>
 			 
-                            <td><?php echo $l['title']?></td>
                           <?php if($l['type'] == 1){ ?>
 			  <td><?php 
 				 switch ( $l['uType']){
@@ -211,7 +208,6 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
                           <td><div style="width:200px;word-wrap:break-word;"><?php echo $l['param']?></div></td>
 			 <?php } ?>
-			   <td><div style="width:200px;word-wrap:break-word;"><?php echo $l['info']?></div></td> 
 			   <td><?php echo $l['flag']?></td>
 
 

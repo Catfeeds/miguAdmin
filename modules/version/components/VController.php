@@ -197,7 +197,7 @@ class VController extends Controller{
 				else if($v['flag']=='5'){
                     $list .= ",10,34";
                 }elseif($v['flag']==8){
-                    $list.=",48";
+                    $list.=",41";
                 }
 			
             }

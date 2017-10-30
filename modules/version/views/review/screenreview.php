@@ -104,20 +104,19 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     <table width="100%" cellspacing="0" cellpadding="10" class="mtable center media">
         <tr>
             <th></th>
+            <th>提审时间</th>
             <th>提审人</th>
             <th>提审动作</th>
-            <th>提审时间</th>
             <th>站点</th>
-            <th>屏幕名称</th>
-            <th>位置尺寸</th>
-            <th>图片</th>
+            <th>导航</th>
             <th>标题</th>
+            <th>图片</th>
+            <th>action</th>
+            <th>param</th>
             <th>推荐内容</th>
             <th>页面类型</th>
             <th>ID</th>
-            <th>牌照方</th>
-            <th>action</th>
-            <th>param</th>
+	    <th>审核</th>
         </tr>
         <?php
         if(!empty($list)){
@@ -137,7 +136,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 ?>
                 <tr class="tr_list">
                     <td><input type="checkbox" name="id" value="<?php echo $v['id']?>"  <?php if(in_array($v['screenGuideid'],$copyGuides)){echo "disabled=disabled";}?> screenGuidid="<?=$v['screenGuideid']?>" onclick="checkQuote(this)" ></td>
-                    <td><?php echo $v['username'];?></td>
+                    <td><?php echo date("Y-m-d h:i:s",$v['add_time'])?></td>
+		    <td><?php echo $v['username'];?></td>
                     <td><?php
                             if($v['pic'] == '/file/3.png'){
                                 echo '删除提审';
@@ -147,18 +147,17 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
                         ?>
                     </td>
-                    <td><?php echo date("Y-m-d h:i:s",$v['add_time'])?></td>
                     <td><?php echo $v['name']?></td>
                     <td><?php echo $v['gtitle']?></td>
-                    <td><?php echo $v['x']?>×<?php echo $v['y']?>;<br><?php echo $v['width']?>×<?php echo $v['height']?></td>
-                    <td class="img"><img src="<?php echo $v['pic']?>" width="100px"></td>
+                   <!-- <td><?php echo $v['x']?>×<?php echo $v['y']?>;<br><?php echo $v['width']?>×<?php echo $v['height']?></td>-->
                     <td><?php echo $v['title']?></td>
+                    <td class="img"><img src="<?php echo $v['pic']?>" width="100px"></td>
+                    <td><div style="width:200px;word-wrap:break-word;"><?php echo $v['action']?></div></td>
+                    <td><div style="width:200px;word-wrap:break-word;"><?php echo $v['param']?></div></td>
                     <td><?php echo $v['tType']?></td>
                     <td><?php echo $v['uType']?></td>
                     <td><?php echo $v['cid']?></td>
-                    <td><?php echo $v['cp']?></td>
-                    <td><div style="width:200px;word-wrap:break-word;"><?php echo $v['action']?></div></td>
-                    <td><div style="width:200px;word-wrap:break-word;"><?php echo $v['param']?></div></td>
+                    <td></td>
                 </tr>
                 <?php
             }

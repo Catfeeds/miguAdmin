@@ -473,7 +473,7 @@ class ReviewController extends VController
 	        $tmp_stationId=join(",",$stationId);
             //$tmp_stationId = explode(',',$stationId);
 //            $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id=$stationId ";
-            $sql_top = "select a.*,g.title as gtitle,s.name,d.username,c.add_time from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid left join yd_ver_review_record as c on a.id=c.bind_id left join yd_ver_admin as d on c.user_id=d.id where b.id in ($tmp_stationId) and c.type=3 ";
+            $sql_top = "select a.*,g.title as gtitle,s.name,d.username,c.* from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid left join yd_ver_review_record as c on a.id=c.bind_id left join yd_ver_admin as d on c.user_id=d.id where b.id in ($tmp_stationId) and c.type=3 ";
             $sql_where = " where  1=1";
             if(!empty($_REQUEST['title'])){
                 $sql_where .= " and a.title='%{$_REQUEST['title']}%'";
@@ -512,17 +512,17 @@ class ReviewController extends VController
                 $allbtn=$_REQUEST['allbtn'];
                 if($allbtn=='已通过'){
                      //$sql="select p.*,g.title as gtitle,s.name,c.username,b.add_time from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and b.review_flag='1' inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
-                     $sql = "select a.add_time,b.*,c.username,d.title as gtitle,e.name from yd_ver_review_record as a inner join yd_ver_screen_content_copy as b on a.bind_id=b.id and a.review_flag='1' and a.type=3 inner join yd_ver_admin as c on a.user_id=c.id inner join yd_ver_screen_guide as d on b.screenGuideid=d.id inner join yd_ver_station as e on e.id=d.gid ";
+                     $sql = "select a.*,b.*,c.username,d.title as gtitle,e.name from yd_ver_review_record as a inner join yd_ver_screen_content_copy as b on a.bind_id=b.id and a.review_flag='1' and a.type=3 inner join yd_ver_admin as c on a.user_id=c.id inner join yd_ver_screen_guide as d on b.screenGuideid=d.id inner join yd_ver_station as e on e.id=d.gid ";
                       
                 }else if($allbtn=='已驳回'){
                      //$sql="select p.*,g.title as gtitle,s.name,c.username,b.add_time from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and b.review_flag='2' inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
-                    $sql = "select a.add_time,b.*,c.username,d.title as gtitle,e.name from yd_ver_review_record as a inner join yd_ver_screen_content_copy as b on a.bind_id=b.id and a.review_flag='2' and a.type=3 inner join yd_ver_admin as c on a.user_id=c.id inner join yd_ver_screen_guide as d on b.screenGuideid=d.id inner join yd_ver_station as e on e.id=d.gid ";
+                    $sql = "select a.*,b.*,c.username,d.title as gtitle,e.name from yd_ver_review_record as a inner join yd_ver_screen_content_copy as b on a.bind_id=b.id and a.review_flag='2' and a.type=3 inner join yd_ver_admin as c on a.user_id=c.id inner join yd_ver_screen_guide as d on b.screenGuideid=d.id inner join yd_ver_station as e on e.id=d.gid ";
                 }else{
-         		    $sql="select b.*,d.title as gtitle,e.name,c.username,a.add_time from yd_ver_screen_content_copy b inner join yd_ver_screen_guide d on b.screenGuideid=d.id and b.delFlag=1 and b.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station e on e.id=d.gid inner join yd_ver_review_record as a on b.id=a.bind_id left join yd_ver_admin as c on a.user_id=c.id ";
+         		    $sql="select b.*,d.title as gtitle,e.name,c.username,a.* from yd_ver_screen_content_copy b inner join yd_ver_screen_guide d on b.screenGuideid=d.id and b.delFlag=1 and b.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station e on e.id=d.gid inner join yd_ver_review_record as a on b.id=a.bind_id left join yd_ver_admin as c on a.user_id=c.id ";
                     //$sql = "select a.add_time,b.*,c.username,d.title as gtitle,e.name from yd_ver_review_record as a inner join yd_ver_screen_content_copy as b on a.bind_id=b.id and a.review_flag='3' and a.type=3 inner join yd_ver_admin as c on a.user_id=c.id inner join yd_ver_screen_guide as d on b.screenGuideid=d.id inner join yd_ver_station as e on e.id=d.gid ";
                 }
             }else{
-         		$sql="select b.*,d.title as gtitle,e.name,c.username,a.add_time from yd_ver_screen_content_copy b inner join yd_ver_screen_guide d on b.screenGuideid=d.id and b.delFlag=1 and b.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station e on e.id=d.gid inner join yd_ver_review_record as a on b.id=a.bind_id inner join yd_ver_admin as c on a.user_id=c.id ";
+         		$sql="select b.*,d.title as gtitle,e.name,c.username,a.* from yd_ver_screen_content_copy b inner join yd_ver_screen_guide d on b.screenGuideid=d.id and b.delFlag=1 and b.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station e on e.id=d.gid inner join yd_ver_review_record as a on b.id=a.bind_id inner join yd_ver_admin as c on a.user_id=c.id ";
             }
             $sql_where = " where  1=1";
             if(!empty($_REQUEST['stationId'])){
@@ -1101,7 +1101,7 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
             $sql = "select a.* from yd_ver_sitelist as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 6 left join  yd_ver_review_work as
  c on c.workid=b.id  where c.uid=$uid  group by a.id";
 	$st = SQLManager::QueryAll($sql);
-
+	//var_dump($st);die;
 	if(!empty($st)){
 
 		foreach($st as $key=>$value){
@@ -1319,7 +1319,6 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
         }
 
         $tmp=VideoManager::getMaterialReview($data,$list);
-
         $url = $this->createUrl($this->action->id);
         $pagination = $this->renderPagination($url,$tmp['count'],$page,$data['currentPage'],$tmp['alwaysCount']);
         $list = array();
@@ -1355,18 +1354,18 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
                         $review_flag = 1;   //审核通过
                         $review_times =$sign ;
                         $review_message = '通过';
-                        $bind_id = $_REQUEST['gid'];
+                        $bind_id = $gid[$j];
                         $review_type = 8;   //素材
                         $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
-                        $sql="update yd_ver_upload set flag=6 where id=$id[$j]";
+                        $sql="update yd_ver_upload set flag=6 where id=$tmp[$m]";
                     }elseif($rid[$j]==2){
                         $review_flag = 1;   //审核通过
                         $review_times = $sign;
                         $review_message = '删除请求已通过';
-                        $bind_id = $_REQUEST['gid'];
+                        $bind_id = $gid[$j];
                         $review_type = 8;   //素材
                         $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
-                        $sql="update yd_ver_upload set flag=7 where id=$id[$j]";//删除请求已通过
+                        $sql="update yd_ver_upload set flag=7 where id=$tmp[$m]";//删除请求已通过
                     }
                     $res=SQLManager::execute($sql);
                 }
