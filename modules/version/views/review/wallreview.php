@@ -130,7 +130,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				}else{
 					echo "";
 				}*/
-                                    $tmp_sql = "select c.username from yd_ver_review_record as a INNER JOIN yd_ver_wall as b on a.bind_id=b.id INNER JOIN yd_ver_admin as c on a.user_id=c.id WHERE b.id={$l['id']} order by a.add_time desc limit 1";
+                                    $tmp_sql = "select c.username,a.add_time from yd_ver_review_record as a INNER JOIN yd_ver_wall as b on a.bind_id=b.id INNER JOIN yd_ver_admin as c on a.user_id=c.id WHERE b.id={$l['id']} order by a.add_time desc limit 1";
                                     $tmp_res = SQLManager::queryRow($tmp_sql);
                                   echo  $tmp_res['username'];
                                 ?>
@@ -146,7 +146,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                 ?>
 
                             </td>
-                            <td><?php if(!empty($l['addTime'])){echo date('Y-m-d H:i',$l['addTime']);}?></td>
+                            <td><?php if(!empty($l['addTime'])){echo date('Y-m-d H:i',$tmp_res['add_time']);}?></td>
                             <td><?php echo $l['name'];?></td>
 				<td>
 				<?php
