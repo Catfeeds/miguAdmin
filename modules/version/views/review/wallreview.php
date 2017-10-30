@@ -146,7 +146,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                 ?>
 
                             </td>
-                            <td><?php if(!empty($l['addTime'])){echo date('Y-m-d H:i',$tmp_res['add_time']);}?></td>
+                            <td><?php if(!empty($tmp_res['add_time'])){echo date('Y-m-d H:i',$tmp_res['add_time']);}?></td>
                             <td><?php echo $l['name'];?></td>
 				<td>
 				<?php
