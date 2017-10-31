@@ -573,24 +573,21 @@ class StationController extends VController
     }
 
 
-    public function actionTopic(){
+    public function actionTopic()
+    {
         try{
             $username=$_SESSION['nickname'];
             $flag= '6';
-
             if(!empty($_REQUEST['type'])){
                 $result = Common::getWork($_REQUEST['type'],$_REQUEST['nid']);
             }else{
                 $result = Common::getUser($username,$flag);
             }
-//            var_dump($result);die;
-            //$result  = Common::getUser($username,$flag);
             if(!empty($_REQUEST['nid'])){
                 $gid = $_REQUEST['nid'];
             }else{
                 $gid=$_REQUEST['gid'];
             }
-
             $bkimg = VerBkimgCopy::model()->find("gid = $gid");
             $html = '';
             if(empty($bkimg)){
@@ -598,8 +595,6 @@ class StationController extends VController
             }else{
                 $type = $bkimg->attributes['type'];
                 $list =VerUiCopyManager::getAll($gid);
-                //var_dump($gid);
-		
                 switch($type){
                     case '1':$html = HTML::data($list);break;
                     case '2':$html = HTML::top();break;
@@ -608,7 +603,6 @@ class StationController extends VController
                 }
             }
 
-//      var_dump($_POST);die;
             if(!empty($_POST)){
                 if(empty($_POST['type']))throw new ExceptionEx('请选择链接类型');
                 $bkimg->type=$_POST['type'];
@@ -618,17 +612,10 @@ class StationController extends VController
                 if(!empty($_FILES['url']['tmp_name'])){
                     $filename = 'url';
                     $path = $this->up($filename);
-                    //$bkimg ->url    = 'http://' . $_SERVER['HTTP_HOST'] . '/file/' . $path;
-                    //$bkimg ->url    = 'http://117.131.17.46:8087/file/' . $path;
-                    //$bkimg ->url    = 'http://pic-portal-v3.itv.cmvideo.cn:8083/file/' . $path;
-                   // $bkimg ->url    =  FTP_PATH. $path;
                    $bkimg ->url    =  FTP_PATH. $path;
-                    //Common::synchroPic(basename($path));
-                    //$guide ->ico_true    = 'http://192.168.1.110/file/' . $path;
                 }
                 if(!empty($_POST['url'])){
                     $bkimg ->url = $_POST['url'];
-                    //Common::synchroPic(basename($_POST['url']));
                 }
                 if(!$bkimg->save()){
                     var_dump($bkimg->getErrors());
@@ -637,9 +624,7 @@ class StationController extends VController
                 }
                 $gid = $_REQUEST['gid'];
                 $list =VerUiCopyManager::getAll($gid);
-                
-
-		switch($bkimg->type){
+		        switch($bkimg->type){
                     case '1':$html = HTML::data($list);break;
                     //测试
                     case '2':$html = HTML::top();break;
@@ -651,45 +636,25 @@ class StationController extends VController
             $sql="select * from yd_special_topic_copy where sid={$_GET['nid']} and type <> 3";
             $res=SQLManager::queryAll($sql);
             $res=json_encode($res);
-            /*if($type == '2'){
-                $list  = $this->topIndex($gid);
-//              echo '<pre>';
-//              var_dump($list);die;
-                if(!empty($list)){
-                    $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'list'=>$list,'res'=>$result));
-                }else{
-                    $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result));
-                }
-            }else{
-                $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result));
-            }*/
-            //$this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result));
             if($type == '2'){
-
-            $list  = $this->topIndex($gid);
-
-//              echo '<pre>';
-//              var_dump($list);die;
-            if(!empty($list)){
-                $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'topList'=>$list,'res'=>$result,'result'=>$res));
+                $list  = $this->topIndex($gid);
+                if(!empty($list)){
+                    $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'topList'=>$list,'res'=>$result,'result'=>$res));
+                }else{
+                    $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result,'result'=>$res));
+                }
+            }else if($type == '3'){
+                $list  = $this->topIndexNews($gid);
+                if(!empty($list)){
+                    $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'news'=>$list,'res'=>$result,'result'=>$res));
+                }else{
+                    $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result,'result'=>$res));
+                }
+            }elseif($type == '4'){
+                $this->render("topic",array("bkimg"=>$bkimg,"html"=>$html,"res"=>$result,"type"=>$type,"result"=>$res));
             }else{
                 $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result,'result'=>$res));
             }
-        }else if($type == '3'){
-            $list  = $this->topIndexNews($gid);
-            //      var_dump($list);die;
-            if(!empty($list)){
-                $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'news'=>$list,'res'=>$result,'result'=>$res));
-            }else{
-                $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result,'result'=>$res));
-            }
-        }elseif($type == '4'){
-	
-            $this->render("topic",array("bkimg"=>$bkimg,"html"=>$html,"res"=>$result,"type"=>$type,"result"=>$res));
-        }else{
-	    
-            $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result,'result'=>$res));
-        }
         }catch (ExceptionEx $ex){
             $this->PopMsg($ex->getMessage());
         }catch (Exception $e){
