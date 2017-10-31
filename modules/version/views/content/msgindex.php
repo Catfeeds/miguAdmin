@@ -139,11 +139,11 @@ if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
         <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
             <tr>
                 <th>序号</th>
-                <th>名称</th>
-                <th>内容</th>
                 <th>站点</th>
-                <th>状态</th>
+                <th>标题</th>
+                <th>显示内容</th>
                 <th>有效期</th>
+                <th>状态</th>
                 <th>操作</th>
             </tr>
             <?php
@@ -166,12 +166,20 @@ if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
                        <tr>
                            <input type="hidden" name="id" value="<?php echo $l['id'] ?>">
                            <td><?php echo $l['id'] ?></td>
+                           <td><?php echo $l['name'] ?></td>
                            <td><?php echo $l['title'] ?></td>
                            <td>
                                <div style="width:300px;word-wrap:break-word;"><?php echo $l['info'] ?></div>
                            </td>
-                           <td><?php echo $l['name'] ?></td>
-                           <td><?php
+                           <td<?php
+				if(!empty($l['firstTime'])&&!empty($l['endTime'])&&$l['endTime']<strtotime(date('Ymd',time()))){
+					echo " class ='cc'>".date("Y-m-d",$l['firstTime']);
+				}elseif (!empty($l['firstTime'])) {
+                                   echo ">".date("Y-m-d", $l['firstTime']);
+                               } ?>---<?php if (!empty($l['endTime'])) {
+                                   echo date("Y-m-d", $l['endTime']);
+                               } ?></td>
+				<td><?php
                                if ($l['flag'] == '0') {
                                    echo '未通过';
                                } else if ($l['flag'] == '6' && $l['delFlag'] == '0') {
@@ -183,14 +191,6 @@ if(in_array('1',$res['status']) || $_SESSION['auth']=='1'){
                                }
 
                                ?></td>
-                           <td<?php
-				if(!empty($l['firstTime'])&&!empty($l['endTime'])&&$l['endTime']<strtotime(date('Ymd',time()))){
-					echo " class ='cc'>".date("Y-m-d",$l['firstTime']);
-				}elseif (!empty($l['firstTime'])) {
-                                   echo ">".date("Y-m-d", $l['firstTime']);
-                               } ?>---<?php if (!empty($l['endTime'])) {
-                                   echo date("Y-m-d", $l['endTime']);
-                               } ?></td>
                            <td>
                                <?php
 

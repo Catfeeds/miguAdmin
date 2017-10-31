@@ -970,7 +970,8 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
     public function actionTopicallaccess(){
     	$ids = $_REQUEST['ids'];
     	$ids = substr($ids, 0,strlen($ids)-1);
-		$sql ="SELECT t1.id,t1.flag,t3.type FROM yd_ver_topic_review t1 LEFT JOIN yd_ver_sitelist t2 ON t1.stationid = t2.`name` and t2.pid = 0 LEFT JOIN yd_ver_work t3 on t2.id = t3.stationId and t3.flag = 6 WHERE t1.id IN ($ids)";
+	//$sql ="SELECT t1.id,t1.flag,t3.type FROM yd_ver_topic_review t1 LEFT JOIN yd_ver_sitelist t2 ON t1.stationid = t2.`name` and t2.pid = 0 LEFT JOIN yd_ver_work t3 on t2.id = t3.stationId and t3.flag = 6 WHERE t1.id IN ($ids)";
+	$sql ="SELECT t1.id,t1.flag,t3.type FROM yd_ver_topic_review t1 LEFT JOIN yd_ver_sitelist t2 ON t1.stationid = t2.`name` and t2.pid = 0 LEFT JOIN yd_ver_station t4 on t4.name=t2.name left join yd_ver_work t3 on t3.stationId=t4.id  WHERE t1.id IN ($ids)";
 
 	    $res = SQLManager::queryAll($sql);
 	    if(!empty($res)){

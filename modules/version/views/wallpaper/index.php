@@ -169,16 +169,16 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 <div style='width:100%;' >
     <table width="1280px" cellspacing="0" cellpadding="10" class="mtable center">
         <tr>
-            <th>编号</th>
+            <th>序号</th>
 	    <th>站点</th>
             <th>标题</th>
 	    <th>壁纸类型</th>
 	    <th>省份</th>
 	    <th>市</th>
             <th>缩略图</th>
-            <th>大图</th>
+            <th>壁纸</th>
             <th>有效期</th>
-            <th>审核</th>
+            <th>状态</th>
             <th>操作</th>
         </tr>
         <?php

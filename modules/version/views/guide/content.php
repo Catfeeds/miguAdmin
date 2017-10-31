@@ -75,10 +75,14 @@
     $adminLeftTwoName = !empty($_GET['epg'])?$_GET['epg']:$_GET['adminLeftTwoName'];
     $adminLeftOne = !empty($_GET['adminLeftOne'])?$_GET['adminLeftOne']:'';
     $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
-
-                 $sql = "select id,name from yd_ver_station";
-                 $result = SQLManager::queryAll($sql);
-
+    if($_SESSION['auth']==1){
+        $sql = "select id,name from yd_ver_station";
+    }else{
+	$uid=$_SESSION['userid'];
+        $sql="select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 8  left join yd_ver_worker as c on c.workid=b.id where c.type = 1 and  c.uid=$uid group
+ by a.id";
+    }
+    $result = SQLManager::queryAll($sql);
 ?>
 <div style='padding: 5px 0px 5px 12px;'>
     <span><?php echo $adminLeftOneName;echo '>';?></span>
@@ -128,9 +132,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 <div>
     <table style="text-align: center"  id="tb" class="mtable mt10" cellpadding="10" cellspacing="0" width="100%">
         <tr>
-            <th>ID</th>
+            <th>序号</th>
             <th>站点</th>
-            <th>名称</th>
+            <th>标题</th>
             <th>Url</th>
             <th>状态</th>
             <th>操作</th>

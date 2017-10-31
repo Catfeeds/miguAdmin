@@ -58,7 +58,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 $sql = "select id,name from yd_ver_station";
             }else{
                 $uid = $_SESSION['userid'];
-                $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 8  left join yd_ver_worker as c on c.workid=b.id where c.type = 1 and  c.uid=$uid group by a.id";
+                $sql = "select a.* from yd_ver_station as a left join yd_ver_work as b on a.id=b.stationId and b.flag = 8  left join yd_ver_worker as c on c.workid=b.id where c.type > 1 and  c.uid=$uid group by a.id";
             }
             $result = SQLManager::queryAll($sql);
             ?>
@@ -115,7 +115,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             <td>
                                 <?php
                                     if($v['flag']==0){
-                                        echo "未通过";
+                                        echo "已驳回";
                                     }elseif($v['flag']==6||$v['flag']==7){
                                         echo "已通过";
                                     }else{
@@ -127,7 +127,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <?php endforeach;?>
                 <?php else:?>
                     <tr>
-                        <td colspan="7">暂无数据</td>
+                        <td colspan="8">暂无数据</td>
                     </tr>
                 <?php endif;?>
             </table>

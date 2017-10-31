@@ -82,6 +82,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         background: #f0fdff;
     }
     .inputDivTwo a{float:left;}
+    .img:hover{cursor:pointer}
 </style>
 <div style='padding: 5px 0px 5px 14px;'>
     <span><?php echo $adminLeftOneName;echo '>';?></span>

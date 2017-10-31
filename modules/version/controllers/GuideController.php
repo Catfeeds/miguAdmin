@@ -289,7 +289,11 @@ class GuideController extends VController{
                 $page = 100;
 		$data = $this->getPageInfo($page);
                 $url = $this->createUrl($this->action->id);
-                $sql_select="select a.*,b.name from yd_ver_upload as a left join yd_ver_station as b on a.stationId=b.id ";
+		if($_SESSION['auth']==1){
+                	$sql_select="select a.*,b.name from yd_ver_upload as a left join yd_ver_station as b on a.stationId=b.id ";
+		}else{
+                	$sql_select="select a.*,b.name from yd_ver_upload as a left join yd_ver_station as b on a.stationId=b.id left join yd_ver_work as d on a.stationId=d.stationId and d.flag=8 inner join yd_ver_worker as c on c.workid=d.id and c.uid={$_SESSION['userid']} ";
+		}
                 $sql_where = " where a.flag<7 ";
                 if(!empty($_REQUEST['title'])){
  			$sql_where .=" and a.title like '%{$_REQUEST['title']}%'";
@@ -297,7 +301,7 @@ class GuideController extends VController{
                 if(!empty($_REQUEST['gid'])){
                         $sql_where .=" and a.stationId='{$_REQUEST['gid']}'";
                 }
-                $sql_limit = " order by a.id desc limit ".$data['start'].','.$data['limit'];
+                $sql_limit = "group by a.id order by a.id desc limit ".$data['start'].','.$data['limit'];
                 $sql = $sql_select . $sql_where . $sql_limit;
                 $content=SQLManager::queryAll($sql);
                 $tmp['count'] = VerUpload::model()->count();
@@ -308,7 +312,7 @@ class GuideController extends VController{
 	public function actionReview(){
 		$id=$_REQUEST['id'];
 		$time=time();
-		$sql="update yd_ver_upload set `flag`=1,`time`={$time},`reason`=1,`uname`={$_SESSION['nickname']} where id={$id}";
+		$sql="update yd_ver_upload set `flag`=1,`time`={$time},`reason`=1,`uname`='{$_SESSION['nickname']}' where id={$id}";
 		$res=SQLManager::execute($sql);
 		$review_flag = 3;   //提交审核
 		$review_times = 1;
@@ -392,7 +396,7 @@ class GuideController extends VController{
 	public function actionDelete(){
 		$id = $_REQUEST['id'];
 		$time=time();
-		$sql="update yd_ver_upload set `flag`=1,`reason`=2,`time`=$time ,`uname`={$_SESSION['nickname']} where id={$id}";
+		$sql="update yd_ver_upload set `flag`=1,`reason`=2,`time`=$time ,`uname`='{$_SESSION['nickname']}' where id={$id}";
 		$count=SQLManager::execute($sql);
 		$review_flag = 3;   //提交审核
 		$review_times = 1;

@@ -145,7 +145,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 			    <td><?php echo $l['name'];?></td>
                             <td><?php echo $l['title']?></td>
 			   <td><div style="width:200px;word-wrap:break-word;"><?php echo $l['info']?></div></td> 
-			   <td>有效期</td>
+			   <td><?php echo date('Y-m-d',$l['firstTime'])?>~<?php echo date('Y-m-d',$l['endTime'])?></td>
                             <td>
                             <?php
 				switch ( $l['type']){
