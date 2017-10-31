@@ -116,7 +116,11 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 </tr>
                 <?php
                 if(!empty($list)){
-                    foreach($list as $l){?>
+                    foreach($list as $l){
+                        $tmp_sql = "select c.username,a.add_time from yd_ver_review_record as a INNER JOIN yd_ver_wall as b on a.bind_id=b.id INNER JOIN yd_ver_admin as c on a.user_id=c.id WHERE b.id={$l['id']} order by a.add_time desc limit 1";
+                        $tmp_res = SQLManager::queryRow($tmp_sql);
+
+                        ?>
                         <tr>
                             <input type="hidden" name='id' value="<?php echo $l['id']?>">
                             <td><input type="checkbox" class="checkbox" name="id" value="<?php echo $l['id']?>"></td>
@@ -130,8 +134,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				}else{
 					echo "";
 				}*/
-                                    $tmp_sql = "select c.username,a.add_time from yd_ver_review_record as a INNER JOIN yd_ver_wall as b on a.bind_id=b.id INNER JOIN yd_ver_admin as c on a.user_id=c.id WHERE b.id={$l['id']} order by a.add_time desc limit 1";
-                                    $tmp_res = SQLManager::queryRow($tmp_sql);
+
                                   echo  $tmp_res['username'];
                                 ?>
 			    </td>
