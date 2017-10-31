@@ -176,6 +176,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 	    <th>省份</th>
 	    <th>市</th>
             <th>缩略图</th>
+            <th>大图</th>
             <th>有效期</th>
             <th>审核</th>
             <th>操作</th>
@@ -235,7 +236,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     ?>
 		    </td>
                     <td><img src="<?php echo $l->thum?>" width="150px" height="86px"></td>
-                    <!--<td><img src="<?php echo $l->pic?>" width="214px" height="123px"></td>-->
+                    <td><img src="<?php echo $l->pic?>" width="214px" height="123px"></td>
 		   <td 
 			<?php 
 				if(!empty($l->startTime)&&!empty($l->endTime)&&$l->endTime<strtotime(date('Ymd',time()))){
