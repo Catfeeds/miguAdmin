@@ -98,17 +98,17 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <tr>
                 	<th></th>
                     <th>提审人</th>
-                    <th>提交审核时间时间</th>
-                    <th>修改类型</th>
+                    <th>提审时间</th>
+                    <th>提审动作</th>
                     <th>站点</th>
 		            <th>专题名称</th>
                     <th>标题</th>
-                    <th>缩略图</th>
+                    <th>图片</th>
                     <th>类型</th>
                     <th>推荐内容</th>
                     <th>action/页面类型</th>
                     <th>param/vid</th>
-
+			<th>审核</th>
                     
                 </tr>
                 <?php
@@ -258,12 +258,12 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				}?>
               	 </div> </td>
               	 
-
+		<td></td>
               	 
                </tr>
                 <?php } }else{?>
                     <tr>
-                        <td colspan="8" align="center">暂无数据</td>
+                        <td colspan="13" align="center">暂无数据</td>
                     </tr>
                     <?php
                 }

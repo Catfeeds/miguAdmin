@@ -774,22 +774,23 @@ $sql_where .=" or (a.flag = 0";
         $res = array();
 
         $sql_count = 'select count(a.id)';
-        $sql_select = 'select a.*,b.name,b.id as gid,d.id as workid';
-        //$sql_from = " from yd_ver_upload as a left join yd_ver_station as b on a.stationId=b.id LEFT JOIN yd_ver_work c ON b.id = c.stationId and c.flag = 8 and a.flag=1";
-        $sql_from = " from yd_ver_upload as a left join yd_ver_station as b on a.stationId=b.id ";
-	if($_SESSION['auth']!=1){
-        $sql_join = " left join yd_ver_work as d on a.stationId=d.stationId and d.flag=8 inner join yd_ver_review_work as c on c.workid=d.id ";
+
+	if($_SESSION['auth']==1){
+        	$sql_select = 'select a.*,b.name,b.id as gid,d.id as workid';
 	}else{
-	$sql_join = "left join yd_ver_work as d on a.stationId=d.stationId and d.flag=8";
+        	$sql_select = 'select a.*,b.name,b.id as gid,d.id as workid,c.type,c.uid';
 	}
-	//$sql_join="";
+
+        $sql_from = " from yd_ver_upload as a left join yd_ver_station as b on a.stationId=b.id ";
+	
+	if($_SESSION['auth']!=1){
+        	$sql_join = " left join yd_ver_work as d on b.id=d.stationId and d.flag=8 inner join yd_ver_review_work as c on c.workid=d.id and c.uid={$_SESSION['userid']}";
+	}else{
+		$sql_join = "left join yd_ver_work as d on a.stationId=d.stationId and d.flag=8";
+	}
         $sql_order = ' group by a.id order by a.time desc';
         $sql_limit = ' limit '.$data['start'].','.$data['limit'];
-	if($_SESSION['auth']!=1){
-	$sql_where=" where 1=1 and c.uid={$_SESSION['userid']}";
-	}else{
 	$sql_where=" where 1=1 ";
-	}
         if(empty($list['type']) || $list['type'] == 1){
             $sql_where .=" and a.flag in (1,2,3,4,5) and a.reason>0";
         }else if($list['type'] == 2){

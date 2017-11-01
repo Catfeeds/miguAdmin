@@ -1338,14 +1338,13 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 	$gid=$_REQUEST['gid'];
 	$workid=$_REQUEST['workid'];
 	$rid=$_REQUEST['rid'];
-	//var_dump($rid);die;
         $username=$_SESSION['nickname'];
         $flag=8;//素材
 	$user = VerAdmin::model()->find("nickname='$username'");
 	for($j=0;$j<count($gid);$j++){
+	    if(!empty($gid[$j])){
             $sql = "select w.type from yd_ver_work w inner join yd_ver_review_work k on w.id=k.workid and k.uid='{$user->attributes['id']}' and w.flag=$flag and w.stationId=$gid[$j]";
             $result = SQLManager::queryRow($sql);
-	    //var_dump($result);die;
             if($_SESSION['auth']==1||empty($result)){//admin或零审核
 		$tmp=explode(",",$id);
                 for($m=0;$m<count($tmp);$m++){
@@ -1375,9 +1374,7 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
                 for($i=0;$i<count($tmp);$i++){
                     $res=VerUpload::model()->findByPk($tmp[$i]);
                     $sign=$res->flag;//素材当前的flag
-                    //$stationId=$res->stationId;
                     $auth=VerReviewWork::model()->findByAttributes(array("type"=>$sign,"uid"=>$_SESSION['userid'],"workid"=>$workid[$j]));
-		    //var_dump($sign,$result,$_SESSION['userid'],$auth->uid);die;
                     if(empty($auth->uid)){//当前用户是否有权限过审
                         $res=0;
                         break;
@@ -1408,6 +1405,21 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
                     $res=SQLManager::execute($sql);
                 }
             }
+	}else{//无站点的素材
+		if($_SESSION['auth']==1){
+			$tmp=explode(",",$id);
+			for($k=0;$k<count($tmp);$k++){
+			if($rid[$j]==1){
+				$sql = "update yd_ver_upload set flag=6 where id=$tmp[$k]";
+			}else{
+				$sql = "update yd_ver_upload set flag=7 where id=$tmp[$k]";
+			}}
+			$res=SQLManager::execute($sql);
+		}else{
+			$res=0;
+			break;
+		}
+	}
         }
         if($res>0){
             echo json_encode(array("code"=>200));
@@ -1419,14 +1431,17 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
     public function  actionMaterReject(){
         $id=$_REQUEST['id'];
 	$gid=$_REQUEST['gid'];
+	$workid=$_REQUEST['workid'];
+        $rid=$_REQUEST['rid'];
         //如当前2审状态，则除了2审用户，其他用户不能驳回
         $username=$_SESSION['nickname'];
         $flag=8;
         $user = VerAdmin::model()->find("nickname='$username'");
         for($j=0;$j<count($gid);$j++){
+	    if(!empty($gid[$j])){
             $sql = "select w.type from yd_ver_work w inner join yd_ver_review_work k on w.id=k.workid and k.uid='{$user->attributes['id']}' and w.flag=$flag and w.stationId=$gid[$j]";
             $tmp = SQLManager::queryRow($sql);
-            if($_SESSION['auth']==1||empty($tmp)){//admin或零审核
+            if($_SESSION['auth']==1||empty($tmp['type'])){//admin或零审核
                 $sql="update yd_ver_upload set flag=0 where id in({$id})";
                 $res=SQLManager::execute($sql);
             }else{
@@ -1434,11 +1449,11 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
                 for($i=0;$i<count($tmp);$i++){
                     $res=VerUpload::model()->findByPk($tmp[$i]);
                     $sign=$res->flag;//素材当前的flag
-                    $auth=VerReviewWork::model()->findByAttributes(array("type"=>$sign,"uid"=>$_SESSION['userid'],"workid"=>$gid[$j]));
+                    $auth=VerReviewWork::model()->findByAttributes(array("type"=>$sign,"uid"=>$_SESSION['userid'],"workid"=>$workid[$i]));
                     if(empty($auth->uid)){//当前用户是否有权限过审
                         $res=0;
                         break;
-                    }elseif($tmp['type']==$sign){
+                    }else{
 			$review_flag = 2;   //驳回
                         $review_times =$sign;
                         $review_message = '请求已被驳回';
@@ -1446,11 +1461,24 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
                         $review_type = 8;
                         $this->recordReview($review_type,$bind_id,$review_times,$review_flag,$review_message);
                         $sql="update yd_ver_upload set flag=0 where id=$tmp[$i]";
-                    }
-                    $res=SQLManager::execute($sql);
+                    	$res=SQLManager::execute($sql);
+		    }
                 }
             }
-        }
+        }else{
+		if($_SESSION['auth']==1){
+                        $tmp=explode(",",$id);
+                        for($k=0;$k<count($tmp);$k++){
+                                $sql = "update yd_ver_upload set flag=0 where id=$tmp[$k]";
+                        }
+                        $res=SQLManager::execute($sql);
+                }else{
+                        $res=0;
+                        break;
+                }
+		
+	}
+	}
         if($res>0){
             echo json_encode(array("code"=>200));
         }else{

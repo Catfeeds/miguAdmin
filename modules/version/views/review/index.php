@@ -164,7 +164,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <th>语言</th>
                     <th>类型</th>
                     <th>审核</th>
-                    <th>提交审核时间时间</th>
+                    <th>提审时间</th>
                     <th>操作</th>
                 </tr>
                 <?php

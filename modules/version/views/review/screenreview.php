@@ -157,7 +157,15 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td><?php echo $v['tType']?></td>
                     <td><?php echo $v['uType']?></td>
                     <td><?php echo $v['cid']?></td>
-                    <td></td>
+                    <td>
+			<?php
+				if($v['flag']==6){
+				echo "已通过";
+				}else{
+				echo "审核中";
+				}
+			?>
+		    </td>
                 </tr>
                 <?php
             }
