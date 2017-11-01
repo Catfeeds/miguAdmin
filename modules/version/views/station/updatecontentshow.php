@@ -125,8 +125,19 @@
 <table class="mtable" width="100%" cellspacing="0" cellpadding="10">
     <input type="hidden" name="id" value="<?php echo $screenContent->id;?>">
     <tr>
+
         <td width="100" align="right">尺寸：</td>
-        <td><?php echo $screenContent->width;?>X<?php echo $screenContent->height;?></td>
+        <?php
+        $width = $screenContent->width;
+        $height = $screenContent->height;
+        if($width<20){
+            $width = $width*250;
+        }
+        if($height<20){
+            $height = $height*105;
+        }
+        ?>
+        <td><?php echo $width;?>X<?php echo $height;?></td>
     </tr>
     <tr>
         <td width="100" align="right">位置：</td>

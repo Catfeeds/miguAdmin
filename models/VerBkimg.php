@@ -10,6 +10,7 @@
  * @property string $type
  * @property string $delFlag
  * @property string $gid
+ * @property integer $template_id
  */
 class VerBkimg extends CActiveRecord
 {
@@ -29,14 +30,14 @@ class VerBkimg extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('status', 'numerical', 'integerOnly'=>true),
+			array('status, template_id', 'numerical', 'integerOnly'=>true),
 			array('url', 'length', 'max'=>200),
 			array('type', 'length', 'max'=>30),
 			array('delFlag', 'length', 'max'=>10),
 			array('gid', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, url, status, type, delFlag, gid', 'safe', 'on'=>'search'),
+			array('id, url, status, type, delFlag, gid, template_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,11 +59,12 @@ class VerBkimg extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'url' => 'Url',
-			'status' => 'Status',
+			'url' => '地址',
+			'status' => '状态 1.正常  2.隐藏  3.删除',
 			'type' => 'Type',
 			'delFlag' => 'Del Flag',
 			'gid' => 'Gid',
+			'template_id' => 'Template',
 		);
 	}
 
@@ -90,6 +92,7 @@ class VerBkimg extends CActiveRecord
 		$criteria->compare('type',$this->type,true);
 		$criteria->compare('delFlag',$this->delFlag,true);
 		$criteria->compare('gid',$this->gid,true);
+		$criteria->compare('template_id',$this->template_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -107,4 +110,3 @@ class VerBkimg extends CActiveRecord
 		return parent::model($className);
 	}
 }
-

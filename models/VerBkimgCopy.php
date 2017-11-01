@@ -11,6 +11,7 @@
  * @property string $delFlag
  * @property string $gid
  * @property integer $flag
+ * @property integer $template_id
  */
 class VerBkimgCopy extends CActiveRecord
 {
@@ -30,14 +31,14 @@ class VerBkimgCopy extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('status, flag', 'numerical', 'integerOnly'=>true),
+			array('status, flag, template_id', 'numerical', 'integerOnly'=>true),
 			array('url', 'length', 'max'=>200),
 			array('type', 'length', 'max'=>30),
 			array('delFlag', 'length', 'max'=>10),
 			array('gid', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, url, status, type, delFlag, gid, flag', 'safe', 'on'=>'search'),
+			array('id, url, status, type, delFlag, gid, flag, template_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,6 +66,7 @@ class VerBkimgCopy extends CActiveRecord
 			'delFlag' => 'Del Flag',
 			'gid' => 'Gid',
 			'flag' => 'Flag',
+			'template_id' => 'Template',
 		);
 	}
 
@@ -93,6 +95,7 @@ class VerBkimgCopy extends CActiveRecord
 		$criteria->compare('delFlag',$this->delFlag,true);
 		$criteria->compare('gid',$this->gid,true);
 		$criteria->compare('flag',$this->flag);
+		$criteria->compare('template_id',$this->template_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

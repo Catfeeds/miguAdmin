@@ -1,11 +1,13 @@
 
 <?php
-if (!empty($html)) {
+if (!empty($html) && !isset($flag)) {
         $a = "/<style[\s\S]*?<\/style>/";
         preg_match_all($a, $html, $matches);
 
         $html = str_replace($matches[0][0], "", $html);
+
         $html = str_replace("131px", "95px", $html);
+
 }
 
 
@@ -524,7 +526,7 @@ if (!empty($html)) {
                     <option value="0">请选择</option>
                     <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='1'){echo "selected=selected"; } ?>  value="1" >海报专题</option>
                     <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='2'){echo "selected=selected"; } ?>  value="2" >排行榜专题</option>
- <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='4'){echo "selected=selected"; } ?>  value="4" >河南专题</option>
+ <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='4'){echo "selected=selected"; } ?>  value="4" >自定义模板专题</option>
                 </select>
                 <span><input class="btn module" type="submit" value="保存修改"></span>
             </div>
@@ -630,7 +632,7 @@ if (!empty($html)) {
 
                             <?php }?>
 
-                            <?php echo $html; //echo "<script>$('b').css('float','left');</script>";?>
+                            <?php echo $html; ?>
                     </div>
    </td>
 
@@ -1730,7 +1732,11 @@ function add(obj)
         }
         function banner(l)
         {
-            for(var i = 0 ; i<200 ; i++){
+            var template_id = <?php echo isset($template_id)?$template_id:'0';?>;
+            guideid = getGuideid(template_id);
+            var info = getMaxOrder(guideid);
+            info = JSON.parse(info);
+            for(var i = (info.min)-1 ; i<(info.max)+1 ; i++){
                 if($('.order-'+i).find('li').length>1){
                     var aa = $('.order-'+i).html();
                     var bb = $('.order-'+i);
@@ -1746,6 +1752,41 @@ function add(obj)
         }
 
         showData();
+
+    function getMaxOrder(guideid)
+    {
+        var mid = <?php echo $this->mid;?>;
+        var d = 1;
+        $.ajax
+        ({
+            type:'get',
+            async:false,
+            url:'/version/screen/getMaxOrder/mid/'+mid+'/guideid/'+guideid,
+            success:function(data)
+            {
+                d = data;
+            }
+        });
+        return d;
+    }
+
+    function getGuideid(template_id)
+    {
+        var mid = <?php echo $this->mid;?>;
+        var d = 1;
+        $.ajax
+        ({
+            type:'get',
+            async:false,
+            url:'/version/station/getOneGuideId/mid/'+mid+'/template_id/'+template_id,
+            success:function(data)
+            {
+                d = data;
+            }
+        });
+        return d;
+    }
+
     </script>
 
 

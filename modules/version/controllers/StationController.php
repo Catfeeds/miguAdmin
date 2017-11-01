@@ -121,6 +121,7 @@ class StationController extends VController
                         $res1->status = $content1->attributes['status'];
                         $res1->delFlag = $content1->attributes['delFlag'];
                         $res1->gid = $content1->attributes['gid'];
+                        $res1->template_id = $content1->attributes['template_id'];
                         $res1->save();
                     }
 
@@ -595,11 +596,15 @@ class StationController extends VController
             }else{
                 $type = $bkimg->attributes['type'];
                 $list =VerUiCopyManager::getAll($gid);
+
                 switch($type){
                     case '1':$html = HTML::data($list);break;
                     case '2':$html = HTML::top();break;
                     //测试服
-                    case '4':$html = HTML::henan();break;
+                    case '4':
+                        $template_id = $bkimg->attributes['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
 
@@ -609,6 +614,8 @@ class StationController extends VController
                 $bkimg->status = '1';
                                 $bkimg->flag = '7';
                 $bkimg->gid = $_REQUEST['gid'];
+                $bkimg->template_id = $_REQUEST['template_id'];
+                $template_id = $_REQUEST['template_id'];
                 if(!empty($_FILES['url']['tmp_name'])){
                     $filename = 'url';
                     $path = $this->up($filename);
@@ -624,11 +631,16 @@ class StationController extends VController
                 }
                 $gid = $_REQUEST['gid'];
                 $list =VerUiCopyManager::getAll($gid);
+//                var_dump($list);die;
 		        switch($bkimg->type){
                     case '1':$html = HTML::data($list);break;
                     //测试
                     case '2':$html = HTML::top();break;
-                    case '4':$html=HTML::henan();break;
+//                    case '4':$html=HTML::henan();break;
+                    case '4':
+                        $template_id = $_REQUEST['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
             $type = $bkimg->attributes['type'];
@@ -651,7 +663,7 @@ class StationController extends VController
                     $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result,'result'=>$res));
                 }
             }elseif($type == '4'){
-                $this->render("topic",array("bkimg"=>$bkimg,"html"=>$html,"res"=>$result,"type"=>$type,"result"=>$res));
+                $this->render("topic",array("bkimg"=>$bkimg,"html"=>$html,"res"=>$result,"type"=>$type,"result"=>$res,'flag'=>'1','template_id'=>$template_id));
             }else{
                 $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result,'result'=>$res));
             }
@@ -692,7 +704,10 @@ class StationController extends VController
                     case '1':$html = HTML::data($list);break;
                     case '2':$html = HTML::top();break;
                     //测试服
-                    case '4':$html = HTML::henan();break;
+                    case '4':
+                        $template_id = $bkimg->attributes['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
 //      var_dump($_POST);die;
@@ -726,7 +741,11 @@ class StationController extends VController
                     case '1':$html = HTML::data($list);break;
                     //测试
                     case '2':$html = HTML::top();break;
-                    case '4':$html=HTML::henan();break;
+//                    case '2':$html = HTML::top();break;
+                    case '4':
+                        $template_id = $_REQUEST['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
             $type = $bkimg->attributes['type'];
@@ -766,7 +785,7 @@ class StationController extends VController
                 $this->render('topic1',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result,'result'=>$res));
             }
         }elseif($type == '4'){
-            $this->render("topic1",array("bkimg"=>$bkimg,"html"=>$html,"res"=>$result,"type"=>$type,"result"=>$res));
+            $this->render("topic1",array("bkimg"=>$bkimg,"html"=>$html,"res"=>$result,"type"=>$type,"result"=>$res,'flag'=>'1','template_id'=>$template_id));
         }else{
             $this->render('topic1',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result,'result'=>$res));
         }
@@ -806,7 +825,10 @@ class StationController extends VController
                     case '1':$html = HTML::data($list);break;
                     case '2':$html = HTML::top();break;
                     //测试服
-                    case '4':$html = HTML::henan();break;
+                    case '4':
+                        $template_id = $bkimg->attributes['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
 //      var_dump($_POST);die;
@@ -840,7 +862,10 @@ class StationController extends VController
                     case '1':$html = HTML::data($list);break;
                     //测试
                     case '2':$html = HTML::top();break;
-                    case '4':$html=HTML::henan();break;
+                    case '4':
+                        $template_id = $_REQUEST['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
 
@@ -884,7 +909,7 @@ class StationController extends VController
             }
         }elseif($type == '4'){
 
-            $this->render("topic2",array("bkimg"=>$bkimg,"html"=>$html,"res"=>$result,"type"=>$type,"result"=>$res));
+            $this->render("topic2",array("bkimg"=>$bkimg,"html"=>$html,"res"=>$result,"type"=>$type,"result"=>$res,'flag'=>'1','template_id'=>$template_id));
         }else{
             $this->render('topic2',array('bkimg'=>$bkimg,'html'=>$html,'res'=>$result,'result'=>$res));
         }
@@ -1712,6 +1737,13 @@ class StationController extends VController
         $auth['submit'] = $submit;
         $auth['show'] = $show;
         echo json_encode($auth);
+    }
+
+    public function actionGetOneGuideId()
+    {
+        $template_id = $_REQUEST['template_id'];
+        $tmp_res = VerScreenGuide::model()->find("templateId=$template_id order by id desc limit 1");
+        echo $tmp_res->attributes['id'];
     }
 }
 
