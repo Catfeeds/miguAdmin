@@ -458,6 +458,18 @@ class ReviewController extends VController
     {
         $workInfo = Common::getWorkInfo();
         $workNum = array();
+        if(!empty($_REQUEST['allbtn'])) {
+            $allbtn = $_REQUEST['allbtn'];
+            if ($allbtn == '已通过') {
+                $review_flag = 1;
+            }else if($allbtn=='已驳回'){
+                $review_flag = 2;
+            }else{
+                $review_flag = 3;
+            }
+        }else{
+            $review_flag = 3;
+        }
         if(!empty($workInfo)){
             foreach ($workInfo as $K=>$v){
                 $workNum[] = $v['type'];
@@ -488,13 +500,15 @@ class ReviewController extends VController
             if(in_array($sign,$workNum) && $sign==1){
                 $workFlag = $sign*10;   //  || flag=1  一审数据
                 $sql_center = " and a.flag in (1,6) or a.flag=$workFlag";
-                $sql_work = $sql_top.$sql_center.$sql_bottom;
+                $sql_review = " or c.review_flag=$review_flag";
+                $sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
                 $sign++;
             }else if(in_array($sign,$workNum)){
                 $workFlag = $sign*10;   //   flag=20  二审数据
                 //$sql_center = " and a.flag in (1,6) or a.flag=$workFlag";
                 $sql_center = " and  a.flag=$workFlag";
-                $sql_work = $sql_top.$sql_center.$sql_bottom;
+                $sql_review = " or c.review_flag=$review_flag";
+                $sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
                 if($sign==5){
                    $sign = $sign;
                 }else{
