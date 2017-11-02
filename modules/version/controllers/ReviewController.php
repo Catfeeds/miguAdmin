@@ -496,7 +496,7 @@ class ReviewController extends VController
 
  //         $sql_top = $sql . $sql_where;
             //$sql_bottom = " inner join yd_ver_station s on s.id=g.gid GROUP BY p.flag";
-            $sql_bottom = " group by a.id";
+            $sql_bottom = " group by a.id order by c.add_time desc";
             if(in_array($sign,$workNum) && $sign==1){
                 $workFlag = $sign*10;   //  || flag=1  一审数据
                 $sql_center = " and a.flag in (1,6) or (a.flag=$workFlag)";
