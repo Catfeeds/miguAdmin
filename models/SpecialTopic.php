@@ -16,7 +16,7 @@
  * @property string $y
  * @property string $width
  * @property string $height
- * @property integer $order
+ * @property string $order
  * @property string $videoUrl
  * @property string $sid
  * @property string $picSrc
@@ -39,9 +39,10 @@ class SpecialTopic extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, type, tType, x, y, width, height, order, sid, picSrc', 'required'),
-			array('type, tType, uType, order', 'numerical', 'integerOnly'=>true),
+			array('title, type, tType, x, y, width, height, sid, picSrc', 'required'),
+			array('type, tType, uType', 'numerical', 'integerOnly'=>true),
 			array('title, action, param, cid, x, y, width, height, videoUrl, picSrc', 'length', 'max'=>255),
+			array('order', 'length', 'max'=>10),
 			array('sid', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -115,7 +116,7 @@ class SpecialTopic extends CActiveRecord
 		$criteria->compare('y',$this->y,true);
 		$criteria->compare('width',$this->width,true);
 		$criteria->compare('height',$this->height,true);
-		$criteria->compare('order',$this->order);
+		$criteria->compare('order',$this->order,true);
 		$criteria->compare('videoUrl',$this->videoUrl,true);
 		$criteria->compare('sid',$this->sid,true);
 		$criteria->compare('picSrc',$this->picSrc,true);
@@ -136,4 +137,3 @@ class SpecialTopic extends CActiveRecord
 		return parent::model($className);
 	}
 }
-

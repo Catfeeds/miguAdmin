@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "{{special_topic}}".
+ * This is the model class for table "{{special_topic_copy}}".
  *
- * The followings are the available columns in table '{{special_topic}}':
+ * The followings are the available columns in table '{{special_topic_copy}}':
  * @property string $id
  * @property string $title
  * @property integer $type
@@ -16,10 +16,11 @@
  * @property string $y
  * @property string $width
  * @property string $height
- * @property integer $order
+ * @property string $order
  * @property string $videoUrl
  * @property string $sid
  * @property string $picSrc
+ * @property string $flag
  */
 class SpecialTopicCopy extends CActiveRecord
 {
@@ -39,13 +40,14 @@ class SpecialTopicCopy extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, type, tType, x, y, width, height, order, sid, picSrc', 'required'),
-			array('type, tType, uType, order', 'numerical', 'integerOnly'=>true),
-			array('title, action, param, cid, x, y, width, height, videoUrl, picSrc', 'length', 'max'=>255),
+			array('title, type, tType, x, y, width, height, sid, picSrc', 'required'),
+			array('type, tType, uType', 'numerical', 'integerOnly'=>true),
+			array('title, action, param, cid, x, y, width, height, videoUrl, picSrc, flag', 'length', 'max'=>255),
+			array('order', 'length', 'max'=>10),
 			array('sid', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, type, tType, uType, action, param, cid, x, y, width, height, order, videoUrl, sid, picSrc ,flag', 'safe', 'on'=>'search'),
+			array('id, title, type, tType, uType, action, param, cid, x, y, width, height, order, videoUrl, sid, picSrc, flag', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -116,11 +118,12 @@ class SpecialTopicCopy extends CActiveRecord
 		$criteria->compare('y',$this->y,true);
 		$criteria->compare('width',$this->width,true);
 		$criteria->compare('height',$this->height,true);
-		$criteria->compare('order',$this->order);
+		$criteria->compare('order',$this->order,true);
 		$criteria->compare('videoUrl',$this->videoUrl,true);
 		$criteria->compare('sid',$this->sid,true);
 		$criteria->compare('picSrc',$this->picSrc,true);
 		$criteria->compare('flag',$this->flag,true);
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -130,12 +133,10 @@ class SpecialTopicCopy extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return SpecialTopic the static model class
+	 * @return SpecialTopicCopy the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
 }
-
-
