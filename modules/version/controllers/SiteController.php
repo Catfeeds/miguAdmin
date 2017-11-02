@@ -177,7 +177,10 @@ class SiteController extends VController
                     case '2':$html = HTML::top();break;
                     case '3':$html = HTML::news();break;
                     //测试服代码
-            case '4':$html=HTML::henan();break;
+                    case '4':
+                        $template_id = $bkimg->attributes['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
             if(!empty($_POST)){
@@ -186,6 +189,8 @@ class SiteController extends VController
                 $bkimg->status = '1';
 				$bkimg->flag = '7';
                 $bkimg->gid = $_REQUEST['gid'];
+                $bkimg->template_id = $_REQUEST['template_id'];
+                $template_id = $_REQUEST['template_id'];
                 if(!empty($_FILES['url']['tmp_name'])){
                     $filename = 'url';
                     $path = $this->up($filename);
@@ -211,7 +216,10 @@ class SiteController extends VController
                     //测试
                     case '2':$html = HTML::top();break;
                     case '3':$html = HTML::news();break;
-                    case '4':$html=HTML::henan();break;
+                    case '4':
+                        $template_id = $_REQUEST['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
 	    $type = $bkimg->attributes['type'];
@@ -237,7 +245,7 @@ class SiteController extends VController
                    $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,"result"=>$res));
                 }
 	    }elseif($type=='4'){
-            $this->render("topic",array("bkimg"=>$bkimg,"html"=>$html,"type"=>$type,"result"=>$res));
+            $this->render("topic",array("bkimg"=>$bkimg,"html"=>$html,"type"=>$type,"result"=>$res,'flag'=>'1','template_id'=>$template_id));
             //$this->render('topic',array('bkimg'=>$bkimg,'html'=>$html));
         }else{
 		  $this->render('topic',array('bkimg'=>$bkimg,'html'=>$html,"result"=>$res));
@@ -270,8 +278,11 @@ class SiteController extends VController
                     case '1':$html = HTML::data($list);break;
                     case '2':$html = HTML::top();break;
                     case '3':$html = HTML::news();break;
-                    //测试服代码
-            case '4':$html=HTML::henan();break;
+                    //测试服
+                    case '4':
+                        $template_id = $bkimg->attributes['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
             if(!empty($_POST)){
@@ -279,6 +290,8 @@ class SiteController extends VController
                 $bkimg->type=$_POST['type'];
                 $bkimg->status = '1';
                 $bkimg->gid = $_REQUEST['gid'];
+                $bkimg->template_id = $_REQUEST['template_id'];
+                $template_id = $_REQUEST['template_id'];
                 if(!empty($_FILES['url']['tmp_name'])){
                     $filename = 'url';
                     $path = $this->up($filename);
@@ -302,7 +315,10 @@ class SiteController extends VController
                     //测试
                     case '2':$html = HTML::top();break;
                     case '3':$html = HTML::news();break;
-                    case '4':$html=HTML::henan();break;
+                    case '4':
+                        $template_id = $_REQUEST['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
 	    $type = $bkimg->attributes['type'];
@@ -329,7 +345,7 @@ class SiteController extends VController
                    $this->render('topic1',array('bkimg'=>$bkimg,'html'=>$html,"result"=>$res));
                 }
 	    }elseif($type=='4'){
-            $this->render("topic1",array("bkimg"=>$bkimg,"html"=>$html,"type"=>$type,"result"=>$res));
+            $this->render("topic1",array("bkimg"=>$bkimg,"html"=>$html,"type"=>$type,"result"=>$res,'flag'=>'1','template_id'=>$template_id));
             //$this->render('topic',array('bkimg'=>$bkimg,'html'=>$html));
         }else{
 		  $this->render('topic1',array('bkimg'=>$bkimg,'html'=>$html,"result"=>$res));
@@ -361,8 +377,11 @@ public function actionTopic2(){
                     case '1':$html = HTML::data($list);break;
                     case '2':$html = HTML::top();break;
                     case '3':$html = HTML::news();break;
-                    //测试服代码
-            case '4':$html=HTML::henan();break;
+                    //测试服
+                    case '4':
+                        $template_id = $bkimg->attributes['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
             if(!empty($_POST)){
@@ -370,6 +389,8 @@ public function actionTopic2(){
                 $bkimg->type=$_POST['type'];
                 $bkimg->status = '1';
                 $bkimg->gid = $_REQUEST['gid'];
+                $bkimg->template_id = $_REQUEST['template_id'];
+                $template_id = $_REQUEST['template_id'];
                 if(!empty($_FILES['url']['tmp_name'])){
                     $filename = 'url';
                     $path = $this->up($filename);
@@ -393,7 +414,10 @@ public function actionTopic2(){
                     //测试
                     case '2':$html = HTML::top();break;
                     case '3':$html = HTML::news();break;
-                    case '4':$html=HTML::henan();break;
+                    case '4':
+                        $template_id = $_REQUEST['template_id'];
+                        $html = HTML::getTemplate($template_id);
+                        break;
                 }
             }
 	    $type = $bkimg->attributes['type'];
@@ -419,7 +443,7 @@ public function actionTopic2(){
                    $this->render('topic2',array('bkimg'=>$bkimg,'html'=>$html,"result"=>$res));
                 }
 	    }elseif($type=='4'){
-            $this->render("topic2",array("bkimg"=>$bkimg,"html"=>$html,"type"=>$type,"result"=>$res));
+            $this->render("topic2",array("bkimg"=>$bkimg,"html"=>$html,"type"=>$type,"result"=>$res,'flag'=>'1','template_id'=>$template_id));
             //$this->render('topic',array('bkimg'=>$bkimg,'html'=>$html));
         }else{
 		  $this->render('topic2',array('bkimg'=>$bkimg,'html'=>$html,"result"=>$res));

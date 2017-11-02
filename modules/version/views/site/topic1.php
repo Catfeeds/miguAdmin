@@ -1,6 +1,6 @@
 
 <?php
-if (!empty($html)) {
+if (!empty($html) && !isset($flag)) {
         $a = "/<style[\s\S]*?<\/style>/";
         preg_match_all($a, $html, $matches);
 
@@ -1434,7 +1434,11 @@ function add(obj)
         }
         function banner(l)
         {
-            for(var i = 0 ; i<200 ; i++){
+            var template_id = <?php echo isset($template_id)?$template_id:'0';?>;
+            guideid = getGuideid(template_id);
+            var info = getMaxOrder(guideid);
+            info = JSON.parse(info);
+            for(var i = (info.min)-1 ; i<(info.max)+1 ; i++){
                 if($('.order-'+i).find('li').length>1){
                     var aa = $('.order-'+i).html();
                     var bb = $('.order-'+i);
@@ -1450,6 +1454,40 @@ function add(obj)
         }
 
         showData();
+
+        function getMaxOrder(guideid)
+        {
+            var mid = <?php echo $this->mid;?>;
+            var d = 1;
+            $.ajax
+            ({
+                type:'get',
+                async:false,
+                url:'/version/screen/getMaxOrder/mid/'+mid+'/guideid/'+guideid,
+                success:function(data)
+                {
+                    d = data;
+                }
+            });
+            return d;
+        }
+
+        function getGuideid(template_id)
+        {
+            var mid = <?php echo $this->mid;?>;
+            var d = 1;
+            $.ajax
+            ({
+                type:'get',
+                async:false,
+                url:'/version/station/getOneGuideId/mid/'+mid+'/template_id/'+template_id,
+                success:function(data)
+                {
+                    d = data;
+                }
+            });
+            return d;
+        }
     </script>
 
 
