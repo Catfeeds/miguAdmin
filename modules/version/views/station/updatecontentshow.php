@@ -432,7 +432,7 @@
         var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
         $.post('/version/station/updatecontent?mid=<?php echo $this->mid?>',G,function(d){
             if(d.code == 200){
-                alert('修改成功');
+                layer.alert('修改成功');
                 //location.reload();
                 window.close();
             }else{
@@ -484,7 +484,7 @@
         var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
         $.post('/version/station/updatecontent?mid=<?php echo $this->mid?>',G,function(d){
             if(d.code == 200){
-                alert('删除成功');
+                layer.alert('删除成功');
                 //location.reload();
                 window.close();
             }else{

@@ -419,7 +419,7 @@
         $.post('<?php echo $this->get_url('station','firstPageAdd')?>',G,function(d){
             if(d.code == 200){
 //                location.reload();
-                alert('添加成功');
+                layer.alert('添加成功');
                 window.close();
             }else{
                 layer.close(load);
