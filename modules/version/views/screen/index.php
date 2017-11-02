@@ -235,7 +235,7 @@ if(!empty($templateList)){
     ?>
 <!--    <input type="button" value="切换审核内容" class="btn content_btn" style="margin-top: 560px;/*margin-left:-100%*/;">-->
     <div>
-        <input type="button" value="提交审核" class="btn submit_btn" style="margin-top: 560px;">
+        <input type="button" value="提交审核" class="btn submit_btn" style="margin-top: 635px;">
     </div>
 
 </div>
