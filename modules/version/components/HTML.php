@@ -1379,7 +1379,7 @@ class HTML
             switch($templateId)
     {
         case 1 :
-            $html .= '<div class="templateParent" style="height: 450px;width:2280px;overflow-y: scroll;overflow-x: scroll;float: left;">
+            $html .= '<div class="templateParent" style="height: 520px;width:2280px;overflow-y: scroll;overflow-x: scroll;float: left;">
     <div class="parent-1">
         <div class="m-1-2 order-1" size-w="1" size-h="2" x="0" y="0" order="1">
             <img class="clickImg-1-2" src="/file/3.png" style="position:relative;z-index:9999" alt="" onclick="add(this)" />
