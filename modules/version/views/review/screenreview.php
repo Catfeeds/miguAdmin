@@ -159,11 +159,12 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td><?php echo $v['cid']?></td>
                     <td>
 			<?php
-				if($v['flag']==6){
+				echo $v['review_times'];
+				/*if($v['flag']==6){
 				echo "已通过";
 				}else{
 				echo "审核中";
-				}
+				}*/
 			?>
 		    </td>
                 </tr>

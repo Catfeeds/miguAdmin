@@ -106,8 +106,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <?php foreach($list as $v):?>
                         <?php if(isset($v['uid'])&&isset($v['type'])):?>
 			<?php
+				$type=isset($_REQUEST['type'])?$_REQUEST['type']:1;
 				$auth=VerReviewWork::model()->findByAttributes(array("type"=>$v['flag'],"uid"=>$_SESSION['userid'],"workid"=>$v['workid']));
-				if(!empty($auth->uid)){
+				if(!empty($auth->uid)&&$type==1){
 			?>
                         <tr>
                             <td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>" rid="<?php echo $v['reason'];?>"></td>
@@ -129,8 +130,47 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                 ?>
                             </td>
                         </tr>
-			<?php }else{?>
-				<td colspan="8">暂无数据</td>
+			<?php }elseif(empty($auth->uid)&&$type==2){?>
+				<tr>
+				    <td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>" rid="<?php echo $v['reason'];?>"></td>
+                            <td><?php echo date("Y-m-d H:i:s",$v['time']);?></td>
+                            <td><?php echo $v['uname']?></td>
+                            <td><?php if($v['reason']==1){echo '请求通过';}elseif($v['reason']==2){echo '请求删除';}?></td>
+                            <td><?php echo $v['name'];?></td>
+                            <td><?php echo $v['title'];?></td>
+                            <td><?php echo $v['url'];?></td>
+                            <td>
+                                <?php
+                                    if($v['flag']==0){
+                                        echo "已驳回";
+                                    }elseif($v['flag']==6||$v['flag']==7){
+                                        echo "已通过";
+                                    }else{
+                                        echo "审核中";
+                                    }
+                                ?>
+                            </td>
+				</tr>
+			<?php }elseif(empty($auth->uid)&&$type==3){?>
+				<tr>
+				<td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>" rid="<?php echo $v['reason'];?>"></td>
+                            <td><?php echo date("Y-m-d H:i:s",$v['time']);?></td>
+                            <td><?php echo $v['uname']?></td>
+                            <td><?php if($v['reason']==1){echo '请求通过';}elseif($v['reason']==2){echo '请求删除';}?></td>
+                            <td><?php echo $v['name'];?></td>
+                            <td><?php echo $v['title'];?></td>
+                            <td><?php echo $v['url'];?></td>
+                            <td>
+                                <?php
+                                    if($v['flag']==0){
+                                        echo "已驳回";
+                                    }elseif($v['flag']==6||$v['flag']==7){
+                                        echo "已通过";
+                                    }else{
+                                        echo "审核中";
+                                    }
+                                ?>
+                            </td></tr>
 			<?php }?>
                         <?php else:?>
                         <tr>
