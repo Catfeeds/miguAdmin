@@ -189,8 +189,8 @@ class SiteController extends VController
                 $bkimg->status = '1';
 				$bkimg->flag = '7';
                 $bkimg->gid = $_REQUEST['gid'];
-                $bkimg->template_id = $_REQUEST['template_id'];
-                $template_id = $_REQUEST['template_id'];
+                $bkimg->template_id = !empty($_REQUEST['template_id'])?$_REQUEST['template_id']:$bkimg->attributes['template_id'];
+                $template_id = !empty($_REQUEST['template_id'])?$_REQUEST['template_id']:$bkimg->attributes['template_id'];
                 if(!empty($_FILES['url']['tmp_name'])){
                     $filename = 'url';
                     $path = $this->up($filename);
@@ -290,8 +290,8 @@ class SiteController extends VController
                 $bkimg->type=$_POST['type'];
                 $bkimg->status = '1';
                 $bkimg->gid = $_REQUEST['gid'];
-                $bkimg->template_id = $_REQUEST['template_id'];
-                $template_id = $_REQUEST['template_id'];
+                $bkimg->template_id = !empty($_REQUEST['template_id'])?$_REQUEST['template_id']:$bkimg->attributes['template_id'];
+                $template_id = !empty($_REQUEST['template_id'])?$_REQUEST['template_id']:$bkimg->attributes['template_id'];
                 if(!empty($_FILES['url']['tmp_name'])){
                     $filename = 'url';
                     $path = $this->up($filename);
@@ -389,8 +389,8 @@ public function actionTopic2(){
                 $bkimg->type=$_POST['type'];
                 $bkimg->status = '1';
                 $bkimg->gid = $_REQUEST['gid'];
-                $bkimg->template_id = $_REQUEST['template_id'];
-                $template_id = $_REQUEST['template_id'];
+                $bkimg->template_id = !empty($_REQUEST['template_id'])?$_REQUEST['template_id']:$bkimg->attributes['template_id'];
+                $template_id = !empty($_REQUEST['template_id'])?$_REQUEST['template_id']:$bkimg->attributes['template_id'];
                 if(!empty($_FILES['url']['tmp_name'])){
                     $filename = 'url';
                     $path = $this->up($filename);
