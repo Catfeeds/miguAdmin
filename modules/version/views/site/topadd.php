@@ -59,7 +59,10 @@
             return false;
         }
         $.post("<?php echo $this->get_url('site','topsave')?>",G,function(d){
-            location.reload();
+            var json=eval('('+d+')');
+            var nid=json.id;
+            //console.log(nid);
+            window.location.href=top.location.href+"&newid="+nid;
         })
         return false;
     })

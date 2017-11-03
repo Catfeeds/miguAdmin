@@ -711,6 +711,24 @@ if($_SESSION['auth']=='1'){
     </div>
 <script type="text/javascript" src="/js/jquery.bxslider.min.js"></script>
     <script>
+        var newid=<?php echo isset($_REQUEST['newid'])?$_REQUEST['newid']:0;?>;
+        if(newid>0){
+            addsearch(newid);
+        }
+        function addsearch(id){
+            var search_id=id;
+            var my_href = '';
+            for(var i  = 0 ; i<$('.topic_id').length ; i++){
+                if(search_id == $('.topic_id').eq(i).text()){
+                    my_href = $('.topic_id').eq(i).parent().children('a').attr('href');
+                }
+            }
+
+            if(!empty(my_href)){
+                window.location.href = my_href;
+            }
+        }
+
         $('.topic_search_save').click(function()
         {
             var search_id = $('#topic_search').val();
