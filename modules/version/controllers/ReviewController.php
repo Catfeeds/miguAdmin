@@ -485,7 +485,7 @@ class ReviewController extends VController
 	        $tmp_stationId=join(",",$stationId);
             //$tmp_stationId = explode(',',$stationId);
 //            $sql_top = "select a.*,g.title as gtitle,s.name from yd_ver_screen_content_copy as a left join yd_ver_screen_guide as g on a.screenGuideid=g.id left join yd_ver_station as s on s.id=g.gid left join yd_ver_station as b on b.id=g.gid where  b.id=$stationId ";
-            $sql_top = "select a.*,g.title as gtitle,s.name,d.username,c.id as cid ,c.type,c.bind_id,c.user_id,c.review_times,c.review_flag,c.message,c.add_time from yd_ver_screen_content_copy as a inner join yd_ver_screen_guide as g on a.screenGuideid=g.id inner join yd_ver_station as s on s.id=g.gid inner join yd_ver_review_record as c on a.id=c.bind_id inner join yd_ver_admin as d on c.user_id=d.id where s.id in ($tmp_stationId) and c.type=3 ";
+            $sql_top = "select a.*,g.title as gtitle,s.name,d.username,c.id as cid ,c.type,c.bind_id,c.user_id,c.review_times,c.review_flag,c.message,c.add_time from yd_ver_screen_content_copy as a inner join yd_ver_screen_guide as g on a.screenGuideid=g.id inner join yd_ver_station as s on s.id=g.gid inner join yd_ver_review_record as c on a.id=c.bind_id inner join yd_ver_admin as d on c.user_id=d.id where  c.type=3 ";
             $sql_where = " where  1=1";
             if(!empty($_REQUEST['title'])){
                 $sql_where .= " and a.title='%{$_REQUEST['title']}%'";
@@ -498,17 +498,34 @@ class ReviewController extends VController
             //$sql_bottom = " inner join yd_ver_station s on s.id=g.gid GROUP BY p.flag";
             $sql_bottom = " group by a.id order by c.add_time desc";
             if(in_array($sign,$workNum) && $sign==1){
-                $workFlag = $sign*10;   //  || flag=1  一审数据
+		$workFlag = $sign*10;   //  || flag=1  一审数据
                 $sql_center = " and a.flag in (1,6) or (a.flag=$workFlag)";
-                $sql_review = " or (c.review_flag=$review_flag and c.user_id={$_SESSION['userid']})";
-                $sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
+                //$sql_center = " ";
+                if($review_flag == 1){
+                    $str = "(100)";
+                }else if($review_flag == 2){
+                    $str = "(7)";
+                }else{
+                    $str = "(1,6,$workFlag)";
+                }
+                $sql_review = " and c.review_flag=$review_flag and c.user_id={$_SESSION['userid']} and s.id in ($tmp_stationId) and a.flag in $str";
+                //$sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
+                $sql_work = $sql_top.$sql_review.$sql_bottom;
                 $sign++;
             }else if(in_array($sign,$workNum)){
-                $workFlag = $sign*10;   //   flag=20  二审数据
+		$workFlag = $sign*10;   //   flag=20  二审数据
                 //$sql_center = " and a.flag in (1,6) or a.flag=$workFlag";
                 $sql_center = " and  a.flag=$workFlag";
-                $sql_review = " or (c.review_flag=$review_flag and c.user_id={$_SESSION['userid']})";
-                $sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
+                if($review_flag == 1){
+                    $str = "(100)";
+                }else if($review_flag == 2){
+                    $str = "(7)";
+                }else{
+                    $str = "($workFlag)";
+                }
+                $sql_review = " and c.review_flag=$review_flag and c.user_id={$_SESSION['userid']} and s.id in ($tmp_stationId) and a.flag in $str";
+                //$sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
+                $sql_work = $sql_top.$sql_review.$sql_bottom;
                 if($sign==5){
                    $sign = $sign;
                 }else{
