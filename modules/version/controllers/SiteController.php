@@ -766,6 +766,8 @@ public function actionTopic2(){
         if(!$guide->save()){
             var_dump($guide->getErrors());
         }
+        $id=$guide->id;//返回插入id
+        echo json_encode(array("id"=>$id));
     }
     public function up($filename){
         if (!empty($filename)) {
