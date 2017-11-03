@@ -159,12 +159,16 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td><?php echo $v['cid']?></td>
                     <td>
 			<?php
-				echo $v['review_times'];
-				/*if($v['flag']==6){
-				echo "已通过";
-				}else{
-				echo "审核中";
-				}*/
+				if($v['review_flag'] == 3){
+					echo $v['review_times'].'审提审';
+				}elseif($v['review_flag'] == 1){
+					echo $v['review_times'].'审通过';
+				}elseif($v['review_flag'] == 2){
+					echo $v['review_times'].'审驳回';
+				}elseif($v['review_flag'] == 4){
+					echo $v['review_times'].'审发布';
+				}
+				//echo $v['review_times'];
 			?>
 		    </td>
                 </tr>
