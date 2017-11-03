@@ -217,7 +217,7 @@ class SiteController extends VController
                     case '2':$html = HTML::top();break;
                     case '3':$html = HTML::news();break;
                     case '4':
-                        $template_id = $_REQUEST['template_id'];
+                        $template_id = !empty($_REQUEST['template_id'])?$_REQUEST['template_id']:$bkimg->attributes['template_id'];
                         $html = HTML::getTemplate($template_id);
                         break;
                 }
@@ -316,7 +316,7 @@ class SiteController extends VController
                     case '2':$html = HTML::top();break;
                     case '3':$html = HTML::news();break;
                     case '4':
-                        $template_id = $_REQUEST['template_id'];
+                        $template_id = !empty($_REQUEST['template_id'])?$_REQUEST['template_id']:$bkimg->attributes['template_id'];
                         $html = HTML::getTemplate($template_id);
                         break;
                 }
@@ -415,7 +415,7 @@ public function actionTopic2(){
                     case '2':$html = HTML::top();break;
                     case '3':$html = HTML::news();break;
                     case '4':
-                        $template_id = $_REQUEST['template_id'];
+                        $template_id = !empty($_REQUEST['template_id'])?$_REQUEST['template_id']:$bkimg->attributes['template_id'];
                         $html = HTML::getTemplate($template_id);
                         break;
                 }
