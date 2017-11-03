@@ -1862,6 +1862,9 @@ function add(obj)
             case '11' :
                 $('.templatePic').children('img').attr('src','/file/template/t11.jpg');
                 break;
+        <?php
+            $data = VerTemplate::model()->findAll();
+            ?>
         <?php foreach($data as $v):?>
             case <?php echo "'".($v->attributes['id']+11)."'"?>:
                 $('.templatePic').children('img').attr('src','<?php echo $v->attributes["pic"]?>');
