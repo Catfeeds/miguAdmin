@@ -571,11 +571,14 @@ class StationController extends VController
     }
 
 
-    public function delSiteListData($id)
+    public function delSiteListData($sid)
     {
-        $result = VerSitelist::model()->deleteAllByAttributes(array('pid'=>$id));
-        $result = VerSitelist::model()->deleteByPk($id);
-
+//        $result = VerSitelist::model()->deleteAllByAttributes(array('pid'=>$sid));
+//        $result = VerSitelist::model()->deleteByPk($sid);
+        $sql = "delete from yd_ver_sitelist where pid=$sid";
+        $sql_1 = "delete from yd_ver_sitelist where id=$sid";
+        $res = SQLManager::execute($sql);
+        $res_1 = SQLManager::execute($sql_1);
     }
 
 
