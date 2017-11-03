@@ -141,9 +141,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 		    <td><?php echo $v['username'];?></td>
                     <td><?php
                             if($first_pic = $v['pic'] == '/file/3.png'){
-                                echo '删除提审';
+                                echo '删除';
                             }else{
-                                echo '编辑或添加';
+                                echo '编辑';
                             }
 
                         ?>
