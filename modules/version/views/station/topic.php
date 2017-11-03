@@ -522,7 +522,7 @@ if (!empty($html) && !isset($flag)) {
             <input type="hidden" name="url" value="" class="upImg">
             <div class="topicTop">
                 <span>专题模板：</span>
-                <select name="type" class="form-input w100" id="type">
+                <select name="type" class="form-input w100" id="type" onchange="selectType(this)">
                     <option value="0">请选择</option>
                     <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='1'){echo "selected=selected"; } ?>  value="1" >海报专题</option>
                     <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='2'){echo "selected=selected"; } ?>  value="2" >排行榜专题</option>
@@ -530,7 +530,32 @@ if (!empty($html) && !isset($flag)) {
                 </select>
                 <span><input class="btn module" type="submit" value="保存修改"></span>
             </div>
-
+                          <div class="my_template" style="display: none;">
+                              <span class="name">模板：</span>
+                              <select style="width:100px;margin:7px;"  name="template_id" onchange="showTemplate()"  id="template" class="form-input w200 field">
+                                  <option value="0">--------------请选择-------------</option>
+                                  <option onclick="showTemplate(this)" value="1" selected="selected">1</option>
+                                  <option value="2" onclick='showTemplate(this)'>2</option>
+                                  <option value="3" onclick="showTemplate(this)">3</option>
+                                  <option value="4" onclick="showTemplate(this)">4</option>
+                                  <option value="5" onclick="showTemplate(this)">5</option>
+                                  <option value="6" onclick="showTemplate(this)">6</option>
+                                  <option value="7" onclick="showTemplate(this)">7</option>
+                                  <option value="8" onclick="showTemplate(this)">8</option>
+                                  <option value="9" onclick="showTemplate(this)">9</option>
+                                  <option value="10" onclick="showTemplate(this)">10</option>
+                                  <option value="11" onclick="showTemplate(this)">11</option>
+                                  <?php
+                                  $data = VerTemplate::model()->findAll();
+                                  ?>
+                                  <?php foreach($data as $v):?>
+                                      <option value="<?php echo $v->attributes['id']+11?>" onclick="showTemplate(this)"><?php echo $v->attributes['name']?></option>
+                                  <?php endforeach;?>
+                              </select>
+                              <div class="templatePic">
+                                  <img src="/file/template/t01.png" alt="" width='600px' height='300px'>
+                              </div>
+                          </div>
            </td></tr>  <tr style = "height:152px;background:#F0FDFF ">
                     <td style="width:250px;">专题背景图</td>
                     <td style="text-align: left;padding-left: 15px;">
@@ -1787,6 +1812,65 @@ function add(obj)
         return d;
     }
 
+    function selectType(obj)
+    {
+        var option_id = $('#type option:selected').val();
+        if(option_id == 4){
+            $('.my_template').show();
+        }else{
+            $('.my_template').hide();
+        }
+    }
+
+    function showTemplate(obj)
+    {
+
+        var templateId = $('#template  option:selected').val();
+
+        switch (templateId)
+        {
+            case '1' :
+                $('.templatePic').children('img').attr('src','/file/template/t01.png');
+                break;
+            case '2' :
+                $('.templatePic').children('img').attr('src','/file/template/t02.png');
+                break;
+            case '3' :
+                $('.templatePic').children('img').attr('src','/file/template/t03.png');
+                break;
+            case '4' :
+                $('.templatePic').children('img').attr('src','/file/template/t04.png');
+                break;
+            case '5' :
+                $('.templatePic').children('img').attr('src','/file/template/t05.png');
+                break;
+            case '6' :
+                $('.templatePic').children('img').attr('src','/file/template/t06.png');
+                break;
+            case '7' :
+                $('.templatePic').children('img').attr('src','/file/template/t07.png');
+                break;
+            case '8' :
+                $('.templatePic').children('img').attr('src','/file/template/t08.png');
+                break;
+            case '9' :
+                $('.templatePic').children('img').attr('src','/file/template/t09.png');
+                break;
+            case '10' :
+                $('.templatePic').children('img').attr('src','/file/template/t10.jpg');
+                break;
+            case '11' :
+                $('.templatePic').children('img').attr('src','/file/template/t11.jpg');
+                break;
+        <?php foreach($data as $v):?>
+            case <?php echo "'".($v->attributes['id']+11)."'"?>:
+                $('.templatePic').children('img').attr('src','<?php echo $v->attributes["pic"]?>');
+                break;
+        <?php endforeach;?>
+
+        }
+
+    }
     </script>
 
 
