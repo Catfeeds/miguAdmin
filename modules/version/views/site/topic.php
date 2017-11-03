@@ -595,7 +595,7 @@ if($_SESSION['auth']=='1'){
                     <option value="0">请选择</option>
                     <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='1'){echo "selected=selected"; } ?>  value="1" >海报专题</option>
                     <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='2'){echo "selected=selected"; } ?>  value="2" >排行榜专题</option>
- <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='4'){echo "selected=selected"; } ?>  value="4" >河南专题</option>
+ <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='4'){echo "selected=selected"; } ?>  value="4" >自定义模板专题</option>
                 </select>
                 <span><input class="btn module" type="submit" value="保存修改"></span>
             </div>

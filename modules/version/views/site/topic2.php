@@ -560,7 +560,7 @@ $res['status'][] =2;
                <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';
                if($type=='1'){echo "海报专题"; }
 			   else  if($type=='2'){echo "排行榜专题"; }
-			   else  if($type=='4'){echo "河南专题"; }
+			   else  if($type=='4'){echo "自定义模板专题"; }
                   ?>
                 <span></span>
             </div>
