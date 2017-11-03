@@ -551,13 +551,18 @@ class StationController extends VController
                     'condition'=>'name=:name and type=0',
                     'params'=>array(':name'=>$name),
                 ));
-            $sid = $tmp->attributes['id'];
+		foreach($tmp as $k=>$v){
+			$sid = $v->attributes['id'];
+		}
+        $res = VerStation::model()->deleteByPk($id);
+            //$sid = $tmp->attributes['id'];
 //            $pid = $sid;
             $this->delSiteListData($sid);
             //Yii::app()->db->createCommand()->delete('{{ver_sitelist}}', "pid=$sid");
 
-        }
-        $res = VerStation::model()->deleteByPk($id);
+        }else{
+		$res = 0;
+	}
         if($res){
             echo json_encode(array('code'=>200));
         }else{
