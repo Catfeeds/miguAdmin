@@ -545,7 +545,7 @@ class StationController extends VController
         $list = VerStation::model()->findByPk($id);
         if(!empty($list)){
             $name = $list->attributes['name'];
-            $tmp = VerSitelist::model()->find(
+            $tmp = VerSitelist::model()->findAll(
                 array(
                     'select'=>'id,name,pid',
                     'condition'=>'name=:name and type=0',
