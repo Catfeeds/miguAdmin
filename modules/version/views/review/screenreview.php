@@ -128,11 +128,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         $copyGuides[] = $val->attributes['pasteGuideId'];
                     }
                 }
-                if($v['pic'] == '/file/3.png'){
-                    $first_pic = $v['pic'];
-                    $tmp_pic = VerScreenContent::model()->find("id={$v['sid']}");
-                    $v['pic'] = $tmp_pic->attributes['pic'];
-                }
+
 //                var_dump($v);die;
                 ?>
                 <tr class="tr_list">
@@ -140,12 +136,16 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td><?php echo date("Y-m-d h:i:s",$v['add_time'])?></td>
 		    <td><?php echo $v['username'];?></td>
                     <td><?php
-                            if(isset($first_pic) && $first_pic == '/file/3.png'){
+                            if($v['pic'] == '/file/3.png'){
                                 echo '删除';
                             }else{
                                 echo '编辑';
                             }
-
+                            if($v['pic'] == '/file/3.png'){
+        //                    $first_pic = $v['pic'];
+                                $tmp_pic = VerScreenContent::model()->find("id={$v['sid']}");
+                                $v['pic'] = $tmp_pic->attributes['pic'];
+                            }
                         ?>
                     </td>
                     <td><?php echo $v['name']?></td>
