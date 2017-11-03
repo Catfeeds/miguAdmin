@@ -133,7 +133,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 ?>
                 <tr class="tr_list">
                     <td><input type="checkbox" name="id" value="<?php echo $v['id']?>"  <?php if(in_array($v['screenGuideid'],$copyGuides)){echo "disabled=disabled";}?> screenGuidid="<?=$v['screenGuideid']?>" onclick="checkQuote(this)" ></td>
-                    <td><?php echo date("Y-m-d h:i:s",$v['add_time'])?></td>
+                    <td><?php echo date("Y-m-d h:i",$v['add_time'])?></td>
 		    <td><?php echo $v['username'];?></td>
                     <td><?php
                             if($v['pic'] == '/file/3.png'){
