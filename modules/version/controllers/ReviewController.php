@@ -456,6 +456,8 @@ class ReviewController extends VController
 
     public function actionScreenReview()
     {
+        $page = 10;
+        $data = $this->getPageInfo($page);
         $workInfo = Common::getWorkInfo();
         $workNum = array();
         if(!empty($_REQUEST['allbtn'])) {
@@ -510,7 +512,9 @@ class ReviewController extends VController
                 }
                 $sql_review = " and c.review_flag=$review_flag  and s.id in ($tmp_stationId) and a.flag in $str";
                 //$sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
-                $sql_work = $sql_top.$sql_review.$sql_bottom;
+                $sql_limit = ' limit '.$data['start'].','.$data['limit'];
+                $sql_work = $sql_top.$sql_review.$sql_bottom.$sql_limit;
+                $sql_work_1 = $sql_top.$sql_review.$sql_bottom;
                 $sign++;
             }else if(in_array($sign,$workNum)){
 		$workFlag = $sign*10;   //   flag=20  二审数据
@@ -525,7 +529,9 @@ class ReviewController extends VController
                 }
                 $sql_review = " and c.review_flag=$review_flag  and s.id in ($tmp_stationId) and a.flag in $str";
                 //$sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
-                $sql_work = $sql_top.$sql_review.$sql_bottom;
+                $sql_limit = ' limit '.$data['start'].','.$data['limit'];
+                $sql_work = $sql_top.$sql_review.$sql_bottom.$sql_limit;
+                $sql_work_1 = $sql_top.$sql_review.$sql_bottom;
                 if($sign==5){
                    $sign = $sign;
                 }else{
@@ -537,6 +543,9 @@ class ReviewController extends VController
             }
 //	var_dump($sql_work);die;
             $list = SQLManager::queryAll($sql_work);
+            $list_1 = SQLManager::queryAll($sql_work_1);
+            $url = $this->createUrl($this->action->id);
+            $pagination = $this->renderPagination($url,count($list),$page,$data['currentPage'],count($list_1));
             $this->render('screenreview',array('list'=>$list,'readFlag'=>'1'));
         }else{
             if(!empty($_REQUEST['allbtn'])){
@@ -567,11 +576,16 @@ class ReviewController extends VController
             }
 
             $sql_order = " group by b.id order by a.add_time desc ";
-            $sql = $sql . $sql_where . $sql_order;
+            $sql_limit = ' limit '.$data['start'].','.$data['limit'];
+            $sql = $sql . $sql_where . $sql_order . $sql_limit;
+            $sql_1 = $sql . $sql_where . $sql_order;
             $list = SQLManager::queryAll($sql);
+            $list_1 = SQLManager::queryAll($sql);
 //            print_r($sql);
 //            var_dump($list);die;
-            $this->render('screenreview',array('list'=>$list,'readFlag'=>'2'));
+            $url = $this->createUrl($this->action->id);
+            $pagination = $this->renderPagination($url,count($list),$page,$data['currentPage'],count($list_1));
+            $this->render('screenreview',array('list'=>$list,'readFlag'=>'2','page'=>$pagination));
         }
 //        echo $sql_work;die;
     //    $list = SQLManager::queryAll($sql_work);
