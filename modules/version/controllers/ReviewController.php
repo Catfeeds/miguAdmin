@@ -508,7 +508,7 @@ class ReviewController extends VController
                 }else{
                     $str = "(1,6,$workFlag)";
                 }
-                $sql_review = " and c.review_flag=$review_flag and c.user_id={$_SESSION['userid']} and s.id in ($tmp_stationId) and a.flag in $str";
+                $sql_review = " and c.review_flag=$review_flag  and s.id in ($tmp_stationId) and a.flag in $str";
                 //$sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
                 $sql_work = $sql_top.$sql_review.$sql_bottom;
                 $sign++;
@@ -523,7 +523,7 @@ class ReviewController extends VController
                 }else{
                     $str = "($workFlag)";
                 }
-                $sql_review = " and c.review_flag=$review_flag and c.user_id={$_SESSION['userid']} and s.id in ($tmp_stationId) and a.flag in $str";
+                $sql_review = " and c.review_flag=$review_flag  and s.id in ($tmp_stationId) and a.flag in $str";
                 //$sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
                 $sql_work = $sql_top.$sql_review.$sql_bottom;
                 if($sign==5){
