@@ -142,9 +142,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                 <?php
 
                                 if($l['delFlag'] == '1'){
-                                    echo '删除数据';
+                                    echo '删除';
                                 }else{
-                                    echo '编辑或添加';
+                                    echo '编辑';
                                 }
                                 ?>
 
