@@ -456,7 +456,7 @@ class ReviewController extends VController
 
     public function actionScreenReview()
     {
-        $page = 10;
+        $page = 20;
         $data = $this->getPageInfo($page);
         $workInfo = Common::getWorkInfo();
         $workNum = array();
@@ -545,7 +545,7 @@ class ReviewController extends VController
             $list = SQLManager::queryAll($sql_work);
             $list_1 = SQLManager::queryAll($sql_work_1);
             $url = $this->createUrl($this->action->id);
-            $pagination = $this->renderPagination($url,count($list),$page,$data['currentPage'],count($list_1));
+            $pagination = $this->renderPagination($url,count($list_1),$page,$data['currentPage'],count($list_1));
             $this->render('screenreview',array('list'=>$list,'readFlag'=>'1'));
         }else{
             if(!empty($_REQUEST['allbtn'])){
@@ -577,14 +577,13 @@ class ReviewController extends VController
 
             $sql_order = " group by b.id order by a.add_time desc ";
             $sql_limit = ' limit '.$data['start'].','.$data['limit'];
+	    $sql_1 = $sql . $sql_where . $sql_order;	
             $sql = $sql . $sql_where . $sql_order . $sql_limit;
-            $sql_1 = $sql . $sql_where . $sql_order;
             $list = SQLManager::queryAll($sql);
-            $list_1 = SQLManager::queryAll($sql);
-//            print_r($sql);
-//            var_dump($list);die;
+            $list_1 = SQLManager::queryAll($sql_1);
             $url = $this->createUrl($this->action->id);
-            $pagination = $this->renderPagination($url,count($list),$page,$data['currentPage'],count($list_1));
+            //$pagination = $this->renderPagination($url,count($list),$page,$data['currentPage'],count($list_1));
+            $pagination = $this->renderPagination($url,count($list_1),$page,$data['currentPage'],count($list_1));
             $this->render('screenreview',array('list'=>$list,'readFlag'=>'2','page'=>$pagination));
         }
 //        echo $sql_work;die;
