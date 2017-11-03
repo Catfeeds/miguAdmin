@@ -129,6 +129,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     }
                 }
                 if($v['pic'] == '/file/3.png'){
+                    $first_pic = $v['pic'];
                     $tmp_pic = VerScreenContent::model()->find("id={$v['sid']}");
                     $v['pic'] = $tmp_pic->attributes['pic'];
                 }
@@ -139,7 +140,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td><?php echo date("Y-m-d h:i:s",$v['add_time'])?></td>
 		    <td><?php echo $v['username'];?></td>
                     <td><?php
-                            if($v['pic'] == '/file/3.png'){
+                            if($first_pic = $v['pic'] == '/file/3.png'){
                                 echo '删除提审';
                             }else{
                                 echo '编辑或添加';
