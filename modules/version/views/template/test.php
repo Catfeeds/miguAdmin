@@ -19,6 +19,7 @@
     td{text-align:center;background-color: #9a9797;color: white;}
 .cannotselect{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-khtml-user-select:none;user-select:none;}
 td.selected{background-color:#0094ff;color:#fff}
+table{table-layout:fixed;word-break:break-all;}
 </style>
 
 <?php
@@ -28,8 +29,12 @@ td.selected{background-color:#0094ff;color:#fff}
     $cellspacing = !empty($_GET['cellspacing'])?$_GET['cellspacing']:20;//apk端 间距20
     $max_line = !empty($_GET['max_line'])?$_GET['max_line']:10;//最大列数目
     $max_column = !empty($_GET['max_column'])?$_GET['max_column']:6;//最大行数目
+    $h_coord = !empty($_GET['h_coord'])?$_GET['h_coord']:0;//起始横坐标
+    $v_coord = !empty($_GET['v_coord'])?$_GET['v_coord']:0;//起始纵坐标
 ?>
 <form  method="get">
+起始坐标<input type="text" id="" class="form-input w100" name="h_coord" value="<?php echo $h_coord;?>" placeholder="横坐标">
+--<input type="text" id="" class="form-input w100" name="v_coord" value="<?php echo $v_coord;?>" placeholder="纵坐标">&nbsp;&nbsp;
 单元格宽度<input id="width" class="form-input topinput" type="text" name="width" value="<?php echo $width; ?>" />px&nbsp;&nbsp;
 单元格高度<input id="height" class="form-input topinput" type="text" name="height" value="<?php echo $height; ?>" />px&nbsp;&nbsp;
 单元格间距<input class="form-input topinput" type="text" name="cellspacing" value="<?php echo $cellspacing; ?>" />px&nbsp;&nbsp;
@@ -38,7 +43,7 @@ td.selected{background-color:#0094ff;color:#fff}
 <input type="hidden" value="-1" name="mid">
 <input type="submit" class="btn" value="生成模板" />
 </form>
-<div style="background:url(/file/1508223135911204.jpg) no-repeat;width:1920px;padding-left:45px;min-height:394px">
+<div style="background:url(/file/1508223135911204.jpg) no-repeat;width:1920px;padding-left:<?php echo $h_coord;?>px;padding-top:<?php echo $v_coord;?>px;min-height:394px">
 <table id="template_table" cellspacing="<?php echo $cellspacing/2;?>" style="width:<?php echo ($max_line*$width)/2+(($max_line-1)*$cellspacing)/2;?>px;">
 
     <?php
@@ -63,6 +68,8 @@ td.selected{background-color:#0094ff;color:#fff}
 上传缩略图：<input id="pic" type="file" class="form-input w400" value="" name="url"> <br/>
 <input type="hidden" name="html" id="html" />
 
+<input type="hidden" name="h_coord"  value="<?php echo $h_coord; ?>"/>
+<input type="hidden" name="v_coord"  value="<?php echo $v_coord; ?>"/>
 <input type="hidden" name="cellspacing"  value="<?php echo $cellspacing; ?>"/>
 <input type="hidden" name="width" value="<?php echo $width; ?>"/>
 <input type="hidden" name="cols"  value="<?php echo $max_line; ?>"/>
@@ -139,8 +146,6 @@ td.selected{background-color:#0094ff;color:#fff}
             }
             function onMouseup(e) {//鼠标弹起事件
                 tb.unbind({ mouseup: onMouseup, mousemove: onMousemove });
-          
-             
          
                 //if (startTD && endTD && startTD != endTD && confirm('确认合并？！')) {//开始结束td不相同确认合并
 		if (startTD && endTD && confirm('确认合并？！')) {

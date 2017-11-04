@@ -2260,9 +2260,8 @@ class HTML
 //            $id = $templateId;
             $id = intval($templateId) - 11;
 
-            $sql = "select t1.colw,t1.roww,t1.cellspacing,t1.cols as allw,t1.rows as allh,t2.*  from yd_ver_template t1 left join yd_ver_template_detail t2 on t1.id = t2.tem_id where t1.id = $id";
+            $sql = "select t1.colw,t1.roww,t1.cellspacing,t1.cols as allw,t1.rows as allh,t1.h_coord,t1.v_coord,t2.*  from yd_ver_template t1 left join yd_ver_template_detail t2 on t1.id = t2.tem_id where t1.id = $id";
             $res = SQLManager::queryAll($sql);
-
             $width = ($res[0]['allw']*$res[0]['colw'] + ($res[0]['allw']-1)*$res[0]['cellspacing'])/2 + 50;
             $height = ($res[0]['allh']*$res[0]['roww'] + ($res[0]['allh']-1)*$res[0]['cellspacing'])/2 + 50;
 
@@ -2276,11 +2275,11 @@ class HTML
                     //var_dump($match);die;
                     $x = $value['x']/2;
                     $y = $value['y']/2;
-                    /*$html .= '<div class="order-'.$order.'" style="border:1px solid #ccc;  border-radius: 8px;position:absolute;top:'.$y.'px;left:'.$x.'px;margin-left:5px;margin-top:5px;background:#ccc;width:'.$width1.'px;height:'.$height1.'px;" size-w="'.$value['colw'].'" size-h="'.$value['roww'].'" x="'.$value['x'].'" y="'.$value['y'].'" order="'.$order.'">
+                    /*$html .= '<div class="order-'.$order.'" style="border:1px solid #ccc;  border-radius: 8px;position:absolute;top:'.$y.'px;left:'.$x.'px;margin-left:5px;margin-top:5px;background:#ccc;width:'.$width1.'px;height:'.$height1.'px;" size-w="'.$value['colw'].'" size-h="'.$value['roww'].'" x="'.($value['x']+$value['h_coord']).'" y="'.($value['y']+$value['v_coord']).'" order="'.$order.'">
                                 <img class="clickImg-'.$value['colw'].'-'.$value['roww'].'" style="width:'.$width1.'px;height:'.$height1.'px;" src="/file/3.png" style="position:relative;z-index:9999" alt="" onclick="add(this)"/>
                                 <img style="position:absolute;top:50%;left:50%;margin-left:-15px;margin-top:-15px;width:30px;height:30px;border-radius:10px;" class="plus_button" src="/file/u1892.png">
                             </div>';*/
-                     $html .= '<div class="order-'.$order.'" style="border:1px solid #ccc;  border-radius: 8px;position:absolute;top:'.$y.'px;left:'.$x.'px;margin-left:5px;margin-top:5px;background:#ccc;width:'.$width1.'px;height:'.$height1.'px;" size-w="'.$value['width'].'" size-h="'.$value['height'].'" x="'.$value['x'].'" y="'.$value['y'].'" order="'.$order.'">
+                     $html .= '<div class="order-'.$order.'" style="border:1px solid #ccc;  border-radius: 8px;position:absolute;top:'.$y.'px;left:'.$x.'px;margin-left:5px;margin-top:5px;background:#ccc;width:'.$width1.'px;height:'.$height1.'px;" size-w="'.$value['width'].'" size-h="'.$value['height'].'" x="'.($value['x']+$value['h_coord']).'" y="'.($value['y']+$value['v_coord']).'" order="'.$order.'">
                                 <img class="clickImg-'.$value['width'].'-'.$value['height'].'" style="width:'.$width1.'px;height:'.$height1.'px;" src="/file/3.png" style="position:relative;z-index:9999" alt="" onclick="add(this)"/>
                                 <img style="position:absolute;top:50%;left:50%;margin-left:-15px;margin-top:-15px;width:30px;height:30px;border-radius:10px;" class="plus_button" 
             src="/file/u1892.png">

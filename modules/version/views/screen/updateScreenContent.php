@@ -141,9 +141,11 @@
     .m-550-280{width:550px;  height:280px;  border:1px solid #ccc;  border-radius: 8px;  float:left; }
     .m-270-180{width:270px;  height:180px;  border:1px solid #ccc;  border-radius: 8px;  float:left; }
     .m-825-420{width:550px;  height:280px;  border:1px solid #ccc;  border-radius: 8px;  float:left; }
-     .m-405-420{  width:270px;  height:280px;  border:1px solid #ccc;  border-radius: 8px;  float:left;}
-     .m-405-285{  width:270px;  height:190px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
-    .m-195-135{width:270px;  height:190px;  border:1px solid #ccc;  border-radius: 8px;  float:left;}
+     .m-405-420{  width:403px;  height:418px;  border:1px solid #ccc;  border-radius: 8px;  float:left;}
+     .m-405-285{  width:403px;  height:283px;  border:1px solid #ccc;  border-radius: 8px;  float:left;  }
+    .m-195-135{width:193px;  height:133px;  border:1px solid #ccc;  border-radius: 8px;  float:left;}
+    .m-410-445{width:407px;  height:443px;  border:1px solid #ccc;  border-radius: 8px;  float:left;}
+    .m-825-420{width:823px;  height:418px;  border:1px solid #ccc;  border-radius: 8px;  float:left;}
     #pageType{display:none;}
     .page2{display:none;}
     .typeUrl{display:none;}

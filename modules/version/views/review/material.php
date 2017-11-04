@@ -78,7 +78,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
 	    <input style="width:50px;height:20px;margin-left: 5px;font-size: 14px;" class="btn btn1 btn-gray audit_search search " type="button" value="查询" name="">
 
-        <?php //echo $page;?>
+        <?php echo $page;?>
 
     </div>
 
@@ -114,7 +114,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             <td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>" rid="<?php echo $v['reason'];?>"></td>
                             <td><?php echo date("Y-m-d H:i:s",$v['time']);?></td>
                             <td><?php echo $v['uname']?></td>
-			    <td><?php if($v['reason']==1){echo '请求通过';}elseif($v['reason']==2){echo '请求删除';}?></td>
+			    <td><?php if($v['reason']==1){echo '编辑';}elseif($v['reason']==2){echo '删除';}?></td>
                             <td><?php echo $v['name'];?></td>
                             <td><?php echo $v['title'];?></td>
                             <td><?php echo $v['url'];?></td>
@@ -135,7 +135,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				    <td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>" rid="<?php echo $v['reason'];?>"></td>
                             <td><?php echo date("Y-m-d H:i:s",$v['time']);?></td>
                             <td><?php echo $v['uname']?></td>
-                            <td><?php if($v['reason']==1){echo '请求通过';}elseif($v['reason']==2){echo '请求删除';}?></td>
+                            <td><?php if($v['reason']==1){echo '编辑';}elseif($v['reason']==2){echo '删除';}?></td>
                             <td><?php echo $v['name'];?></td>
                             <td><?php echo $v['title'];?></td>
                             <td><?php echo $v['url'];?></td>
@@ -156,7 +156,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				<td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>" rid="<?php echo $v['reason'];?>"></td>
                             <td><?php echo date("Y-m-d H:i:s",$v['time']);?></td>
                             <td><?php echo $v['uname']?></td>
-                            <td><?php if($v['reason']==1){echo '请求通过';}elseif($v['reason']==2){echo '请求删除';}?></td>
+                            <td><?php if($v['reason']==1){echo '编辑';}elseif($v['reason']==2){echo '删除';}?></td>
                             <td><?php echo $v['name'];?></td>
                             <td><?php echo $v['title'];?></td>
                             <td><?php echo $v['url'];?></td>
@@ -177,7 +177,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             <td><input type="checkbox" name="id" value="<?php echo $v['id']?>" workid="<?php echo $v['workid'];?>" gid="<?php echo $v['gid'];?>" rid="<?php echo $v['reason'];?>"></td>
                             <td><?php echo date("Y-m-d H:i:s",$v['time']);?></td>
                             <td><?php echo $v['uname']?></td>
-                            <td><?php if($v['reason']==1){echo '请求通过';}elseif($v['reason']==2){echo '请求删除';}?></td>
+                            <td><?php if($v['reason']==1){echo '编辑';}elseif($v['reason']==2){echo '删除';}?></td>
                             <td><?php echo $v['name'];?></td>
                             <td><?php echo $v['title'];?></td>
                             <td><?php echo $v['url'];?></td>
@@ -298,4 +298,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         var headerUrl = "/version/review/material/gid/"+gid+"/mid/<?php echo $this->mid;?>/type/"+type+"/nid/"+nid+fixedUrl;
         window.location.href=headerUrl;
     })
+    $('.page_btn').click(function(){
+        var num = $('input[name=pagenum]').val();
+        var test = window.location.href;
+        window.location.href=test+"&page="+num;
+    });
 </script>

@@ -147,7 +147,13 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td><?php echo $v['id'];?></td>
                     <td><?php echo $v['name'];?></td>
                     <td><?php echo $v['title'];?></td>
-                    <td><?php echo $v['url'];?></td>
+                    <td><?php
+				if($v['flag']<6){
+					echo "生成中...";
+				}else{
+					echo $v['url'];
+				}
+			?></td>
 		    <td>
 			<?php 
 				if($v['flag']==0){

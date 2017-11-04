@@ -628,20 +628,20 @@ $sql_where .=" or (a.flag = 0";
 
 	 public static function getTopicReview($data,$list){
         $res = array();
-        $sql_count = 'select t1.id';
+        $sql_count = 'select count(t1.id)';
         $sql_select = 'select t1.*,t2.name,t3.name as topname';
-        $sql_from = " from yd_ver_topic_review t1 left join yd_ver_sitelist t2 on t1.gid = t2.id left join yd_ver_sitelist t3 on t2.pid = t3.id ";//修改的地方inner join
+        $sql_from = " from yd_ver_topic_review t1  left join yd_ver_sitelist t2 on t1.gid = t2.id left join yd_ver_sitelist t3 on t2.pid = t3.id";//修改的地方inner join
 
         $sql_limit = ' limit '.$data['start'].','.$data['limit'];
 
                 if(empty($list['type']) || $list['type'] == 1){
-                $sql_where =" where t1.flag in (1,2,3,4,5)";
-                //$sql_where =" where t4.review_flag=2 and t4.type in (4,5,6)";
+                $sql_where =" where  t1.flag in (1,2,3,4,5)";
             }else if($list['type'] == 2){
                 $sql_where =" where t1.flag = 6";
-                //$sql_where =" where t4.review_flag = 1 and t4.type in (4,5,6)";
+                //$sql_where =" where t4.review_flag = 1 and t4.user_id={$_SESSION['userid']}";
             }else{
                 $sql_where =" where t1.flag = 2";
+                //$sql_where =" where t4.review_flag = 2 and t4.user_id={$_SESSION['userid']}";
                 }
 	if(!empty($list['sitelist']) && !empty($list['typelist'])){
 		$sql_where .= " and ( 1 = 2";
@@ -669,11 +669,10 @@ $sql_where .=" or (a.flag = 0";
             $sql_where .=" and t1.gid in (".$list['stationId'].")";
         }
 	
-	$sql_order = " ORDER BY t1.uptime desc";
-        $count = $sql_count . $sql_from  . $sql_where;
+	$sql_order = "  ORDER BY t1.uptime desc";
+        $count = $sql_count . $sql_from  . $sql_where.$sql_order;
         $list = $sql_select . $sql_from  . $sql_where . $sql_order . $sql_limit;
-
-	$sql = $sql_count . $sql_from ;
+	$sql = $sql_count . $sql_from.$sql_where ;
         $res['count'] = Yii::app()->db->createCommand($count)->queryScalar();
         $res['alwaysCount'] = Yii::app()->db->createCommand($sql)->queryScalar();
         $res['list'] = SQLManager::queryAll($list);
