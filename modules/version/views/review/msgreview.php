@@ -216,7 +216,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     }
                 }else{?>
                     <tr>
-                        <td colspan="8" align="center">暂无数据</td>
+                        <td colspan="12" align="center">暂无数据</td>
                     </tr>
                     <?php
                 }

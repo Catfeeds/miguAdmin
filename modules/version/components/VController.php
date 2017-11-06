@@ -90,7 +90,6 @@ class VController extends Controller{
         $sql = "select w.stationId from yd_ver_work w inner join yd_ver_worker k on k.workid=w.id and k.uid=$uid and w.flag=2";
 		}
 	    $user = SQLManager::queryAll($sql);
-
         if(!empty($user)){
             if($flag == 6){
                 $tmp_list = array();
@@ -98,14 +97,13 @@ class VController extends Controller{
                     if($v['stationId'] == 7){
                         $tmp_list[] = $this->getAuthSiteList('专题');
                     }else{
-                        $tmp = VerStation::model()->findByPk($v['stationId']);
+                        //$tmp = VerStation::model()->findByPk($v['stationId']);
+                        $tmp = VerSitelist::model()->findByPk($v['stationId']);
                         if(!empty($tmp)){
                             $name = $tmp->attributes['name'];
                             $tmp_list[] = $this->getAuthSiteList($name);
                         }
                     }
-
-
 
                 }
                 $a = array();
@@ -186,7 +184,7 @@ class VController extends Controller{
                 }else if($v['flag']=='2'){
                     $list .=",31,32";
                 }else if($v['flag']=='6' && $v['stationId']<>'7'){
-                    $list .=",31,39";
+                    $list .=",10,39";
                 }else if($v['flag']=='6' && $v['stationId']=='7'){
                     $list .=",37,33";
                 }else if($v['flag']=='3'){

@@ -136,7 +136,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
                         </td>
                         <td><?php echo date("Y-m-d H:i:s",$vv['uptime']); ?></td>
-               <td><?php if($vv['type'] == 'bkimg'){ echo '背景图修改';}else if($vv['type'] == 'verui'){ echo '普通站点修改';}else if($vv['type'] == 'specialtopic'){ echo '河南站点修改';} ?></td>
+              <!-- <td><?php if($vv['type'] == 'bkimg'){ echo '背景图修改';}else if($vv['type'] == 'verui'){ echo '普通站点修改';}else if($vv['type'] == 'specialtopic'){ echo '河南站点修改';} ?></td>-->
+               <td><?php if($vv['type'] == 'bkimg'){ echo '编辑';}else if($vv['type'] == 'verui'){ echo '编辑';}else if($vv['type'] == 'specialtopic'){ echo '编辑';} ?></td>
                <td><?php echo $vv['stationid']; ?></td>
 		<td><?php echo $vv['topname'].">".$vv['name']; ?></td>
                <td><?php echo $vv['title']; ?></td>
@@ -258,7 +259,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 				}?>
               	 </div> </td>
               	 
-		<td></td>
+		<td><?php echo $vv['flag'];?></td>
               	 
                </tr>
                 <?php } }else{?>

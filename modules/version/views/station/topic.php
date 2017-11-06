@@ -392,7 +392,6 @@ if (!empty($html) && !isset($flag)) {
                                 <ul>
                                     <?php
                                     $data = VerSiteListManager::getList($value['id']);
-									
                                     if(!empty($data)){
                                         foreach($data as $k=>$v){
                                             if($v['name']=='专题'){

@@ -615,7 +615,6 @@ class StationController extends VController
                         break;
                 }
             }
-
             if(!empty($_POST)){
                 if(empty($_POST['type']))throw new ExceptionEx('请选择链接类型');
                 $bkimg->type=$_POST['type'];

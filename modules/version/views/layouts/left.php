@@ -115,7 +115,7 @@ $admin = $this->getMvAdmin();
                                         }else{?>
                                         <li>
                                             <?php
-
+						$b=-1;
                                             switch($v['id'])
                                             {
                                                 case 3:

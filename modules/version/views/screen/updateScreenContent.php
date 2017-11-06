@@ -294,7 +294,7 @@
             <div  id="main">
                 <?php
                 if($screenContent[0]['height'] == 1){
-                    echo "<div class='m-".$screenContent[0]['width']."' style='width:".$screenContent[0]['width']."px;height:".$screenContent[0]['height']."px;'>
+                    echo "<div class='m-".$screenContent[0]['width']."' style='width:".($screenContent[0]['width']*125)."px;height:".($screenContent[0]['height']*52.5)."px;'>
                                 <input type='file' id='upload_file_new'>";
                        if($screenContent[0]['height'] == 1){
                     echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']." oldPic' width=".($screenContent[0]['width']/2)."px; height=".($screenContent[0]['height']/2)."px;>";

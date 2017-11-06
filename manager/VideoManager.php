@@ -630,7 +630,7 @@ $sql_where .=" or (a.flag = 0";
         $res = array();
         $sql_count = 'select count(t1.id)';
         $sql_select = 'select t1.*,t2.name,t3.name as topname';
-        $sql_from = " from yd_ver_topic_review t1  left join yd_ver_sitelist t2 on t1.gid = t2.id left join yd_ver_sitelist t3 on t2.pid = t3.id";//修改的地方inner join
+        $sql_from = " from yd_ver_topic_review t1  left join yd_ver_sitelist t2 on t1.gid = t2.id left join yd_ver_sitelist t3 on t2.pid = t3.id";
 
         $sql_limit = ' limit '.$data['start'].','.$data['limit'];
 

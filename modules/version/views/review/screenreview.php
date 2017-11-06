@@ -388,5 +388,14 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     }
 
     <?php if($_SESSION['auth']=='1'){echo "$('.mt10').show();";}?>
+    $('.page_btn').click(function(){
+        var num = $('input[name=pagenum]').val();
+        var test = window.location.href;
+	if(test.indexOf("&")>0){
+        window.location.href=test+"&page="+num;
+	}else{
+	window.location.href=test+"/page/"+num;
+	}
+    });
 </script>
 
