@@ -32,6 +32,10 @@ table{table-layout:fixed;word-break:break-all;}
     $h_coord = !empty($_GET['h_coord'])?$_GET['h_coord']:0;//起始横坐标
     $v_coord = !empty($_GET['v_coord'])?$_GET['v_coord']:0;//起始纵坐标
 ?>
+<div>
+    有导航建议起始点x为110，y为70，无导航建议起始点x为0，y为0
+</div>
+<br>
 <form  method="get">
 起始坐标<input type="text" id="" class="form-input w100" name="h_coord" value="<?php echo $h_coord;?>" placeholder="横坐标">
 --<input type="text" id="" class="form-input w100" name="v_coord" value="<?php echo $v_coord;?>" placeholder="纵坐标">&nbsp;&nbsp;
