@@ -112,8 +112,8 @@
             <td align="right">模板选择：</td>
             <td>
                 <select class="form-input w100" name="tmp" id="tmp">
-                    <option value="1" <?php if($template==1) echo "selected=selected";?>>默认模板</option>
-                    <option value="2" <?php if($template==2) echo "selected=selected";?>>河南模板</option>
+                    <option value="1" <?php if($template==1) echo "selected=selected";?>>有导航</option>
+                    <option value="2" <?php if($template==2) echo "selected=selected";?>>无导航</option>
                 </select>
             </td>
         </tr>
@@ -135,15 +135,15 @@
                 </select>
             </td>
         </tr>
-	<tr class="">
+	<!--<tr class="">
         <td   align="right">图片是否圆角：</td>
             <td>
             	<select  class="form-input w100" name="circular" id="circular">
-                    <option value="1" <?php if($circular==1) echo "selected=selected";?>>是</option>
-                    <option value="2" <?php if($circular==2) echo "selected=selected";?>>否</option>
+                    <option value="1" <?php /*if($circular==1) echo "selected=selected";*/?>>是</option>
+                    <option value="2" <?php /*if($circular==2) echo "selected=selected";*/?>>否</option>
             	</select>
             </td>
-   	</tr>
+   	</tr>-->
         <tr>
             <td align="center">userGroup:</td>
             <td><input type="text" name="usergroup" id="usergroup" class="aa form-input w300" placeholder="输入userGroup" value="<?php echo $list[0]['usergroup']?>"></td>

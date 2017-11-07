@@ -124,8 +124,8 @@
         <td align="right">模板选择：</td>
         <td>
             <select  class="form-input w100" name="tmp" id="tmp">
-                <option value="1">默认模板</option>
-                <option value="2">河南模板</option>
+                <option value="1">有导航</option>
+                <option value="2">无导航</option>
             </select>
         </td>
     </tr>
@@ -147,7 +147,7 @@
             </select>
         </td>
     </tr>
-    <tr class="">
+   <!-- <tr class="">
         <td   align="right">图片是否圆角：</td>
         <td>
             <select  class="form-input w100" name="circular" id="circular">
@@ -155,7 +155,7 @@
                 <option value="2">否</option>
             </select>
         </td>
-    </tr>
+    </tr>-->
 <tr>
     <td align="center">备注：</td>
     <td><input type="text" name="mark" id="mark" class="aa  form-input w300" placeholder="输入备注信息"></td>
