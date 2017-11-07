@@ -50,8 +50,8 @@ table{table-layout:fixed;word-break:break-all;}
 行数<input class="form-input topinput" type="text" name="max_column" value="<?php echo $max_column; ?>" />&nbsp;&nbsp;
 圆直角选择
     <select onchange="circular_change()" style="width:70px;height:20px;"  class="form-input w100" id="circular" name="circular">
-        <option value="<?php echo $circular; ?>"  >圆角</option>
-        <option value="<?php echo $circular; ?>"  >直角</option>
+        <option value="<?php if($circular==1){echo 'selected=selected';}; ?>"  >圆角</option>
+        <option value="<?php if($circular==2){echo 'selected=selected';}; ?>"  >直角</option>
     </select>
 <input type="hidden" value="-1" name="mid">
 <input type="submit" class="btn" value="生成模板" />
