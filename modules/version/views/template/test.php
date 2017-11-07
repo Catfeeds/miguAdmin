@@ -12,7 +12,13 @@ $circular = !empty($_GET['circular'])?$_GET['circular']:1;//直圆角
         width:125px;
         height:52.5px;
         border:1px solid #ccc;
-        border-radius: 8px;
+    <?php
+         if($circular == 1){
+             echo "border-radius: 8px;";
+         }else{
+             echo "border-radius: 0px;";
+         }
+     ?>
     }
     .topinput{
     	padding:5px;
@@ -200,7 +206,7 @@ table{table-layout:fixed;word-break:break-all;}
 		    var total_w=<?php echo $width/2;?>*(MMRC.endCellIndex - MMRC.startCellIndex + 1)+(MMRC.endCellIndex - MMRC.startCellIndex)*<?php echo $cellspacing/2;?>;
 		    firstTD.height(total_h);
 		    firstTD.width(total_w);
-		    firstTD.css('border-radius','<?php  if($circular == 1){echo "8px";}else{echo "0px";} ;?>');
+
                     //更新合并的第一个单元格的缓存rc数据为所跨列和行
                     var rc = firstTD.attr({ colspan: MMRC.endCellIndex - MMRC.startCellIndex + 1, rowspan: MMRC.endRowIndex - MMRC.startRowIndex + 1 }).data('rc');
                     rc.maxc = rc.c + MMRC.endCellIndex - MMRC.startCellIndex; rc.maxr = rc.r + MMRC.endRowIndex - MMRC.startRowIndex;
