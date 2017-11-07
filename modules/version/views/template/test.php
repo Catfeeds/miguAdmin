@@ -1,3 +1,6 @@
+<?php
+$circular = !empty($_GET['circular'])?$_GET['circular']:1;//直圆角
+?>
 <style>
     /*#template_table td{
         width:125px;
@@ -21,7 +24,14 @@
 td.selected{background-color:#0094ff;color:#fff}
 table{table-layout:fixed;word-break:break-all;}
     .my_td{
-        border-radius: 8px;
+        <?php
+            if($circular == 1){
+                echo "border-radius: 8px;";
+            }else{
+                echo "border-radius: 0px;";
+            }
+        ?>
+
     }
 </style>
 
@@ -34,7 +44,7 @@ table{table-layout:fixed;word-break:break-all;}
     $max_column = !empty($_GET['max_column'])?$_GET['max_column']:6;//最大行数目
     $h_coord = !empty($_GET['h_coord'])?$_GET['h_coord']:0;//起始横坐标
     $v_coord = !empty($_GET['v_coord'])?$_GET['v_coord']:0;//起始纵坐标
-    $circular = !empty($_GET['circular'])?$_GET['circular']:1;//直圆角
+
 ?>
 <div>
     有导航建议起始点x为110，y为70，无导航建议起始点x为0，y为0
