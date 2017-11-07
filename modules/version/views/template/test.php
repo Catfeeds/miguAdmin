@@ -98,7 +98,6 @@ table{table-layout:fixed;word-break:break-all;}
 <input type="hidden" name="cols"  value="<?php echo $max_line; ?>"/>
 <input type="hidden" name="rows"  value="<?php echo $max_column; ?>"/>
 <input type="hidden" name="height"  value="<?php echo $height; ?>"/>
-<input type="hidden" name="height"  value="<?php echo $height; ?>"/>
 <input type="hidden" name="circular"  value="<?php echo $circular; ?>"/>
 <input type="button" value="保存模板" class="btn submit_btn" style="">
 </form>
