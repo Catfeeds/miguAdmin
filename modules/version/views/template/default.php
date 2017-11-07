@@ -100,6 +100,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
     <tr>
         <th>ID</th>
+        <th>创建时间</th>
+        <th>创建人</th>
         <th>模板名称</th>
         <th>缩略图</th>
         <th>操作</th>
@@ -107,6 +109,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     <?php foreach($data as $v):?>
     <tr>
         <td gid="<?php echo $v['id']?>" class="gid"><?php echo $v['id']?></td>
+        <td ><?php echo date("Y-m-d H:i:s",$v['add_time'])?></td>
+        <td ><?php echo $v['add_user']?></td>
         <td><?php echo $v['name']?></td>
         <td><img width="214px" height="123px" src="<?php echo $v['pic']?>"  class="img"></td>
         <td><a href="#" class="del">删除</a></td>
