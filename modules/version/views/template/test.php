@@ -20,6 +20,9 @@
 .cannotselect{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-khtml-user-select:none;user-select:none;}
 td.selected{background-color:#0094ff;color:#fff}
 table{table-layout:fixed;word-break:break-all;}
+    .my_td{
+        border-radius: 8px;
+    }
 </style>
 
 <?php
@@ -37,13 +40,18 @@ table{table-layout:fixed;word-break:break-all;}
 </div>
 <br>
 <form  method="get">
-起始坐标<input type="text" id="" class="form-input w100" name="h_coord" value="<?php echo $h_coord;?>" placeholder="横坐标">
---<input type="text" id="" class="form-input w100" name="v_coord" value="<?php echo $v_coord;?>" placeholder="纵坐标">&nbsp;&nbsp;
+起始坐标<input type="number" id="" class="form-input w100" name="h_coord" value="<?php echo $h_coord;?>" placeholder="横坐标">
+--<input type="number" id="" class="form-input w100" name="v_coord" value="<?php echo $v_coord;?>" placeholder="纵坐标">&nbsp;&nbsp;
 单元格宽度<input id="width" class="form-input topinput" type="text" name="width" value="<?php echo $width; ?>" />px&nbsp;&nbsp;
 单元格高度<input id="height" class="form-input topinput" type="text" name="height" value="<?php echo $height; ?>" />px&nbsp;&nbsp;
 单元格间距<input class="form-input topinput" type="text" name="cellspacing" value="<?php echo $cellspacing; ?>" />px&nbsp;&nbsp;
 列数<input class="form-input topinput" type="text" name="max_line" value="<?php echo $max_line; ?>" />&nbsp;&nbsp;
 行数<input class="form-input topinput" type="text" name="max_column" value="<?php echo $max_column; ?>" />&nbsp;&nbsp;
+圆直角选择
+    <select onchange="circular_change()" style="width:70px;height:20px;"  class="form-input w100" id="circular" name="circular">
+        <option value="1"  >圆角</option>
+        <option value="2"  >直角</option>
+    </select>
 <input type="hidden" value="-1" name="mid">
 <input type="submit" class="btn" value="生成模板" />
 </form>
@@ -59,7 +67,7 @@ table{table-layout:fixed;word-break:break-all;}
                 $style_x = ($width/2)."px";
                 $style_y = ($height/2)."px";
 			
-                echo "<td style='width:$style_x;height:$style_y;border:1px solid #9e9d9d;border-radius: 8px'>".$x."x".$y."</td>";
+                echo "<td class='my_td' style='width:$style_x;height:$style_y;border:1px solid #9e9d9d;'>".$x."x".$y."</td>";
             }
             echo "</tr>";
         }
@@ -223,12 +231,12 @@ table{table-layout:fixed;word-break:break-all;}
 //console.log(html);return false;
     	if(document.getElementById("name").value == null || document.getElementById("name").value == '')
     	{
-    		alert("请填入模板名称"); 
+    		layer.alert("请填入模板名称");
     		return false;
     	}
     	if(document.getElementById("pic").value == null || document.getElementById("pic").value == '')
     	{
-    		alert("请上传一张图片作为模板缩略图"); 
+    		layer.alert("请上传一张图片作为模板缩略图");
     		return false;
     	}
     	document.getElementById("html").value = $('#template_table').html();
@@ -251,6 +259,16 @@ table{table-layout:fixed;word-break:break-all;}
                     tableObj.rows[i].innerHTML=<?php echo $width?>+"x"+<?php echo $height?>;
                 }
             }
+        }
+    }
+
+    function circular_change()
+    {
+        var circular = $('#circular').val();
+        if(circular == 2){
+            $('.my_td').css('border-radius','0px');
+        }else{
+            $('.my_td').css('border-radius','8px');
         }
     }
 </script>

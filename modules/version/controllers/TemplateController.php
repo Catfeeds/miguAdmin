@@ -229,7 +229,8 @@ class TemplateController extends VController
                 }
 
 			$name = !empty($_POST['name'])?$_POST['name']:"";
-			$sql = "INSERT yd_ver_template(pic,name,cols,rows,colw,roww,cellspacing,h_coord,v_coord,add_time,add_user) values ('{$pic}','$name','{$_POST['cols']}','{$_POST['rows']}','{$_POST['width']}','{$_POST['height']}','{$_POST['cellspacing']}','{$_POST['h_coord']}','{$_POST['v_coord']}','".time()."','".$_SESSION['username']."')";
+			$circular = !empty($_POST['circular'])?$_POST['circular']:"1";
+			$sql = "INSERT yd_ver_template(`pic`,`name`,`cols`,`rows`,`colw`,`roww`,`cellspacing`,`h_coord`,`v_coord`,`add_time`,`add_user`,`circular`) values ('{$pic}','$name','{$_POST['cols']}','{$_POST['rows']}','{$_POST['width']}','{$_POST['height']}','{$_POST['cellspacing']}','{$_POST['h_coord']}','{$_POST['v_coord']}','".time()."','".$_SESSION['username']."',$circular)";
 			$res = SQLManager::execute($sql);
 			$sql = "select id from yd_ver_template where name = '$name' and pic = '{$pic}'";
 			$res = SQLManager::queryAll($sql);
