@@ -34,6 +34,7 @@ table{table-layout:fixed;word-break:break-all;}
     $max_column = !empty($_GET['max_column'])?$_GET['max_column']:6;//最大行数目
     $h_coord = !empty($_GET['h_coord'])?$_GET['h_coord']:0;//起始横坐标
     $v_coord = !empty($_GET['v_coord'])?$_GET['v_coord']:0;//起始纵坐标
+    $circular = !empty($_GET['circular'])?$_GET['circular']:1;//直圆角
 ?>
 <div>
     有导航建议起始点x为110，y为70，无导航建议起始点x为0，y为0
@@ -49,8 +50,8 @@ table{table-layout:fixed;word-break:break-all;}
 行数<input class="form-input topinput" type="text" name="max_column" value="<?php echo $max_column; ?>" />&nbsp;&nbsp;
 圆直角选择
     <select onchange="circular_change()" style="width:70px;height:20px;"  class="form-input w100" id="circular" name="circular">
-        <option value="1"  >圆角</option>
-        <option value="2"  >直角</option>
+        <option value="<?php echo $circular; ?>"  >圆角</option>
+        <option value="<?php echo $circular; ?>"  >直角</option>
     </select>
 <input type="hidden" value="-1" name="mid">
 <input type="submit" class="btn" value="生成模板" />

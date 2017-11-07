@@ -252,7 +252,7 @@ class TemplateController extends VController
 			$sql = substr($sql,0,strlen($sql)-1);
 			//echo $sql;die;
 			$res = SQLManager::execute($sql);
-			echo "<script>alert('保存成功！')</script>";
+			echo "<script>layer.alert('保存成功！')</script>";
 			echo '<script>window.location.href="/version/template/default.html?mid=-1&nid=51";</script>';
 		}
 
