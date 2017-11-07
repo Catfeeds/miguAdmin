@@ -384,16 +384,17 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     $('.sub_btn').click(function(){
 
  
-        var ids="";
-        $("input[name='id']:checked").each(function() {
+        var id_s=[];
+        $("input[name='id']:checked").each(function(i) {
 
-            ids += $(this).val()+',';
+            id_s[i]= $(this).val();
 
         });
+	var ids=id_s.join(",");
      
         $.post("<?php echo $this->get_url('review','topicallaccess')?>",{ids:ids},function(){
             location.reload();
-
+		//return false;
         })
     })
     

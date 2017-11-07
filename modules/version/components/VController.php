@@ -97,8 +97,8 @@ class VController extends Controller{
                     if($v['stationId'] == 7){
                         $tmp_list[] = $this->getAuthSiteList('专题');
                     }else{
-                        //$tmp = VerStation::model()->findByPk($v['stationId']);
-                        $tmp = VerSitelist::model()->findByPk($v['stationId']);
+                        $tmp = VerStation::model()->findByPk($v['stationId']);
+                        //$tmp = VerSitelist::model()->findByPk($v['stationId']);
                         if(!empty($tmp)){
                             $name = $tmp->attributes['name'];
                             $tmp_list[] = $this->getAuthSiteList($name);

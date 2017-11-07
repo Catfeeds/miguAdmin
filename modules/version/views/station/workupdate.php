@@ -88,7 +88,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         <?php
                         
                       
-                        $sql = "select id,name from yd_ver_sitelist where pid=0 and type=0";
+                        $sql = "select id,name from yd_ver_station";
                         $res = SQLManager::queryAll($sql);
                         if (!empty($res)) {?>
                             <?php

@@ -868,7 +868,7 @@ class StationController extends VController
                     throw new ExceptionEx('信息保存失败');
                 }
                 $gid = $_REQUEST['gid'];
-                $list =VerUiManager::getAll($gid);
+                $list =VerUiCopyManager::getAll($gid);
                 switch($bkimg->type){
                     case '1':$html = HTML::data($list);break;
                     //测试

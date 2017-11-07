@@ -591,7 +591,7 @@ if($_SESSION['auth']=='1'){
             <input type="hidden" name="url" value="" class="upImg">
             <div class="topicTop">
                 <span>专题模板：</span>
-                <select name="type" class="form-input w100" id="type" onchange="selectType(this)">
+                <select name="type" class="form-input w100" id="type" onchange="selectType()">
                     <option value="0">请选择</option>
                     <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='1'){echo "selected=selected"; } ?>  value="1" >海报专题</option>
                     <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='2'){echo "selected=selected"; } ?>  value="2" >排行榜专题</option>
@@ -599,26 +599,27 @@ if($_SESSION['auth']=='1'){
                 </select>
                 <span><input class="btn module" type="submit" value="保存修改"></span>
             </div>
+		<?php $template_id=!empty($template_id)?$template_id:0;?>
                           <div class="my_template" style="display: none;">
                               <span class="name">模板：</span>
                               <select style="width:100px;margin:7px;"  name="template_id" onchange="showTemplate()"  id="template" class="form-input w200 field">
-                                  <option value="0">--------------请选择-------------</option>
-                                  <option onclick="showTemplate(this)" value="1" selected="selected">1</option>
-                                  <option value="2" onclick='showTemplate(this)'>2</option>
-                                  <option value="3" onclick="showTemplate(this)">3</option>
-                                  <option value="4" onclick="showTemplate(this)">4</option>
-                                  <option value="5" onclick="showTemplate(this)">5</option>
-                                  <option value="6" onclick="showTemplate(this)">6</option>
-                                  <option value="7" onclick="showTemplate(this)">7</option>
-                                  <option value="8" onclick="showTemplate(this)">8</option>
-                                  <option value="9" onclick="showTemplate(this)">9</option>
-                                  <option value="10" onclick="showTemplate(this)">10</option>
-                                  <option value="11" onclick="showTemplate(this)">11</option>
+                                  <option value="0" <?php if($template_id==1){echo "selected=selected";}?>>--------------请选择-------------</option>
+                                  <option onclick="showTemplate()" value="1" <?php if($template_id==0){echo "selected=selected";}?>>1</option>
+                                  <option value="2" onclick='showTemplate()' <?php if($template_id==1){echo "selected=selected";}?>>2</option>
+                                  <option value="3" onclick="showTemplate()" <?php if($template_id==2){echo "selected=selected";}?>>3</option>
+                                  <option value="4" onclick="showTemplate()" <?php if($template_id==3){echo "selected=selected";}?>>4</option>
+                                  <option value="5" onclick="showTemplate()" <?php if($template_id==4){echo "selected=selected";}?>>5</option>
+                                  <option value="6" onclick="showTemplate()" <?php if($template_id==5){echo "selected=selected";}?>>6</option>
+                                  <option value="7" onclick="showTemplate()" <?php if($template_id==6){echo "selected=selected";}?>>7</option>
+                                  <option value="8" onclick="showTemplate()" <?php if($template_id==7){echo "selected=selected";}?>>8</option>
+                                  <option value="9" onclick="showTemplate()" <?php if($template_id==8){echo "selected=selected";}?>>9</option>
+                                  <option value="10" onclick="showTemplate()" <?php if($template_id==9){echo "selected=selected";}?>>10</option>
+                                  <option value="11" onclick="showTemplate()" <?php if($template_id==10){echo "selected=selected";}?>>11</option>
                                   <?php
                                   $data = VerTemplate::model()->findAll();
                                   ?>
                                   <?php foreach($data as $v):?>
-                                      <option value="<?php echo $v->attributes['id']+11?>" onclick="showTemplate(this)"><?php echo $v->attributes['name']?></option>
+                                      <option value="<?php echo $v->attributes['id']+11?>" onclick="showTemplate()" <?php if($template_id==($v->attributes['id']+11)){echo "selected=selected";}?>><?php echo $v->attributes['name']?></option>
                                   <?php endforeach;?>
                               </select>
                               <div class="templatePic">
@@ -1822,7 +1823,7 @@ function add(obj)
             }
         }
 
-        function showTemplate(obj)
+        function showTemplate()
         {
 
             var templateId = $('#template  option:selected').val();
@@ -1874,6 +1875,7 @@ function add(obj)
             }
 
         }
+	showTemplate();
     </script>
 
 

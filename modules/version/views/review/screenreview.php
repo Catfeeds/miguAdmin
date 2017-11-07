@@ -91,7 +91,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <span style="float:right;font-size:14px">&nbsp;页</span>
         <input type="text" style='width:30px;height:18px;float:right' class="form-input " value="" name="page"  >
          <span style="float:right;font-size:14px">到第&nbsp;</span>-->
-	 <?php echo $page;?>
+	 <?php echo $page?>
     </div>
 </div>
 <div class="inputDivTwo" style="margin-top:0px;">
