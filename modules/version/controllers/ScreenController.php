@@ -400,7 +400,7 @@ class ScreenController extends VController
         }
 	    $template="select * from yd_ver_template";
         $data=SQLManager::queryAll($template);
-        $quote = "select c.id as stationId,c.name,a.copyGuideId,a.pasteGuideId,a.status from yd_ver_screen_quote as a left join yd_ver_screen_guide as b on a.copyGuideId=b.id left join yd_ver_station as c on c.id=b.gid WHERE a.pasteGuideId=$id AND a.status=1";
+        $quote = "select c.id as stationId,c.name,a.copyGuideId,a.pasteGuideId,a.status from yd_ver_screen_quote as a left join yd_ver_screen_guide as b on a.copyGuideId=b.id left join yd_ver_station as c on c.id=b.gid WHERE a.pasteGuideId=$id AND a.status=1 order by id desc ";
         $quote_res = SQLManager::queryRow($quote);
         if(!empty($quote_res)){
             $station_guide = VerScreenGuide::model()->findAll(
