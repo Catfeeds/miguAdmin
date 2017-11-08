@@ -694,7 +694,7 @@ class ScreenController extends VController
             $model->videoUrl = $v['videoUrl'];
             $model->save();
         }
-        $screen_quote_model = VerScreenQuote::model()->find("`copyGuideId`=$copyGuideId and `pasteGuideId`=$pasteGuideId and `status`=1 ");
+        $screen_quote_model = VerScreenQuote::model()->find("`copyGuideId`=$copyGuideId and `pasteGuideId`=$pasteGuideId and `status`=1 order by id desc limit 1");
         if(empty($screen_quote_model)){
             $screen_quote_model = new VerScreenQuote();
         }
