@@ -1057,7 +1057,7 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 				$res = SQLManager::execute($sql);
                     		$review_times = 1;//几审
 			    }else if($res[0]['flag'] < $res[0]['type']){
-				$flag = $value['flag'] + 1;
+				$flag = $res[0]['flag'] + 1;
                     		$review_times = $flag;//几审
                     		$sql = "UPDATE yd_ver_topic_review set flag = $flag where id = {$value['id']}";
 				    $res = SQLManager::execute($sql);
