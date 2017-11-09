@@ -294,6 +294,14 @@ class TemplateController extends VController
             }
         }
         return $path;
-    }	
+    }
+
+    public function actionPreview()
+    {
+        $gid = Yii::app()->request->getParam('gid');
+        $html = HTML::getTemplate($gid+11);
+        $info = VerTemplate::model()->findByPk($gid);
+        $this->render('preview',array("gid"=>$gid,"html"=>$html,'info'=>$info));
+    }
 
 }

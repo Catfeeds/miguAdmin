@@ -109,11 +109,15 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     <?php foreach($data as $v):?>
     <tr>
         <td gid="<?php echo $v['id']?>" class="gid"><?php echo $v['id']?></td>
+
         <td ><?php echo date("Y-m-d H:i:s",$v['add_time'])?></td>
         <td ><?php echo $v['add_user']?></td>
         <td><?php echo $v['name']?></td>
         <td><img width="214px" height="123px" src="<?php echo $v['pic']?>"  class="img"></td>
-        <td><a href="#" class="del">删除</a></td>
+        <td>
+            <a href="#" class="see" gid="<?php echo $v['id']?>">预览</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="del">删除</a>
+        </td>
     </tr>
     <?php endforeach;?>
 </table>
@@ -152,4 +156,11 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 		var src=$(this).attr("src");
 		window.open(src);
 	})
+
+    $('.see').click(function()
+    {
+        var gid = $(this).attr('gid');
+        var mid = <?php echo $this->mid;?>;
+        window.open("/version/template/preview.html?mid="+mid+"&gid="+gid);
+    })
 </script>
