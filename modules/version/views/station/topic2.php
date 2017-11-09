@@ -624,6 +624,7 @@ if (!empty($html) && !isset($flag)) {
             for(var i  = 0 ; i<$('.topic_id').length ; i++){
                 if(search_id == $('.topic_id').eq(i).text()){
                     my_href = $('.topic_id').eq(i).parent().children('a').attr('href');
+                    break;
                 }
             }
 
