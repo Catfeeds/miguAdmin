@@ -1175,54 +1175,73 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 
 	$uid = $_SESSION['userid'];
 	$sitelist = array();
-            //$sql = "select a.* from yd_ver_sitelist as a left join yd_ver_work as b on a.id=b.stationId and a.pid=0 and b.flag = 6 left join  yd_ver_review_work as c on c.workid=b.id  where c.uid=$uid  group by a.id";
-            $sql = "select a.* from yd_ver_sitelist as a left join yd_ver_station as b on a.name=b.name left join yd_ver_work as c on c.stationId=b.id left join yd_ver_review_work as d on d.workid=c.id where d.uid={$_SESSION['userid']} and  a.pid=0 and c.flag=6";
-	$st = SQLManager::QueryAll($sql);
+        $sql="select * from yd_ver_work where flag=6 ";
+        $result=SQLManager::queryAll($sql);
+	$st=array();
+        if(!empty($result)){
+                foreach($result as $val){
+                        if($val['stationId']==7){//通用专题工作流
+				//$sql="select a.* from yd_ver_sitelist as a left join yd_ver_work as b on b.stationId=a.id and b.stationId=7 left join yd_ver_review_work as c on c.workid=b.id and c.uid=$uid where a.name='专题' and a.pid=0";
+				$sql="select a.* from yd_ver_sitelist as a left join yd_ver_work as b on a.id=b.stationId left join yd_ver_review_work as c on b.id=c.workid where c.uid=$uid and b.stationId=7";
+				$st[]=SQLManager::queryAll($sql);
+                        }else{//站点专题工作流
+                                $sql = "select a.* from yd_ver_sitelist as a left join yd_ver_station as b on a.name=b.name left join yd_ver_work as c on c.stationId=b.id left join yd_ver_review_work as d on d.workid=c.id where d.uid=$uid and  a.pid=0 and c.flag=6";
+				$st[]=SQLManager::queryAll($sql);
+                        }
+                }
+        }
 	//var_dump($st);die;
 	if(!empty($st)){
-
 		foreach($st as $key=>$value){
-		if($value['id'] == 7){
-			$aa = $st;
-		}else{
-			$aa = VerSiteListManager::getList($value['id']);
-		}
-		
+			$aa=array();
+			if(count($value)>0){
+				foreach($value as $k1=>$v1){
+					if($v1['id']==7){
+						$aa[]=$value;
+						//echo 1;
+					}else{
+						$aa[]=VerSiteListManager::getList($v1['id']);
+					}
+				}
+				if(!empty($aa)){
 
-			if(!empty($aa)){
-			
 				foreach ($aa as $k => $v) {
-					
-					
-					if($v['name'] == '专题'){
-				
-						$bb = VerSiteListManager::getList($v['id']);
-					
+
+					foreach($v as $kk=>$vv){
+					if($vv['name'] == '专题'){
+
+						$bb = VerSiteListManager::getList($vv['id']);
+						//var_dump($bb);
+
 						if(!empty($bb)){
 							foreach ($bb as $key1 => $value1) {
 								$cc = VerSiteListManager::getList($value1['id']);
-							
+								//var_dump($cc);
 								if(!empty($cc)){
 									foreach ($cc as $key2 => $value2) {
-										if($v['id'] == 7){
+										if($vv['id'] == 7){
 											$list['sitelist'][7][] = $value2['id'];
 										}else{
-										$list['sitelist'][$v['pid']][] = $value2['id'];
+										$list['sitelist'][$vv['pid']][] = $value2['id'];
 									}}
 								}
 							}
-						}	
-					}
+						}
+					}}
 				}
-							
-			}
-	}}
 
-	if(!empty($list['sitelist'])){
+			}
+			//var_dump($list['sitelist']);
+			if(!empty($list['sitelist'])){
 		foreach ($list['sitelist']  as $key => $value) {
-			//$sql = "SELECT t1.type FROM yd_ver_review_work t1 LEFT JOIN yd_ver_work t2 on t1.workid = t2.id where t1.uid = $uid and t2.stationId in ($key)";
-			$sql = "SELECT t1.type FROM yd_ver_review_work t1 LEFT JOIN yd_ver_work t2 on t1.workid = t2.id left join yd_ver_station t3 on t3.id=t2.stationId left join yd_ver_sitelist t4 on t4.name=t3.name where t1.uid = $uid and t4.id in ($key)";
-			$ss = SQLManager::queryAll($sql);
+			if($key==7){//通用站点
+				$sql = "SELECT t1.type FROM yd_ver_review_work t1 LEFT JOIN yd_ver_work t2 on t1.workid = t2.id where t1.uid = $uid and t2.stationId = $key";
+				$ss = SQLManager::queryAll($sql);
+			}else{//站点专题
+				$sql = "select type from yd_ver_review_work where uid=$uid and workid in (select id from yd_ver_work where stationId= (select id from yd_ver_station where name=(select name from yd_ver_sitelist where id=$key)))";
+				$ss = SQLManager::queryAll($sql);
+			}
+			//var_dump($ss);
 			if(!empty($ss)){
 				foreach ($ss as $key1 => $value1) {
 					$list['typelist'][$key][] = $value1['type']; 
@@ -1231,6 +1250,10 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 			}
 		}
 	}
+			}
+					
+	}}
+
         $tmp =VideoManager::getTopicReview($data,$list);
         //print_r($tmp);die;
 	$url = $this->createUrl($this->action->id);
