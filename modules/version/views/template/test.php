@@ -1,5 +1,6 @@
 <?php
 $circular = !empty($_GET['circular'])?$_GET['circular']:1;//直圆角
+
 ?>
 <style>
     /*#template_table td{
