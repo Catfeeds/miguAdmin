@@ -73,7 +73,7 @@ table{table-layout:fixed;word-break:break-all;}
 <input type="hidden" value="-1" name="mid">
 <input type="submit" class="btn" value="生成模板" />
 </form>
-<div style="background:url(/file/template/template_add_bg.jpg) no-repeat;width:1920px;padding-left:<?php echo $h_coord/2;?>px;padding-top:<?php echo $v_coord/2;?>px;min-height:394px;background-size: 960px 540px">
+<div style="background:url(/file/template/template_add_bg.jpg) no-repeat;width:1920px;padding-left:<?php echo $h_coord/2;?>px;padding-top:<?php echo $v_coord/2;?>px;min-height:394px;background-size: 1920px 540px">
 <table id="template_table" cellspacing="<?php echo $cellspacing/2;?>" style="width:<?php echo ($max_line*$width)/2+(($max_line-1)*$cellspacing)/2;?>px;">
 
     <?php
