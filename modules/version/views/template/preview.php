@@ -5,7 +5,7 @@
         background:url(/file/template/has_guide.jpg)no-repeat;
         background-size:990px 540px ;
         padding-left:<?php echo ($info->attributes['h_coord'])/2?>px;
-        padding-top: 85px;
+        padding-top: <?php echo ($info->attributes['v_coord'])/2?>px;
     }
 </style>
 <div class="fa">
@@ -33,12 +33,12 @@
     {
         if($(this).val() == '有导航'){
             $(this).val('无导航');
-            $('.fa').css('padding-top','65');
+//            $('.fa').css('padding-top','65');
             $('.fa').css({"background":"url(/file/template/no_guide.jpg)no-repeat","background-size":"990px 540px "});
         }else{
             $(this).val('有导航');
             $('.fa').css({"background":"url(/file/template/has_guide.jpg)no-repeat","background-size":"990px 540px "});
-            $('.fa').css('padding-top','85');
+//            $('.fa').css('padding-top','85');
         }
     })
 </script>
