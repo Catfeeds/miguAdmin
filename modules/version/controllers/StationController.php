@@ -1753,7 +1753,7 @@ class StationController extends VController
     public function actionGetOneGuideId()
     {
         $template_id = $_REQUEST['template_id'];
-        $tmp_res = VerScreenGuide::model()->find("templateId=$template_id order by id desc limit 1");
+        $tmp_res = VerScreenGuide::model()->find("templateId=$template_id order by id desc ");
         echo $tmp_res->attributes['id'];
     }
 }
