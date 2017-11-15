@@ -5,7 +5,7 @@
         background:url(/file/template/has_guide.jpg)no-repeat;
         background-size:990px 540px ;
         padding-left:<?php echo (($info->attributes['h_coord'])/2)-5;?>px;
-        padding-top: <?php echo (($info->attributes['v_coord'])/2)-5;?>px;
+        padding-top: <?php echo (($info->attributes['v_coord'])/2)-15;?>px;
     }
 </style>
 <div class="fa">
