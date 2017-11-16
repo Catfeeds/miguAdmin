@@ -104,7 +104,7 @@ padding:5px 10px;
                 <option value="0">请选择</option>
                 <option  value="4" <?php $uType= !empty($message->attributes['uType'])?$message->attributes['uType']:'';if($uType=='4'){echo "selected=selected"; }?>>海报专题</option>
         	<option  value="13" <?php $uType= !empty($message->attributes['uType'])?$message->attributes['uType']:'';if($uType=='13'){echo "selected=selected"; }?>>排行榜专题</option>
-        	<option  value="17" <?php $uType= !empty($message->attributes['uType'])?$message->attributes['uType']:'';if($uType=='17'){echo "selected=selected"; }?>>河南专题</option>
+        	<option  value="17" <?php $uType= !empty($message->attributes['uType'])?$message->attributes['uType']:'';if($uType=='17'){echo "selected=selected"; }?>>自定义专题</option>
                 <option  value="2" <?php $uType= !empty($message->attributes['uType'])?$message->attributes['uType']:'';if($uType=='2'){echo "selected=selected"; }?>>海报栏目</option>
                 <option  value="15" <?php $uType= !empty($message->attributes['uType'])?$message->attributes['uType']:'';if($uType=='15'){echo "selected=selected"; }?>>视频栏目</option>
                 <option  value="7" <?php $uType= !empty($message->attributes['uType'])?$message->attributes['uType']:'';if($uType=='7'){echo "selected=selected"; }?>>竖图单片详情页</option>
