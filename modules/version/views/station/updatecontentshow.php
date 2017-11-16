@@ -198,7 +198,7 @@
         <td>
              <?php if($screenContent->uType==4){echo '海报专题';}?>
              <?php if($screenContent->uType==13){echo '排行榜专题';}?>
-              <?php if($screenContent->uType==17){echo '河南专题';}?>
+              <?php if($screenContent->uType==17){echo '自定义专题';}?>
               <?php if($screenContent->uType==2){echo '海报栏目';}?>
                <?php if($screenContent->uType==15){echo '视频栏目';}?>
                 <?php if($screenContent->uType==7){echo '竖图单片详情页';}?>

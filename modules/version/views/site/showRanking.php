@@ -108,7 +108,7 @@
         <td>
 				 <?php $uType = !empty($res['uType'])?$res['uType']:'';if($uType=='4'){echo "海报专题"; }?>
               <?php $uType = !empty($res['uType'])?$res['uType']:'';if($uType=='13'){echo "排行榜专题"; }?> 
-              <?php $uType = !empty($res['uType'])?$res['uType']:'';if($uType=='17'){echo "河南专题"; }?> 
+              <?php $uType = !empty($res['uType'])?$res['uType']:'';if($uType=='17'){echo "自定义专题"; }?>
               <?php $uType = !empty($res['uType'])?$res['uType']:'';if($uType=='2'){echo "海报栏目"; }?> 
               <?php $uType = !empty($res['uType'])?$res['uType']:'';if($uType=='15'){echo "视频栏目"; }?> 
               <?php $uType = !empty($res['uType'])?$res['uType']:'';if($uType=='A'){echo "竖图单片详情页"; }?> 

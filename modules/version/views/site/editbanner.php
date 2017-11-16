@@ -82,7 +82,7 @@
         	<option  value="4" <?php if($data->uType=='4'){echo "selected=selected"; }?>>海报专题</option>
                 <option  value="2" <?php if($data->uType=='2'){echo "selected=selected"; }?>>海报栏目</option>
                 <option  value="13" <?php if($data->uType=='13'){echo "selected=selected"; }?>>排行榜专题</option>
-                <option  value="17" <?php if($data->uType=='17'){echo "selected=selected"; }?>>河南专题</option>
+                <option  value="17" <?php if($data->uType=='17'){echo "selected=selected"; }?>>自定义专题</option>
                 <option  value="15" <?php if($data->uType=='15'){echo "selected=selected"; }?>>视频栏目</option>
                 <option  value="7" <?php if($data->uType=='7'){echo "selected=selected"; }?>>竖图单片详情页</option>
                 <option  value="8" <?php if($data->uType=='8'){echo "selected=selected"; }?>>多集数字详情页</option>

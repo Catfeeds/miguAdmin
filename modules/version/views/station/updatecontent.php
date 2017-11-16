@@ -205,7 +205,7 @@
         	<option  value="0">请选择</option>
                 <option  value="4" <?php if($screenContent->uType==4){echo 'selected';}?>>海报专题</option>
                 <option  value="13" <?php if($screenContent->uType==13){echo 'selected';}?>>排行榜专题</option>
-                <option  value="17" <?php if($screenContent->uType==17){echo 'selected';}?>>河南专题</option>
+                <option  value="17" <?php if($screenContent->uType==17){echo 'selected';}?>>自定义专题</option>
                 <option  value="2" <?php if($screenContent->uType==2){echo 'selected';}?>>海报栏目</option>
                 <option  value="15" <?php if($screenContent->uType==15){echo 'selected';}?>>视频栏目</option>
                 <option  value="7" <?php if($screenContent->uType==7){echo 'selected';}?>>竖图单片详情页</option>

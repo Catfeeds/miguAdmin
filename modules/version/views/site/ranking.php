@@ -115,7 +115,7 @@
                 <option value="0">请选择</option>
                 <option  value="4">海报专题</option>
                 <option  value="13">排行榜专题</option>
-                <option  value="17">河南专题</option>
+                <option  value="17">自定义专题</option>
                 <option  value="2">海报栏目</option>
                 <option  value="15">视频栏目</option>
                 <option  value="A">竖图单片详情页</option>
