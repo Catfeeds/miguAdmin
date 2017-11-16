@@ -597,9 +597,22 @@ if($_SESSION['auth']=='1'){
                     <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='2'){echo "selected=selected"; } ?>  value="2" >排行榜专题</option>
  <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='4'){echo "selected=selected"; } ?>  value="4" >自定义模板专题</option>
                 </select>
-                <span><input class="btn module" type="submit" value="保存修改"></span>
+                <?php $template_id= !empty($template_id)?$template_id:0;?>
+                <?php
+                $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='4'){?>
+                    <span>模板名称：</span>
+                    <?php
+                    if($template_id<=11){
+                        echo "<span>模板".$template_id."</span>";
+                    }else{
+//                            $pk_id = $template_id+11;
+                        $pk_id = $template_id-11;
+                        $tmp_res = VerTemplate::model()->findByPk($pk_id);
+                        echo "<span>模板".$tmp_res->attributes['name']."</span>";
+                    }
+                    ?>
+                <?php }?>
             </div>
-		<?php $template_id=!empty($template_id)?$template_id:0;?>
                           <div class="my_template" style="display: none;">
                               <span class="name">模板：</span>
                               <select style="width:100px;margin:7px;"  name="template_id" onchange="showTemplate()"  id="template" class="form-input w200 field">
@@ -634,6 +647,7 @@ if($_SESSION['auth']=='1'){
                 <div class="up-main topicBgEdit" >
                     <input type="file" name="url" id="upload_file_true" placeholder="选择图片" value="">
                 </div>
+                <span><input class="btn module" type="submit" value="保存修改"></span>
             </div>
 </td>
                          <tr style = "height:275px;background:#E2EEFB ">
