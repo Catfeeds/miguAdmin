@@ -54,7 +54,7 @@ table{table-layout:fixed;word-break:break-all;}
 
 ?>
 <div>
-    有导航建议起始点x为110，y为245，无导航建议起始点x为130，y为200
+    有导航建议起始点x为110，y为200，无导航建议起始点x为110，y为150
 </div>
 <br>
 <form  method="get">
