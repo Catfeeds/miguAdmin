@@ -25,7 +25,7 @@ class StationController extends VController
         }
         $sql_select = "select * from yd_ver_station";
         $sql_order = " order by id asc ";
-        $sql_limit = " limit $page,100";
+        $sql_limit = " limit $page,200";
         $sql = $sql_select . $sql_where . $sql_order . $sql_limit;
         //var_dump($sql);die;
         $list= array();
