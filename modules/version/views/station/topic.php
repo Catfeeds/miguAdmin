@@ -537,7 +537,7 @@ if (!empty($html) && !isset($flag)) {
                             echo "<span>模板".$template_id."</span>";
                         }else{
 //                            $pk_id = $template_id+11;
-                            $pk_id = $template_id;
+                            $pk_id = $template_id-11;
                             $tmp_res = VerTemplate::model()->findByPk($pk_id);
                             echo "<span>模板".$tmp_res->attributes['name']."</span>";
                         }
