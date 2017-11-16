@@ -280,8 +280,17 @@
                                 <input type='file' id='upload_file_new'>
                               </div>";
                 ?>
-                <!--<span class="infoSpan">请上传宽为<?php //echo $_GET['width']*250+($_GET['width']-1)*20 ;?>，高为<?php //echo $_GET['height']*105+($_GET['height']-1)*20;?>的图片！</span>-->
-		<span class="infoSpan">请上传宽为<?php echo $_GET['width']?>，高为<?php echo $_GET['height']?>的图片！</span>
+                <?php
+                    $pk_id = $_REQUEST['screenGuideId'];
+                    $tmp_res = VerTemplate::model()->findByPk($pk_id);
+                    if($tmp_res->attributes['templateId']<11){?>
+                        <span class="infoSpan">请上传宽为<?php echo $_GET['width']*250+($_GET['width']-1)*20 ;?>，高为<?php echo $_GET['height']*105+($_GET['height']-1)*20;?>的图片！</span>
+                    <?php }else{?>
+                        <span class="infoSpan">请上传宽为<?php echo $_GET['width']?>，高为<?php echo $_GET['height']?>的图片！</span>
+                    <?php }
+                ?>
+
+
             </div>
         </td>
     </tr>
