@@ -608,7 +608,7 @@ if($_SESSION['auth']=='1'){
 //                            $pk_id = $template_id+11;
                         $pk_id = $template_id-11;
                         $tmp_res = VerTemplate::model()->findByPk($pk_id);
-                        echo "<span>模板".$tmp_res->attributes['name']."</span>";
+                        echo "<span>".$tmp_res->attributes['name']."</span>";
                     }
                     ?>
                 <?php }?>
