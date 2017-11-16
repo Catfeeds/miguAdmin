@@ -1052,6 +1052,7 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 			}else{
 			    $sql="select t1.flag,t3.type from yd_ver_topic_review t1 left join yd_ver_station t2 on t1.stationid=t2.name left join yd_ver_work t3 on t3.stationId=t2.id  where t1.id={$value['id']} and t3.flag=6";
 			$res=SQLManager::queryAll($sql);
+			if(!empty($res)){
 			    if($res[0]['flag'] == $res[0]['type'] || $_SESSION['auth']=='1'){
 				$sql = "UPDATE yd_ver_topic_review set flag = 6 where id = {$value['id']}";
 				$res = SQLManager::execute($sql);
@@ -1063,6 +1064,13 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 				    $res = SQLManager::execute($sql);
 			    }else{
                     		$review_times = 1;//几审
+			}
+			}else{
+				if($_SESSION['auth']=='1'){
+					$sql = "UPDATE yd_ver_topic_review set flag = 6 where id = {$value['id']}";
+                                $res = SQLManager::execute($sql);
+                                $review_times = 1;//几审
+				}
 			}
                 }
 			$type_res = VerTopicReview::model()->findByPk($value['id']);
