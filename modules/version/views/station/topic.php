@@ -527,7 +527,7 @@ if (!empty($html) && !isset($flag)) {
                     <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='2'){echo "selected=selected"; } ?>  value="2" >排行榜专题</option>
  <option <?php $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='4'){echo "selected=selected"; } ?>  value="4" >自定义模板专题</option>
                 </select>
-                <span><input class="btn module" type="submit" value="保存修改"></span>
+
                 <?php $template_id= !empty($template_id)?$template_id:0;?>
                 <?php
                     $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='4'){?>
@@ -577,10 +577,11 @@ if (!empty($html) && !isset($flag)) {
             <div class="topicBg" id="main">
                 <img src="<?php echo !empty($bkimg->attributes['url'])?$bkimg->attributes['url']:'/file/5.png'?>" alt="" class="topicBgImg bg" width="216px" height="127px">
                 
-      
+
                 <div class="up-main topicBgEdit" >
                     <input type="file" name="url" id="upload_file_true" placeholder="选择图片" value="">
                 </div>
+                <span><input class="btn module" type="submit" value="保存修改"></span>
             </div>
 </td>
                          <tr style = "height:275px;background:#E2EEFB ">
