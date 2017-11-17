@@ -1808,6 +1808,28 @@ class StationController extends VController
         $tmp_res = VerScreenGuide::model()->find("templateId=$template_id order by id desc ");
         echo $tmp_res->attributes['id'];
     }
+
+    public function actionTest()
+    {
+        $res = SpecialTopicCopy::model()->findAll();
+        foreach ($res as $k=>$v){
+            $model = SpecialTopicCopy::model()->findByPk($v->attributes['id']);
+            $tmp_res = VerBkimgCopy::model()->find("gid={$v->attributes['sid']}");
+            $model->template_id = $tmp_res->attributes['template_id'];
+            $model->save();
+        }
+    }
+
+    public function actionTest2()
+    {
+        $res = SpecialTopic::model()->findAll();
+        foreach ($res as $k=>$v){
+            $model = SpecialTopic::model()->findByPk($v->attributes['id']);
+            $tmp_res = VerBkimg::model()->find("gid={$v->attributes['sid']}");
+            $model->template_id = $tmp_res->attributes['template_id'];
+            $model->save();
+        }
+    }
 }
 
 
