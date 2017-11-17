@@ -215,6 +215,8 @@ class StationController extends VController
                             $res->videoUrl = $content->attributes['videoUrl'];
                             $res->sid = $content->attributes['sid'];
                             $res->picSrc = $content->attributes['picSrc'];
+                            $tmp_res = VerBkimgCopy::model()->find("gid={$content->attributes['sid']}");
+                            $res->template_id= $tmp_res->attributes['template_id'];
                             $res->save();
                         }else{
                             $res = new SpecialTopic();
@@ -234,6 +236,8 @@ class StationController extends VController
                             $res->videoUrl = $content->attributes['videoUrl'];
                             $res->sid = $content->attributes['sid'];
                             $res->picSrc = $content->attributes['picSrc'];
+                            $tmp_res = VerBkimgCopy::model()->find("gid={$content->attributes['sid']}");
+                            $res->template_id= $tmp_res->attributes['template_id'];
                             $res->save();
                         }
                         $content->flag = 0;
@@ -1143,6 +1147,20 @@ class StationController extends VController
         echo json_encode($tmp);
     }
 
+    public function saveDataAuth($user_id,$auth_type,$station_id,$auth_ids)
+    {
+         $add_time = time();
+         $model = VerDataAuth::model()->find("user_id=$user_id and auth_type=$auth_type and station_id=$station_id");
+         if(empty($model)){
+             $model = new VerDataAuth();
+         }
+         $model->auth_type = $auth_type;
+         $model->user_id = $user_id;
+         $model->station_id = $station_id;
+         $model->auth_ids = $auth_ids;
+         $model->add_time = $add_time;
+         $model->save();
+    }
 
     public function actionWorkAdd(){
         try{
@@ -1151,8 +1169,10 @@ class StationController extends VController
             }else{
                 $work = VerWork::model()->findByPk($_REQUEST['id']);
             }
+
             if($_POST){
-                //var_dump($_POST);die;
+                $station_id = !empty($_POST['station'])?$_POST['station']:'0';
+
                 $work->name=$_POST['workname'];
                 $work->cp=$_POST['cp'];
                 $work->type=$_POST['model'];
@@ -1166,6 +1186,7 @@ class StationController extends VController
                     LogWriter::logModelSaveError($work,__METHOD__,$work->attributes);
                     throw new ExceptionEx('信息保存失败');
                 }
+
                 $workid = $work->attributes['id'];
                 if(!empty($_POST['editadd'])){
                     foreach($_POST['editadd'] as $k=>$v){
@@ -1177,6 +1198,9 @@ class StationController extends VController
                         $worker->type = '1';
                         $worker->workid = $workid;
                         $worker->save();
+                        if(!empty($_POST['auth_ids'])){
+                            $this->saveDataAuth($v,1,$station_id,$_POST['auth_ids'][$k]);
+                        }
                     }
                 }
                 if(!empty($_POST['fb'])){
@@ -1189,6 +1213,9 @@ class StationController extends VController
                         $worker->type = '2';
                         $worker->workid = $workid;
                         $worker->save();
+                        if(!empty($_POST['auth_ids'])){
+                            $this->saveDataAuth($v,1,$station_id,$_POST['auth_ids'][$k]);
+                        }
                     }
                 }
                 if(!empty($_POST['see'])){
@@ -1201,23 +1228,31 @@ class StationController extends VController
                         $worker->type = '3';
                         $worker->workid = $workid;
                         $worker->save();
+                        if(!empty($_POST['auth_ids'])){
+                            $this->saveDataAuth($v,1,$station_id,$_POST['auth_ids'][$k]);
+                        }
                     }
                 }
                 if(!empty($_POST['model'])){
-                for($i=1;$i<=$_POST['model'];$i++){
-                    $str = 'first-'.$i;
-                if(!empty($_POST[$str])){
-                  foreach($_POST[$str] as $key=>$val){
-                        $worker = new VerReviewWork();
-                        $worker->uid = $val;
-                        $worker->order = '0';
-                        $worker->status = '0';
-                        $worker->addTime = time();
-                        $worker->type = $i;
-                        $worker->workid = $workid;
-                        $worker->save();
-                    }}
-                }}
+                    for($i=1;$i<=$_POST['model'];$i++){
+                        $str = 'first-'.$i;
+                        if(!empty($_POST[$str])){
+                            foreach($_POST[$str] as $key=>$val){
+                                $worker = new VerReviewWork();
+                                $worker->uid = $val;
+                                $worker->order = '0';
+                                $worker->status = '0';
+                                $worker->addTime = time();
+                                $worker->type = $i;
+                                $worker->workid = $workid;
+                                $worker->save();
+                                if(!empty($_POST['auth_ids'])){
+                                  $this->saveDataAuth($val,1,$station_id,$_POST['auth_ids'][$key]);
+                                }
+                            }
+                        }
+                    }
+                }
                 $this->PopMsg('保存成功');
                 $adminLeftOneName = !empty($_POST['adminLeftOneName'])?$_POST['adminLeftOneName']:'';
                 $adminLeftTwoName = !empty($_POST['epg'])?$_GET['epg']:$_POST['adminLeftTwoName'];
@@ -1242,12 +1277,25 @@ class StationController extends VController
     public function actionAjaxList(){
         $p = $_REQUEST['page'];
         $fu = $_REQUEST['fu'];
+        if(!empty($_REQUEST['stationId'])){
+            $station_id = $_REQUEST['stationId'];
+            $guide_res = VerScreenGuide::model()->findAll(
+                array(
+                    'select' =>array('title','id','templateId'),
+                    'order' => '`order` asc',
+                    'condition' => 'gid=:gid',
+                    'params' => array(':gid'=>$station_id),
+                ));
+        }else{
+            $guide_res = array();
+        }
         $list = StationManager::getAll($p);
         $n = $this->renderPartial(
             'ajaxlist',
             array(
                 'list'=>$list,
                 'fu'=>$fu,
+                'guide_res'=>$guide_res,
             ),
             true
         );
@@ -1523,7 +1571,9 @@ class StationController extends VController
         $model->tType=$_POST['tType'];
         $model->uType=$_POST['uType'];
         $model->title=$_POST['title'];
-                $model->flag=7;
+        $model->flag=7;
+        $tmp_res = VerBkimgCopy::model()->find("gid={$_GET['nid']}");
+        $model->template_id= $tmp_res->attributes['template_id'];
         if($model->save()){
             echo json_encode(array("code"=>200));
         }else{
@@ -1558,6 +1608,8 @@ class StationController extends VController
             $model->uType=$_POST['uType'];
             $model->title=$_POST['title'];
                         $model->flag = 7;
+            $tmp_res = VerBkimgCopy::model()->find("gid={$_POST['nid']}");
+            $model->template_id= $tmp_res->attributes['template_id'];
 
             if($model->save()){
                 echo json_encode(array("code"=>200));

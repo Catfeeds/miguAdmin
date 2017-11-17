@@ -20,6 +20,7 @@
  * @property string $videoUrl
  * @property string $sid
  * @property string $picSrc
+ * @property integer $template_id
  */
 class SpecialTopic extends CActiveRecord
 {
@@ -40,13 +41,13 @@ class SpecialTopic extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, type, tType, x, y, width, height, sid, picSrc', 'required'),
-			array('type, tType, uType', 'numerical', 'integerOnly'=>true),
+			array('type, tType, uType, template_id', 'numerical', 'integerOnly'=>true),
 			array('title, action, param, cid, x, y, width, height, videoUrl, picSrc', 'length', 'max'=>255),
 			array('order', 'length', 'max'=>10),
 			array('sid', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, type, tType, uType, action, param, cid, x, y, width, height, order, videoUrl, sid, picSrc', 'safe', 'on'=>'search'),
+			array('id, title, type, tType, uType, action, param, cid, x, y, width, height, order, videoUrl, sid, picSrc, template_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -83,6 +84,7 @@ class SpecialTopic extends CActiveRecord
 			'videoUrl' => 'Video Url',
 			'sid' => 'Sid',
 			'picSrc' => 'Pic Src',
+			'template_id' => '对应模板id',
 		);
 	}
 
@@ -120,6 +122,7 @@ class SpecialTopic extends CActiveRecord
 		$criteria->compare('videoUrl',$this->videoUrl,true);
 		$criteria->compare('sid',$this->sid,true);
 		$criteria->compare('picSrc',$this->picSrc,true);
+		$criteria->compare('template_id',$this->template_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

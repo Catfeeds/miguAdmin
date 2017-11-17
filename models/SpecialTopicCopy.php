@@ -21,6 +21,7 @@
  * @property string $sid
  * @property string $picSrc
  * @property string $flag
+ * @property integer $template_id
  */
 class SpecialTopicCopy extends CActiveRecord
 {
@@ -41,13 +42,13 @@ class SpecialTopicCopy extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, type, tType, x, y, width, height, sid, picSrc', 'required'),
-			array('type, tType, uType', 'numerical', 'integerOnly'=>true),
+			array('type, tType, uType, template_id', 'numerical', 'integerOnly'=>true),
 			array('title, action, param, cid, x, y, width, height, videoUrl, picSrc, flag', 'length', 'max'=>255),
 			array('order', 'length', 'max'=>10),
 			array('sid', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, type, tType, uType, action, param, cid, x, y, width, height, order, videoUrl, sid, picSrc, flag', 'safe', 'on'=>'search'),
+			array('id, title, type, tType, uType, action, param, cid, x, y, width, height, order, videoUrl, sid, picSrc, flag, template_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -85,6 +86,7 @@ class SpecialTopicCopy extends CActiveRecord
 			'sid' => 'Sid',
 			'picSrc' => 'Pic Src',
 			'flag' => 'Flag',
+			'template_id' => '对应模板id',
 		);
 	}
 
@@ -123,6 +125,7 @@ class SpecialTopicCopy extends CActiveRecord
 		$criteria->compare('sid',$this->sid,true);
 		$criteria->compare('picSrc',$this->picSrc,true);
 		$criteria->compare('flag',$this->flag,true);
+		$criteria->compare('template_id',$this->template_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
