@@ -360,7 +360,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
 //        return false;
         $.post('/version/wallpaper/doNewAdd?mid=<?php echo $_REQUEST['mid']?>',G,function(d){
-//            console.log(d);return false;
+            //console.log(d);return false;
             if(d== 200){
                 //location.reload();
                 alert('添加成功');
