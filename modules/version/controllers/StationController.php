@@ -1198,8 +1198,8 @@ class StationController extends VController
                         $worker->type = '1';
                         $worker->workid = $workid;
                         $worker->save();
-                        if(!empty($_POST['auth_ids'])){
-                            $this->saveDataAuth($v,1,$station_id,$_POST['auth_ids'][$k]);
+                        if(!empty($_POST['editadd_auth_ids'])){
+                            $this->saveDataAuth($v,1,$station_id,$_POST['editadd_auth_ids'][$k]);
                         }
                     }
                 }
@@ -1213,8 +1213,8 @@ class StationController extends VController
                         $worker->type = '2';
                         $worker->workid = $workid;
                         $worker->save();
-                        if(!empty($_POST['auth_ids'])){
-                            $this->saveDataAuth($v,1,$station_id,$_POST['auth_ids'][$k]);
+                        if(!empty($_POST['fb_auth_ids'])){
+                            $this->saveDataAuth($v,1,$station_id,$_POST['fb_auth_ids'][$k]);
                         }
                     }
                 }
@@ -1228,8 +1228,8 @@ class StationController extends VController
                         $worker->type = '3';
                         $worker->workid = $workid;
                         $worker->save();
-                        if(!empty($_POST['auth_ids'])){
-                            $this->saveDataAuth($v,1,$station_id,$_POST['auth_ids'][$k]);
+                        if(!empty($_POST['see_auth_ids'])){
+                            $this->saveDataAuth($v,1,$station_id,$_POST['see_auth_ids'][$k]);
                         }
                     }
                 }
@@ -1246,8 +1246,9 @@ class StationController extends VController
                                 $worker->type = $i;
                                 $worker->workid = $workid;
                                 $worker->save();
-                                if(!empty($_POST['auth_ids'])){
-                                  $this->saveDataAuth($val,1,$station_id,$_POST['auth_ids'][$key]);
+                                $tmp_str = $str."_auth_ids";
+                                if(!empty($_POST[$tmp_str])){
+                                  $this->saveDataAuth($val,1,$station_id,$_POST[$tmp_str][$key]);
                                 }
                             }
                         }
@@ -1317,6 +1318,9 @@ class StationController extends VController
             $adminLeftTwoName = !empty($_POST['epg'])?$_GET['epg']:$_POST['adminLeftTwoName'];
             $adminLeftOne = !empty($_POST['adminLeftOne'])?$_POST['adminLeftOne']:'';
             $adminLeftTwo = !empty($_POST['adminLeftTwo'])?$_POST['adminLeftTwo']:'';
+
+            $station_id=!empty($_POST['station'])?$_POST['station']:'0';
+
             $id= $_POST['wid'];
             $work = VerWork::model()->findByPk($_REQUEST['id']);
             $work->name=$_POST['workname'];
@@ -1334,6 +1338,7 @@ class StationController extends VController
             }
             Yii::app()->db->createCommand()->delete('{{ver_worker}}', "workid='{$id}'");
             Yii::app()->db->createCommand()->delete('{{ver_review_work}}', "workid='{$id}'");
+//            var_dump($_POST);die;
             if(!empty($_POST['editadd'])){
                 foreach($_POST['editadd'] as $k=>$v){
                     $worker = new VerWorker();
@@ -1344,6 +1349,9 @@ class StationController extends VController
                     $worker->type = '1';
                     $worker->workid = $id;
                     $worker->save();
+                    if(!empty($_POST['editadd_auth_ids'])){
+                        $this->saveDataAuth($v,1,$station_id,$_POST['editadd_auth_ids'][$k]);
+                    }
                 }
             }
             if(!empty($_POST['fb'])){
@@ -1356,6 +1364,9 @@ class StationController extends VController
                     $worker->type = '2';
                     $worker->workid = $id;
                     $worker->save();
+                    if(!empty($_POST['fb_auth_ids'])){
+                        $this->saveDataAuth($v,1,$station_id,$_POST['fb_auth_ids'][$k]);
+                    }
                 }
             }
             if(!empty($_POST['see'])){
@@ -1368,6 +1379,9 @@ class StationController extends VController
                     $worker->type = '3';
                     $worker->workid = $id;
                     $worker->save();
+                    if(!empty($_POST['see_auth_ids'])){
+                        $this->saveDataAuth($v,1,$station_id,$_POST['see_auth_ids'][$k]);
+                    }
                 }
             }
             for($i=1;$i<=$_POST['model'];$i++){
@@ -1382,6 +1396,10 @@ class StationController extends VController
                     $worker->type = $i;
                     $worker->workid = $id;
                     $worker->save();
+                    $tmp_str = $str."_auth_ids";
+                    if(!empty($_POST[$tmp_str])){
+                        $this->saveDataAuth($val,1,$station_id,$_POST[$tmp_str][$key]);
+                    }
                 }
                 }
             }

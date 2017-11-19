@@ -7,7 +7,14 @@ class ScreenController extends VController
 	//echo FTP_PATH;
         $gid = $_REQUEST['nid'];
         //$sql = "select * from yd_ver_screen_guide where gid = $gid";
-        $sql = "select * from yd_ver_screen_guide where gid = $gid order by `order` asc";
+        if($_SESSION['auth'] == '1'){
+            $sql = "select * from yd_ver_screen_guide where gid = $gid order by `order` asc";
+        }else{
+            $user_id = $_SESSION['userid'];
+            $auth_ids_res = VerDataAuth::model()->find("station_id=$gid and user_id=$user_id and auth_type=1");
+            //$sql = "select a.* from yd_ver_screen_guide as a inner join yd_ver_data_auth as b on a.gid=b.station_id where b.user_id=$user_id  and a.id in(b.auth_ids)";
+            $sql = "select * from yd_ver_screen_guide where id in (".$auth_ids_res->attributes['auth_ids'].")";
+        }
         $list = SQLManager::queryAll($sql);
         if(empty($list)){
             $this->render('index');
@@ -909,6 +916,19 @@ class ScreenController extends VController
           `copyGuideId` int(10) NOT NULL DEFAULT '0' COMMENT '选中复制的导航id',
           `pasteGuideId` int(10) NOT NULL DEFAULT '0' COMMENT '进行粘贴的导航id',
           `status` int(1) NOT NULL DEFAULT '1' COMMENT '两个导航之间的绑定关系是否有效  1有效；2无效',
+          PRIMARY KEY (`id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+    */
+
+    /*
+     * 站点各种数据的对应用户权限关系表
+        CREATE TABLE `yd_ver_data_auth` (
+          `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+          `user_id` int(10) NOT NULL DEFAULT '0' COMMENT '用户id',
+          `station_id` int(10) NOT NULL DEFAULT '0' COMMENT '对应站点id',
+          `auth_ids` varchar(255) NOT NULL DEFAULT '' COMMENT '有权限显示的数据id',
+          `add_time` int(10) NOT NULL DEFAULT 0 COMMENT '添加这条数据的时间',
+          `auth_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '数据的种类，1->屏幕导航',
           PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8
     */

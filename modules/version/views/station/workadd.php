@@ -2,6 +2,8 @@
 .mtable td{
 	padding:5px;
 }
+    .guide_td{display: none;}
+    .guide_checkbox{display: none;}
 </style>
 <?php
     $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
@@ -56,7 +58,7 @@
         <tr>
             <td>选择屏幕</td>
             <td>
-                <select name="station" id="station" class="form-input w300">
+                <select name="station" id="station" class="form-input w300" <!--onchange="stationGuide(this)"-->>
                     <option value="0">--请选择--</option>
                     <?php
                     foreach ($res as $k => $v) {
@@ -145,7 +147,7 @@
                     <tr>
                         <td>选择站点</td>
                         <td>
-                            <select name="station" id="station" class="form-input w300">
+                            <select name="station" id="station" class="form-input w300" >
                                 <option value="0">--请选择--</option>
                                 <?php
                                 foreach ($res as $k => $v) {
@@ -176,14 +178,17 @@
         <tr>
             <th colspan="4" align="left"><b>编辑节点配置</b></th>
         </tr>
-        <tr class="editer">
+        <tr class="editer ">
             <td colspan="2" align="center">人员</td>
             <td colspan="2" align="center">操作</td>
+            <td class="guide_td">勾选对应导航权限</td>
         </tr>
-        <tr class="editadd" id="editadd">
+        <tr class="editadd guide" id="editadd">
             <td colspan="2" align="center" class="add" onclick="add(this)">添加</td>
             <td colspan="2" align="center"></td>
+            <td class="guide_checkbox"></td>
         </tr>
+
         <!--<tr class="first first-1">
             <th colspan="4" align="left"><b>1审节点配置</b></th>
         </tr>
@@ -201,10 +206,12 @@
         <tr>
             <td colspan="2" align="center">人员</td>
             <td colspan="2" align="center">操作</td>
+            <td class="guide_td">勾选对应导航权限</td>
         </tr>
-        <tr id="fb">
+        <tr id="fb" class="guide">
             <td colspan="2" align="center"  class="add" onclick="add(this)">添加</td>
             <td colspan="2" align="center"></td>
+            <td class="guide_checkbox"></td>
         </tr>
         <tr>
             <th colspan="4" align="left"><b>浏览权限配置</b></th>
@@ -212,10 +219,12 @@
         <tr>
             <td colspan="2" align="center">人员</td>
             <td colspan="2" align="center">操作</td>
+            <td class="guide_td">勾选对应导航权限</td>
         </tr>
-        <tr id="see">
+        <tr id="see" class="guide">
             <td colspan="2" align="center"  class="add" onclick="add(this)">添加</td>
             <td colspan="2" align="center"></td>
+            <td class="guide_checkbox"></td>
         </tr>
         <tr>
    
@@ -227,6 +236,35 @@
     </table>
 </form>
 <script>
+
+    /*function stationGuide(obj)
+    {
+        var station_id = $(obj).val();
+        var mid = <?php //echo $this->mid;?>;
+        $.ajax
+        ({
+            type:'get',
+            url:'/version/screen/getStationGuide/mid/'+mid+'/stationId/'+station_id,
+            success:function(data)
+            {
+                data = eval(data);
+                $('.guide_td').show();
+                $('.guide_checkbox').show();
+                $(".guide_checkbox").children().remove();
+                $.each(data,function(i)
+                {
+//                    console.log(data[i]['title']);
+                    $(".guide_checkbox").append
+                    (
+                        '<input type="checkbox" name="screenGuideId" value="'+data[i]['id']+'">'+
+                        '<span>'+data[i]['title']+'</span>'
+                    );
+                });
+            }
+        });
+    }*/
+
+
     function checks(){
         var num = $('#xuanze').val();
         $('.first').remove();
@@ -239,11 +277,11 @@
         var workname = $('input[name=workname]').val();
         var model = $('#xuanze').val();
         if(empty(workname)){
-            alert('请输入任务名');
+            layer.alert('请输入任务名');
             return false;
         }
         if(empty(cp)){
-            alert('请选择牌照方');
+            layer.alert('请选择牌照方');
             return false;
         }
 
@@ -251,7 +289,7 @@
         if(stationFlag){
             var stationId = $('#station').val();
             if(empty(stationId)){
-                alert('请选择屏幕！');
+                layer.alert('请选择屏幕！');
                 return false;
             }
         }
@@ -276,16 +314,27 @@
                 $('.content').append(li);
                 $('.over').show();
             }else{
-                alert(d.msg)
+                layer.alert(d.msg)
             }
         })
     })*/
     //$(document).off("click").on('click','.add',function(){
     //$('.add').click(function(){
     function add(obj){
+        <?php if($_REQUEST['flag'] == '3'){echo 'var stationFlag=1;';}else{echo 'var stationFlag=0;';}?>
+        if(stationFlag){
+            var stationId = $('#station').val();
+            if(empty(stationId)){
+                layer.alert('请选择屏幕！');
+                return false;
+            }
+        }else{
+            var stationId = 0;
+        }
+
         fu = $(obj).parent().attr('id');
         var p = 1;
-        $.getJSON("<?php echo $this->get_url('station','ajaxlist')?>",{page:p,fu:fu},function(d){
+        $.getJSON("<?php echo $this->get_url('station','ajaxlist')?>",{page:p,fu:fu,stationId:stationId},function(d){
             if(d.code==200){
                 layer.open({
                     type: 1,
@@ -294,7 +343,7 @@
                     content: d.msg
                 })
             }else{
-                alert(msg);
+                layer.alert(msg);
             }
         })
     }

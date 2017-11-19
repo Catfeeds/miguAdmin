@@ -11,6 +11,17 @@
 <div class="mt10">
     <form action="">
         <input type="hidden" name="fu" value="<?php echo $fu?>">
+        <?php
+            if(!empty($guide_res)){?>
+                <div>请勾选改用户的对应导航权限</div>
+                <?php
+                foreach ($guide_res as $key=>$val){?>
+                    <input type="checkbox" name="guide_id" id="guide_id" value="<?php echo $val->attributes['id']?>">
+                    <span><?php echo $val->attributes['title']?></span>&nbsp;
+        <?php
+                }
+            }
+        ?>
         <div class="fenlei" style="height:400px;overflow:auto">
         <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
             <tr>
@@ -69,16 +80,31 @@
             newid+= $(this).val()+' ';
             order +=$(this).parent().next().children('input').val()+' ';
         });
+
+        var guide_id = '';
+        if($('#guide_id').length>0){
+            $("input[name='guide_id']:checked").each(function() {
+                guide_id += $(this).val()+',';
+            });
+            guide_id = guide_id.substring(0, guide_id.length - 1);
+        }
+
         var ids = trim(newid).split(' ');
         var orders = trim(order).split(' ');
         //return false;
         //var c = $.extend(ids, orders);
         if(!empty(ids)){
-        var str = '#'+fu;
-        for(var i=0;i<count(ids);i++){
-            var li = "<tr><td colspan='2' align='center'><input type='hidden' name="+fu+'[]'+" value="+ids[i]+">"+orders[i]+"</td><td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td></tr>";
-            $(str).before(li);
-        }
+            var str = '#'+fu;
+            for(var i=0;i<count(ids);i++){
+                var li = "<tr>" +
+                            "<td colspan='2' align='center'>" +
+                                "<input type='hidden' name="+fu+'_auth_ids[]'+" value='"+guide_id+"'>"+
+                                "<input type='hidden' name="+fu+'[]'+" value="+ids[i]+">"+orders[i]+
+                            "</td>" +
+                            "<td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td>" +
+                        "</tr>";
+                $(str).before(li);
+            }
         }
         layer.closeAll();
 

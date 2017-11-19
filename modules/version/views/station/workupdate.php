@@ -61,7 +61,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <tr>
                     <td>已选屏幕：</td>
                     <td>
-                    <select name="station" id="station" class="form-input w300">
+                    <select name="station" id="station" onchange="stationGuide(this)" class="form-input w300">
                         <?php
                         $sql = "select id,name from yd_ver_station";
                         $res = SQLManager::queryAll($sql);
@@ -147,19 +147,50 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
              }
 
         ?>
+
+        <?php $sign = $work->attributes['flag'];?>
         <tr>
             <th colspan="4" align="left"><b>编辑节点配置</b></th>
         </tr>
         <tr class="editer">
             <td colspan="2" align="center">人员</td>
             <td colspan="2" align="center">操作</td>
+            <?php
+                if($sign == 3){echo '<td>对应导航</td>';}
+            ?>
         </tr>
         <?php
+        $station_id = $work->attributes['stationId'];
         if(!empty($worker[1])){
-            foreach($worker[1] as $k=>$v){
-                ?>
 
-                <tr><td colspan='2' align='center'><input type='hidden' name="editadd[<?php echo $k?>]" value="<?php echo $v['id']?>"><?php echo $v['username']?></td><td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td></tr>
+            foreach($worker[1] as $k=>$v){
+                $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['id']} and auth_type=1");
+                ?>
+                <tr class="editadd">
+                    <td colspan='2' align='center'>
+                        <input type='hidden' name="editadd[<?php echo $k?>]" value="<?php echo $v['id']?>">
+                        <input type="hidden" name="editadd_auth_ids[<?php echo $k?>]" value="<?php echo $auth_ids_res->attributes['auth_ids'];?>">
+                        <?php echo $v['username']?>
+                    </td>
+                    <td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td>
+                    <?php if($sign == 3){
+                        echo "<td colspan='2'>";
+                        $guide_res = VerScreenGuide::model()->findAll("gid=$station_id");
+                        $selected_guide = explode(',',$auth_ids_res->attributes['auth_ids']);
+                        foreach ($guide_res as $a=>$b){
+                            if(in_array($b->attributes['id'],$selected_guide)){?>
+                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" checked="checked"  value="<?php echo $b->attributes['id']?>">
+                            <?php }else{?>
+                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" value="<?php echo $b->attributes['id']?>">
+
+                           <?php } ?>
+                            <span><?php echo $b->attributes['title'];?></span>
+                    <?php
+                        }
+                        echo "</td>";
+                    }
+                    ?>
+                </tr>
                 <?php
             }
         }
@@ -178,14 +209,45 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <tr class='first'>
                         <td colspan="2" align="center">人员</td>
                         <td colspan="2" align="center">操作</td>
+                        <?php
+                        if($sign == 3){echo '<td>对应导航</td>';}
+                        ?>
                     </tr>
                     <?php
                         foreach($val as $k=>$v){
+                            $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['id']} and auth_type=1");
                             ?>
-                            <tr class='first' ><td colspan='2' align='center'><input type='hidden' name="first-<?php echo $key?>[]" value="<?php echo $v['id']?>"><?php echo $v['username']?></td><td colspan='2'  align='center' class='del'  onclick='del(this)'>删除</td></tr>
+                            <tr class='first' >
+                                <td colspan='2' align='center'>
+                                    <input type='hidden' name="first-<?php echo $key?>[]" value="<?php echo $v['id']?>">
+                                    <input type="hidden" name="first-<?php echo $key?>_auth_ids[]" value="<?php echo $auth_ids_res->attributes['auth_ids'];?>">
+                                    <?php echo $v['username']?>
+                                </td>
+                                <td colspan='2'  align='center' class='del'  onclick='del(this)'>删除</td>
+
+                            <?php if($sign == 3){
+                                echo "<td colspan='2'>";
+                                $guide_res = VerScreenGuide::model()->findAll("gid=$station_id");
+                                $selected_guide = explode(',',$auth_ids_res->attributes['auth_ids']);
+                                foreach ($guide_res as $a=>$b){
+                                    if(in_array($b->attributes['id'],$selected_guide)){?>
+                                        <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" checked="checked"  value="<?php echo $b->attributes['id']?>">
+                                    <?php }else{?>
+                                        <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" value="<?php echo $b->attributes['id']?>">
+
+                                    <?php } ?>
+                                    <span><?php echo $b->attributes['title'];?></span>
+                                    <?php
+                                }
+                                echo "</td>";
+                            }
+
+                            ?>
+                            </tr>
                             <?php
                         }
                     ?>
+
                     <tr class='first' id="first-<?php echo $key?>" >
                         <td colspan="2" align="center" class="add" onclick="add(this)">添加</td>
                         <td colspan="2" align="center"></td>
@@ -202,16 +264,45 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <tr>
             <td colspan="2" align="center">人员</td>
             <td colspan="2" align="center">操作</td>
+            <?php
+            if($sign == 3){echo '<td>对应导航</td>';}
+            ?>
         </tr>
         <?php
         if(!empty($worker[2])){
             foreach($worker[2] as $k=>$v){
+                $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['id']} and auth_type=1");
                 ?>
-                <tr><td colspan='2' align='center'><input type='hidden' name="fb[<?php echo $k?>]" value="<?php echo $v['id']?>"><?php echo $v['username']?></td><td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td></tr>
+                <tr class="fb">
+                    <td colspan='2' align='center'>
+                        <input type='hidden' name="fb[<?php echo $k?>]" value="<?php echo $v['id']?>">
+                        <?php echo $v['username']?>
+                        <input type="hidden" name="fb_auth_ids[<?php echo $k?>]" value="<?php echo $auth_ids_res->attributes['auth_ids'];?>">
+                    </td>
+                    <td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td>
+                    <?php if($sign == 3){
+                        echo "<td colspan='2'>";
+                        $guide_res = VerScreenGuide::model()->findAll("gid=$station_id");
+                        $selected_guide = explode(',',$auth_ids_res->attributes['auth_ids']);
+                        foreach ($guide_res as $a=>$b){
+                            if(in_array($b->attributes['id'],$selected_guide)){?>
+                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" checked="checked"  value="<?php echo $b->attributes['id']?>">
+                            <?php }else{?>
+                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" value="<?php echo $b->attributes['id']?>">
+
+                            <?php } ?>
+                            <span><?php echo $b->attributes['title'];?></span>
+                            <?php
+                        }
+                        echo "</td>";
+                    }
+                    ?>
+                </tr>
                 <?php
             }
         }
         ?>
+
         <tr id="fb">
             <td colspan="2" align="center"  class="add" onclick="add(this)">添加</td>
             <td colspan="2" align="center"></td>
@@ -222,12 +313,41 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <tr>
             <td colspan="2" align="center">人员</td>
             <td colspan="2" align="center">操作</td>
+            <?php
+                if($sign == 3){echo '<td>对应导航</td>';}
+            ?>
         </tr>
         <?php
         if(!empty($worker[3])){
             foreach($worker[3] as $k=>$v){
+                $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['id']} and auth_type=1");
                 ?>
-                <tr><td colspan='2' align='center'><input type='hidden' name="see[<?php echo $k?>]" value="<?php echo $v['id']?>"><?php echo $v['username']?></td><td colspan='2'  align='center' class='del'onclick='del(this)'>删除</td></tr>
+                <tr class="see">
+                    <td colspan='2' align='center'>
+                        <input type='hidden' name="see[<?php echo $k?>]" value="<?php echo $v['id']?>">
+                        <?php echo $v['username'];?>
+                        <input type="hidden" name="see_auth_ids[<?php echo $k?>]" value="<?php echo $auth_ids_res->attributes['auth_ids'];?>">
+                    </td>
+                    <td colspan='2'  align='center' class='del'onclick='del(this)'>删除</td>
+
+                <?php if($sign == 3){
+                    echo "<td colspan='2'>";
+                    $guide_res = VerScreenGuide::model()->findAll("gid=$station_id");
+                    $selected_guide = explode(',',$auth_ids_res->attributes['auth_ids']);
+                    foreach ($guide_res as $a=>$b){
+                        if(in_array($b->attributes['id'],$selected_guide)){?>
+                            <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" checked="checked" class="guide_checkbox" value="<?php echo $b->attributes['id']?>">
+                        <?php }else{?>
+                            <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" value="<?php echo $b->attributes['id']?>">
+
+                        <?php } ?>
+                        <span><?php echo $b->attributes['title'];?></span>
+                        <?php
+                    }
+                    echo "</td>";
+                }
+                ?>
+                </tr>
                 <?php
             }
         }
@@ -246,6 +366,46 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     </table>
 </form>
 <script>
+
+    function stationGuide(obj)
+    {
+        var station_id = $(obj).val();
+        var mid = <?php echo $this->mid;?>;
+        $.ajax
+        ({
+            type:'get',
+            url:'/version/screen/getStationGuide/mid/'+mid+'/stationId/'+station_id,
+            success:function(data)
+            {
+                data = eval(data);
+                $(".guide_checkbox").next('span').remove();
+                $(".guide_checkbox").remove();
+                $.each(data,function(i)
+                {
+                    $(".del").after
+                    (
+                        '<input type="checkbox" name="guide" class="guide_checkbox" onclick="change_guide_auth(this)" value="'+data[i]['id']+'">'+
+                        '<span>'+data[i]['title']+'</span>'
+                    );
+                });
+            }
+        });
+    }
+
+   function change_guide_auth(obj)
+   {
+       var guide_id = '';
+//       $(obj).parent('td').children('input[name="guide"]:checked').each(function()
+       $(obj).parent('td').children('.guide_checkbox:checked').each(function()
+       {
+           guide_id += $(this).val()+',';
+       });
+       guide_id = guide_id.substring(0, guide_id.length - 1);
+       $(obj).parent().parent().children().eq(0).children().eq(1).val(guide_id);
+   }
+
+
+
 	var num = $('#xuanze').val();
 	var x;
 		
@@ -280,7 +440,17 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     function add(obj){
         fu = $(obj).parent().attr('id');
         var p = 1;
-        $.getJSON("<?php echo $this->get_url('station','ajaxlist')?>",{page:p,fu:fu},function(d){
+        <?php if($work->attributes['flag'] == '3'){echo 'var stationFlag=1;';}else{echo 'var stationFlag=0;';}?>
+        if(stationFlag){
+            var stationId = $('#station').val();
+            if(empty(stationId)){
+                layer.alert('请选择屏幕！');
+                return false;
+            }
+        }else{
+            var stationId = 0;
+        }
+        $.getJSON("<?php echo $this->get_url('station','ajaxlist')?>",{page:p,fu:fu,stationId:stationId},function(d){
             if(d.code==200){
                 layer.open({
                     type: 1,
