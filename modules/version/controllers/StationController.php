@@ -1827,7 +1827,7 @@ class StationController extends VController
         echo $tmp_res->attributes['id'];
     }
 
-    public function actionTest()
+    /*public function actionTest()
     {
         $res = SpecialTopicCopy::model()->findAll();
         foreach ($res as $k=>$v){
@@ -1847,7 +1847,7 @@ class StationController extends VController
             $model->template_id = $tmp_res->attributes['template_id'];
             $model->save();
         }
-    }
+    }*/
 }
 
 

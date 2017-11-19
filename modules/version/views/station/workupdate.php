@@ -169,23 +169,32 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <tr class="editadd">
                     <td colspan='2' align='center'>
                         <input type='hidden' name="editadd[<?php echo $k?>]" value="<?php echo $v['id']?>">
+                        <?php if(!empty($auth_ids_res)){?>
                         <input type="hidden" name="editadd_auth_ids[<?php echo $k?>]" value="<?php echo $auth_ids_res->attributes['auth_ids'];?>">
+                    <?php }?>
                         <?php echo $v['username']?>
                     </td>
                     <td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td>
                     <?php if($sign == 3){
                         echo "<td colspan='2'>";
                         $guide_res = VerScreenGuide::model()->findAll("gid=$station_id");
-                        $selected_guide = explode(',',$auth_ids_res->attributes['auth_ids']);
-                        foreach ($guide_res as $a=>$b){
-                            if(in_array($b->attributes['id'],$selected_guide)){?>
-                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" checked="checked"  value="<?php echo $b->attributes['id']?>">
-                            <?php }else{?>
-                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" value="<?php echo $b->attributes['id']?>">
+                        if(!empty($guide_res) && !empty($auth_ids_res)) {
+                            $selected_guide = explode(',', $auth_ids_res->attributes['auth_ids']);
+                            foreach ($guide_res as $a => $b) {
+                                if (in_array($b->attributes['id'], $selected_guide)) {
+                                    ?>
+                                    <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)"
+                                           class="guide_checkbox" checked="checked"
+                                           value="<?php echo $b->attributes['id'] ?>">
+                                <?php } else {
+                                    ?>
+                                    <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)"
+                                           class="guide_checkbox" value="<?php echo $b->attributes['id'] ?>">
 
-                           <?php } ?>
-                            <span><?php echo $b->attributes['title'];?></span>
-                    <?php
+                                <?php } ?>
+                                <span><?php echo $b->attributes['title']; ?></span>
+                                <?php
+                            }
                         }
                         echo "</td>";
                     }
@@ -220,7 +229,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             <tr class='first' >
                                 <td colspan='2' align='center'>
                                     <input type='hidden' name="first-<?php echo $key?>[]" value="<?php echo $v['id']?>">
+                                    <?php if(!empty($auth_ids_res)){?>
                                     <input type="hidden" name="first-<?php echo $key?>_auth_ids[]" value="<?php echo $auth_ids_res->attributes['auth_ids'];?>">
+                                <?php } ?>
                                     <?php echo $v['username']?>
                                 </td>
                                 <td colspan='2'  align='center' class='del'  onclick='del(this)'>删除</td>
@@ -228,16 +239,19 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             <?php if($sign == 3){
                                 echo "<td colspan='2'>";
                                 $guide_res = VerScreenGuide::model()->findAll("gid=$station_id");
-                                $selected_guide = explode(',',$auth_ids_res->attributes['auth_ids']);
-                                foreach ($guide_res as $a=>$b){
-                                    if(in_array($b->attributes['id'],$selected_guide)){?>
-                                        <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" checked="checked"  value="<?php echo $b->attributes['id']?>">
-                                    <?php }else{?>
-                                        <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" value="<?php echo $b->attributes['id']?>">
+                                if(!empty($guide_res) && !empty($auth_ids_res)) {
+                                    $selected_guide = explode(',',$auth_ids_res->attributes['auth_ids']);
 
-                                    <?php } ?>
-                                    <span><?php echo $b->attributes['title'];?></span>
-                                    <?php
+                                    foreach ($guide_res as $a=>$b){
+                                        if(in_array($b->attributes['id'],$selected_guide)){?>
+                                            <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" checked="checked"  value="<?php echo $b->attributes['id']?>">
+                                        <?php }else{?>
+                                            <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" value="<?php echo $b->attributes['id']?>">
+
+                                        <?php } ?>
+                                        <span><?php echo $b->attributes['title'];?></span>
+                                        <?php
+                                    }
                                 }
                                 echo "</td>";
                             }
@@ -277,23 +291,32 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td colspan='2' align='center'>
                         <input type='hidden' name="fb[<?php echo $k?>]" value="<?php echo $v['id']?>">
                         <?php echo $v['username']?>
+                        <?php if(!empty($auth_ids_res)){?>
                         <input type="hidden" name="fb_auth_ids[<?php echo $k?>]" value="<?php echo $auth_ids_res->attributes['auth_ids'];?>">
+                    <?php } ?>
                     </td>
                     <td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td>
                     <?php if($sign == 3){
                         echo "<td colspan='2'>";
                         $guide_res = VerScreenGuide::model()->findAll("gid=$station_id");
-                        $selected_guide = explode(',',$auth_ids_res->attributes['auth_ids']);
-                        foreach ($guide_res as $a=>$b){
-                            if(in_array($b->attributes['id'],$selected_guide)){?>
-                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" checked="checked"  value="<?php echo $b->attributes['id']?>">
-                            <?php }else{?>
-                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" value="<?php echo $b->attributes['id']?>">
+                    if(!empty($guide_res) && !empty($auth_ids_res)) {
+                        $selected_guide = explode(',', $auth_ids_res->attributes['auth_ids']);
+                        foreach ($guide_res as $a => $b) {
+                            if (in_array($b->attributes['id'], $selected_guide)) {
+                                ?>
+                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)"
+                                       class="guide_checkbox" checked="checked"
+                                       value="<?php echo $b->attributes['id'] ?>">
+                            <?php } else {
+                                ?>
+                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)"
+                                       class="guide_checkbox" value="<?php echo $b->attributes['id'] ?>">
 
                             <?php } ?>
-                            <span><?php echo $b->attributes['title'];?></span>
+                            <span><?php echo $b->attributes['title']; ?></span>
                             <?php
                         }
+                    }
                         echo "</td>";
                     }
                     ?>
@@ -326,23 +349,32 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td colspan='2' align='center'>
                         <input type='hidden' name="see[<?php echo $k?>]" value="<?php echo $v['id']?>">
                         <?php echo $v['username'];?>
+                        <?php if(!empty($auth_ids_res)){?>
                         <input type="hidden" name="see_auth_ids[<?php echo $k?>]" value="<?php echo $auth_ids_res->attributes['auth_ids'];?>">
+                    <?php }?>
                     </td>
                     <td colspan='2'  align='center' class='del'onclick='del(this)'>删除</td>
 
                 <?php if($sign == 3){
                     echo "<td colspan='2'>";
                     $guide_res = VerScreenGuide::model()->findAll("gid=$station_id");
-                    $selected_guide = explode(',',$auth_ids_res->attributes['auth_ids']);
-                    foreach ($guide_res as $a=>$b){
-                        if(in_array($b->attributes['id'],$selected_guide)){?>
-                            <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" checked="checked" class="guide_checkbox" value="<?php echo $b->attributes['id']?>">
-                        <?php }else{?>
-                            <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox" value="<?php echo $b->attributes['id']?>">
+                    if(!empty($guide_res) && !empty($auth_ids_res)) {
+                        $selected_guide = explode(',', $auth_ids_res->attributes['auth_ids']);
+                        foreach ($guide_res as $a => $b) {
+                            if (in_array($b->attributes['id'], $selected_guide)) {
+                                ?>
+                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)"
+                                       checked="checked" class="guide_checkbox"
+                                       value="<?php echo $b->attributes['id'] ?>">
+                            <?php } else {
+                                ?>
+                                <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)"
+                                       class="guide_checkbox" value="<?php echo $b->attributes['id'] ?>">
 
-                        <?php } ?>
-                        <span><?php echo $b->attributes['title'];?></span>
-                        <?php
+                            <?php } ?>
+                            <span><?php echo $b->attributes['title']; ?></span>
+                            <?php
+                        }
                     }
                     echo "</td>";
                 }
