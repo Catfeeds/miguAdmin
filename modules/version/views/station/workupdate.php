@@ -22,7 +22,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <input type="hidden" name="adminLeftOne" value="<?php echo $adminLeftOne;?>">
         <input type="hidden" name="adminLeftTwo" value="<?php echo $adminLeftTwo;?>">
         <tr>
-            <th colspan="4" align="left"><b>任务信息</b></th>
+            <th colspan="<?php if($work->attributes['flag']==3){echo '6';}else{echo '4';}?>" align="left"><b>任务信息</b></th>
         </tr>
         <tr>
             <td>任务名称</td>
@@ -41,6 +41,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 			<option <?php $cp=$work->attributes['cp'];if($cp=='poms'){echo "selected=selected"; }?> value="poms">咪咕</option>
                 </select>
             </td>
+            <?php if($work->attributes['flag']==3){echo '<td colspan="2"></td>';}?>
         </tr>
         <tr>
             <td >流模式：</td>
@@ -54,6 +55,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <option <?php $cp=$work->attributes['type'];if($cp=='5'){echo "selected=selected"; }?> value="5">五审</option>
                 </select>
             </td>
+            <?php if($work->attributes['flag']==3){echo '<td colspan="6"></td>';}?>
         </tr>
         <?php
         
@@ -75,6 +77,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
                     </select>
                     </td>
+                    <?php if($work->attributes['flag']==3){echo '<td colspan="4"></td>';}?>
                 </tr>
         <?php }else if($work->attributes['flag']=='2' || $work->attributes['flag']=='6' ){ 
                  ?>
@@ -150,7 +153,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
         <?php $sign = $work->attributes['flag'];?>
         <tr>
-            <th colspan="4" align="left"><b>编辑节点配置</b></th>
+            <th colspan="<?php if($work->attributes['flag']==3){echo '6';}else{echo '4';}?>" align="left"><b>编辑节点配置</b></th>
         </tr>
         <tr class="editer">
             <td colspan="2" align="center">人员</td>
@@ -206,14 +209,14 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         ?>
         <tr class="editadd" id="editadd">
             <td colspan="2" align="center" class="add" onclick="add(this)">添加</td>
-            <td colspan="2" align="center"></td>
+            <td colspan="<?php if($work->attributes['flag']==3){echo '4';}else{echo '2';}?>" align="center"></td>
         </tr>
         <?php
             if(!empty($review)){
                 foreach($review as $key=>$val){
                     ?>
                     <tr class="first first-<?php echo $key?>">
-                        <th colspan="4" align="left"><b><?php echo $key?>审节点配置</b></th>
+                        <th colspan="<?php if($work->attributes['flag']==3){echo '6';}else{echo '4';}?>" align="left"><b><?php echo $key?>审节点配置</b></th>
                     </tr>
                     <tr class='first'>
                         <td colspan="2" align="center">人员</td>
@@ -264,7 +267,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
                     <tr class='first' id="first-<?php echo $key?>" >
                         <td colspan="2" align="center" class="add" onclick="add(this)">添加</td>
-                        <td colspan="2" align="center"></td>
+                        <td colspan="<?php if($work->attributes['flag']==3){echo '4';}else{echo '2';}?>" align="center"></td>
                     </tr>
                 <?php
                 }
@@ -273,7 +276,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         ?>
 
         <tr>
-            <th colspan="4" align="left"><b>发布节点配置</b></th>
+            <th colspan="<?php if($work->attributes['flag']==3){echo '6';}else{echo '4';}?>" align="left"><b>发布节点配置</b></th>
         </tr>
         <tr>
             <td colspan="2" align="center">人员</td>
@@ -328,10 +331,10 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
         <tr id="fb">
             <td colspan="2" align="center"  class="add" onclick="add(this)">添加</td>
-            <td colspan="2" align="center"></td>
+            <td colspan="<?php if($work->attributes['flag']==3){echo '4';}else{echo '2';}?>" align="center"></td>
         </tr>
         <tr>
-            <th colspan="4" align="left"><b>浏览权限配置</b></th>
+            <th colspan="<?php if($work->attributes['flag']==3){echo '6';}else{echo '4';}?>" align="left"><b>浏览权限配置</b></th>
         </tr>
         <tr>
             <td colspan="2" align="center">人员</td>
@@ -386,7 +389,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         ?>
         <tr id="see">
             <td colspan="2" align="center"  class="add" onclick="add(this)">添加</td>
-            <td colspan="2" align="center"></td>
+            <td colspan="<?php if($work->attributes['flag']==3){echo '4';}else{echo '2';}?>" align="center"></td>
         </tr>
         <tr>
             
@@ -394,6 +397,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <input style="width:100px;height:30px;padding:0px;float:none" type="submit" value="添加/保存用户" class="btn user_add">
                 <input style="width:100px;height:30px;padding:0px;float:none" type="button" value="返回列表" class="gray" onclick="window.location.href='<?php echo $this->get_url('station','indexlist',array('adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>'">
             </td>
+            <td colspan="<?php if($work->attributes['flag']==3){echo '4';}else{echo '2';}?>" align="center"></td>
         </tr>
     </table>
 </form>
