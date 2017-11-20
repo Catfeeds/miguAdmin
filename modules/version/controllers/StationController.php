@@ -1288,6 +1288,8 @@ class StationController extends VController
                     'condition' => 'gid=:gid',
                     'params' => array(':gid'=>$station_id),
                 ));
+//            echo '<pre>';
+//            var_dump($guide_res);die;
         }else{
             $guide_res = array();
         }

@@ -14,9 +14,9 @@ class ScreenController extends VController
             $auth_ids_res = VerDataAuth::model()->find("station_id=$gid and user_id=$user_id and auth_type=1");
             //$sql = "select a.* from yd_ver_screen_guide as a inner join yd_ver_data_auth as b on a.gid=b.station_id where b.user_id=$user_id  and a.id in(b.auth_ids)";
             if(!empty($auth_ids_res)){
-                $sql = "select * from yd_ver_screen_guide where id in (".$auth_ids_res->attributes['auth_ids'].")";
+                $sql = "select * from yd_ver_screen_guide where id in (".$auth_ids_res->attributes['auth_ids'].") order by `order` asc";
             }else{
-                $sql = "select * from yd_ver_screen_guide where id in (0)";
+                $sql = "select * from yd_ver_screen_guide where id in (0) order by `order` asc";
             }
 
         }
