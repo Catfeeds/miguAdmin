@@ -1284,7 +1284,7 @@ class StationController extends VController
             $guide_res = VerScreenGuide::model()->findAll(
                 array(
                     'select' =>array('title','id','templateId'),
-                    'order' => '`order` asc',
+                    'order' => "`order` asc",
                     'condition' => 'gid=:gid',
                     'params' => array(':gid'=>$station_id),
                 ));
