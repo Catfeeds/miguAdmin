@@ -200,7 +200,7 @@
             <td colspan="2" align="center" class="add" onclick="add(this)">添加</td>
             <td colspan="2" align="center"></td>
             <?php if($_REQUEST['flag'] == 3){
-//                echo '<td colspan="1"></td>';
+                echo '<td colspan="1"></td>';
             }?>
         </tr>
 
@@ -229,7 +229,7 @@
             <td colspan="2" align="center"  class="add" onclick="add(this)">添加</td>
             <td colspan="2" align="center"></td>
             <?php if($_REQUEST['flag'] == 3){
-//                echo '<td colspan="1"></td>';
+                echo '<td colspan="1"></td>';
             }?>
         </tr>
         <tr>
@@ -246,7 +246,7 @@
             <td colspan="2" align="center"  class="add" onclick="add(this)">添加</td>
             <td colspan="2" align="center"></td>
             <?php if($_REQUEST['flag'] == 3){
-//                echo '<td colspan="1"></td>';
+                echo '<td colspan="1"></td>';
             }?>
         </tr>
         <tr>
