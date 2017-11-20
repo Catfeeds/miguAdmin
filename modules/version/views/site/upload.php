@@ -102,7 +102,7 @@
                 <option value="0">请选择</option>
 <option <?php $uType = !empty($ui[$address][$fid]['uType'])?$ui[$address][$fid]['uType']:'';if($uType=='4'){echo "selected=selected"; }?> value="4">海报专题</option>
         	<option <?php $uType = !empty($ui[$address][$fid]['uType'])?$ui[$address][$fid]['uType']:'';if($uType=='13'){echo "selected=selected"; }?> value="13">排行榜专题</option>
-        	<option <?php $uType = !empty($ui[$address][$fid]['uType'])?$ui[$address][$fid]['uType']:'';if($uType=='17'){echo "selected=selected"; }?> value="17">河南专题</option>
+        	<option <?php $uType = !empty($ui[$address][$fid]['uType'])?$ui[$address][$fid]['uType']:'';if($uType=='17'){echo "selected=selected"; }?> value="17">自定义专题</option>
                 <option <?php $uType = !empty($ui[$address][$fid]['uType'])?$ui[$address][$fid]['uType']:'';if($uType=='2'){echo "selected=selected"; }?> value="2">海报栏目</option>
                 <option <?php $uType = !empty($ui[$address][$fid]['uType'])?$ui[$address][$fid]['uType']:'';if($uType=='15'){echo "selected=selected"; }?> value="15">视频栏目</option>
                 <option <?php $uType = !empty($ui[$address][$fid]['uType'])?$ui[$address][$fid]['uType']:'';if($uType=='7'){echo "selected=selected"; }?> value="7">竖图单片详情页</option>
