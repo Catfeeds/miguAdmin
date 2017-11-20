@@ -112,6 +112,7 @@ class StationController extends VController
 
                         $res1->url = $content1->attributes['url'];
                         $res1->type = $content1->attributes['type'];
+                        $res1->template_id = $content1->attributes['template_id'];
                         $res1->save();
                     }else{
                         $res1 = new VerBkimg();
