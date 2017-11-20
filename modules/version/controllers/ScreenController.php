@@ -748,7 +748,7 @@ class ScreenController extends VController
         $station_id = $_REQUEST['stationId'];
         $res = VerScreenGuide::model()->findAll(
             array(
-                'select' =>array('title','id','templateId'),
+                'select' =>" * ",
                 'order' => '`order` asc',
                 'condition' => 'gid=:gid',
                 'params' => array(':gid'=>$station_id),
