@@ -1283,13 +1283,13 @@ class StationController extends VController
             $station_id = $_REQUEST['stationId'];
             $guide_res = VerScreenGuide::model()->findAll(
                 array(
-                    'select' =>array('title','id','templateId'),
+                    'select' =>" * ",
                     'order' => "`order` asc",
                     'condition' => 'gid=:gid',
                     'params' => array(':gid'=>$station_id),
                 ));
-//            echo '<pre>';
-//            var_dump($guide_res);die;
+
+
         }else{
             $guide_res = array();
         }
