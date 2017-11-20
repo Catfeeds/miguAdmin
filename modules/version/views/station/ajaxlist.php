@@ -13,15 +13,20 @@
         <input type="hidden" name="fu" value="<?php echo $fu?>">
         <?php
             if(!empty($guide_res)){?>
-                <div>请勾选改用户的对应导航权限</div>
+                <!--<div>
+                    请勾选改用户的对应导航权限
+                    <input class="btnall btn" type="button" value="全选">
+                </div>-->
+                <div class="guide_div" style="display: none;">
                 <?php
                 foreach ($guide_res as $key=>$val){?>
-                    <input type="checkbox" name="guide_id" id="guide_id" value="<?php echo $val->attributes['id']?>">
+                    <input type="checkbox" name="guide" id="" onclick="change_guide_auth(this)" class="guide_checkbox"  value="<?php echo $val->attributes['id']?>">&nbsp;
                     <span><?php echo $val->attributes['title']?></span>&nbsp;
         <?php
                 }
             }
         ?>
+                </div>
         <div class="fenlei" style="height:400px;overflow:auto">
         <table width="100%" cellspacing="0" cellpadding="10" class="mtable center">
             <tr>
@@ -71,6 +76,10 @@
 
         })
     })*/
+    $('.btnall').click(function(){
+        $(".guide_div :checkbox").prop("checked", true);
+    });
+
     $(document).off("click").on('click','.useradd',function(){
         var fu = $('input[name=fu]').val();
         var newid = "";
@@ -82,12 +91,12 @@
         });
 
         var guide_id = '';
-        if($('#guide_id').length>0){
+       /* if($('#guide_id').length>0){
             $("input[name='guide_id']:checked").each(function() {
                 guide_id += $(this).val()+',';
             });
             guide_id = guide_id.substring(0, guide_id.length - 1);
-        }
+        }*/
 
         var ids = trim(newid).split(' ');
         var orders = trim(order).split(' ');
@@ -95,15 +104,31 @@
         //var c = $.extend(ids, orders);
         if(!empty(ids)){
             var str = '#'+fu;
-            for(var i=0;i<count(ids);i++){
-                var li = "<tr>" +
-                            "<td colspan='2' align='center'>" +
-                                "<input type='hidden' name="+fu+'_auth_ids[]'+" value='"+guide_id+"'>"+
-                                "<input type='hidden' name="+fu+'[]'+" value="+ids[i]+">"+orders[i]+
-                            "</td>" +
-                            "<td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td>" +
+
+            if($('.guide_div').length>0){
+                for(var i=0;i<count(ids);i++){
+                    var li = "<tr>" +
+                        "<td colspan='2' align='center'>" +
+                        "<input type='hidden' name="+fu+'_auth_ids[]'+" value='"+guide_id+"'>"+
+                        "<input type='hidden' name="+fu+'[]'+" value="+ids[i]+">"+orders[i]+
+                        "</td>" +
+                        "<td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td>" +
+                        "<td>"+$('.guide_div').html()+"</td>"+
                         "</tr>";
-                $(str).before(li);
+                    $(str).before(li);
+                }
+            }else{
+                for(var i=0;i<count(ids);i++){
+                    var li = "<tr>" +
+                        "<td colspan='2' align='center'>" +
+                        "<input type='hidden' name="+fu+'_auth_ids[]'+" value='"+guide_id+"'>"+
+                        "<input type='hidden' name="+fu+'[]'+" value="+ids[i]+">"+orders[i]+
+                        "</td>" +
+                        "<td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td>" +
+                        //"<td>"+$('.guide_div').html()+"</td>"+
+                        "</tr>";
+                    $(str).before(li);
+                }
             }
         }
         layer.closeAll();

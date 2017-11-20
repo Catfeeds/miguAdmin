@@ -2,8 +2,8 @@
 .mtable td{
 	padding:5px;
 }
-    .guide_td{display: none;}
-    .guide_checkbox{display: none;}
+    /*.guide_td{display: none;}*/
+    /*.guide_checkbox{display: none;}*/
 </style>
 <?php
     $adminLeftOneName = !empty($_GET['adminLeftOneName'])?$_GET['adminLeftOneName']:'';
@@ -23,7 +23,7 @@
     	<th style="background: #A3BAD5;height:30px;" colspan="7">添加工作流</th>
     </tr>  
         <tr>
-            <th colspan="4" align="left"><b>任务信息</b></th>
+            <th colspan="<?php if($_REQUEST['flag']==3){echo '6';}else{echo '4';}?>" align="left"><b>任务信息</b></th>
         </tr>
         <tr>
             <td>任务名称</td>
@@ -42,6 +42,9 @@
 		    <option value="poms">咪咕</option>
                 </select>
             </td>
+            <?php if($_REQUEST['flag'] == 3){
+                echo ' <td colspan="2"></td>';
+            }?>
         </tr>
         <?php
             if($_REQUEST['flag'] == '3') {
@@ -58,7 +61,7 @@
         <tr>
             <td>选择屏幕</td>
             <td>
-                <select name="station" id="station" class="form-input w300" <!--onchange="stationGuide(this)"-->>
+                <select name="station" id="station" class="form-input w300" onchange="stationGuide(this)">
                     <option value="0">--请选择--</option>
                     <?php
                     foreach ($res as $k => $v) {
@@ -67,6 +70,10 @@
                     <?php } ?>
                 </select>
             </td>
+            <?php if($_REQUEST['flag'] == 3){
+                echo ' <td colspan="1"></td>';
+            }?>
+            <?php if($_REQUEST['flag']==3){echo '<td colspan="4"></td>';}?>
     </tr>
                 <?php }
             }else if($_REQUEST['flag'] == '2' || $_REQUEST['flag'] == '6'){
@@ -174,19 +181,27 @@
                     <option value="5">五审</option>
                 </select>
             </td>
+            <?php if($_REQUEST['flag'] == 3){
+                echo ' <td colspan="3"></td>';
+            }?>
+
         </tr>
         <tr>
-            <th colspan="4" align="left"><b>编辑节点配置</b></th>
+            <th colspan="<?php if($_REQUEST['flag']==3){echo '6';}else{echo '4';}?>" align="left"><b>编辑节点配置</b></th>
         </tr>
         <tr class="editer ">
             <td colspan="2" align="center">人员</td>
             <td colspan="2" align="center">操作</td>
-            <td class="guide_td">勾选对应导航权限</td>
+            <?php if($_REQUEST['flag'] == 3){?>
+                <td class="guide_td">勾选对应导航权限</td>
+            <?php } ?>
         </tr>
         <tr class="editadd guide" id="editadd">
             <td colspan="2" align="center" class="add" onclick="add(this)">添加</td>
             <td colspan="2" align="center"></td>
-            <td class="guide_checkbox"></td>
+            <?php if($_REQUEST['flag'] == 3){
+//                echo '<td colspan="1"></td>';
+            }?>
         </tr>
 
         <!--<tr class="first first-1">
@@ -201,30 +216,38 @@
             <td colspan="2" align="center"></td>
         </tr>-->
         <tr>
-            <th colspan="4" align="left"><b>发布节点配置</b></th>
+            <th colspan="<?php if($_REQUEST['flag']==3){echo '6';}else{echo '4';}?>" align="left"><b>发布节点配置</b></th>
         </tr>
         <tr>
             <td colspan="2" align="center">人员</td>
             <td colspan="2" align="center">操作</td>
+            <?php if($_REQUEST['flag'] == 3){?>
             <td class="guide_td">勾选对应导航权限</td>
+            <?php } ?>
         </tr>
         <tr id="fb" class="guide">
             <td colspan="2" align="center"  class="add" onclick="add(this)">添加</td>
             <td colspan="2" align="center"></td>
-            <td class="guide_checkbox"></td>
+            <?php if($_REQUEST['flag'] == 3){
+//                echo '<td colspan="1"></td>';
+            }?>
         </tr>
         <tr>
-            <th colspan="4" align="left"><b>浏览权限配置</b></th>
+            <th colspan="<?php if($_REQUEST['flag']==3){echo '6';}else{echo '4';}?>" align="left"><b>浏览权限配置</b></th>
         </tr>
         <tr>
             <td colspan="2" align="center">人员</td>
             <td colspan="2" align="center">操作</td>
-            <td class="guide_td">勾选对应导航权限</td>
+            <?php if($_REQUEST['flag'] == 3){?>
+                <td class="guide_td">勾选对应导航权限</td>
+            <?php } ?>
         </tr>
         <tr id="see" class="guide">
             <td colspan="2" align="center"  class="add" onclick="add(this)">添加</td>
             <td colspan="2" align="center"></td>
-            <td class="guide_checkbox"></td>
+            <?php if($_REQUEST['flag'] == 3){
+//                echo '<td colspan="1"></td>';
+            }?>
         </tr>
         <tr>
    
@@ -232,15 +255,19 @@
                 <input style="width:100px;height:30px;padding:0px;float:none" type="submit" value="添加/保存用户" class="btn user_add">
                 <input style="width:100px;height:30px;padding:0px;float:none" type="button" value="返回列表" class="gray" onclick="window.location.href='<?php echo $this->get_url('station','indexlist',array('adminLeftNavFlag'=>1,'adminLeftOne'=>$adminLeftOne,'adminLeftTwo'=>$adminLeftTwo,'adminLeftOneName'=>$adminLeftOneName,'adminLeftTwoName'=>$adminLeftTwoName))?>'">
             </td>
+            <?php if($_REQUEST['flag'] == 3){
+                echo '<td colspan="1"></td>';
+            }?>
+
         </tr>
     </table>
 </form>
 <script>
 
-    /*function stationGuide(obj)
+    function stationGuide(obj)
     {
         var station_id = $(obj).val();
-        var mid = <?php //echo $this->mid;?>;
+        var mid = <?php echo $this->mid;?>;
         $.ajax
         ({
             type:'get',
@@ -248,29 +275,62 @@
             success:function(data)
             {
                 data = eval(data);
-                $('.guide_td').show();
-                $('.guide_checkbox').show();
-                $(".guide_checkbox").children().remove();
+                $(".guide_checkbox").next('span').remove();
+                $(".guide_checkbox").remove();
+                $(".del").after("<td colspan='1'></td>");
                 $.each(data,function(i)
                 {
-//                    console.log(data[i]['title']);
-                    $(".guide_checkbox").append
+                    $(".del").next().append
                     (
-                        '<input type="checkbox" name="screenGuideId" value="'+data[i]['id']+'">'+
+                        '<input type="checkbox" name="guide" class="guide_checkbox" onclick="change_guide_auth(this)" value="'+data[i]['id']+'">'+
                         '<span>'+data[i]['title']+'</span>'
                     );
                 });
             }
         });
-    }*/
+    }
 
+    function change_guide_auth(obj)
+    {
+        var guide_id = '';
+//       $(obj).parent('td').children('input[name="guide"]:checked').each(function()
+        $(obj).parent('td').children('.guide_checkbox:checked').each(function()
+        {
+            guide_id += $(this).val()+',';
+        });
+        guide_id = guide_id.substring(0, guide_id.length - 1);
+        $(obj).parent().parent().children().eq(0).children().eq(0).val(guide_id);
+    }
 
     function checks(){
         var num = $('#xuanze').val();
+        var flag = <?php echo $_REQUEST['flag'];?>;
         $('.first').remove();
-        for(var i=num;i>0;i--){
-            $('.editadd').after("<tr class='first first-"+i+"'><th colspan='4' align='left'>"+i+"审节点配置</th></tr><tr class='first' ><td colspan='2' align='center'>人员</td><td colspan='2' align='center'>操作</td></tr><tr class='first' id='first-"+i+"'><td colspan='2' align='center' class='add' onclick='add(this)'>添加</td><td colspan='2' align='center'></td></tr>")
+        if(flag == 3){
+            for(var i=num;i>0;i--){
+                $('.editadd').after
+                ("<tr class='first first-"+i+"'>" +
+                      "<th colspan='6' align='left'>"+i+"审节点配置</th>" +
+                    "</tr>" +
+                    "<tr class='first' >" +
+                        "<td colspan='2' align='center'>人员</td>" +
+                        "<td colspan='2' align='center'>操作</td>" +
+                        "<td colspan='1' align='center'>勾选对应导航权限</td>" +
+                    "</tr>" +
+                    "<tr class='first' id='first-"+i+"'>" +
+                        "<td colspan='2' align='center' class='add' onclick='add(this)'>添加</td>" +
+                        "<td colspan='2' align='center'></td>" +
+                        "<td colspan='1' align='center'></td>" +
+                    "</tr>"
+                )
+            }
+        }else{
+            for(var i=num;i>0;i--){
+                $('.editadd').after("<tr class='first first-"+i+"'><th colspan='4' align='left'>"+i+"审节点配置</th></tr><tr class='first' ><td colspan='2' align='center'>人员</td><td colspan='2' align='center'>操作</td></tr><tr class='first' id='first-"+i+"'><td colspan='2' align='center' class='add' onclick='add(this)'>添加</td><td colspan='2' align='center'></td></tr>")
+
+            }
         }
+
     }
 
     $('.user_add').click(function(){
