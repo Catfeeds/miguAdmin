@@ -315,7 +315,7 @@
                     "<tr class='first' >" +
                         "<td colspan='2' align='center'>人员</td>" +
                         "<td colspan='2' align='center'>操作</td>" +
-                        "<td colspan='1' align='center'>勾选对应导航权限</td>" +
+                        "<td colspan='1' >勾选对应导航权限</td>" +
                     "</tr>" +
                     "<tr class='first' id='first-"+i+"'>" +
                         "<td colspan='2' align='center' class='add' onclick='add(this)'>添加</td>" +
