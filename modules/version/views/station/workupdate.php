@@ -494,11 +494,11 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         var workname = $('input[name=workname]').val();
         var model = $('#xuanze').val();
         if(empty(workname)){
-            alert('请输入任务名');
+            layer.alert('请输入任务名');
             return false;
         }
         if(empty(cp)){
-            alert('请选择牌照方');
+            layer.alert('请选择牌照方');
             return false;
         }
     })
@@ -525,7 +525,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     content: d.msg
                 })
             }else{
-                alert(msg);
+                layer.alert(msg);
             }
         })
     }
