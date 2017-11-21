@@ -485,8 +485,28 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     function checks(){
         var num = $('#xuanze').val();
         $('.first').remove();
+        var flag = <?php echo $work->attributes['flag'];?>;
         for(var i=num;i>0;i--){
-            $('.editadd').after("<tr class='first first-"+i+"'><th colspan='4' align='left'>"+i+"审节点配置</th></tr><tr class='first' ><td colspan='2' align='center'>人员</td><td colspan='2' align='center'>操作</td></tr><tr class='first' id='first-"+i+"'><td colspan='2' align='center' class='add' onclick='add(this)'>添加</td><td colspan='2' align='center'></td></tr>")
+            if(flag == 3){
+                $('.editadd').after(
+                    "<tr class='first first-"+i+"'>" +
+                        "<th colspan='6' align='left'>"+i+"审节点配置</th>" +
+                    "</tr>" +
+                    "<tr class='first' >" +
+                        "<td colspan='2' align='center'>人员</td>" +
+                        "<td colspan='2' align='center'>操作</td>" +
+                        "<td colspan='1'>对应导航</td>" +
+                    "</tr>" +
+                    "<tr class='first' id='first-"+i+"'>" +
+                        "<td colspan='2' align='center' class='add' onclick='add(this)'>添加</td>" +
+                        "<td colspan='2' align='center'></td>" +
+                        "<td colspan='1' align='center'></td>" +
+                    "</tr>"
+                )
+            }else{
+                $('.editadd').after("<tr class='first first-"+i+"'><th colspan='4' align='left'>"+i+"审节点配置</th></tr><tr class='first' ><td colspan='2' align='center'>人员</td><td colspan='2' align='center'>操作</td></tr><tr class='first' id='first-"+i+"'><td colspan='2' align='center' class='add' onclick='add(this)'>添加</td><td colspan='2' align='center'></td></tr>")
+            }
+
         }
     }
 
