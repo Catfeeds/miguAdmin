@@ -169,7 +169,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             foreach($worker[1] as $k=>$v){
                 $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['id']} and auth_type=1");
                 ?>
-                <tr class="editadd">
+                <tr >
                     <td colspan='2' align='center'>
                         <input type='hidden' name="editadd[<?php echo $k?>]" value="<?php echo $v['id']?>">
                         <?php if(!empty($auth_ids_res)){?>
@@ -444,13 +444,43 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
 	var num = $('#xuanze').val();
 	var x;
-		
+	var flag = <?php echo $work->attributes['flag'];?>;
 	for(var i=num;i>0;i--){
-	x = '#first-'+i;
-	if($(x).length == 0){
-		 $('.editadd').after("<tr class='first first-"+i+"'><th colspan='4' align='left'>"+i+"审节点配置</th></tr><tr class='first' ><td colspan='2' align='center'>人员</td><td colspan='2' align='center'>操作</td></tr><tr class='first' id='first-"+i+"'><td colspan='2' align='center' class='add' onclick='add(this)'>添加</td><td colspan='2' align='center'></td></tr>")
+        x = '#first-'+i;
+        if($(x).length == 0){
+            if(flag == 3){
+                $('.editadd').after(
+                    "<tr class='first first-"+i+"'>" +
+                        "<th colspan='6' align='left'>"+i+"审节点配置</th>" +
+                    "</tr>" +
+                    "<tr class='first' >" +
+                        "<td colspan='2' align='center'>人员</td>" +
+                        "<td colspan='2' align='center'>操作</td>" +
+                        "<td colspan='1'>对应导航</td>" +
+                    "</tr>" +
+                    "<tr class='first' id='first-"+i+"'>" +
+                        "<td colspan='2' align='center' class='add' onclick='add(this)'>添加</td>" +
+                        "<td colspan='2' align='center'></td>" +
+                        "<td colspan='1' align='center'></td>" +
+                    "</tr>"
+                )
+            }else{
+                $('.editadd').after(
+                    "<tr class='first first-"+i+"'>" +
+                        "<th colspan='4' align='left'>"+i+"审节点配置</th>" +
+                    "</tr>" +
+                    "<tr class='first' >" +
+                        "<td colspan='2' align='center'>人员</td>" +
+                        "<td colspan='2' align='center'>操作</td>" +
+                    "</tr>" +
+                    "<tr class='first' id='first-"+i+"'>" +
+                        "<td colspan='2' align='center' class='add' onclick='add(this)'>添加</td>" +
+                        "<td colspan='2' align='center'></td>" +
+                    "</tr>"
+                )
+            }
 
-	}
+        }
 	}
     function checks(){
         var num = $('#xuanze').val();
