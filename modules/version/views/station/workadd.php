@@ -309,7 +309,8 @@
         if(flag == 3){
             for(var i=num;i>0;i--){
                 $('.editadd').after
-                ("<tr class='first first-"+i+"'>" +
+                (
+                    "<tr class='first first-"+i+"'>" +
                       "<th colspan='6' align='left'>"+i+"审节点配置</th>" +
                     "</tr>" +
                     "<tr class='first' >" +
