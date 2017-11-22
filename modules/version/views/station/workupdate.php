@@ -346,7 +346,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <?php
         if(!empty($worker[3])){
             foreach($worker[3] as $k=>$v){
-                $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['id']} and auth_type=1");
+                $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['uid']} and auth_type=1");
                 ?>
                 <tr class="see">
                     <td colspan='2' align='center'>
