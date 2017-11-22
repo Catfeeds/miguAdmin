@@ -262,7 +262,7 @@ class ContentController extends VController
 					$firstTime = !empty($_POST['firstTime'])?$_POST['firstTime']:'';
 					$message->firstTime = strtotime($firstTime);
 					$endTime = !empty($_POST['endTime'])?$_POST['endTime']:'';
-					$message->endTime = strtotime($endTime);
+					$message->endTime = strtotime($endTime)+86399;
 					$message->cTime = time();
 					$message->flag = '0';
 					$message->cp = !empty($_POST['cp'])?$_POST['cp']:'';
