@@ -78,7 +78,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='HNBB'){echo "selected=selected"; } ?> value="HNBB">芒果</option>
                 <option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='CIBN'){echo "selected=selected"; } ?> value="CIBN">国广</option>
                 <option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='YGYH'){echo "selected=selected"; } ?> value="YGYH">银河</option>
-		<option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='poms'){echo "selected=selected"; } ?> value="poms">咪咕</option>
+<!--		<option --><?php //$cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='poms'){echo "selected=selected"; } ?><!-- value="poms">咪咕</option>-->
             </select>
             	<span style="float:left;font-size:14px;">类型</span>
             <select name="ShowType" style="width:60px;height:20px;"  class="form-input" id="ShowType">
@@ -88,13 +88,13 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <option <?php $ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='News'){echo "selected=selected"; } ?> value="News">News</option>
                 <option <?php $ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Series'){echo "selected=selected"; } ?> value="Series">Series</option>
                 <option <?php $ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Collection'){echo "selected=selected"; } ?> value="Collection">Collection</option>
-		<option <?php $ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Entertainment'){echo "selected=selected"; } ?> value="Entertainment">Entertainment娱乐</option>
-                <option <?php $ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Comic'){echo "selected=selected"; } ?> value="Comic">Comic动漫</option>
-                <option <?php $ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Record'){echo "selected=selected"; } ?> value="Record">Record记录</option>
-                <option <?php $ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Variety'){echo "selected=selected"; } ?> value="Variety">Variety综艺</option>
-                <option <?php $ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Sports'){echo "selected=selected"; } ?> value="Sports">Sports体育</option>
-                <option <?php $ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Tourism'){echo "selected=selected"; } ?> value="Tourism">Tourism旅游</option>
-                <option <?php $ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Education'){echo "selected=selected"; } ?> value="Education">Education教育</option>
+		<!--<option <?php /*$ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Entertainment'){echo "selected=selected"; } */?> value="Entertainment">Entertainment娱乐</option>
+                <option <?php /*$ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Comic'){echo "selected=selected"; } */?> value="Comic">Comic动漫</option>
+                <option <?php /*$ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Record'){echo "selected=selected"; } */?> value="Record">Record记录</option>
+                <option <?php /*$ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Variety'){echo "selected=selected"; } */?> value="Variety">Variety综艺</option>
+                <option <?php /*$ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Sports'){echo "selected=selected"; } */?> value="Sports">Sports体育</option>
+                <option <?php /*$ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Tourism'){echo "selected=selected"; } */?> value="Tourism">Tourism旅游</option>
+                <option <?php /*$ShowType=!empty($_GET['ShowType'])?$_GET['ShowType']:'';if($ShowType=='Education'){echo "selected=selected"; } */?> value="Education">Education教育</option>-->
             </select>
             <span style="float:left;font-size:14px;">状态</span>
             <select name="flag" style="width:60px;height:20px;"  class="form-input" id="flag">
@@ -107,12 +107,12 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <option <?php $flag=!empty($_GET['flag'])?$_GET['flag']:'';if($flag=='1'){echo "selected=selected"; } ?> value="1" >审核中</option>
                 <option <?php $flag=!empty($_GET['flag'])?$_GET['flag']:'';if($flag=='6'){echo "selected=selected"; } ?> value="6">通过</option>
             </select>
-	    <span style="float:left;font-size:14px;">资费</span>
-	    <select id="isfree" class="form-input isfree" style="width:60px;height:20px">
-		<option value="0">请选择</option>
-		<option value="free"  <?php $isfree=!empty($_GET['isfree'])?$_GET['isfree']:'';if($isfree=='free'){echo "selected=selected"; } ?>>免费</option>
-		<option value="nfree" <?php $isfree=!empty($_GET['isfree'])?$_GET['isfree']:'';if($isfree=='nfree'){echo "selected=selected"; } ?>>收费</option>
-	    </select>
+<!--	    <span style="float:left;font-size:14px;">资费</span>-->
+<!--	    <select id="isfree" class="form-input isfree" style="width:60px;height:20px">-->
+<!--		<option value="0">请选择</option>-->
+<!--		<option value="free"  --><?php //$isfree=!empty($_GET['isfree'])?$_GET['isfree']:'';if($isfree=='free'){echo "selected=selected"; } ?><!-->免费</option>-->
+<!--		<option value="nfree" --><?php //$isfree=!empty($_GET['isfree'])?$_GET['isfree']:'';if($isfree=='nfree'){echo "selected=selected"; } ?><!-->收费</option>-->
+<!--	    </select>-->
             <span  style="font-size:14px;">时间范围</span>
             <input placeholder="开始时间" style="width:60px;height:18px;"  type="text" name="first" id="first" class="form-input " value="<?php echo !empty($_GET['first'])?$_GET['first']:''?>">
           	<span  style="font-size:14px;">&nbsp;&nbsp;</span>
@@ -147,7 +147,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <th>资产ID</th>
             <th>牌照方</th>
             <th>标题</th>
-	        <th>资费类型</th>
+<!--	        <th>资费类型</th>-->
             <th>类型</th>
             <th>语言</th>
             <th>状态</th>
@@ -172,31 +172,31 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             case 'HNBB':echo '芒果';break;
                             case 'CIBN':echo '国广';break;
                             case 'YGYH':echo '银河';break;
-			                case 'poms':echo "咪咕";break;
+//			                case 'poms':echo "咪咕";break;
                         }
                         ?></td>
                     <td><?php echo $l['title']?></td>
-                    <?php $cps = array('642001','BESTVOTT','ICNTV','youpeng','HNBB','YGYH');?>
-		    <td><?php
-                if($l['prdpack_id']==1002381 && $l['cp']=='poms'){
-                    echo "收费";
-                }else if(in_array($l['cp'],$cps)){
-                    echo "";
-                }else{
-                    echo "免费";
-                }?></td>
+<!--                    --><?php //$cps = array('642001','BESTVOTT','ICNTV','youpeng','HNBB','YGYH');?>
+<!--		    <td>--><?php
+//                if($l['prdpack_id']==1002381 && $l['cp']=='poms'){
+//                    echo "收费";
+//                }else if(in_array($l['cp'],$cps)){
+//                    echo "";
+//                }else{
+//                    echo "免费";
+//                }?><!--</td>-->
                     <td><?php switch($l['ShowType']){
                             case 'Movie':echo '电影';break;
                             case 'Column':echo '栏目';break;
                             case 'News':echo '新闻';break;
                             case 'Series':echo '电视剧';break;
-                            case 'Entertainment':echo '娱乐';break;
-                            case 'Comic':echo '动漫';break;
-                            case 'Record':echo '记录';break;
-                            case 'Variety':echo '综艺';break;
-                            case 'Sports':echo '体育';break;
-                            case 'Tourism':echo '旅游';break;
-                            case 'Education':echo '教育';break;
+//                            case 'Entertainment':echo '娱乐';break;
+//                            case 'Comic':echo '动漫';break;
+//                            case 'Record':echo '记录';break;
+//                            case 'Variety':echo '综艺';break;
+//                            case 'Sports':echo '体育';break;
+//                            case 'Tourism':echo '旅游';break;
+//                            case 'Education':echo '教育';break;
                             } 
                             ?></td>
                     <td><?php echo $l['language']?></td>
@@ -307,9 +307,10 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         var timeend = $('input[name=timeend]').val();
         var mid = "<?php echo $this->mid?>";
         var pro="<?php echo $_SESSION['nickname']?>";
-	var isfree = $("#isfree option:selected").val();
+//	var isfree = $("#isfree option:selected").val();
         //var nid = "<?php echo !empty($_REQUEST['nid'])?$_REQUEST['nid']:''?>";
-        window.location.href="/version/content/index?mid="+mid+"&isfree="+isfree+"&ShowType="+ShowType+"&cp="+cp+"&title="+title+"&flag="+flag+"&first="+first+"&timeend="+timeend+"&pro="+pro+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
+//        window.location.href="/version/content/index?mid="+mid+"&isfree="+isfree+"&ShowType="+ShowType+"&cp="+cp+"&title="+title+"&flag="+flag+"&first="+first+"&timeend="+timeend+"&pro="+pro+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
+        window.location.href="/version/content/index?mid="+mid+"&ShowType="+ShowType+"&cp="+cp+"&title="+title+"&flag="+flag+"&first="+first+"&timeend="+timeend+"&pro="+pro+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
     })
 
     $('.review').click(function(){
@@ -340,16 +341,17 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             case '芒果':cp='HNBB';break;
             case '国广':cp='CIBN';break;
             case '银河':cp='YGYH';break;
-	    case "咪咕":cp="poms";break;
+//	    case "咪咕":cp="poms";break;
         }
-	var isfree = $("#isfree option:selected").val();
+//	var isfree = $("#isfree option:selected").val();
         var flag = $('#flag').val();
         var first = $('input[name=first]').val();
         var timeend = $('input[name=timeend]').val();
         var mid = "<?php echo $this->mid?>";
         //var nid = "<?php echo !empty($_REQUEST['nid'])?$_REQUEST['nid']:''?>";
 
-        window.location.href="/version/content/index?mid="+mid+"&isfree="+isfree+"&ShowType="+ShowType+"&cp="+cp+"&title="+title+"&page="+page+"&flag="+flag+"&first="+first+"&timeend="+timeend+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
+//        window.location.href="/version/content/index?mid="+mid+"&isfree="+isfree+"&ShowType="+ShowType+"&cp="+cp+"&title="+title+"&page="+page+"&flag="+flag+"&first="+first+"&timeend="+timeend+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
+        window.location.href="/version/content/index?mid="+mid+"&ShowType="+ShowType+"&cp="+cp+"&title="+title+"&page="+page+"&flag="+flag+"&first="+first+"&timeend="+timeend+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
     })
     $('.collection_add').click(function(){
         var title = $('input[name=collection]').val();

@@ -32,9 +32,9 @@ class ContentController extends VController
 		if(!empty($_REQUEST['timeend'])){
 			$list['timeend']=strtotime($_REQUEST['timeend']);
 		}
-	        /*if(!empty($_REQUEST['isfree'])){
+	        if(!empty($_REQUEST['isfree'])){
 			$list['isfree'] = $_REQUEST['isfree'];
-		}*/
+		}
 		$tmp =VideoManager::getContentData($data,$list);
 		$url = $this->createUrl($this->action->id);
 		$pagination = $this->renderPagination($url,$tmp['count'],$page,$data['currentPage'],$tmp['alwaysCount']);
@@ -67,7 +67,7 @@ class ContentController extends VController
 						case '芒果':$cp='HNBB';break;
 						case '国广':$cp='CIBN';break;
 						case '银河':$cp='YGYH';break;
-						//case '咪咕':$cp='poms';break;
+						case '咪咕':$cp='poms';break;
                                         }
 					$video->cp=$cp;
 				}
@@ -129,8 +129,8 @@ class ContentController extends VController
                                 $arr['type']=explode(' ',$arr['type']);
                                 $groupid = $arr['vid'];
                                 $lable= $arr['keyword'];
-				//$fee=$arr['prdpack_id'];
-				//$playTime=$arr['first_play_time'];
+				$fee=$arr['prdpack_id'];
+				$playTime=$arr['first_play_time'];
 				//var_dump($lable);
 				//pa = "/[^\d,]*/";
 				$pa = "/^[\d,']+$/";
@@ -157,7 +157,7 @@ class ContentController extends VController
                         $reject=array();
                         $reject = VerReject::model()->find(" vid='$vid' and flag='2' order by id desc");
 			$pic = VideoPic::model()->findAll("vid = '$vid' order by type desc");
-			/*if($arr['CountryOfOrigin'] == '100'){
+			if($arr['CountryOfOrigin'] == '100'){
                                 if( $data->attributes['region'] == '内地'){
                                         $arr['CountryOfOrigin'] = '1';
                                 }else if($data->attributes['region'] == '港台'){
@@ -188,8 +188,8 @@ class ContentController extends VController
 					$arr['CountryOfOrigin']	= $tmp_data->attributes['CountryOfOrigin'];
 				}
                                 //$arr['CountryOfOrigin'] = $data->attributes['region'];
-                        }*/
-			$this->render('add', array( 'arr' => $arr,'extra'=>$extra, 'vid' => $_REQUEST['vid'],'pic'=>$pic,'list'=>$list,'reject'=>$reject/*,"fee"=>$fee,"playtime"=>$playTime*/));
+                        }
+			$this->render('add', array( 'arr' => $arr,'extra'=>$extra, 'vid' => $_REQUEST['vid'],'pic'=>$pic,'list'=>$list,'reject'=>$reject,"fee"=>$fee,"playtime"=>$playTime));
 		}catch (ExceptionEx $ex){
 			$this->PopMsg($ex->getMessage());
 		}catch (Exception $e){
@@ -316,7 +316,7 @@ class ContentController extends VController
 			case '芒果':$cp='HNBB';break;
 			case '国广':$cp='CIBN';break;
 			case '银河':$cp='YGYH';break;
-			//case '咪咕':$cp='poms';break;
+			case '咪咕':$cp='poms';break;
 		}
 		$n = $this->renderPartial(
 				'upload',
@@ -437,7 +437,7 @@ class ContentController extends VController
                                                 case '芒果':$cp='HNBB';break;
                                                 case '国广':$cp='CIBN';break;
                                                 case '银河':$cp='YGYH';break;
-						//case '咪咕':$cp='poms';break;
+						case '咪咕':$cp='poms';break;
                                         }
                                         $video->cp=$cp;
                                 }
@@ -779,9 +779,9 @@ class ContentController extends VController
         if(!empty($_REQUEST['end'])){
             $list['end']=strtotime($_REQUEST['end']);
         }
-	/*if(!empty($_REQUEST['isfree'])){
+	if(!empty($_REQUEST['isfree'])){
 	    $list['isfree'] = $_REQUEST['isfree']=="free"?1002261:1002381;
-	}*/
+	}
         $tmp =ContentDataManager::getData($data,$list);
         $url = $this->createUrl($this->action->id);
         //$pagination = $this->renderPagination($url,$tmp['count'],$page,$data['currentPage']);
@@ -851,7 +851,7 @@ class ContentController extends VController
 						case '芒果':$cp='HNBB';break;
 						case '国广':$cp='CIBN';break;
 						case '银河':$cp='YGYH';break;
-						//case '咪咕':$cp='poms';break;
+						case '咪咕':$cp='poms';break;
 					}
 					$video->cp=$cp;
 				}

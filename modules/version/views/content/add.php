@@ -54,13 +54,13 @@ background: #F0FDFF;
                     <option <?php $ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='News'){echo "selected=selected"; } ?> value="News">News</option>
                     <option <?php $ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Series'){echo "selected=selected"; } ?> value="Series">Series</option>
                     <option <?php $ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Collection'){echo "selected=selected"; } ?> value="Collection">Collection</option>
-                    <option <?php $ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Entertainment'){echo "selected=selected"; } ?> value="Entertainment">Entertainment</option>
-                    <option <?php $ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Comic'){echo "selected=selected"; } ?> value="Comic">Comic</option>
-                    <option <?php $ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Record'){echo "selected=selected"; } ?> value="Record">Record</option>
-                    <option <?php $ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Variety'){echo "selected=selected"; } ?> value="Variety">Variety</option>
-                    <option <?php $ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Sports'){echo "selected=selected"; } ?> value="Sports">Sports</option>
-                    <option <?php $ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Tourism'){echo "selected=selected"; } ?> value="Tourism">Tourism</option>
-                    <option <?php $ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Education'){echo "selected=selected"; } ?> value="Education">Education</option>
+                   <!-- <option <?php /*$ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Entertainment'){echo "selected=selected"; } */?> value="Entertainment">Entertainment</option>
+                    <option <?php /*$ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Comic'){echo "selected=selected"; } */?> value="Comic">Comic</option>
+                    <option <?php /*$ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Record'){echo "selected=selected"; } */?> value="Record">Record</option>
+                    <option <?php /*$ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Variety'){echo "selected=selected"; } */?> value="Variety">Variety</option>
+                    <option <?php /*$ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Sports'){echo "selected=selected"; } */?> value="Sports">Sports</option>
+                    <option <?php /*$ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Tourism'){echo "selected=selected"; } */?> value="Tourism">Tourism</option>
+                    <option <?php /*$ShowType=!empty($arr['ShowType'])?$arr['ShowType']:'';if($ShowType=='Education'){echo "selected=selected"; } */?> value="Education">Education</option>-->
                 </select></td>
              <td class="import">内容提供商:</td>
             <td><input type="text" name='cp' class="form-input w100" placeholder="请输入牌照方名称" style="width:155px;height:20px;" value="<?php  switch(!empty($arr['cp'])?$arr['cp']:''){
@@ -71,7 +71,7 @@ background: #F0FDFF;
                     case 'HNBB':echo '芒果';break;
                     case 'CIBN':echo '国广';break;
                     case 'YGYH':echo '银河';break;
-		            case 'poms':echo '咪咕';break;
+//		            case 'poms':echo '咪咕';break;
               }?>" style="height:25px;line-height: 25px"></td>
 
         </tr>
@@ -292,7 +292,7 @@ background: #F0FDFF;
                     <td>播放</td>
                     <td>媒体文件名称</td>
                     <td>创建时间</td>
-		    <td>播出时间</td>
+<!--		    <td>播出时间</td>-->
                     <td>发布状态</td>
                     <td>操作</td>
                 </tr>
@@ -310,7 +310,7 @@ background: #F0FDFF;
                         }?></td>
                         <td><input type="text" class="title" value="<?php echo $v['title']?>" style="width:200px"></td>
                         <td><div style="width：150px;"><?php echo date('Y-m-d', $v['cTime']) ?></div></td>
-			<td><?php  if($v['cp'] == 'poms'){echo $v['first_play_time'];}else{ echo $playtime;};?></td>
+<!--			<td>--><?php // if($v['cp'] == 'poms'){echo $v['first_play_time'];}else{ echo $playtime;};?><!--</td>-->
                         <td><?php
                                 if ($v['delFlag'] == '0') {
                                     echo '下线';
@@ -376,11 +376,11 @@ background: #F0FDFF;
     </table>
 
     </form>
-	<div style="height:10px"></div>
-	<table width="700px" class="main_tb tb_player picture">
-		<tr bgcolor="#A3BAD5"><td align="center">资费信息</td></tr>
-		<tr><td align="center"><?php if($fee==1002381){echo "收费";}else{echo "免费";}?></td></tr>
-	</table>
+<!--	<div style="height:10px"></div>-->
+<!--	<table width="700px" class="main_tb tb_player picture">-->
+<!--		<tr bgcolor="#A3BAD5"><td align="center">资费信息</td></tr>-->
+<!--		<tr><td align="center">--><?php //if($fee==1002381){echo "收费";}else{echo "免费";}?><!--</td></tr>-->
+<!--	</table>-->
        <div style="height:10px"></div>
     <table width="700px" class="main_tb tb_player picture">
            <tr bgcolor="#A3BAD5">

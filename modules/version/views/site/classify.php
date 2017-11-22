@@ -34,7 +34,7 @@
 			<p><input type="checkbox" value="HNBB" name="cps">芒果</p>
 			<p><input type="checkbox" value="CIBN" name="cps">国广</p>
 			<p><input type="checkbox" value="YGYH" name="cps">银河</p>
-			<p><input type="checkbox" value="poms" name="cps">咪咕</p></td>
+<!--			<p><input type="checkbox" value="poms" name="cps">咪咕</p></td>-->
             </tr>
             <tr>
                 <td>优先级</td>
@@ -111,14 +111,14 @@
                 <td><input type="text" name="boxoffice" class="form-input w300" value=""></td>
             </tr>
 	    <tr>
-		<td>是否免费</td>
+		<!--<td>是否免费</td>
 		<td>
 		    <select name="isfree" class="form-input w300" id="fee">
                         <option value="-1">请选择</option>
                         <option value="0">否</option>
                         <option value="1" >是</option>
                     </select>
-		</td>
+		</td>-->
 	    </tr>
             <tr>
                 <td align="center" colspan="4">

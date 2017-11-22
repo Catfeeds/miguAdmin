@@ -350,7 +350,7 @@
                             case 'HNBB':$cpName = '芒果';break;
                             case 'CIBN':$cpName = '国广';break;
                             case 'YGYH':$cpName = '银河';break;
-			    case "poms":$cpName="咪咕";break;
+//			    case "poms":$cpName="咪咕";break;
                         }
                         if($selectedCp == $v['cp']){
                             echo "<option value='".$v['cp']."' selected=selected>".$cpName."</option>";
@@ -373,7 +373,7 @@
 			<option value="HNBB" <?php if($selectedCp=="HNBB"){echo "selected=selected";}?>>芒果</option>
 			<option value="CIBN" <?php if($selectedCp=="CIBN"){echo "selected=selected";}?>>国广</option>
 			<option value="YGYH" <?php if($selectedCp=="YGYH"){echo "selected=selected";}?>>银河</option>
-			<option value="poms" <?php if($selectedCp=="poms"){echo "selected=selected";}?>>咪咕</option>
+<!--			<option value="poms" --><?php //if($selectedCp=="poms"){echo "selected=selected";}?><!-->咪咕</option>-->
 		</select>
 
             <input type="button" class="btn search_title" value="查找" style="width:50px;height:20px;margin-left: 5px;">
@@ -445,9 +445,9 @@
                             <option <?php if($type=='0'){echo "selected=selected";}?> value="0">竖版</option>
                             <option <?php if($type=='1'){echo "selected=selected";}?> value="1">横版</option>
                             <option <?php if($type=='2'){echo "selected=selected";}?> value="2">文字版</option>
-			    <option value="3" <?php if($type=='3'){echo "selected=selected";}?>>公网列表</option>
-			    <option value="4" <?php if($type=='4'){echo "selected=selected";}?>>公网列表(带推荐位)</option>
-			    <option value="5" <?php if($type=='5'){echo "selected=selected";}?>>公网列表(少儿)</option>
+			    <!--<option value="3" <?php /*if($type=='3'){echo "selected=selected";}*/?>>公网列表</option>
+			    <option value="4" <?php /*if($type=='4'){echo "selected=selected";}*/?>>公网列表(带推荐位)</option>
+			    <option value="5" <?php /*if($type=='5'){echo "selected=selected";}*/?>>公网列表(少儿)</option>-->
                         </select>
                         <?php
                     }else if(in_array('3',$res['status'])){
@@ -458,10 +458,10 @@
                             <option <?php if($type=='0'){echo "selected=selected";}?> value="0">竖版</option>
                             <option <?php if($type=='1'){echo "selected=selected";}?> value="1">横版</option>
                             <option <?php if($type=='2'){echo "selected=selected";}?> value="2">文字版</option>
-			    <option value="3" <?php if($type=='3'){echo "selected=selected";}?>>公网列表</option>
-                            <option value="4" <?php if($type=='4'){echo "selected=selected";}?>>公网列表(带>推荐位)</option>
-                            <option value="5" <?php if($type=='5'){echo "selected=selected";}?>>公网列表(少>儿)</option>
-                        </select>
+			    <!--<option value="3" <?php /*if($type=='3'){echo "selected=selected";}*/?>>公网列表</option>
+                            <option value="4" <?php /*if($type=='4'){echo "selected=selected";}*/?>>公网列表(带>推荐位)</option>
+                            <option value="5" <?php /*if($type=='5'){echo "selected=selected";}*/?>>公网列表(少>儿)</option>
+                        </select>-->
                         <?php
                     }
                     ?>
@@ -479,9 +479,9 @@
                         <option <?php if($type=='0'){echo "selected=selected";}?> value="0">竖版</option>
                         <option <?php if($type=='1'){echo "selected=selected";}?> value="1">横版</option>
                         <option <?php if($type=='2'){echo "selected=selected";}?> value="2">文字版</option>
-		  	<option value="3" <?php if($type=='3'){echo "selected=selected";}?>>公网列表</option>
-                            <option value="4" <?php if($type=='4'){echo "selected=selected";}?>>公网列表(带>推荐位)</option>
-                            <option value="5" <?php if($type=='5'){echo "selected=selected";}?>>公网列表(少>儿)</option>
+		  	<!--<option value="3" <?php /*if($type=='3'){echo "selected=selected";}*/?>>公网列表</option>
+                            <option value="4" <?php /*if($type=='4'){echo "selected=selected";}*/?>>公网列表(带>推荐位)</option>
+                            <option value="5" <?php /*if($type=='5'){echo "selected=selected";}*/?>>公网列表(少>儿)</option>-->
                     </select>
                     <?php
                 }else  if(in_array('3',$res['status'])){
@@ -493,9 +493,9 @@
                         <option <?php if($type=='0'){echo "selected=selected";}?> value="0">竖版</option>
                         <option <?php if($type=='1'){echo "selected=selected";}?> value="1">横版</option>
                         <option <?php if($type=='2'){echo "selected=selected";}?> value="2">文字版</option>
-			<option value="3" <?php if($type=='3'){echo "selected=selected";}?>>公网列表</option>
-                            <option value="4" <?php if($type=='4'){echo "selected=selected";}?>>公网列表(带>推荐位)</option>
-                            <option value="5" <?php if($type=='5'){echo "selected=selected";}?>>公网列表(少>儿)</option>
+			<!--<option value="3" <?php /*if($type=='3'){echo "selected=selected";}*/?>>公网列表</option>
+                            <option value="4" <?php /*if($type=='4'){echo "selected=selected";}*/?>>公网列表(带>推荐位)</option>
+                            <option value="5" <?php /*if($type=='5'){echo "selected=selected";}*/?>>公网列表(少>儿)</option>-->
                     </select>
                     <?php
                 }
@@ -552,14 +552,15 @@
                                 case 'HNBB':echo '芒果';break;
                                 case 'CIBN':echo '国广';break;
                                 case 'YGYH':echo '银河';break;
-				case "poms":echo "咪咕";break;
+//				case "poms":echo "咪咕";break;
                             }
                             ?>
                         </td>
                         <td class='changevid'><?php echo $l['vid']?></td>
                         <td><?php echo $l['title']?></td>
                         <td><?php echo $l['language']?></td>
-                        <td><?php if($l['prdpack_id']=="1002381"){echo "收费";}elseif($l['prdpack_id']=="1002261"){echo "免费";}?></td>
+<!--                        <td>--><?php //if($l['prdpack_id']=="1002381"){echo "收费";}elseif($l['prdpack_id']=="1002261"){echo "免费";}?><!--</td>-->
+                        <td><?php echo "免费";?></td>
                         <td><?php echo date('Y-m-d H:i',$l['vTime'])?></td>
                         <td><?php if(!empty($l['updateTime'])){
                                 echo date('Y-m-d H:i',$l['updateTime']);

@@ -61,7 +61,7 @@
             <option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='HNBB'){echo "selected=selected"; } ?> value="HNBB">芒果</option>
             <option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='CIBN'){echo "selected=selected"; } ?> value="CIBN">国广</option>
             <option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='YGYH'){echo "selected=selected"; } ?> value="YGYH">银河</option>
-            <option <?php $cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='poms'){echo "selected=selected"; } ?> value="poms">咪咕</option>
+<!--            <option --><?php //$cp=!empty($_GET['cp'])?$_GET['cp']:'';if($cp=='poms'){echo "selected=selected"; } ?><!-- value="poms">咪咕</option>-->
         </select>
         <span style="float:left;font-size:14px;">&nbsp;&nbsp;&nbsp;类型</span>
      
@@ -93,12 +93,12 @@
             <option <?php $flag=isset($_GET['flag'])?$_GET['flag']:'';if($flag=='0'){echo "selected=selected"; } ?> value="0">上线</option>
             <option <?php $flag=isset($_GET['flag'])?$_GET['flag']:'';if($flag=='1'){echo "selected=selected"; } ?> value="1" >下线</option>
         </select>
-	<span style="float:left;font-size:14px;">资费</span>
+	<!--<span style="float:left;font-size:14px;">资费</span>
 	<select style="width:60px;height:20px;"  name="isfree" class="form-input w100" id="free">
 		<option value="0">请选择</option>
-	 	<option value="nfree" <?php if(!empty($_GET['isfree']) && $_GET['isfree'] == 'nfree'){echo "selected=selected";};?>>收费</option>
-		<option value="free" <?php if(!empty($_GET['isfree']) && $_GET['isfree'] == 'free'){echo "selected=selected";};?>>免费</option>
-	<select>
+	 	<option value="nfree" <?php /*if(!empty($_GET['isfree']) && $_GET['isfree'] == 'nfree'){echo "selected=selected";};*/?>>收费</option>
+		<option value="free" <?php /*if(!empty($_GET['isfree']) && $_GET['isfree'] == 'free'){echo "selected=selected";};*/?>>免费</option>
+	<select>-->
                <span  style="font-size:14px;">&nbsp;时间范围&nbsp;&nbsp;</span>
         <input placeholder="开始时间" style="width:60px;height:18px;" type="text" name="first" id="first" class="form-input w100" value="<?php echo !empty($_GET['first'])?$_GET['first']:''?>">
        	<span  style="font-size:14px;">&nbsp;&nbsp;</span>
@@ -133,7 +133,7 @@
                 <th>牌照方</th>
                 <th>资产ID</th>
                 <th>标题</th>
-		<th>资费类型</th>
+<!--		<th>资费类型</th>-->
                 <th>类型</th>
                 <th>语言</th>
                 <th>状态</th>
@@ -156,12 +156,12 @@
                                     case 'HNBB':echo '芒果';break;
                                     case 'CIBN':echo '国广';break;
                                     case 'YGYH':echo '银河';break;
-				    case "poms":echo "咪咕";break;
+//				    case "poms":echo "咪咕";break;
                                 }
                                 ?></td>
                             <td class="dataid"><?php echo $v['vid']?></td>
                             <td><?php echo $v['title']?></td>
-			    <td><?php  if($v['prdpack_id']=="1002381"){echo "收费";}elseif($v['prdpack_id']=="1002261"){echo "免费";}?></td>
+			    <!--<td><?php /* if($v['prdpack_id']=="1002381"){echo "收费";}elseif($v['prdpack_id']=="1002261"){echo "免费";}*/?></td>-->
                             <td><?php echo $v['type']?></td>
                             <td><?php echo $v['language']?></td>
                             <td><?php switch($v['flag']){
@@ -220,9 +220,10 @@
         var first = $('input[name=first]').val();
         var end = $('input[name=end]').val();
         var flag = $('#flag').val();
-        var isfree = $("#free option:selected").val();
+//        var isfree = $("#free option:selected").val();
 	if(flag < 0){
-	   window.location.href="/version/content/contentindex?mid="+mid+"&isfree="+isfree+"&type="+type+"&cp="+cp+"&title="+title+"&first="+first+"&end="+end+"&pro="+pro+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;	
+//	   window.location.href="/version/content/contentindex?mid="+mid+"&isfree="+isfree+"&type="+type+"&cp="+cp+"&title="+title+"&first="+first+"&end="+end+"&pro="+pro+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
+	   window.location.href="/version/content/contentindex?mid="+mid+"&type="+type+"&cp="+cp+"&title="+title+"&first="+first+"&end="+end+"&pro="+pro+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;
 	}else{
 	   window.location.href="/version/content/contentindex?mid="+mid+"&type="+type+"&cp="+cp+"&title="+title+"&first="+first+"&end="+end+"&flag="+flag+"&pro="+pro+'&adminLeftNavFlag=1&adminLeftOne='+adminLeftOne+'&adminLeftTwo='+adminLeftTwo+'&adminLeftOneName='+adminLeftOneName+'&adminLeftTwoName='+adminLeftTwoName;	
 	}
