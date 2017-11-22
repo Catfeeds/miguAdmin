@@ -15,7 +15,8 @@ class AdminController extends VController
         if(!empty($_REQUEST['company'])){
 	    $sql_where .=" and pro='{$_REQUEST['company']}'";
         }
-        $sql = $sql_select . $sql_where;        
+        $sql_order = " order by id asc";
+        $sql = $sql_select . $sql_where . $sql_order;
         $list = SQLManager::queryAll($sql); 
         //$this->render('index',array('list'=>$list));
         $this->render('index',array('list'=>$list,'city'=>$city,'province'=>$province));
