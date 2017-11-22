@@ -581,7 +581,8 @@ public function actionTopic2(){
         //Common::synchroPic($path);
         //$mvui->pic      = 'http://117.144.248.58:8082/file/' . trim(substr($_POST['key'],-36));
         //$mvui->pic      = 'http://117.131.17.46:8086/file/' . trim(substr($_POST['key'],-36));
-        $mvui->pic      = "http://117.144.248.58:8082/file/".trim(substr($_POST['key'],-36));
+        //$mvui->pic      = "http://117.144.248.58:8082/file/".trim(substr($_POST['key'],-36));
+        $mvui->pic      = FTP_PATH.trim(substr($_POST['key'],-36));
         if(!$mvui->save()){
             LogWriter::logModelSaveError($mvui,__METHOD__,$mvui->attributes);
             $this->die_json(array('code'=>404,'msg'=>'信息保存失败'));
@@ -850,7 +851,7 @@ public function actionTopic2(){
         $model->short           = !empty($_POST['short'])?trim($_POST['short']):'';
         $model->gid             = !empty($_POST['gid'])?trim($_POST['gid']):'';
         $model->simple_set      = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
-	    $model->is_free         = isset($_POST['fee'])?trim($_POST['fee']):'';
+	//    $model->is_free         = isset($_POST['fee'])?trim($_POST['fee']):'';
         $list = $_REQUEST;
         $gid = $_REQUEST['gid'];
         $sql="select * from  yd_ver_sitelist where id=$gid";
@@ -908,7 +909,7 @@ public function actionTopic2(){
         $model->short           = !empty($_POST['short'])?trim($_POST['short']):'';
         $model->simple_set     = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
         $model->id             = !empty($_POST['id'])?trim($_POST['id']):'';
-	    $model->is_free         = isset($_POST['fee'])?trim($_POST['fee']):'';
+	//    $model->is_free         = isset($_POST['fee'])?trim($_POST['fee']):'';
         $list = $_REQUEST;
         $gid = $_REQUEST['gid'];
         $sql="select * from  yd_ver_sitelist where id=$gid";
@@ -994,7 +995,7 @@ public function actionTopic2(){
         $cate->gid             = !empty($_POST['gid'])?trim($_POST['gid']):'';
         $cate->short           = !empty($_POST['short'])?trim($_POST['short']):'';
         $cate->simple_set      = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
-        $cate->is_free      = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
+        //$cate->is_free      = !empty($_POST['simple_set'])?trim($_POST['simple_set']):'';
         if(!$cate->save()){
             var_dump($cate->getErrors());
         }
