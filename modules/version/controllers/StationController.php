@@ -1411,7 +1411,7 @@ class StationController extends VController
         }
         $id = $_REQUEST['id'];
         $work = VerWork::model()->findByPk($id);
-        $sql_work = "select * from yd_ver_worker w inner join yd_ver_admin a on w.workid=$id and a.id=w.uid";
+        $sql_work = "select * from yd_ver_worker w inner join yd_ver_admin a on w.workid=$id and a.id=w.uid order by w.uid asc";
         $workerlist = SQLManager::queryAll($sql_work);
         $worker = array();
         foreach($workerlist as $k=>$v){
