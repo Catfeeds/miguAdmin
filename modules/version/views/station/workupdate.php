@@ -167,7 +167,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         if(!empty($worker[1])){
 
             foreach($worker[1] as $k=>$v){
-                $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['id']} and auth_type=1");
+                $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['uid']} and auth_type=1");
                 ?>
                 <tr >
                     <td colspan='2' align='center'>
@@ -227,7 +227,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     </tr>
                     <?php
                         foreach($val as $k=>$v){
-                            $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['id']} and auth_type=1");
+                            $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['uid']} and auth_type=1");
                             ?>
                             <tr class='first' >
                                 <td colspan='2' align='center'>
@@ -288,7 +288,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         <?php
         if(!empty($worker[2])){
             foreach($worker[2] as $k=>$v){
-                $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['id']} and auth_type=1");
+                $auth_ids_res = VerDataAuth::model()->find("station_id=$station_id and user_id={$v['uid']} and auth_type=1");
                 ?>
                 <tr class="fb">
                     <td colspan='2' align='center'>
