@@ -102,13 +102,13 @@ class VideoManager extends Video{
         if(!empty($list['timeend'])){
             $sql_where .=" and upTime <'".$list['timeend']."' ";
         }
-	if(!empty($list['isfree'])){
+	/*if(!empty($list['isfree'])){
 	    if($list['isfree'] == 'free'){
             $sql_where .=" and prdpack_id = '1002261' ";
 	    }else if($list['isfree'] == 'nfree'){
 	    $sql_where .=" and prdpack_id = '1002381' ";
 	    }
-        }
+        }*/
         $count = $sql_count . $sql_from . $sql_where;
         $alwaysCount = $sql_count . $sql_from;
 	$list = $sql_select . $sql_from . $sql_where . $sql_order . $sql_limit;

@@ -684,7 +684,7 @@ class ScreenController extends VController
             $model->uType = $v['uType'];
             $model->user = $v['user'];
             $model->flag = $v['flag'];
-            $sql2 = "select id from yd_ver_screen_content where screenGuideid=$copySid and `order`=".$v['order']." order by id asc";
+	    $sql2 = "select id from yd_ver_screen_content where screenGuideid=$copySid and `order`=".$v['order']." and `pic`= '".$v['pic']."' order by id asc";	
             //$sid = SQLManager::queryRow($sql2);
             $sid = SQLManager::queryAll($sql2);
             if(count($sid)==1){
@@ -699,7 +699,8 @@ class ScreenController extends VController
                 if(empty($tmp_model)){
                     $model->sid = $sid[0]['id'];
                 }else{
-                    $model->sid = $sid[count($tmp_model)]['id'];
+		    $offset = count($tmp_model)-1;
+                    $model->sid = isset($sid[$offset]['id'])?$sid[$offset]['id']:'0';
                 }
             }
             //$model->sid = $v['sid'];

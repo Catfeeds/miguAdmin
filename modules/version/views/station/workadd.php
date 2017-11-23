@@ -147,8 +147,12 @@
                 foreach ($work_res as $a=>$b){
                     $tmp[] = $b['stationId'];
                 }
+		if(!empty($tmp)){
                 $arr = implode(',',$tmp);
                 $sql = "select id,name from yd_ver_station where id not in ($arr)";
+		}else{
+		$sql = "select * from yd_ver_station";
+		}
                 $res = SQLManager::queryAll($sql);
                 if (!empty($res)) {?>
                     <tr>

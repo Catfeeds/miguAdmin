@@ -11,7 +11,8 @@ class ContentDataManager extends Video{
 
     public static function getData($data,$list){
         $res = array();
-        $sql_select = "select v.id,v.vid,v.cp,v.title,v.language,v.type,v.prdpack_id,c.cTime,c.flag from yd_ver_content c inner join yd_video v on v.vid=c.vid ";
+        //$sql_select = "select v.id,v.vid,v.cp,v.title,v.language,v.type,v.prdpack_id,c.cTime,c.flag from yd_ver_content c inner join yd_video v on v.vid=c.vid ";
+        $sql_select = "select v.id,v.vid,v.cp,v.title,v.language,v.type,c.cTime,c.flag from yd_ver_content c inner join yd_video v on v.vid=c.vid ";
         $sql_order = ' order by c.cTime desc';
         $sql_limit = ' limit '.$data['start'].','.$data['limit'];
         $sql_where = " ";
@@ -33,9 +34,9 @@ class ContentDataManager extends Video{
         if(isset($list['flag'])){
             $sql_where .=" and c.flag ={$list['flag']}";
         }
-	if(!empty($list['isfree'])){
+	/*if(!empty($list['isfree'])){
 	    $sql_where .=" and v.prdpack_id = {$list['isfree']}";
-	}
+	}*/
         $sql_count = " select count(c.id) from yd_ver_content c inner join yd_video v on v.vid=c.vid";
         //$sql_count = " select count(c.id) from yd_ver_content c ";
         $count = $sql_count .$sql_where ;
