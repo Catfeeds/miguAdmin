@@ -456,7 +456,7 @@ class ReviewController extends VController
 
     public function actionScreenReview()
     {
-        $page = 100;
+        $page = 2;
         $data = $this->getPageInfo($page);
         $workInfo = Common::getWorkInfo();
         $workNum = array();
