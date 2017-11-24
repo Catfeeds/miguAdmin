@@ -214,8 +214,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         }else{
             $('.m-page').show();
         }
-
     }
+
+    index();
 
     function checkQuote(obj)
     {
