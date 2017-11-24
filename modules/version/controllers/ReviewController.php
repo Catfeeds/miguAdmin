@@ -586,7 +586,7 @@ class ReviewController extends VController
             $sql_order = " group by b.id order by a.add_time desc ";
             $sql_limit = ' limit '.$data['start'].','.$data['limit'];
 	    $sql_1 = $sql . $sql_where . $sql_order;
-	    if($review_flag = 4){
+	    if($review_flag == 4){
             $sql = $sql . $sql_where . $sql_order;
         }else{
             $sql = $sql . $sql_where . $sql_order . $sql_limit;
