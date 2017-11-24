@@ -1537,7 +1537,7 @@ if (!empty($html) && !isset($flag)) {
 
         function editTop(obj)
         {
-            var id = $(obj).attr('uiId');
+            var id = "<?php echo $_GET['nid']?>";
             var auth = getauth(id);
             if(parseInt(auth.estatus)){
                             layer.alert("权限不足 无法操作！");return false;

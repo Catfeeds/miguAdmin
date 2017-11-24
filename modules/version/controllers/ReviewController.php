@@ -456,7 +456,7 @@ class ReviewController extends VController
 
     public function actionScreenReview()
     {
-        $page = 20;
+        $page = 100;
         $data = $this->getPageInfo($page);
         $workInfo = Common::getWorkInfo();
         $workNum = array();
@@ -513,7 +513,12 @@ class ReviewController extends VController
                 $sql_review = " and c.review_flag=$review_flag  and s.id in ($tmp_stationId) and a.flag in $str";
                 //$sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
                 $sql_limit = ' limit '.$data['start'].','.$data['limit'];
-                $sql_work = $sql_top.$sql_review.$sql_bottom.$sql_limit;
+
+                if($review_flag == 3){
+                    $sql_work = $sql_top.$sql_review.$sql_bottom;
+                }else{
+                    $sql_work = $sql_top.$sql_review.$sql_bottom.$sql_limit;
+                }
                 $sql_work_1 = $sql_top.$sql_review.$sql_bottom;
                 $sign++;
             }else if(in_array($sign,$workNum)){
@@ -553,16 +558,19 @@ class ReviewController extends VController
                 if($allbtn=='已通过'){
                      //$sql="select p.*,g.title as gtitle,s.name,c.username,b.add_time from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and b.review_flag='1' inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
                      $sql = "select a.id as cid ,a.type,a.bind_id,a.user_id,a.review_times,a.review_flag,a.message,a.add_time,b.*,c.username,d.title as gtitle,e.name from yd_ver_review_record as a inner join yd_ver_screen_content_copy as b on a.bind_id=b.id and a.review_flag='1' and a.type=3 inner join yd_ver_admin as c on a.user_id=c.id inner join yd_ver_screen_guide as d on b.screenGuideid=d.id inner join yd_ver_station as e on e.id=d.gid ";
-                      
+                    $review_flag = 1;
                 }else if($allbtn=='已驳回'){
                      //$sql="select p.*,g.title as gtitle,s.name,c.username,b.add_time from yd_ver_screen_content_copy p inner join yd_ver_screen_guide g on p.screenGuideid=g.id and b.review_flag='2' inner join yd_ver_station s on s.id=g.gid left join yd_ver_review_record as b on p.id=b.bind_id left join yd_ver_admin as c on b.user_id=c.id";
                     $sql = "select a.id as cid ,a.type,a.bind_id,a.user_id,a.review_times,a.review_flag,a.message,a.add_time,b.*,c.username,d.title as gtitle,e.name from yd_ver_review_record as a inner join yd_ver_screen_content_copy as b on a.bind_id=b.id and a.review_flag='2' and a.type=3 inner join yd_ver_admin as c on a.user_id=c.id inner join yd_ver_screen_guide as d on b.screenGuideid=d.id inner join yd_ver_station as e on e.id=d.gid ";
+                    $review_flag = 2;
                 }else{
          		    $sql="select b.*,d.title as gtitle,e.name,c.username,a.id as cid ,a.type,a.bind_id,a.user_id,a.review_times,a.review_flag,a.message,a.add_time from yd_ver_screen_content_copy b inner join yd_ver_screen_guide d on b.screenGuideid=d.id and b.delFlag=1 and b.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station e on e.id=d.gid inner join yd_ver_review_record as a on b.id=a.bind_id left join yd_ver_admin as c on a.user_id=c.id ";
                     //$sql = "select a.add_time,b.*,c.username,d.title as gtitle,e.name from yd_ver_review_record as a inner join yd_ver_screen_content_copy as b on a.bind_id=b.id and a.review_flag='3' and a.type=3 inner join yd_ver_admin as c on a.user_id=c.id inner join yd_ver_screen_guide as d on b.screenGuideid=d.id inner join yd_ver_station as e on e.id=d.gid ";
+                    $review_flag = 3;
                 }
             }else{
          		$sql="select b.*,d.title as gtitle,e.name,c.username,a.id as cid ,a.type,a.bind_id,a.user_id,a.review_times,a.review_flag,a.message,a.add_time from yd_ver_screen_content_copy b inner join yd_ver_screen_guide d on b.screenGuideid=d.id and b.delFlag=1 and b.flag in(1,6,10,20,30,40,50,100) inner join yd_ver_station e on e.id=d.gid inner join yd_ver_review_record as a on b.id=a.bind_id inner join yd_ver_admin as c on a.user_id=c.id ";
+                $review_flag = 3;
             }
             $sql_where = " where  1=1";
             if(!empty($_REQUEST['stationId'])){
@@ -577,8 +585,13 @@ class ReviewController extends VController
 
             $sql_order = " group by b.id order by a.add_time desc ";
             $sql_limit = ' limit '.$data['start'].','.$data['limit'];
-	    $sql_1 = $sql . $sql_where . $sql_order;	
+	    $sql_1 = $sql . $sql_where . $sql_order;
+	    if($review_flag = 3){
+            $sql = $sql . $sql_where . $sql_order;
+        }else{
             $sql = $sql . $sql_where . $sql_order . $sql_limit;
+        }
+
             $list = SQLManager::queryAll($sql);
             $list_1 = SQLManager::queryAll($sql_1);
             $url = $this->createUrl($this->action->id);
