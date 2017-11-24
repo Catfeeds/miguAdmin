@@ -196,6 +196,14 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
     var adminLeftNavFlag  = "<?php echo !empty($_GET['adminLeftNavFlag'])?$_GET['adminLeftNavFlag']:'0'; ?>";
     var fixedUrl = '/adminLeftOne/'+adminLeftOne+'/adminLeftTwo/'+adminLeftTwo+'/adminLeftOneName/'+adminLeftOneName+'/adminLeftTwoName/'+adminLeftTwoName+'/adminLeftNavFlag/'+adminLeftNavFlag+'/one/'+one+'/two/'+two+'/three/'+three+'/siteName/'+siteName+'/son/'+son+'/top/'+topName+'/leftNavFlag/'+leftNavFlag;
 
+    function access_btnChange()
+    {
+        var allbtn = $('#allbtn').val();
+        if(allbtn == '待审核'){
+            $('.m-page').hide();
+        }
+    }
+    $('.m-page').hide();
     function checkQuote(obj)
     {
         var copyGuideId = $(obj).attr('screenguidid');

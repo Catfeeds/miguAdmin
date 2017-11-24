@@ -536,6 +536,11 @@ class ReviewController extends VController
                 //$sql_work = $sql_top.$sql_center.$sql_review.$sql_bottom;
                 $sql_limit = ' limit '.$data['start'].','.$data['limit'];
                 $sql_work = $sql_top.$sql_review.$sql_bottom.$sql_limit;
+                if($review_flag == 3){
+                    $sql_work = $sql_top.$sql_review.$sql_bottom;
+                }else{
+                    $sql_work = $sql_top.$sql_review.$sql_bottom.$sql_limit;
+                }
                 $sql_work_1 = $sql_top.$sql_review.$sql_bottom;
                 if($sign==5){
                    $sign = $sign;
@@ -586,7 +591,7 @@ class ReviewController extends VController
             $sql_order = " group by b.id order by a.add_time desc ";
             $sql_limit = ' limit '.$data['start'].','.$data['limit'];
 	    $sql_1 = $sql . $sql_where . $sql_order;
-	    if($review_flag == 4){
+	    if($review_flag == 3){
             $sql = $sql . $sql_where . $sql_order;
         }else{
             $sql = $sql . $sql_where . $sql_order . $sql_limit;
