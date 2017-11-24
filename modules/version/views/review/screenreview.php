@@ -141,7 +141,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             }else{
                                 echo '编辑';
                             }
-                            if($v['pic'] == '/file/3.png'){
+                            if($v['pic'] == '/file/3.png' && !is_null($v['sid'])){
         //                    $first_pic = $v['pic'];
                                 $tmp_pic = VerScreenContent::model()->find("id={$v['sid']}");
                                 $v['pic'] = $tmp_pic->attributes['pic'];
