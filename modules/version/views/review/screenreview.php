@@ -208,8 +208,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
     function index()
     {
-        var allbtn = <?php echo !empty($_REQUEST['allbtn'])?$_REQUEST['allbtn']:'1'?>;
-        if(allbtn == '1' || allbtn == '待审核'){
+        var allbtn = "<?php echo !empty($_REQUEST['allbtn'])?$_REQUEST['allbtn']:'1'?>";
+        if(allbtn == "1" || allbtn == "待审核"){
             $('.m-page').hide();
         }else{
             $('.m-page').show();
