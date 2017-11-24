@@ -205,7 +205,18 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             $('.m-page').show();
         }
     }
-    $('.m-page').hide();
+
+    function index()
+    {
+        var allbtn = <?php echo !empty($_REQUEST['allbtn'])?$_REQUEST['allbtn']:'1'?>;
+        if(allbtn == '1' || allbtn == '待审核'){
+            $('.m-page').hide();
+        }else{
+            $('.m-page').show();
+        }
+
+    }
+
     function checkQuote(obj)
     {
         var copyGuideId = $(obj).attr('screenguidid');
