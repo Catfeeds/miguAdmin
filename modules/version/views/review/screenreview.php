@@ -201,6 +201,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
         var allbtn = $('#allbtn').val();
         if(allbtn == '待审核'){
             $('.m-page').hide();
+        }else{
+            $('.m-page').show();
         }
     }
     $('.m-page').hide();
