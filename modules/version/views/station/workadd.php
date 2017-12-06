@@ -303,7 +303,12 @@
             guide_id += $(this).val()+',';
         });
         guide_id = guide_id.substring(0, guide_id.length - 1);
-        $(obj).parent().parent().children().eq(0).children().eq(0).val(guide_id);
+        var max  = $(obj).parent().parent().children().eq(0).children().length;
+        for(var i = 0 ; i<max ; i++){
+            console.log($(obj).parent().parent().children().eq(0).find('.auth_input').val());
+            $(obj).parent().parent().children().eq(0).find('.auth_input').val(guide_id);
+        }
+//        $(obj).parent().parent().children().eq(0).children().eq(0).val(guide_id);
     }
 
     function checks(){
