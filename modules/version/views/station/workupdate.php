@@ -173,7 +173,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td colspan='2' align='center'>
                         <input type='hidden' name="editadd[<?php echo $k?>]" value="<?php echo $v['id']?>">
                         <?php if(!empty($auth_ids_res)){?>
-                        <input type="hidden" name="editadd_auth_ids[<?php echo $k?>]" value="<?php echo !empty($auth_ids_res->attributes['auth_ids'])?$auth_ids_res->attributes['auth_ids']:'0';?>">
+                        <input class='auth_input' type="hidden" name="editadd_auth_ids[<?php echo $k?>]" value="<?php echo !empty($auth_ids_res->attributes['auth_ids'])?$auth_ids_res->attributes['auth_ids']:'0';?>">
                     <?php }?>
                         <?php echo $v['username']?>
                     </td>
@@ -233,7 +233,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                 <td colspan='2' align='center'>
                                     <input type='hidden' name="first-<?php echo $key?>[]" value="<?php echo $v['id']?>">
                                     <?php if(!empty($auth_ids_res)){?>
-                                    <input type="hidden" name="first-<?php echo $key?>_auth_ids[]" value="<?php echo $auth_ids_res->attributes['auth_ids'];?>">
+                                    <input type="hidden" class='auth_input' name="first-<?php echo $key?>_auth_ids[]" value="<?php echo $auth_ids_res->attributes['auth_ids'];?>">
                                 <?php } ?>
                                     <?php echo $v['username']?>
                                 </td>
@@ -295,7 +295,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         <input type='hidden' name="fb[<?php echo $k?>]" value="<?php echo $v['id']?>">
                         <?php echo $v['username']?>
                         <?php if(!empty($auth_ids_res)){?>
-                        <input type="hidden" name="fb_auth_ids[<?php echo $k?>]" value="<?php echo !empty($auth_ids_res->attributes['auth_ids'])?$auth_ids_res->attributes['auth_ids']:'0';?>">
+                        <input type="hidden" class='auth_input' name="fb_auth_ids[<?php echo $k?>]" value="<?php echo !empty($auth_ids_res->attributes['auth_ids'])?$auth_ids_res->attributes['auth_ids']:'0';?>">
                     <?php } ?>
                     </td>
                     <td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td>
@@ -353,7 +353,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                         <input type='hidden' name="see[<?php echo $k?>]" value="<?php echo $v['id']?>">
                         <?php echo $v['username'];?>
                         <?php if(!empty($auth_ids_res)){?>
-                        <input type="hidden" name="see_auth_ids[<?php echo $k?>]" value="<?php echo !empty($auth_ids_res->attributes['auth_ids'])?$auth_ids_res->attributes['auth_ids']:'0';?>">
+                        <input type="hidden" class='auth_input' name="see_auth_ids[<?php echo $k?>]" value="<?php echo !empty($auth_ids_res->attributes['auth_ids'])?$auth_ids_res->attributes['auth_ids']:'0';?>">
                     <?php }?>
                     </td>
                     <td colspan='2'  align='center' class='del'onclick='del(this)'>删除</td>
@@ -437,8 +437,12 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
            guide_id += $(this).val()+',';
        });
        guide_id = guide_id.substring(0, guide_id.length - 1);
-       $(obj).parent().parent().children().eq(0).children().find("input[name=editadd_auth_ids]").val(guide_id);
-//       $(obj).parent().parent().children().eq(0).children().eq(1).val(guide_id);
+
+       var max  = $(obj).parent().parent().children().eq(0).children().length;
+       for(var i = 0 ; i<max ; i++){
+//           console.log($(obj).parent().parent().children().eq(0).find('.auth_input').val());
+           $(obj).parent().parent().children().eq(0).find('.auth_input').val(guide_id);
+       }
    }
 
 
