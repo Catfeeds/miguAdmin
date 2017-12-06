@@ -437,7 +437,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
            guide_id += $(this).val()+',';
        });
        guide_id = guide_id.substring(0, guide_id.length - 1);
-       $(obj).parent().parent().children().eq(0).children().eq(1).val(guide_id);
+       $(obj).parent().parent().children().eq(0).children().find("input[name=editadd_auth_ids]").val(guide_id);
+//       $(obj).parent().parent().children().eq(0).children().eq(1).val(guide_id);
    }
 
 
