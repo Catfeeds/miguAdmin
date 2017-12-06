@@ -172,7 +172,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                 <tr >
                     <td colspan='2' align='center'>
                         <input type='hidden' name="editadd[<?php echo $k?>]" value="<?php echo $v['id']?>">
-                        <?php if(!empty($auth_ids_res)){?>
+                        <?php if(!empty($auth_ids_res) || 1==1){?>
                         <input class='auth_input' type="hidden" name="editadd_auth_ids[<?php echo $k?>]" value="<?php echo !empty($auth_ids_res->attributes['auth_ids'])?$auth_ids_res->attributes['auth_ids']:'0';?>">
                     <?php }?>
                         <?php echo $v['username']?>
@@ -294,7 +294,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td colspan='2' align='center'>
                         <input type='hidden' name="fb[<?php echo $k?>]" value="<?php echo $v['id']?>">
                         <?php echo $v['username']?>
-                        <?php if(!empty($auth_ids_res)){?>
+                        <?php if(!empty($auth_ids_res) || 1==1){?>
                         <input type="hidden" class='auth_input' name="fb_auth_ids[<?php echo $k?>]" value="<?php echo !empty($auth_ids_res->attributes['auth_ids'])?$auth_ids_res->attributes['auth_ids']:'0';?>">
                     <?php } ?>
                     </td>
@@ -352,7 +352,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                     <td colspan='2' align='center'>
                         <input type='hidden' name="see[<?php echo $k?>]" value="<?php echo $v['id']?>">
                         <?php echo $v['username'];?>
-                        <?php if(!empty($auth_ids_res)){?>
+                        <?php if(!empty($auth_ids_res) || 1==1){?>
                         <input type="hidden" class='auth_input' name="see_auth_ids[<?php echo $k?>]" value="<?php echo !empty($auth_ids_res->attributes['auth_ids'])?$auth_ids_res->attributes['auth_ids']:'0';?>">
                     <?php }?>
                     </td>
