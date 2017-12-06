@@ -440,7 +440,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 
        var max  = $(obj).parent().parent().children().eq(0).children().length;
        for(var i = 0 ; i<max ; i++){
-//           console.log($(obj).parent().parent().children().eq(0).find('.auth_input').val());
+           console.log($(obj).parent().parent().children().eq(0).find('.auth_input').val());
            $(obj).parent().parent().children().eq(0).find('.auth_input').val(guide_id);
        }
    }
