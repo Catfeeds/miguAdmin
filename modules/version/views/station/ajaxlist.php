@@ -109,7 +109,7 @@
                 for(var i=0;i<count(ids);i++){
                     var li = "<tr>" +
                         "<td colspan='2' align='center'>" +
-                        "<input type='hidden' name="+fu+'_auth_ids[]'+" value='"+guide_id+"'>"+
+                        "<input class='auth_input' type='hidden' name="+fu+'_auth_ids[]'+" value='"+guide_id+"'>"+
                         "<input type='hidden' name="+fu+'[]'+" value="+ids[i]+">"+orders[i]+
                         "</td>" +
                         "<td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td>" +
@@ -121,7 +121,7 @@
                 for(var i=0;i<count(ids);i++){
                     var li = "<tr>" +
                         "<td colspan='2' align='center'>" +
-                        "<input type='hidden' name="+fu+'_auth_ids[]'+" value='"+guide_id+"'>"+
+                        "<input class='auth_input' type='hidden' name="+fu+'_auth_ids[]'+" value='"+guide_id+"'>"+
                         "<input type='hidden' name="+fu+'[]'+" value="+ids[i]+">"+orders[i]+
                         "</td>" +
                         "<td colspan='2'  align='center' class='del' onclick='del(this)'>删除</td>" +
