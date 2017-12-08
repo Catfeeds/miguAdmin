@@ -201,6 +201,10 @@ class StationController extends VController
                         $res = SpecialTopic::model()->findByPk($value['topic_id']);
 
                         if(!empty($res)){
+                            $tmp_res = VerBkimgCopy::model()->find("gid={$content->attributes['sid']}");
+                            if($res->attributes['template_id'] != $tmp_res->attributes['template_id']){
+                                $res = new SpecialTopic();
+                            }
                             $res->title = $content->attributes['title'];
                             $res->type = $content->attributes['type'];
                             $res->tType = $content->attributes['tType'];
@@ -216,7 +220,6 @@ class StationController extends VController
                             $res->videoUrl = $content->attributes['videoUrl'];
                             $res->sid = $content->attributes['sid'];
                             $res->picSrc = $content->attributes['picSrc'];
-                            $tmp_res = VerBkimgCopy::model()->find("gid={$content->attributes['sid']}");
                             $res->template_id= $tmp_res->attributes['template_id'];
                             $res->save();
                         }else{
