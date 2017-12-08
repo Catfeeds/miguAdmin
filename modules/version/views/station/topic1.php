@@ -1382,7 +1382,7 @@ function add(obj)
         }
         function banner(l)
         {
-            var template_id = <?php echo isset($template_id)?$template_id:'0';?>;
+            var template_id = <?php echo isset($template_id)?$template_id-11:'0';?>;
             guideid = getGuideid(template_id);
             var info = getMaxOrder(guideid);
             info = JSON.parse(info);
