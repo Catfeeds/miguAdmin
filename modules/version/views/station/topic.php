@@ -529,6 +529,7 @@ if (!empty($html) && !isset($flag)) {
                 </select>
 
                 <?php $template_id= !empty($template_id)?$template_id:0;?>
+                <?php $template_id_true= !empty($template_id)?$template_id:0;?>
                 <?php
                     $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='4'){?>
                     <span>模板名称：</span>
@@ -1776,7 +1777,7 @@ function add(obj)
         }
         function banner(l)
         {
-            var template_id = <?php echo isset($template_id)?$template_id:'0';?>;
+            var template_id = <?php echo isset($template_id_true)?$template_id_true:'0';?>;
             guideid = getGuideid(template_id);
             var info = getMaxOrder(guideid);
             info = JSON.parse(info);
