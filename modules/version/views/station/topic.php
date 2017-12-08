@@ -529,7 +529,6 @@ if (!empty($html) && !isset($flag)) {
                 </select>
 
                 <?php $template_id= !empty($template_id)?$template_id:0;?>
-                <?php $template_id_true= !empty($template_id)?$template_id:0;?>
                 <?php
                     $type = !empty($bkimg->attributes['type'])?$bkimg->attributes['type']:'';if($type=='4'){?>
                     <span>模板名称：</span>
