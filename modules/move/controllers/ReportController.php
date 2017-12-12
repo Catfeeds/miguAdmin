@@ -659,9 +659,9 @@ class ReportController extends MController{
         $excel = new PHPExcel();
 
         //Excel表格式,这里简略写了8列
-        $letter = array('A','B','C','D','E','F','G','H','I');
+        $letter = array('A','B','C','D','E','F','G','H');
         //表头数组
-        $tableheader = array('省','市','牌照方','导航编号','导航名称','海报标题','统计日期','第一次点击时间','点击量');
+        $tableheader = array('省','市','牌照方','导航名称','海报标题','第一次点击时间','统计时间','点击量');
         //填充表头信息
         for($i = 0;$i < count($tableheader);$i++) {
             $excel->getActiveSheet()->setCellValue("$letter[$i]1","$tableheader[$i]");
@@ -686,7 +686,7 @@ class ReportController extends MController{
         header("Content-Type:application/vnd.ms-execl");
         header("Content-Type:charset/UTF-8");
         header("Content-Type:application/octet-stream");
-        header("Content-Type:application/download");;
+        header("Content-Type:application/download");
         header('Content-Disposition:attachment;filename="'.$fileName.'.xls"');
         header("Content-Transfer-Encoding:binary");
         $write->save('php://output');

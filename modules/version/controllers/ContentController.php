@@ -237,9 +237,9 @@ class ContentController extends VController
 				$start = !empty($_REQUEST['firstTime'])?strtotime($_REQUEST['firstTime']):'';
 				$end= !empty($_REQUEST['endTime'])?strtotime($_REQUEST['endTime']):'';
 				if(!empty($_REQUEST['id'])){
-					$sql="select id from yd_ver_message where gid=$stationId and id<>{$_REQUEST['id']} AND ((endTime>={$end} and firstTime<={$start}) or (firstTime<={$end} and firstTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
+					$sql="select id from yd_ver_message where gid=$stationId and id<>{$_REQUEST['id']} AND ((endTime>={$end} and firstTime<={$start}) or (firstTime<={$end} and firstTime>={$start}) or (endTime>={$start} and endTime<={$end})) AND delFlag <> 1";
 				}else{
-					$sql="select id from yd_ver_message where gid=$stationId AND ((endTime>={$end} and firstTime<={$start}) or (firstTime<={$end} and firstTime>={$start}) or (endTime>={$start} and endTime<={$end}))";
+					$sql="select id from yd_ver_message where gid=$stationId AND ((endTime>={$end} and firstTime<={$start}) or (firstTime<={$end} and firstTime>={$start}) or (endTime>={$start} and endTime<={$end})) AND delFlag <> 1 ";
 				}
 				//echo $sql;die;
 				$res=SQLManager::queryRow($sql);
