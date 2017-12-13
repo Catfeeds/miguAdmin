@@ -121,12 +121,12 @@
     </tr>
     <tr class="act" style="display:none">
         <td width="100" align="right">action：</td>
-        <td><input type="text" name="action" id="action" value="<?php echo !empty($ui[$address][$fid]['action'])?$ui[$address][$fid]['action']:'';?>" class="form-input"></td>
+        <td><input type="text" name="action" id="action" value='<?php echo !empty($ui[$address][$fid]['action'])?$ui[$address][$fid]['action']:'';?>' class="form-input"></td>
     </tr>
 
     <tr class="act" style="display:none">
         <td width="100" align="right">param：</td>
-        <td><input type="text" name="param" id="param" value="<?php echo !empty($ui[$address][$fid]['param'])?$ui[$address][$fid]['param']:'';?>" class="form-input"><input type="submit" name="button" id="pbutton" class="seo-gray" value="搜索" style="float:left;margin-left:650px;margin-top:-35px;display:none"></td>
+        <td><input type="text" name="param" id="param" value='<?php echo !empty($ui[$address][$fid]['param'])?$ui[$address][$fid]['param']:'';?>' class="form-input"><input type="submit" name="button" id="pbutton" class="seo-gray" value="搜索" style="float:left;margin-left:650px;margin-top:-35px;display:none"></td>
     </tr>
     <tr  class="upvid" style="display:none">
         <td width="100" align="right">vid：</td>
