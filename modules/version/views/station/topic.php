@@ -1315,7 +1315,7 @@ if (!empty($html) && !isset($flag)) {
         });
 
         $('.del').click(function(){
-            var id = $(this).attr('dss');
+            var id = "<?php echo $_REQUEST['nid'];?>";
             var auth = getauth(id);
         	if(parseInt(auth.estatus)){
                 layer.alert("权限不足 无法操作！");return false;
