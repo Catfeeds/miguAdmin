@@ -380,6 +380,7 @@
         var k = $(this);
         var G = {};
         var picSrc = $('.upImg').attr('src');
+        G.nid = <?php echo $_REQUEST['nid'];?>;
         G.key = picSrc;
         G.uType  = $('#uType').val();   //选择咪咕后
         G.type   = $('#uptype').val();  //图片视频

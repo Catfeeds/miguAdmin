@@ -1580,7 +1580,7 @@ class StationController extends VController
     public function actionFirstPageAdd(){
         //var_dump($_POST);
         $model=new SpecialTopicCopy();
-        $model->sid=$_GET['nid'];//站点id
+        $model->sid=$_REQUEST['nid'];//站点id
         $model->action=$_POST['action'];
         $model->param=$_POST['param'];
         $model->cid=$_POST['cid'];
@@ -1596,7 +1596,7 @@ class StationController extends VController
         $model->uType=$_POST['uType'];
         $model->title=$_POST['title'];
         $model->flag=7;
-        $tmp_res = VerBkimgCopy::model()->find("gid={$_GET['nid']}");
+        $tmp_res = VerBkimgCopy::model()->find("gid={$_REQUEST['nid']}");
         $model->template_id= $tmp_res->attributes['template_id'];
         if($model->save()){
             echo json_encode(array("code"=>200));
