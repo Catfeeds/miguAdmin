@@ -1833,6 +1833,29 @@ class StationController extends VController
         echo $tmp_res->attributes['id'];
     }
 
+    public function actionGetSpecialMaxOrder()
+    {
+        if(!Yii::app()->request->isAjaxRequest){
+            $this->redirect($this->getPreUrl());
+        }
+        $sid = $_REQUEST['sid'];
+        $template_id = $_REQUEST['template_id']+11;
+        $res = SpecialTopicCopy::model()->findAll(
+            array(
+                'select'=>'`order`',
+                'order'=>'`order` desc',
+                'condition'=>'`sid`=:sid and `template_id`=:template_id',
+                'params'=>array(':sid'=>$sid,':template_id'=>$template_id),
+            ));
+        $data = array();
+        if(!empty($res)){
+            $data['max'] = $res[0]->attributes['order'];
+            $data['min'] = $res[count($res)-1]->attributes['order'];
+        }
+
+        echo json_encode($data);
+    }
+
     /*public function actionTest()
     {
         $res = SpecialTopicCopy::model()->findAll();

@@ -1777,7 +1777,8 @@ function add(obj)
         {
             var template_id = <?php echo isset($pk_id)?$pk_id:'0';?>;
             guideid = getGuideid(template_id);
-            var info = getMaxOrder(guideid);
+            //            var info = getMaxOrder(guideid);
+            var info = getSpecialMaxOrder(template_id);
             info = JSON.parse(info);
             for(var i = (info.min)-1 ; i<(info.max)+1 ; i++){
                 if($('.order-'+i).find('li').length>1){
@@ -1795,6 +1796,24 @@ function add(obj)
         }
 
         showData();
+
+        function getSpecialMaxOrder(template_id)
+        {
+            var mid = <?php echo $this->mid;?>;
+            var sid = <?php echo $_REQUEST['nid'];?>;
+            var d = 1;
+            $.ajax
+            ({
+                type:'get',
+                async:false,
+                url:'/version/station/getSpecialMaxOrder/mid/'+mid+'/sid/'+sid+'/template_id/'+template_id,
+                success:function(data)
+                {
+                    d = data;
+                }
+            });
+            return d;
+        }
 
         function getMaxOrder(guideid)
         {
