@@ -202,8 +202,8 @@ class StationController extends VController
 
                         if(!empty($res)){
                             $tmp_res = VerBkimgCopy::model()->find("gid={$content->attributes['sid']}");
-//                            if($res->att ributes['template_id'] != $tmp_res->attributes['template_id']){
-                            if($res->template_id != $tmp_res->attributes['template_id']){
+                            if($res->attributes['template_id'] != $tmp_res->attributes['template_id']){
+//                            if($res->template_id != $tmp_res->attributes['template_id']){
                                 $res = new SpecialTopic();
                             }
                             $res->title = $content->attributes['title'];
