@@ -144,7 +144,9 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                             if($v['pic'] == '/file/3.png' && !is_null($v['sid'])){
         //                    $first_pic = $v['pic'];
                                 $tmp_pic = VerScreenContent::model()->find("id={$v['sid']}");
-                                $v['pic'] = $tmp_pic->attributes['pic'];
+                                if(!empty($tmp_pic)){
+                                    $v['pic'] = $tmp_pic->attributes['pic'];
+                                }
                             }
                         ?>
                     </td>
