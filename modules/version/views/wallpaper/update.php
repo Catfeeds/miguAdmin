@@ -365,7 +365,7 @@
                 layer.alert(d.msg);
             }else{
 		alert("错误！");
-		loaction.reload();
+                window.location.reload();
 	    }
         },'json')
     });
