@@ -333,7 +333,7 @@ class WallpaperController extends VController{
                 $arr=explode("-",$tmp);
                 $cCode=$arr[1];//市code
                 $pCode=$arr[0];//省份code
-                $sql="select id from yd_ver_wall where id not in($id) and gid=$gid and province like '%$pCode%' and city like '%$cCode%' and type=1  and ((endTime>={$endTime} and startTime<={$startTime}) or (startTime<={$endTime} and startTime>={$startTime}) or (endTime>={$startTime} and endTime<={$endTime}))";
+                $sql="select id from yd_ver_wall where id not in($id) and gid=$gid and province like '%$pCode%' and city like '%$cCode%' and type=1  and ((endTime>={$endTime} and startTime<={$startTime}) or (startTime<={$endTime} and startTime>={$startTime}) or (endTime>={$startTime} and endTime<={$endTime})) and delFlag=0";
                 $data[]=SQLManager::queryRow($sql);
             }
             for($i=0;$i<count($data);$i++){

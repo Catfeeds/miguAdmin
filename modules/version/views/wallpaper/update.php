@@ -352,6 +352,8 @@
             code=["0-0"];
             G.Code=code;
         }
+        G.start = $('#first').val();
+        G.end  = $('#end').val();
         //console.log(G);return false;
 	var load = layer.load(0, {icon: 16,shade: [0.3,'#000']});
 	//console.log(G);return false;
