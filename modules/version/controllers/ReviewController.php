@@ -1545,7 +1545,7 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
 		}
 	}
         }
-        if($res>0){
+        if($res){
             echo json_encode(array("code"=>200));
         }else{
             echo json_encode(array("code"=>500));
