@@ -16,6 +16,10 @@
 	top:0px;		
 
 	}
+#main-1 img {
+    position: relative;
+    top: -25px;
+}
     .interpret{
         /*width: 97.8%;
         height: 35px;
@@ -198,6 +202,11 @@
                                     }?>
 
                 >视频</option>
+                <option value="2" <?php if($screenContent[0]['type']==3){
+                    echo 'selected';
+                }?>
+
+                >在线视频</option>
             </select>
             (不同类型，需要配置的数据不同)
         </td>
@@ -284,12 +293,12 @@
         <td colspan="3"><input type="text" id="videoUrl" name="videoUrl" value="<?php echo $screenContent[0]['videoUrl'] ?>" class="form-input"></td>
     </tr>
     <tr>
-    	<td align="right" valign="top">图片上传</td>
+    	<td align="right" valign="top">选中图片上传</td>
     	<td colspan="3"></td>
     </tr>
     
     <tr>
-    <td  align="right" valign="top">修改图片：</td>
+    <td  align="right" valign="top">选中修改图片：</td>
         <td colspan="3">
             <div  id="main">
                 <?php
@@ -297,9 +306,9 @@
                     echo "<div class='m-".$screenContent[0]['width']."' style='width:".($screenContent[0]['width']*125)."px;height:".($screenContent[0]['height']*52.5)."px;'>
                                 <input type='file' id='upload_file_new'>";
                        if($screenContent[0]['height'] == 1){
-                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']." oldPic' width=".($screenContent[0]['width']/2)."px; height=".($screenContent[0]['height']/2)."px;>";
+                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']." oldPic' width=".($screenContent[0]['width']/2)."px height=".($screenContent[0]['height']/2)."px>";
                 }else{
-                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']." oldPic' width=".($screenContent[0]['width']/2)."px; height=".($screenContent[0]['height']/2)."px;>";
+                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']." oldPic' width=".($screenContent[0]['width']/2)."px height=".($screenContent[0]['height']/2)."px>";
                 }         
                               echo "</div>";
                               
@@ -315,9 +324,9 @@
                                 <input type='file' id='upload_file_new'>";
 		}
                        if($screenContent[0]['height'] == 1){
-                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']." oldPic' width=".($screenContent[0]['width']/2)."px; height=".($screenContent[0]['height']/2)."px;>";
+                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']." oldPic' width=".($screenContent[0]['width']/2)."px height=".($screenContent[0]['height']/2)."px>";
                 }else{
-                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']." oldPic' width=".($screenContent[0]['width']/2)."px; height=".($screenContent[0]['height']/2)."px;>";
+                    echo "<img src=".$screenContent[0]['pic']." class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']." oldPic' width=".($screenContent[0]['width']/2)."px height=".($screenContent[0]['height']/2)."px>";
                 }         
                               echo "</div>";
                 }
@@ -329,7 +338,58 @@
                 <?php endif;?>
             </div>
         </td>
+    </tr>
 
+
+    <!-- 未选中图片修改  -->
+    <tr>
+        <td align="right" valign="top">未选中图片上传</td>
+        <td colspan="3"></td>
+    </tr>
+
+    <tr>
+        <td  align="right" valign="top">未选中修改图片：</td>
+        <td colspan="3">
+            <div  id="main-1">
+                <?php
+                if(empty($screenContent[0]['noSelectPic'])){
+                    $no_select_pic = "/file/3.png";
+                }else{
+                    $no_select_pic = $screenContent[0]['noSelectPic'];
+                }
+                if($screenContent[0]['height'] == 1){
+                    echo "<div class='m-".$screenContent[0]['width']."' style='width:".($screenContent[0]['width']*125)."px;height:".($screenContent[0]['height']*52.5)."px;'>
+                                <input type='file' id='upload_file_new_no_select'>";
+                    if($screenContent[0]['height'] == 1){
+                        echo "<img src=".$no_select_pic." class='m-".$screenContent[0]['width']." oldPic_1' width=".($screenContent[0]['width']/2)."px height=".($screenContent[0]['height']/2)."px>";
+                    }else{
+                        echo "<img src=".$no_select_pic." class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']." oldPic_1' width=".($screenContent[0]['width']/2)."px height=".($screenContent[0]['height']/2)."px>";
+                    }
+                    echo "</div>";
+                } else{
+                    if($screenContent[0]['width']<=10){
+                        echo "<div class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']."' '>
+                                <input type='file' id='upload_file_new_no_select'>";
+                    }else{
+                        echo "<div class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']."' style='width:".$screenContent[0]['width']."px;height:".$screenContent[0]['height']."px;'>
+                                <input type='file' id='upload_file_new_no_select'>";
+                    }
+                    if($screenContent[0]['height'] == 1){
+                        echo "<img src=".$no_select_pic." class='m-".$screenContent[0]['width']." oldPic_1' width=".($screenContent[0]['width']/2)."px height=".($screenContent[0]['height']/2)."px>";
+                    }else{
+                        echo "<img src=".$no_select_pic." class='m-".$screenContent[0]['width']."-".$screenContent[0]['height']." oldPic_1' width=".($screenContent[0]['width']/2)."px height=".($screenContent[0]['height']/2)."px>";
+                    }
+                    echo "</div>";
+                }
+                ?>
+                <?php if($screenContent[0]['width']<=10):?>
+                    <span class="infoSpan">请上传宽为<?php echo $screenContent[0]['width']*250+($screenContent[0]['width']-1)*20 ;?>，高为<?php echo $screenContent[0]['height']*105+($screenContent[0]['height']-1)*20;?>的图片！</span>
+                <?php else:?>
+                    <span class="infoSpan">请上传宽为<?php echo $screenContent[0]['width'];?>，高为<?php echo $screenContent[0]['height']?>的图片！</span>
+                <?php endif;?>
+            </div>
+        </td>
+    </tr>
 </table>
     <tr>
         <td align="center" colspan="4" class="button">
@@ -419,7 +479,7 @@
     function bb()
     {
         var zhi = $("#uptype").val();
-        if(zhi == '2'){
+        if(zhi == '2' || zhi == '3'){
             $('.videoUrl').show();
         }else{
             $('.videoUrl').hide();
@@ -516,7 +576,7 @@
                 <?php }?>
                 if(l.length < 1){
                     <?php if($screenContent[0]['height'] == 1){?>
-                    $('#main').find('.<?php echo "m-".$screenContent[0]['width']?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
+                    $('#main').find('.<?php echo "m-".$screenContent[0]['width']?>').append('<img src="'+value.url+'" width="<?php echo $screenContent[0]['width']/2 ;?>px" height="<?php echo $screenContent[0]['height']/2 ;?>px" class="upImg">');
                     <?php }else{?>
                     $('#main').find('.<?php echo "m-".$screenContent[0]['width']."-".$screenContent[0]['height'];?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
                     <?php }?>
@@ -535,6 +595,72 @@
 
     });
 
+    $('#upload_file_new_no_select').uploadify
+    ({
+        'auto': true,//关闭自动上传
+        'buttonImage': '/images/up1.png',
+        'width': 70,
+        'height': 26,
+        'swf': '/js/uploadify/uploadify.swf',
+        'uploader': '/upload/img',
+        'method': 'post',//方法，服务端可以用$_POST数组获取数据
+        'buttonText': '选择图片',//设置按钮文本
+        'queueID' : 'queueid',
+        'multi': false,//允许同时上传多张图片
+        'uploadLimit': 10,//一次最多只允许上传10张图片
+        'fileTypeExts': '*',//限制允许上传的图片后缀
+        'sizeLimit': 1024000000000,//限制上传的图片不得超过200KB
+        'onSelect'      : function(file)
+        {
+            var type = file.type;
+            var img = ['.jpg','.jpeg','.png','.gif'];
+            var myself = this;
+            if(!in_array(type,img)){
+                myself.cancelUpload();
+                layer.alert("这不是图片");
+                return false;
+            }
+        },
+        'onUploadStart' :function(file)
+        {
+            start = layer.load(0, {icon: 16,shade: [0.3,'#000']});
+        },
+        'onUploadSuccess' : function(file, data, response)
+        {//每次成功上传后执行的回调函数，从服务端返回数据到前端
+            layer.close(start);
+            var value = eval('('+data+')');
+            if(value.code == 200){
+                $('input[name=key]').val(value.key);
+                <?php if($screenContent[0]['height'] == 1){?>
+                var l = $('#main-1').find('.<?php echo "m-".$screenContent[0]['width'];?>').find('img');
+                <?php }else{?>
+                var l = $('#main-1').find('.<?php echo "m-".$screenContent[0]['width']."-".$screenContent[0]['height'];?>').find('img');
+                <?php }?>
+                if(l.length < 1){
+                    <?php if($screenContent[0]['height'] == 1){?>
+                    $('#main-1').find('.<?php echo "m-".$screenContent[0]['width']?>').append('<img src="'+value.url+'" width="<?php echo $screenContent[0]['width']/2 ;?>px" height="<?php echo $screenContent[0]['height']/2 ;?>px" class="upImg_1">');
+                    <?php }else{?>
+                    $('#main-1').find('.<?php echo "m-".$screenContent[0]['width']."-".$screenContent[0]['height'];?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg_1">');
+                    <?php }?>
+                }else{
+                    $(l).attr('src',value.url);
+                }
+            }else{
+                layer.alert(value.msg,{icon:0});
+            }
+//            $('#upload_file_new').hide();
+        },
+        'onError':function(err)
+        {
+            layer.alert(err);
+        }
+
+    });
+
+    var a = document.getElementById('upload_file_new_no_select');
+    a.style.position = "relative";
+    a.style.top = "-33px";
+
     $('.save').click(function()
     {
         var k = $(this);
@@ -544,7 +670,13 @@
         }else{
             var picSrc = $('.oldPic').attr('src');
         }
+        if($('#main-1').children('div').children('div').children('img').length>0){
+            var no_select_pic = $('.upImg_1').attr('src');
+        }else{
+            var no_select_pic = $('.oldPic_1').attr('src');
+        }
         G.key = picSrc;
+        G.no_select_pic = no_select_pic;
 	//alert(G.key);return false;
         G.uType  = $('#uType').val();   //选择咪咕后
         G.type   = $('#uptype').val();  //图片视频

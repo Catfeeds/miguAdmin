@@ -111,6 +111,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <th>导航</th>
             <th>标题</th>
             <th>图片</th>
+            <th>未图片</th>
             <th>action</th>
             <th>param</th>
             <th>推荐内容</th>
@@ -148,6 +149,13 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                                     $v['pic'] = $tmp_pic->attributes['pic'];
                                 }
                             }
+                        if($v['noSelectPic'] == '/file/3.png' && !is_null($v['sid'])){
+                            //                    $first_pic = $v['pic'];
+                            $tmp_pic = VerScreenContent::model()->find("id={$v['sid']}");
+                            if(!empty($tmp_pic)){
+                                $v['noSelectPic'] = $tmp_pic->attributes['noSelectPic'];
+                            }
+                        }
                         ?>
                     </td>
                     <td><?php echo $v['name']?></td>
@@ -155,6 +163,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                    <!-- <td><?php echo $v['x']?>×<?php echo $v['y']?>;<br><?php echo $v['width']?>×<?php echo $v['height']?></td>-->
                     <td><?php echo $v['title']?></td>
                     <td class="img"><img src="<?php echo $v['pic']?>" width="100px"></td>
+                    <td class="img"><img src="<?php echo $v['noSelectPic']?>" width="100px"></td>
                     <td><div style="width:200px;word-wrap:break-word;"><?php echo $v['action']?></div></td>
                     <td><div style="width:200px;word-wrap:break-word;"><?php echo $v['param']?></div></td>
                     <td><?php echo $v['tType']?></td>

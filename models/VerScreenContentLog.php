@@ -28,6 +28,7 @@
  * @property string $screen
  * @property integer $sid
  * @property string $videoUrl
+ * @property string $noSelectPic
  */
 class VerScreenContentLog extends CActiveRecord
 {
@@ -50,7 +51,7 @@ class VerScreenContentLog extends CActiveRecord
 			array('addTime, upTime, screenGuideid, width, height, delFlag, order, sid', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>300),
 			array('type, tType, uType', 'length', 'max'=>5),
-			array('param, action, pic, videoUrl', 'length', 'max'=>600),
+			array('param, action, pic, videoUrl, noSelectPic', 'length', 'max'=>600),
 			array('cp', 'length', 'max'=>2),
 			array('epg', 'length', 'max'=>1),
 			array('cid, user', 'length', 'max'=>50),
@@ -58,7 +59,7 @@ class VerScreenContentLog extends CActiveRecord
 			array('screen', 'length', 'max'=>60),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, type, tType, param, action, pic, cp, epg, addTime, upTime, screenGuideid, cid, width, height, x, y, delFlag, order, uType, user, screen, sid, videoUrl', 'safe', 'on'=>'search'),
+			array('id, title, type, tType, param, action, pic, cp, epg, addTime, upTime, screenGuideid, cid, width, height, x, y, delFlag, order, uType, user, screen, sid, videoUrl, noSelectPic', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -103,6 +104,7 @@ class VerScreenContentLog extends CActiveRecord
 			'screen' => 'Screen',
 			'sid' => 'Sid',
 			'videoUrl' => 'Video Url',
+			'noSelectPic' => 'No Select Pic',
 		);
 	}
 
@@ -148,6 +150,7 @@ class VerScreenContentLog extends CActiveRecord
 		$criteria->compare('screen',$this->screen,true);
 		$criteria->compare('sid',$this->sid);
 		$criteria->compare('videoUrl',$this->videoUrl,true);
+		$criteria->compare('noSelectPic',$this->noSelectPic,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -165,4 +168,3 @@ class VerScreenContentLog extends CActiveRecord
 		return parent::model($className);
 	}
 }
-

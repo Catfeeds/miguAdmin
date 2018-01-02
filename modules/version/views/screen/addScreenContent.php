@@ -13,6 +13,10 @@
 	top:0px;		
 
 	}
+#main-1 img{
+    position: relative;
+    top: -143px;
+}
 	.mtable td{
 		padding:5px;
 	}
@@ -186,6 +190,7 @@
                 <option  value="0">请选择</option>
                 <option  value="1" >图片</option>
                 <option  value="2" >视频</option>
+                <option  value="3" >在线视频</option>
             </select>
             (不同类型，需要配置的数据不同)
         </td>
@@ -266,14 +271,13 @@
         <td><input type="text" id="videoUrl" name="videoUrl" value="" class="form-input"></td>
     </tr>
     
-<tr>
-        <td align="right" valign="top">图片上传：</td>
-        <td></td>
-        </tr>
     <tr>
-        <td align="right" valign="top">图片预览：</td>
+        <td align="right" valign="top">选中图片上传：</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td align="right" valign="top">选中图片预览：</td>
         <td>
-
             <div class="up-main" id="main">
                 <?php
                     echo "<div class='m-".$_GET['width']."-".$_GET['height']."' >
@@ -289,11 +293,39 @@
                         <span class="infoSpan">请上传宽为<?php echo $_GET['width']?>，高为<?php echo $_GET['height']?>的图片！</span>
                     <?php }
                 ?>
-
-
             </div>
         </td>
     </tr>
+
+
+
+    <!--   未选中图片上传区域    -->
+    <tr>
+        <td align="right" valign="top" style="position: relative;">未选中图片上传：</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td align="right" valign="top">未选中图片预览：</td>
+        <td>
+            <div class="up-main-1" id="main-1">
+                <?php
+                echo "<div class='m-".$_GET['width']."-".$_GET['height']."' >
+                                <input type='file' id='upload_file_new_no_select'>
+                      </div>";
+                ?>
+                <?php
+                $pk_id = $_REQUEST['screenGuideId'];
+                $tmp_res = VerScreenGuide::model()->findByPk($pk_id);
+                if($tmp_res->attributes['templateId']<11){?>
+                    <span class="infoSpan">请上传宽为<?php echo $_GET['width']*250+($_GET['width']-1)*20 ;?>，高为<?php echo $_GET['height']*105+($_GET['height']-1)*20;?>的图片！</span>
+                <?php }else{?>
+                    <span class="infoSpan">请上传宽为<?php echo $_GET['width']?>，高为<?php echo $_GET['height']?>的图片！</span>
+                <?php }
+                ?>
+            </div>
+        </td>
+    </tr>
+
     <tr>
         <td align="center" colspan="2">
                 <input style="width:80px;height:30px;padding:0px" type="button" value="保存信息" class="btn save">
@@ -304,10 +336,12 @@
 </table>
 <script>
 
+
+
     function bb()
     {
         var zhi = $("#uptype").val();
-        if(zhi == '2'){
+        if(zhi == '2' || zhi == '3'){
             $('.videoUrl').show();
         }else{
 	    $('.videoUrl').hide();
@@ -397,7 +431,7 @@
                 $('input[name=key]').val(value.key);
                 var l = $('#main').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').find('img');
                 if(l.length < 1){
-                    $('#main').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
+                    $('#main').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo $_GET['width']/2 ;?>px" height="<?php echo $_GET['height']/2 ;?>px" class="upImg">');
                 }else{
                     $(l).attr('src',value.url);
                 }
@@ -414,11 +448,76 @@
 
     });
 
+    $('#upload_file_new_no_select').uploadify
+    ({
+        'auto': true,//关闭自动上传
+        'buttonImage': '/images/up1.png',
+        'width': 70,
+        'height': 26,
+        'swf': '/js/uploadify/uploadify.swf',
+        'uploader': '/upload/img',
+        'method': 'post',//方法，服务端可以用$_POST数组获取数据
+        'buttonText': '选择图片',//设置按钮文本
+        'queueID' : 'queueid',
+        'multi': false,//允许同时上传多张图片
+        'uploadLimit': 10,//一次最多只允许上传10张图片
+        'fileTypeExts': '*',//限制允许上传的图片后缀
+        'sizeLimit': 1024000000000,//限制上传的图片不得超过200KB
+        'onSelect'      : function(file)
+        {
+            var type = file.type;
+            var img = ['.jpg','.jpeg','.png','.gif'];
+            var myself = this;
+            if(!in_array(type,img)){
+                myself.cancelUpload();
+                layer.alert("这不是图片");
+                return false;
+            }
+        },
+        'onUploadStart' :function(file)
+        {
+            start = layer.load(0, {icon: 16,shade: [0.3,'#000']});
+        },
+        'onUploadSuccess' : function(file, data, response)
+        {//每次成功上传后执行的回调函数，从服务端返回数据到前端
+            layer.close(start);
+            var value = eval('('+data+')');
+            if(value.code == 200){
+                $('input[name=key]').val(value.key);
+                var l = $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').find('img');
+                if(l.length < 1){
+                    $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo $_GET['width']/2 ;?>px" height="<?php echo $_GET['height']/2 ;?>px" class="upImg_1">');
+                }else{
+                    $(l).attr('src',value.url);
+                }
+            }else{
+                layer.alert(value.msg,{icon:0});
+            }
+            $('#upload_file_new_no_select').width(<?php echo ($_REQUEST['width']/2)?>);
+            $('#upload_file_new_no_select').height(<?php echo ($_REQUEST['height']/2)?>);
+        },
+        'onError':function(err)
+        {
+            layer.alert(err);
+        }
+
+    });
+
+    var a = document.getElementById('upload_file_new_no_select');
+    a.style.position = "relative";
+    a.style.top = "-40px";
+
     $('.save').click(function()
     {
         var k = $(this);
         var G = {};
         var picSrc = $('.upImg').attr('src');
+        var no_select_pic = $('.upImg_1').attr('src');
+        if(empty(no_select_pic) || no_select_pic == undefined){
+            G.no_select_pic = 0;
+        }else{
+            G.no_select_pic = no_select_pic;
+        }
         G.key = picSrc;
         G.uType  = $('#uType').val();   //选择咪咕后
         G.type   = $('#uptype').val();  //图片视频

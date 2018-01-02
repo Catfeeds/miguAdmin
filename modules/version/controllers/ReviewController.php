@@ -839,6 +839,7 @@ class ReviewController extends VController
         $content->param=$list->attributes['param'];
         $content->action=$list->attributes['action'];
         $content->pic=$list->attributes['pic'];
+        $content->noSelectPic=$list->attributes['noSelectPic'];
         $content->cp=$list->attributes['cp'];
         $content->epg=$list->attributes['epg'];
         $content->screenGuideid=$list->attributes['screenGuideid'];
@@ -864,6 +865,7 @@ class ReviewController extends VController
         $content->param=$list->attributes['param'];
         $content->action=$list->attributes['action'];
         $content->pic=$list->attributes['pic'];
+        $content->noSelectPic=$list->attributes['noSelectPic'];
         $content->cp=$list->attributes['cp'];
         $content->epg=$list->attributes['epg'];
         $content->screenGuideid=$list->attributes['screenGuideid'];

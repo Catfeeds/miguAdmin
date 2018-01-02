@@ -25,6 +25,7 @@
  * @property integer $order
  * @property string $uType
  * @property string $videoUrl
+ * @property string $noSelectPic
  */
 class VerScreenContent extends CActiveRecord
 {
@@ -47,14 +48,14 @@ class VerScreenContent extends CActiveRecord
 			array('addTime, upTime, screenGuideid, width, height, delFlag, order', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>300),
 			array('type, tType, uType', 'length', 'max'=>5),
-			array('param, action, pic, videoUrl', 'length', 'max'=>600),
+			array('param, action, pic, videoUrl, noSelectPic', 'length', 'max'=>600),
 			array('cp', 'length', 'max'=>2),
 			array('epg', 'length', 'max'=>1),
 			array('cid', 'length', 'max'=>50),
 			array('x, y', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, type, tType, param, action, pic, cp, epg, addTime, upTime, screenGuideid, cid, width, height, x, y, delFlag, order, uType, videoUrl', 'safe', 'on'=>'search'),
+			array('id, title, type, tType, param, action, pic, cp, epg, addTime, upTime, screenGuideid, cid, width, height, x, y, delFlag, order, uType, videoUrl, noSelectPic', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -96,6 +97,7 @@ class VerScreenContent extends CActiveRecord
 			'order' => 'ǰ����ʾ��������',
 			'uType' => 'U Type',
 			'videoUrl' => 'Video Url',
+			'noSelectPic' => 'No Select Pic',
 		);
 	}
 
@@ -138,6 +140,7 @@ class VerScreenContent extends CActiveRecord
 		$criteria->compare('order',$this->order);
 		$criteria->compare('uType',$this->uType,true);
 		$criteria->compare('videoUrl',$this->videoUrl,true);
+		$criteria->compare('noSelectPic',$this->noSelectPic,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -155,4 +158,3 @@ class VerScreenContent extends CActiveRecord
 		return parent::model($className);
 	}
 }
-

@@ -203,6 +203,7 @@ class ScreenController extends VController
                 $model->videoUrl = trim($_POST['videoUrl']);
                 $model->delFlag = 0;
                 $model->flag = 1;
+                $model->noSelectPic = !empty($_POST['no_select_pic'])?trim($_POST['no_select_pic']):'0';
                 if(!$model->save()){
                     $code = '404';
                 }
@@ -236,6 +237,7 @@ class ScreenController extends VController
             $model->videoUrl = trim($_POST['videoUrl']);
             $model->delFlag = 0;
             $model->flag = 1;
+            $model->noSelectPic = !empty($_POST['no_select_pic'])?trim($_POST['no_select_pic']):'0';
             if($model->save()){
                 $this->die_json(array('code'=>200));
             }else{
@@ -554,6 +556,7 @@ class ScreenController extends VController
                     $content->upTime=time();
                     $content->uType=$v->attributes['uType'];
                     $content->videoUrl=$v->attributes['videoUrl'];
+                    $content->noSelectPic=$v->attributes['noSelectPic'];
                     $content->save();
                     $res->flag = '3';
                     $res->delFlag = '0';
@@ -646,8 +649,8 @@ class ScreenController extends VController
         $sql = "select * from yd_ver_screen_content where screenGuideid=$sid";
         $res = SQLManager::queryAll($sql);
         foreach ($res as $k=>$v){
-            $insert_sql = "insert into `yd_ver_screen_content`(`title`,`type`,`tType`,`param`,`action`,`pic`,`cp`,`epg`,`addTime`,`upTime`,`screenGuideid`,`cid`,`width`,`height`,`x`,`y`,`delFlag`,`order`,`uType`,`videoUrl`)";
-            $insert_values = "  values('".$v['title']."','".$v['type']."','".$v['tType']."','".$v['param']."','".$v['action']."','".$v['pic']."','".$v['cp']."','".$v['epg']."','".$v['addTime']."','".$v['upTime']."','".$copySid."','".$v['cid']."','".$v['width']."','".$v['height']."','".$v['x']."','".$v['y']."','".$v['delFlag']."','".$v['order']."','".$v['uType']."','".$v['videoUrl']."')";
+            $insert_sql = "insert into `yd_ver_screen_content`(`title`,`type`,`tType`,`param`,`action`,`pic`,`cp`,`epg`,`addTime`,`upTime`,`screenGuideid`,`cid`,`width`,`height`,`x`,`y`,`delFlag`,`order`,`uType`,`videoUrl`,`noSelectPic`)";
+            $insert_values = "  values('".$v['title']."','".$v['type']."','".$v['tType']."','".$v['param']."','".$v['action']."','".$v['pic']."','".$v['cp']."','".$v['epg']."','".$v['addTime']."','".$v['upTime']."','".$copySid."','".$v['cid']."','".$v['width']."','".$v['height']."','".$v['x']."','".$v['y']."','".$v['delFlag']."','".$v['order']."','".$v['uType']."','".$v['videoUrl']."','".$v['noSelectPic']."')";
             $execute_sql = $insert_sql . $insert_values;
             $res = SQLManager::execute($execute_sql);
         }
@@ -669,6 +672,7 @@ class ScreenController extends VController
             $model->param = $v['param'];
             $model->action = $v['action'];
             $model->pic = $v['pic'];
+            $model->noSelectPic = $v['noSelectPic'];
             $model->cp  = $v['cp'];
             $model->epg = $v['epg'];
             $model->addTime = $v['addTime'];
@@ -684,7 +688,7 @@ class ScreenController extends VController
             $model->uType = $v['uType'];
             $model->user = $v['user'];
             $model->flag = $v['flag'];
-	    $sql2 = "select id from yd_ver_screen_content where screenGuideid=$copySid and `order`=".$v['order']." and `pic`= '".$v['pic']."' order by id asc";	
+	        $sql2 = "select id from yd_ver_screen_content where screenGuideid=$copySid and `order`=".$v['order']." and `pic`= '".$v['pic']."' order by id asc";
             //$sid = SQLManager::queryRow($sql2);
             $sid = SQLManager::queryAll($sql2);
             if(count($sid)==1){
@@ -699,7 +703,7 @@ class ScreenController extends VController
                 if(empty($tmp_model)){
                     $model->sid = $sid[0]['id'];
                 }else{
-		    $offset = count($tmp_model)-1;
+		            $offset = count($tmp_model)-1;
                     $model->sid = isset($sid[$offset]['id'])?$sid[$offset]['id']:'0';
                 }
             }
@@ -730,7 +734,7 @@ class ScreenController extends VController
         $res = SQLManager::queryAll($sql);
         foreach ($res as $k=>$v){
             $insert_sql = "insert into `yd_ver_screen_content`(`title`,`type`,`tType`,`param`,`action`,`pic`,`cp`,`epg`,`addTime`,`upTime`,`screenGuideid`,`cid`,`width`,`height`,`x`,`y`,`delFlag`,`order`,`uType`,`videoUrl`)";
-            $insert_values = "  values('".$v['title']."','".$v['type']."','".$v['tType']."','".$v['param']."','".$v['action']."','".$v['pic']."','".$v['cp']."','".$v['epg']."','".$v['addTime']."','".$v['upTime']."','".$copySid."','".$v['cid']."','".$v['width']."','".$v['height']."','".$v['x']."','".$v['y']."','".$v['delFlag']."','".$v['order']."','".$v['uType']."','".$v['videoUrl']."')";
+            $insert_values = "  values('".$v['title']."','".$v['type']."','".$v['tType']."','".$v['param']."','".$v['action']."','".$v['pic']."','".$v['cp']."','".$v['epg']."','".$v['addTime']."','".$v['upTime']."','".$copySid."','".$v['cid']."','".$v['width']."','".$v['height']."','".$v['x']."','".$v['y']."','".$v['delFlag']."','".$v['order']."','".$v['uType']."','".$v['videoUrl']."','".$v['noSelectPic']."')";
             $execute_sql = $insert_sql . $insert_values;
             $res = SQLManager::execute($execute_sql);
         }
