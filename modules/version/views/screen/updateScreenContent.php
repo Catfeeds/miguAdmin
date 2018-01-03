@@ -202,7 +202,7 @@
                                     }?>
 
                 >视频</option>
-                <option value="2" <?php if($screenContent[0]['type']==3){
+                <option value="3" <?php if($screenContent[0]['type']==3){
                     echo 'selected';
                 }?>
 
