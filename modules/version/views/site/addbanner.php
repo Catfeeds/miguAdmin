@@ -160,6 +160,7 @@
                 <option value="0">请选择</option>
                 <option  value="1" >图片</option>
                 <option  value="2" >视频</option>
+                <option  value="3" >在线视频</option>
             </select>
             (不同类型，需要配置的数据不同)
         </td>
@@ -264,7 +265,7 @@
     function bb()
     {
         var zhi = $("#uptype").val();
-        if(zhi == '2'){
+        if(zhi == '2' || zhi == '3'){
             $('.videoUrl').show();
         }else{
 	    $('.videoUrl').hide();
@@ -288,7 +289,7 @@
                 $('.act').show();
                 break;
             case '3':
-                $('#show').show();
+                $('#show').hide();
                 $('.upvid').hide();
                 $('.utp').hide();
                 $('.act').show();

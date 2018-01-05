@@ -42,6 +42,7 @@
                 <option  value="0">请选择</option>
                 <option <?php if($data->type=='1'){echo "selected=selected"; }?>  value="1" >图片</option>
                 <option <?php if($data->type=='2'){echo "selected=selected"; }?>  value="2" >视频</option>
+                <option <?php if($data->type=='3'){echo "selected=selected"; }?>  value="3" >在线视频</option>
             </select>
         </td>
     </tr>
@@ -154,7 +155,7 @@
                 $('.act').show();
                 break;
             case '3':
-                $('#show').show();
+                $('#show').hide();
                 $('.upvid').hide();
                 $('.utp').hide();
                 $('.act').show();

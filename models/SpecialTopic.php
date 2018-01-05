@@ -21,6 +21,7 @@
  * @property string $sid
  * @property string $picSrc
  * @property integer $template_id
+ * @property string $noSelectPic
  */
 class SpecialTopic extends CActiveRecord
 {
@@ -45,9 +46,10 @@ class SpecialTopic extends CActiveRecord
 			array('title, action, param, cid, x, y, width, height, videoUrl, picSrc', 'length', 'max'=>255),
 			array('order', 'length', 'max'=>10),
 			array('sid', 'length', 'max'=>11),
+			array('noSelectPic', 'length', 'max'=>600),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, type, tType, uType, action, param, cid, x, y, width, height, order, videoUrl, sid, picSrc, template_id', 'safe', 'on'=>'search'),
+			array('id, title, type, tType, uType, action, param, cid, x, y, width, height, order, videoUrl, sid, picSrc, template_id, noSelectPic', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -84,7 +86,8 @@ class SpecialTopic extends CActiveRecord
 			'videoUrl' => 'Video Url',
 			'sid' => 'Sid',
 			'picSrc' => 'Pic Src',
-			'template_id' => '对应模板id',
+			'template_id' => 'å¯¹åº”æ¨¡æ¿id',
+			'noSelectPic' => 'No Select Pic',
 		);
 	}
 
@@ -123,6 +126,7 @@ class SpecialTopic extends CActiveRecord
 		$criteria->compare('sid',$this->sid,true);
 		$criteria->compare('picSrc',$this->picSrc,true);
 		$criteria->compare('template_id',$this->template_id);
+		$criteria->compare('noSelectPic',$this->noSelectPic,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

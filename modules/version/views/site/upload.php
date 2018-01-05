@@ -60,6 +60,7 @@
                 <option value="0">请选择</option>
                 <option <?php $uptype = !empty($ui[$address][$fid]['type'])?$ui[$address][$fid]['type']:'';if($uptype=='1'){echo "selected=selected"; }?>  value="1" >图片</option>
                 <option <?php $uptype = !empty($ui[$address][$fid]['type'])?$ui[$address][$fid]['type']:'';if($uptype=='2'){echo "selected=selected"; }?> value="2" >视频</option>
+                <option <?php $uptype = !empty($ui[$address][$fid]['type'])?$ui[$address][$fid]['type']:'';if($uptype=='3'){echo "selected=selected"; }?> value="3" >在线视频</option>
             </select>
         </td>
     </tr>
@@ -219,7 +220,7 @@ $html = str_replace("overflow:auto", "", $html);
                 $('.act').show();
                 break;
             case '3':
-                $('#show').show();
+                $('#show').hide();
                 $('.upvid').hide();
                 $('.utp').hide();
                 $('.act').show();

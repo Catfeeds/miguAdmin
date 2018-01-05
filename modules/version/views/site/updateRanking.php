@@ -74,6 +74,7 @@
                 <option  value="0">请选择</option>
                 <option <?php $uptype = !empty($res['type'])?$res['type']:'';if($uptype=='1'){echo "selected=selected"; }?>  value="1" >图片</option>
                 <option <?php $uptype = !empty($res['type'])?$res['type']:'';if($uptype=='2'){echo "selected=selected"; }?>  value="2" >视频</option>
+                <option <?php $uptype = !empty($res['type'])?$res['type']:'';if($uptype=='3'){echo "selected=selected"; }?>  value="3" >在线视频</option>
             </select>
         </td>
     </tr>

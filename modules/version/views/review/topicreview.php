@@ -142,7 +142,7 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
 		<td><?php echo $vv['topname'].">".$vv['name']; ?></td>
                <td><?php echo $vv['title']; ?></td>
                 <td><img  width="240" height="120"  src="<?php echo $vv['pic']; ?>" /></td>
-               <td><?php 
+               <td><?php
                if($vv['type'] <> 'bkimg'){
                if($vv['uptype'] == '1')
                { echo '图片';}

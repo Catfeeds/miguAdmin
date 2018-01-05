@@ -148,9 +148,14 @@
         <td>
              <?php if($screenContent->type==1){
                     echo '图片';
-                }?><?php if($screenContent->type==2){
+                }?>
+
+            <?php if($screenContent->type==2){
                     echo '视频';
                 }?>
+            <?php if($screenContent->type==3){
+                echo '在线视频';
+            }?>
             (不同类型，需要配置的数据不同)
         </td>
     </tr>
@@ -232,11 +237,17 @@
         <td><?php echo $screenContent->videoUrl ?></td>
     </tr>
     <tr>
-        <td width="100" align="right">当前图片为：</td>
+        <td width="100" align="right">当前选中图片为：</td>
         <td><div class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?>">
         <img src="<?php echo $screenContent->picSrc;?>" class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?> oldPic"></div>
         </td>
 </tr>
+    <tr>
+        <td width="100" align="right">当前未选中图片为：</td>
+        <td><div class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?>">
+                <img src="<?php echo $screenContent->noSelectPic;?>" class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?> oldPic_1"></div>
+        </td>
+    </tr>
 </table>
 
 <script>
@@ -271,7 +282,7 @@
     function bb()
     {
         var zhi = $("#uptype").val();
-        if(zhi == '2'){
+        if(zhi == '2' || zhi == '3'){
             $('.videoUrl').show();
         }else{
             $('.videoUrl').hide();

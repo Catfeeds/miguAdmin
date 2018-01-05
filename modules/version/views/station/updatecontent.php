@@ -156,6 +156,11 @@
                 }?>
 
                 >视频</option>
+                <option value="3" <?php if($screenContent->type==3){
+                    echo 'selected';
+                }?>
+
+                >在线视频</option>
             </select>
             (不同类型，需要配置的数据不同)
         </td>
@@ -239,20 +244,46 @@
         <td><input type="text" id="videoUrl" name="videoUrl" value="<?php echo $screenContent->videoUrl ?>" class="form-input"></td>
     </tr>
     <tr>
-        <td width="100" align="right">当前图片为：</td>
+        <td width="100" align="right">当前选中图片为：</td>
         <td><div class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?>">
 	<img src="<?php echo $screenContent->picSrc;?>" class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?> oldPic"></div>
         </td>
-</tr><tr>
-        <td align="right" valign="top">修改图片：</td>
+</tr>
+    <tr>
+        <td align="right" valign="top">选中修改图片：</td>
         <td>
             <div  id="main">
-            	<?php echo "<div class='m-".$_GET['width']."-".$_GET['height']."' style='position:relative' >
-                                <input type='file' id='upload_file_new'>
-                              </div>"?>
+            	<?php
+                    echo "<div class='m-".$_GET['width']."-".$_GET['height']."' style='position:relative' >
+                            <input type='file' id='upload_file_new'>
+                          </div>"
+                ?>
 	    </div>
         </td><style>#upload_file_new{position: absolute;top: 0;left: 0;}</style>
     </tr>
+
+
+    <!--未选中图片上传区域-->
+    <tr>
+        <td width="100" align="right">当未选中前图片为：</td>
+        <td><div class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?>">
+                <img src="<?php echo $screenContent->noSelectPic;?>" class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?> oldPic_1"></div>
+        </td>
+    </tr>
+    <tr>
+        <td align="right" valign="top">未选中修改图片：</td>
+        <td>
+            <div  id="main-1">
+                <?php
+                    echo "<div class='m-".$_GET['width']."-".$_GET['height']."' style='position:relative' >
+                            <input type='file' id='upload_file_new_no_select'>
+                          </div>"
+                ?>
+            </div>
+        </td>
+    </tr>
+
+
 <?php //if($_GET['show']){ ?>
     <tr>
         <td align="center" colspan="2">
@@ -329,7 +360,7 @@
     function bb()
     {
         var zhi = $("#uptype").val();
-        if(zhi == '2'){
+        if(zhi == '2' || zhi  == '3'){
             $('.videoUrl').show();
         }else{
             $('.videoUrl').hide();
@@ -426,9 +457,74 @@
                 <?php }?>
                 if(l.length < 1){
                     <?php if($screenContent->height == 1){?>
-                    $('#main').find('.<?php echo "m-".$screenContent->width?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
+                    $('#main').find('.<?php echo "m-".$screenContent->width?>').append('<img src="'+value.url+'" width="<?php echo ($screenContent->width)/2;?>px" height="<?php echo ($screenContent->height)/2;?>px" class="upImg">');
                     <?php }else{?>
-                    $('#main').find('.<?php echo "m-".$screenContent->width."-".$screenContent->height;?>').append('<img src="'+value.url+'" width="100%" height="100%" class="upImg">');
+                    $('#main').find('.<?php echo "m-".$screenContent->width."-".$screenContent->height;?>').append('<img src="'+value.url+'" width="<?php echo ($screenContent->width)/2;?>px" height="<?php echo ($screenContent->height)/2;?>px" class="upImg">');
+                    <?php }?>
+                }else{
+                    $(l).attr('src',value.url);
+                }
+            }else{
+                layer.alert(value.msg,{icon:0});
+            }
+//            $('#upload_file_new').hide();
+        },
+        'onError':function(err)
+        {
+            layer.alert(err);
+        }
+
+    });
+    var a = document.getElementById('upload_file_new');
+    a.style.position = "relative";
+    a.style.top = "0px";
+
+    $('#upload_file_new_no_select').uploadify
+    ({
+        'auto': true,//关闭自动上传
+        'buttonImage': '/images/up1.png',
+        'width': 70,
+        'height': 26,
+        'swf': '/js/uploadify/uploadify.swf',
+        'uploader': '/upload/img',
+        'method': 'post',//方法，服务端可以用$_POST数组获取数据
+        'buttonText': '选择图片',//设置按钮文本
+        'queueID' : 'queueid',
+        'multi': false,//允许同时上传多张图片
+        'uploadLimit': 10,//一次最多只允许上传10张图片
+        'fileTypeExts': '*',//限制允许上传的图片后缀
+        'sizeLimit': 1024000000000,//限制上传的图片不得超过200KB
+        'onSelect'      : function(file)
+        {
+            var type = file.type;
+            var img = ['.jpg','.jpeg','.png','.gif'];
+            var myself = this;
+            if(!in_array(type,img)){
+                myself.cancelUpload();
+                layer.alert("这不是图片");
+                return false;
+            }
+        },
+        'onUploadStart' :function(file)
+        {
+            start = layer.load(0, {icon: 16,shade: [0.3,'#000']});
+        },
+        'onUploadSuccess' : function(file, data, response)
+        {//每次成功上传后执行的回调函数，从服务端返回数据到前端
+            layer.close(start);
+            var value = eval('('+data+')');
+            if(value.code == 200){
+                $('input[name=key]').val(value.key);
+                <?php if($screenContent->height == 1){?>
+                var l = $('#main-1').find('.<?php echo "m-".$screenContent->width;?>').find('img');
+                <?php }else{?>
+                var l = $('#main-1').find('.<?php echo "m-".$screenContent->width."-".$screenContent->height;?>').find('img');
+                <?php }?>
+                if(l.length < 1){
+                    <?php if($screenContent->height == 1){?>
+                    $('#main-1').find('.<?php echo "m-".$screenContent->width?>').append('<img src="'+value.url+'" width="<?php echo ($screenContent->width)/2;?>px" height="<?php echo ($screenContent->height)/2;?>px" class="upImg_1">');
+                    <?php }else{?>
+                    $('#main-1').find('.<?php echo "m-".$screenContent->width."-".$screenContent->height;?>').append('<img src="'+value.url+'" width="<?php echo ($screenContent->width)/2;?>px" height="<?php echo ($screenContent->height)/2;?>px" class="upImg_1">');
                     <?php }?>
                 }else{
                     $(l).attr('src',value.url);
@@ -453,6 +549,16 @@
             var picSrc = $('.upImg').attr('src');
         }else{
             var picSrc = $('.oldPic').attr('src');
+        }
+        if($('#main-1').children('div').children('img').length>0){
+            var no_select_pic = $('.upImg_1').attr('src');
+        }else{
+            var no_select_pic = $('.oldPic_1').attr('src');
+        }
+        if(empty(no_select_pic) || no_select_pic == undefined){
+            G.no_select_pic = 0;
+        }else{
+            G.no_select_pic = no_select_pic;
         }
         G.key = picSrc;
         G.uType  = $('#uType').val();   //选择咪咕后

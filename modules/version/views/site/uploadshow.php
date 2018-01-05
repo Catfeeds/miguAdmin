@@ -59,6 +59,7 @@
          
                  <?php $uptype = !empty($ui[$address][$fid]['type'])?$ui[$address][$fid]['type']:'';if($uptype=='1'){echo "图片"; }?> 
                  <?php $uptype = !empty($ui[$address][$fid]['type'])?$ui[$address][$fid]['type']:'';if($uptype=='2'){echo "视频"; }?> 
+                 <?php $uptype = !empty($ui[$address][$fid]['type'])?$ui[$address][$fid]['type']:'';if($uptype=='3'){echo "在线视频"; }?>
 
         </td>
     </tr>
@@ -173,7 +174,7 @@ $html = str_replace("overflow:auto", "", $html);
                 $('.act').show();
                 break;
             case '3':
-                $('#show').show();
+                $('#show').hide();
                 $('.upvid').hide();
                 $('.utp').hide();
                 $('.act').show();

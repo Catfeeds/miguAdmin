@@ -222,6 +222,7 @@ class StationController extends VController
                             $res->sid = $content->attributes['sid'];
                             $res->picSrc = $content->attributes['picSrc'];
                             $res->template_id= $tmp_res->attributes['template_id'];
+                            $res->noSelectPic= $content->attributes['noSelectPic'];
                             $res->save();
                         }else{
                             $res = new SpecialTopic();
@@ -243,6 +244,7 @@ class StationController extends VController
                             $res->picSrc = $content->attributes['picSrc'];
                             $tmp_res = VerBkimgCopy::model()->find("gid={$content->attributes['sid']}");
                             $res->template_id= $tmp_res->attributes['template_id'];
+                            $res->noSelectPic= $content->attributes['noSelectPic'];
                             $res->save();
                         }
                         $content->flag = 0;
@@ -1596,6 +1598,7 @@ class StationController extends VController
         $model->tType=$_POST['tType'];
         $model->uType=$_POST['uType'];
         $model->title=$_POST['title'];
+        $model->noSelectPic = !empty($_POST['no_select_pic'])?$_POST['no_select_pic']:'0';
         $model->flag=7;
         $tmp_res = VerBkimgCopy::model()->find("gid={$_REQUEST['nid']}");
         $model->template_id= $tmp_res->attributes['template_id'];
@@ -1632,6 +1635,7 @@ class StationController extends VController
             $model->tType=$_POST['tType'];
             $model->uType=$_POST['uType'];
             $model->title=$_POST['title'];
+            $model->noSelectPic = !empty($_POST['no_select_pic'])?$_POST['no_select_pic']:'0';
                         $model->flag = 7;
             $tmp_res = VerBkimgCopy::model()->find("gid={$_POST['nid']}");
             $model->template_id= $tmp_res->attributes['template_id'];

@@ -73,6 +73,7 @@
 
              <?php $uptype = !empty($res['type'])?$res['type']:'';if($uptype=='1'){echo "图片"; }?>
              <?php $uptype = !empty($res['type'])?$res['type']:'';if($uptype=='2'){echo "视频"; }?>
+             <?php $uptype = !empty($res['type'])?$res['type']:'';if($uptype=='3'){echo "在线视频"; }?>
        </td>
     </tr>
     <tr>
