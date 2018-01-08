@@ -398,7 +398,12 @@
                 $('input[name=key]').val(value.key);
                 var l = $('#main').find('.<?php echo "m-".$info['width']."-".$info['height'];?>').find('img');
                 if(l.length < 1){
+                    <?php if($info['width']<=10):?>
+                    $('#main').find('.<?php echo "m-".$info['width']."-".$info['height'];?>').append('<img src="'+value.url+'" width="<?php echo ($info['width']*250+($info['width']-1)*20)/2 ;?>px" height="<?php echo ($info['height']*105+($info['height']-1)*20)/2;?>px"  class="upImg">');
+                    <?php else:?>
                     $('#main').find('.<?php echo "m-".$info['width']."-".$info['height'];?>').append('<img src="'+value.url+'" width="<?php echo $info['width']/2 ;?>px" height="<?php echo $info['height']/2 ;?>px"  class="upImg">');
+                    <?php endif;?>
+
                 }else{
                     $(l).attr('src',value.url);
                 }
@@ -454,7 +459,11 @@
                 $('input[name=key]').val(value.key);
                 var l = $('#main-1').find('.<?php echo "m-".$info['width']."-".$info['height'];?>').find('img');
                 if(l.length < 1){
+                    <?php if($info['width']<=10):?>
+                    $('#main-1').find('.<?php echo "m-".$info['width']."-".$info['height'];?>').append('<img src="'+value.url+'" width="<?php echo ($info['width']*250+($info['width']-1)*20)/2 ;?>px" height="<?php echo ($info['height']*105+($info['height']-1)*20)/2;?>px"  class="upImg_1">');
+                    <?php else:?>
                     $('#main-1').find('.<?php echo "m-".$info['width']."-".$info['height'];?>').append('<img src="'+value.url+'" width="<?php echo $info['width']/2 ;?>px" height="<?php echo $info['height']/2 ;?>px"  class="upImg_1">');
+                    <?php endif;?>
                 }else{
                     $(l).attr('src',value.url);
                 }
