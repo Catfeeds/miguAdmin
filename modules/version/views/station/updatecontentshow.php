@@ -237,13 +237,13 @@
         <td><?php echo $screenContent->videoUrl ?></td>
     </tr>
     <tr>
-        <td width="100" align="right">当前选中图片为：</td>
+        <td width="100" align="right">当前未选中图片为：</td>
         <td><div class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?>">
         <img src="<?php echo $screenContent->picSrc;?>" class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?> oldPic"></div>
         </td>
 </tr>
     <tr>
-        <td width="100" align="right">当前未选中图片为：</td>
+        <td width="100" align="right">当前选中图片为：</td>
         <td><div class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?>">
                 <img src="<?php echo $screenContent->noSelectPic;?>" class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?> oldPic_1"></div>
         </td>

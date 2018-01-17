@@ -244,13 +244,13 @@
         <td><input type="text" id="videoUrl" name="videoUrl" value="<?php echo $screenContent->videoUrl ?>" class="form-input"></td>
     </tr>
     <tr>
-        <td width="100" align="right">当前选中图片为：</td>
+        <td width="100" align="right">未选中图片为：</td>
         <td><div class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?>">
 	<img src="<?php echo $screenContent->picSrc;?>" class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?> oldPic"></div>
         </td>
 </tr>
     <tr>
-        <td align="right" valign="top">选中修改图片：</td>
+        <td align="right" valign="top">未选中修改图片：</td>
         <td>
             <div  id="main">
             	<?php
@@ -263,15 +263,15 @@
     </tr>
 
 
-    <!--未选中图片上传区域-->
+    <!--选中图片上传区域-->
     <tr>
-        <td width="100" align="right">当未选中前图片为：</td>
+        <td width="100" align="right">选中前图片为：</td>
         <td><div class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?>">
                 <img src="<?php echo $screenContent->noSelectPic;?>" class="m-<?php echo $_GET['width']?>-<?php echo $_GET['height']?> oldPic_1"></div>
         </td>
     </tr>
     <tr>
-        <td align="right" valign="top">未选中修改图片：</td>
+        <td align="right" valign="top">选中修改图片：</td>
         <td>
             <div  id="main-1">
                 <?php

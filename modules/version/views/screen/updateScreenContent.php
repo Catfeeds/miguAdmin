@@ -293,12 +293,12 @@
         <td colspan="3"><input type="text" id="videoUrl" name="videoUrl" value="<?php echo $screenContent[0]['videoUrl'] ?>" class="form-input"></td>
     </tr>
     <tr>
-    	<td align="right" valign="top">选中图片上传</td>
+    	<td align="right" valign="top">未选中图片上传</td>
     	<td colspan="3"></td>
     </tr>
     
     <tr>
-    <td  align="right" valign="top">选中修改图片：</td>
+    <td  align="right" valign="top">未选中修改图片：</td>
         <td colspan="3">
             <div  id="main">
                 <?php
@@ -341,14 +341,14 @@
     </tr>
 
 
-    <!-- 未选中图片修改  -->
+    <!-- 选中图片修改  -->
     <tr>
-        <td align="right" valign="top">未选中图片上传</td>
+        <td align="right" valign="top">选中图片上传</td>
         <td colspan="3"></td>
     </tr>
 
     <tr>
-        <td  align="right" valign="top">未选中修改图片：</td>
+        <td  align="right" valign="top">选中修改图片：</td>
         <td colspan="3">
             <div  id="main-1">
                 <?php

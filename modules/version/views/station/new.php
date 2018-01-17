@@ -245,7 +245,7 @@
     </tr>
     <tr>
 
-        <td align="right" valign="top">选中图片上传：</td>
+        <td align="right" valign="top">未选中图片上传：</td>
         <td>
             <div class="up-main" id="main">
                 <?php
@@ -259,9 +259,9 @@
     </tr>
 
 
-<!-- 未选中图片上传区域   -->
+<!-- 选中图片上传区域   -->
     <tr>
-        <td align="right" valign="top">未选中图片上传：</td>
+        <td align="right" valign="top">选中图片上传：</td>
         <td>
             <div class="up-main" id="main-1">
                 <?php

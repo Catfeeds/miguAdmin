@@ -272,11 +272,11 @@
     </tr>
     
     <tr>
-        <td align="right" valign="top">选中图片上传：</td>
+        <td align="right" valign="top">未选中图片上传：</td>
         <td></td>
     </tr>
     <tr>
-        <td align="right" valign="top">选中图片预览：</td>
+        <td align="right" valign="top">未选中图片预览：</td>
         <td>
             <div class="up-main" id="main">
                 <?php
@@ -299,13 +299,13 @@
 
 
 
-    <!--   未选中图片上传区域    -->
+    <!--   选中图片上传区域    -->
     <tr>
         <td align="right" valign="top" style="position: relative;">未选中图片上传：</td>
         <td></td>
     </tr>
     <tr>
-        <td align="right" valign="top">未选中图片预览：</td>
+        <td align="right" valign="top">选中图片预览：</td>
         <td>
             <div class="up-main-1" id="main-1">
                 <?php

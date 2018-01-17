@@ -257,7 +257,7 @@
         <td><input type="text" id="videoUrl" name="videoUrl" value="" class="form-input"></td>
     </tr>
     <tr>
-        <td align="right" valign="top">选中图片上传：</td>
+        <td align="right" valign="top">未选中图片上传：</td>
         <td>
 
             <div class="up-main" id="main">
@@ -276,7 +276,7 @@
     </tr>
 
     <tr>
-        <td align="right" valign="top">未选中图片上传：</td>
+        <td align="right" valign="top">选中图片上传：</td>
         <td>
 
             <div class="up-main" id="main-1">
