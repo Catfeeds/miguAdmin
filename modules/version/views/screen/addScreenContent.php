@@ -301,7 +301,7 @@
 
     <!--   选中图片上传区域    -->
     <tr>
-        <td align="right" valign="top" style="position: relative;">未选中图片上传：</td>
+        <td align="right" valign="top" style="position: relative;">选中图片上传：</td>
         <td></td>
     </tr>
     <tr>
