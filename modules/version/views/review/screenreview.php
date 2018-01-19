@@ -110,8 +110,8 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
             <th>站点</th>
             <th>导航</th>
             <th>标题</th>
-            <th>图片</th>
             <th>未图片</th>
+            <th>选中图片</th>
             <th>action</th>
             <th>param</th>
             <th>推荐内容</th>
