@@ -163,7 +163,15 @@ $adminLeftTwo = !empty($_GET['adminLeftTwo'])?$_GET['adminLeftTwo']:'';
                    <!-- <td><?php echo $v['x']?>×<?php echo $v['y']?>;<br><?php echo $v['width']?>×<?php echo $v['height']?></td>-->
                     <td><?php echo $v['title']?></td>
                     <td class="img"><img src="<?php echo $v['pic']?>" width="100px"></td>
-                    <td class="img"><img src="<?php echo $v['noSelectPic']?>" width="100px"></td>
+                    <td class="img">
+                        <?php
+                            if(strlen($v['noSelectPic'])>18){?>
+                                <img src="<?php echo $v['noSelectPic']?>" width="100px">
+                        <?php
+                            }
+                        ?>
+
+                    </td>
                     <td><div style="width:200px;word-wrap:break-word;"><?php echo $v['action']?></div></td>
                     <td><div style="width:200px;word-wrap:break-word;"><?php echo $v['param']?></div></td>
                     <td><?php echo $v['tType']?></td>
