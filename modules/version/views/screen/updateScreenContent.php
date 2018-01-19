@@ -735,6 +735,7 @@
         var G = {};
   
         G.key = "/file/3.png";
+        G.no_select_pic = "/file/3.png";
 	//alert(G.key);return false;
         G.uType  = "";   //选择咪咕后
         G.type   = "";  //图片视频

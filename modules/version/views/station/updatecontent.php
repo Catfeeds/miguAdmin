@@ -624,6 +624,11 @@
             var picSrc = $('.oldPic').attr('src');
         }
         G.key = picSrc;
+        if(empty(no_select_pic) || no_select_pic == undefined){
+            G.no_select_pic = 0;
+        }else{
+            G.no_select_pic = no_select_pic;
+        }
         G.uType  = $('#uType').val();   //选择咪咕后
         G.type   = '3';  //图片视频
         G.tType  = $('#tType').val();   //推荐内容
