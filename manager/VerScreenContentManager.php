@@ -6,7 +6,7 @@ class VerScreenContentManager extends MvUi
         $res = array();
         $sql_select = "select cid,id,pic,screenGuideId,width,height,tType,type,cp,uType,`order`,videoUrl,noSelectPic from yd_ver_screen_content";
         $sql_where = " where screenGuideId=$gid and `delFlag`=0 ";
-        $sql_order = " order by `order`";
+        $sql_order = " order by `order`,id ";
         $sql = $sql_select.$sql_where.$sql_order;
         $res = SQLManager::queryAll($sql);
         return $res;
@@ -17,7 +17,7 @@ class VerScreenContentManager extends MvUi
         $res = array();
         $sql_select = "select cid,id,pic,screenGuideId,width,height,tType,type,cp,uType,`order`,videoUrl,noSelectPic from yd_ver_screen_content_copy";
         $sql_where = " where screenGuideId=$gid and delFlag in (0,1,2,3) and flag not in (8)";
-        $sql_order = " order by `order` ";
+        $sql_order = " order by `order`,id ";
         $sql = $sql_select.$sql_where.$sql_order;
         $res = SQLManager::queryAll($sql);
         return $res;
@@ -28,7 +28,7 @@ class VerScreenContentManager extends MvUi
         $res = array();
         $sql_select = "select cid,id,pic,screenGuideId,width,height,tType,type,cp,action,uType,param,title,x,y,`order`,epg,videoUrl from yd_ver_screen_content_copy";
         $sql_where = " where `screenGuideId`=$screenGuideId AND `order`='$order'";
-        $sql_order = " order by `order`";
+        $sql_order = " order by `order` ,id ";
         $sql = $sql_select.$sql_where.$sql_order;
         $res = SQLManager::queryAll($sql);
         return $res;
@@ -55,7 +55,7 @@ class VerScreenContentManager extends MvUi
         $res = array();
         $sql_select = "select cid,id,pic,screenGuideId,width,height,tType,type,cp,action,uType,param,title,x,y,`order`,epg,videoUrl,noSelectPic from yd_ver_screen_content";
         $sql_where = " where `screenGuideId`=$screenGuideId AND `order`='$order'";
-        $sql_order = " order by `order`";
+        $sql_order = " order by `order` ,id ";
         $sql = $sql_select.$sql_where.$sql_order;
         $res = SQLManager::queryAll($sql);
         return $res;
