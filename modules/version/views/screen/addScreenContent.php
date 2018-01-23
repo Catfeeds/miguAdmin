@@ -15,7 +15,7 @@
 	}
 #main-1 img{
     position: absolute;
-    top: 510px;
+    top: 0px;
 }
 	.mtable td{
 		padding:5px;
@@ -279,7 +279,7 @@
         <td></td>
     </tr>
     <tr>
-        <td align="right" style="width:15%" valign="top">未选中图片预览：</td>
+        <td align="right" style="position: relative;width:15%" valign="top">未选中图片预览：</td>
         <td>
             <div class="up-main" id="main">
                 <?php
