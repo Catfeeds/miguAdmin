@@ -90,9 +90,8 @@
         margin-right: 10px;
     }
     #main-1 img{
-        /*position: absolute;*/
-        top:0px;
-
+        position: absolute;
+        top: 0px;
     }
     .up-h-1,.up-h-2,.up-h-8,.up-h-9{background-color:#fff;width:75px;height:150px;}
     .up-h-8,.up-h-9{width:150px;}
@@ -276,7 +275,7 @@
     </tr>
 
     <tr>
-        <td align="right" valign="top">选中图片上传：</td>
+        <td align="right" style="position: relative;width:15%" valign="top">选中图片上传：</td>
         <td>
 
             <div class="up-main" id="main-1">
