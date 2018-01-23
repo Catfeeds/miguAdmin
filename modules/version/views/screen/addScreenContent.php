@@ -497,7 +497,7 @@
                     <?php  $height = ($_GET['height']*105+($_GET['height']-1)*20)/2; ?>
                     $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo ($_GET['width']*250+($_GET['width']-1)*20)/2 ;?>px" height="<?php echo ($_GET['height']*105+($_GET['height']-1)*20)/2;?>px"  class="upImg_1">');
                     <?php else:?>
-                    <?php  $height = $_GET['height']; ?>
+                    <?php  $height = $_GET['height']/2; ?>
                     $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo $_GET['width']/2 ;?>px" height="<?php echo $_GET['height']/2 ;?>px"  class="upImg_1">');
                     <?php endif;?>
                     pos(<?php echo $height;?>);
@@ -525,7 +525,7 @@
     {
         var a = document.getElementsByClassName('upImg_1')[0];
         a.style.position = "relative";
-        a.style.top = height+"px";
+        a.style.top = "-"+height+"px";
     }
 
     $('.save').click(function()
