@@ -279,7 +279,7 @@
         <td></td>
     </tr>
     <tr>
-        <td align="right" style="position: relative;width:15%" valign="top">未选中图片预览：</td>
+        <td align="right" style="width:15%" valign="top">未选中图片预览：</td>
         <td>
             <div class="up-main" id="main">
                 <?php
@@ -308,7 +308,7 @@
         <td></td>
     </tr>
     <tr>
-        <td align="right" style="width:15%" valign="top">选中图片预览：</td>
+        <td align="right" style="position: relative;width:15%" valign="top">选中图片预览：</td>
         <td>
             <div class="up-main-1" id="main-1">
                 <?php
