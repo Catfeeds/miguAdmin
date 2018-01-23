@@ -13,10 +13,10 @@
 	top:0px;		
 
 	}
-#main-1 img{
+/*#main-1 img{
     position: absolute;
     top: 0px;
-}
+}*/
 	.mtable td{
 		padding:5px;
 	}
@@ -523,7 +523,7 @@
 
     function pos(height)
     {
-        var a = document.getElementById('upImg_1');
+        var a = document.getElementsByClassName('upImg_1')[0];
         a.style.position = "relative";
         a.style.top = height+"px";
     }
