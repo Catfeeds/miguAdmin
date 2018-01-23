@@ -499,8 +499,9 @@
                     <?php else:?>
                     <?php  $height = $_GET['height']/2; ?>
                     $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo $_GET['width']/2 ;?>px" height="<?php echo $_GET['height']/2 ;?>px"  class="upImg_1">');
-                    <?php endif;?>
                     pos(<?php echo $height;?>);
+                    <?php endif;?>
+
                 }else{
                     $(l).attr('src',value.url);
                 }
