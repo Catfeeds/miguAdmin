@@ -434,7 +434,11 @@
                 $('input[name=key]').val(value.key);
                 var l = $('#main').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').find('img');
                 if(l.length < 1){
-                    $('#main').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo $_GET['width']/2 ;?>px" height="<?php echo $_GET['height']/2 ;?>px" class="upImg">');
+                    <?php if($_GET['width']<=10):?>
+                    $('#main').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo ($_GET['width']*250+($_GET['width']-1)*20)/2 ;?>px" height="<?php echo ($_GET['height']*105+($_GET['height']-1)*20)/2;?>px"  class="upImg">');
+                    <?php else:?>
+                    $('#main').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo $_GET['width']/2 ;?>px" height="<?php echo $_GET['height']/2 ;?>px"  class="upImg">');
+                    <?php endif;?>
                 }else{
                     $(l).attr('src',value.url);
                 }
@@ -489,7 +493,11 @@
                 $('input[name=key]').val(value.key);
                 var l = $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').find('img');
                 if(l.length < 1){
-                    $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo $_GET['width']/2 ;?>px" height="<?php echo $_GET['height']/2 ;?>px" class="upImg_1">');
+                    <?php if($_GET['width']<=10):?>
+                    $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo ($_GET['width']*250+($_GET['width']-1)*20)/2 ;?>px" height="<?php echo ($_GET['height']*105+($_GET['height']-1)*20)/2;?>px"  class="upImg_1">');
+                    <?php else:?>
+                    $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo $_GET['width']/2 ;?>px" height="<?php echo $_GET['height']/2 ;?>px"  class="upImg_1">');
+                    <?php endif;?>
                 }else{
                     $(l).attr('src',value.url);
                 }
