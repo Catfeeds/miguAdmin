@@ -200,7 +200,7 @@
     </tr>
     <tr>
         <td width="100" align="right">推荐内容：</td>
-        <td width="15%">
+        <td >
             <select name="tType" class="form-input w300" id="tType" onchange="aa()">
                 <option value="0">请选择</option>
                 <option  value="1" >咪咕</option>
@@ -275,11 +275,11 @@
     </tr>
     
     <tr>
-        <td align="right" width="15%" valign="top">未选中图片上传：</td>
+        <td align="right" style="width:15%" valign="top">未选中图片上传：</td>
         <td></td>
     </tr>
     <tr>
-        <td align="right" width="15%" valign="top">未选中图片预览：</td>
+        <td align="right" style="width:15%" valign="top">未选中图片预览：</td>
         <td>
             <div class="up-main" id="main">
                 <?php
@@ -308,7 +308,7 @@
         <td></td>
     </tr>
     <tr>
-        <td align="right" width="15%" valign="top">选中图片预览：</td>
+        <td align="right" style="width:15%" valign="top">选中图片预览：</td>
         <td>
             <div class="up-main-1" id="main-1">
                 <?php
