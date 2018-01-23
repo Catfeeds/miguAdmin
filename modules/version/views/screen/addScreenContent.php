@@ -494,10 +494,13 @@
                 var l = $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').find('img');
                 if(l.length < 1){
                     <?php if($_GET['width']<=10):?>
+                    <?php  $height = ($_GET['height']*105+($_GET['height']-1)*20)/2; ?>
                     $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo ($_GET['width']*250+($_GET['width']-1)*20)/2 ;?>px" height="<?php echo ($_GET['height']*105+($_GET['height']-1)*20)/2;?>px"  class="upImg_1">');
                     <?php else:?>
+                    <?php  $height = $_GET['height']; ?>
                     $('#main-1').find('.<?php echo "m-".$_GET['width']."-".$_GET['height'];?>').append('<img src="'+value.url+'" width="<?php echo $_GET['width']/2 ;?>px" height="<?php echo $_GET['height']/2 ;?>px"  class="upImg_1">');
                     <?php endif;?>
+                    pos(<?php echo $height;?>);
                 }else{
                     $(l).attr('src',value.url);
                 }
@@ -517,6 +520,13 @@
     var a = document.getElementById('upload_file_new_no_select');
     a.style.position = "relative";
     a.style.top = "-33px";
+
+    function pos(height)
+    {
+        var a = document.getElementById('upImg_1');
+        a.style.position = "relative";
+        a.style.top = height+"px";
+    }
 
     $('.save').click(function()
     {
