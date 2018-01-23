@@ -21,7 +21,7 @@
 		padding:5px;
 	}
     td{
-        width: 15%;
+        /*width: 15%;*/
     }
     .interpret{
         /*width: 97.8%;
@@ -200,7 +200,7 @@
     </tr>
     <tr>
         <td width="100" align="right">推荐内容：</td>
-        <td>
+        <td width="15%">
             <select name="tType" class="form-input w300" id="tType" onchange="aa()">
                 <option value="0">请选择</option>
                 <option  value="1" >咪咕</option>
@@ -218,7 +218,7 @@
     </tr>
     <tr id="show" style="display:none">
         <td width="100" align="right">牌照方：</td>
-        <td>
+        <td >
             <select name="cp" class="form-input w300" id="cp">
                 <option  value="0">请选择</option>
                 <option  value="1">华数客户端</option>
@@ -275,11 +275,11 @@
     </tr>
     
     <tr>
-        <td align="right" valign="top">未选中图片上传：</td>
+        <td align="right" width="15%" valign="top">未选中图片上传：</td>
         <td></td>
     </tr>
     <tr>
-        <td align="right" valign="top">未选中图片预览：</td>
+        <td align="right" width="15%" valign="top">未选中图片预览：</td>
         <td>
             <div class="up-main" id="main">
                 <?php
@@ -304,11 +304,11 @@
 
     <!--   选中图片上传区域    -->
     <tr>
-        <td align="right" valign="top" style="position: relative;">选中图片上传：</td>
+        <td align="right" width="15%" valign="top" style="position: relative;">选中图片上传：</td>
         <td></td>
     </tr>
     <tr>
-        <td align="right" valign="top">选中图片预览：</td>
+        <td align="right" width="15%" valign="top">选中图片预览：</td>
         <td>
             <div class="up-main-1" id="main-1">
                 <?php
