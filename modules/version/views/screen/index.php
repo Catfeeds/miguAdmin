@@ -707,6 +707,7 @@ if(!empty($templateList)){
                data = data.list;
                if(data.length>0){
                    var data = eval(data);
+                   console.log(data);
                    showDataAgain(data);
                }
                var statusFlag = $('.centerTopNav').attr('statusFlag'); //编辑|待发布|现网
