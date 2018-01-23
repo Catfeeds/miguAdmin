@@ -14,12 +14,15 @@
 
 	}
 #main-1 img{
-    position: relative;
-    top: -143px;
+    position: absolute;
+    top: 510px;
 }
 	.mtable td{
 		padding:5px;
 	}
+    td{
+        width: 15%;
+    }
     .interpret{
         /*width: 97.8%;
         height: 35px;
@@ -505,7 +508,7 @@
 
     var a = document.getElementById('upload_file_new_no_select');
     a.style.position = "relative";
-    a.style.top = "-40px";
+    a.style.top = "-33px";
 
     $('.save').click(function()
     {
