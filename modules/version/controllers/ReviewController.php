@@ -1120,6 +1120,7 @@ c on c.workid=b.id where c.uid=$uid  group by a.id";
     public function actionTopicnotaccess(){
     	$ids = $_REQUEST['ids'];
         //$ids = substr($ids, 0,strlen($ids)-1);
+        $ids = trim($ids,',');
 		$sql ="UPDATE yd_ver_topic_review set flag = 0 WHERE id IN ($ids)";
 		$res = SQLManager::execute($sql);
 		$sql1 = "SELECT * from yd_ver_topic_review where id IN ($ids) and type <> 'bkimg' and uptype = '3'";
